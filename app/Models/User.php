@@ -25,13 +25,14 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
      * @var string
      */
     protected $table = 'users';
+    protected $connection = 'mongodb';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['firstname', 'email', 'password'];
+    protected $fillable = ['first_name', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -42,8 +43,13 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
     public static $user_status = array('enable' => 'Active', 'disable' => 'Blocked');
 
     public function scopeManagerName() {
-        return $this->hasOne(self::class, '_id', 'manager_id')->select('firstname', 'lastname');
+        return $this->hasOne(self::class, '_id', 'manager_id')->select('first_name', 'last_name');
     }
+
+//    public function setConnection($conn){
+//        if($conn)
+//            $this->connection=$conn;
+//    }
 
     public static function getUserDropDownList($options = []) {
 

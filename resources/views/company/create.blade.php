@@ -20,7 +20,15 @@
                         <label class="control-label">Email</label><i class="bar"></i>
                     </div>
                     <div class="form-group-custom">
-                        {!! Form::url('domain', Input::old('domain'), array('required')) !!}
+                        {!! Form::text('database', Input::old('database'), array('required')) !!}
+                        <label class="control-label">Database</label><i class="bar"></i>
+                    </div>
+                     <div class="form-group-custom">
+                        {!! Form::select('user_id', $users, null, array('class' => 'form-control','id'=>'_user_id')) !!}
+                        <label class="control-label">User</label><i class="bar"></i>
+                    </div>
+                    <div class="form-group-custom">
+                        {!! Form::text('domain', Input::old('domain'), array('required')) !!}
                         <label class="control-label">Domain</label><i class="bar"></i>
                     </div>
                     <div class="form-group-custom">

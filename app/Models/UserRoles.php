@@ -101,9 +101,7 @@ class UserRoles extends Eloquent {
            return true;
         }
         
-        // code for property access 
-        $property=  clientPropertyDetails();
-        $user_permissions= isset($user_permissions[$property['property_id']])?$user_permissions[$property['property_id']]:[];
+        
         
         // code end for property access
         $getController = false;

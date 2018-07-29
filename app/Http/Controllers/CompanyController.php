@@ -8,6 +8,9 @@ use App\Models\Company;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller {
 
@@ -36,39 +39,43 @@ class CompanyController extends Controller {
     public function Create(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
-            //return redirect()->action($return);
+            return redirect()->action($return);
         }
-
-        $view = view('company.create');
+        $users = User::getUserDropDownList();
+        $view = view('company.create', ['users' => $users]);
         return $view;
     }
 
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
-            //return redirect()->action($return);
+            return redirect()->action($return);
         }
         /* end permission code */
 
         $rules = array(
-            'name' => 'required|min:3|unique:company',
+            'name' => 'required|min:3',
+            'database' => 'required|min:3|unique:company',
             'plan' => 'required|min:3',
             'validity' => 'required|min:3',
-            'email' => 'required|email|min:3',
-            'domain' => 'required|max:256||unique:company',
+            'email' => 'required|email|min:3|unique:company',
+            'domain' => 'required|max:256|unique:company',
         );
         //return $request->all();
         $this->validate($request, $rules);
-        $user = new Company();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->plan = $request->input('plan');
-        $user->validity = $request->input('validity');
-        $user->domain = $request->input('domain');
-        $user->created_by = Auth::user()->_id;
-        $user->status = 'enable';
-        $user->save();
-        $request->session()->flash('status', 'Company ' . $user->title . ' created successfully!');
+        $company = new Company();
+        $company->name = $request->input('name');
+        $company->email = $request->input('email');
+        $company->plan = $request->input('plan');
+        $company->database = $request->input('database');
+        $company->user_id = $request->input('user_id');
+        $company->validity = $request->input('validity');
+        $company->domain = $request->input('domain');
+        $company->created_by = Auth::user()->_id;
+        $this->setUserOtherDB($company->database, $company->user_id);
+        $company->status = 'enable';
+        $company->save();
+        $request->session()->flash('status', 'Company ' . $company->title . ' created successfully!');
         return redirect()->action('CompanyController@Index');
     }
 
@@ -81,7 +88,7 @@ class CompanyController extends Controller {
     public function getEdit(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
-            //return redirect()->action($return);
+            return redirect()->action($return);
         }
         /* end permission code */
 
@@ -92,7 +99,8 @@ class CompanyController extends Controller {
             $request->session()->flash($msg_status, $message);
             return redirect()->action('CompanyController@Index');
         }
-        $view = view('company.edit', ['company_data' => $company_data]);
+        $users = User::getUserDropDownList();
+        $view = view('company.edit', ['company_data' => $company_data, 'users' => $users]);
         return $view;
     }
 
@@ -105,27 +113,29 @@ class CompanyController extends Controller {
      */
     public function postUpdate(Request $request, $id) {
         if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
-            //return redirect()->action($return);
+            return redirect()->action($return);
         }
 
         $rules = array(
-            'name' => 'required|min:3|unique:company,id,' . $id,
+            'name' => 'required|min:3',
             'plan' => 'required|min:3',
             'validity' => 'required|min:3',
-            'email' => 'required|email|min:3',
+            'email' => 'required|email|min:3|unique:company,id,' . $id,
             'domain' => 'required|max:256|unique:company,id,' . $id,
         );
         $this->validate($request, $rules);
-        $user = Company::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->plan = $request->input('plan');
-        $user->validity = $request->input('validity');
-        $user->domain = $request->input('domain');
-        $user->updated_by = Auth::user()->_id;
-        $user->status = 'enable';
-        $user->save();
-        $request->session()->flash('status', 'Company ' . $user->role_name . ' Updated successfully!');
+        $company = Company::find($id);
+        $company->name = $request->input('name');
+        $company->email = $request->input('email');
+        $company->plan = $request->input('plan');
+        $company->validity = $request->input('validity');
+        $company->domain = $request->input('domain');
+        $company->user_id = $request->input('user_id');
+        $this->setUserOtherDB($company->database, $company->user_id);
+        $company->updated_by = Auth::user()->_id;
+        $company->status = 'enable';
+        $company->save();
+        $request->session()->flash('status', 'Company ' . $company->role_name . ' Updated successfully!');
         return redirect()->action('CompanyController@Index');
     }
 
@@ -138,14 +148,14 @@ class CompanyController extends Controller {
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
-            // return redirect()->action($return);
+            return redirect()->action($return);
         }
         /* end permission code */
 
-        $user = Company::find($id);
-        $user->status = 'disable';
-        $user->deleted_at = Carbon::now();
-        $user->save();
+        $company = Company::find($id);
+        $company->status = 'disable';
+        $company->deleted_at = Carbon::now();
+        $company->save();
         $request->session()->flash('status', 'Successfully deleted the Company!');
         return redirect()->action('CompanyController@Index');
     }
@@ -168,6 +178,28 @@ class CompanyController extends Controller {
 
         $results = Company::companyList($sort_by, $sort_dir, $search, true)->paginate($limit);
         return $results;
+    }
+
+    public function setUserOtherDB($database, $user_id) {
+        if ($database && $user_id) {
+            $userData=User::find($user_id);
+            $userData=$userData->toArray();
+            Config::set('database.connections.mongodb.database', $database); //new database name, you want to connect to.
+            DB::purge('mongodb');
+            DB::reconnect('mongodb');
+           
+            $user = User::firstOrNew(['email'=>$userData['email']]);
+            unset($userData['_id']);
+            foreach($userData as $key=>$data){
+             $user->{$key}=$data;
+            }
+            $user->save();
+            
+            Config::set('database.connections.mongodb.database', env('DB_DATABASE')); //new database name, you want to connect to.
+            DB::purge('mongodb');
+            DB::reconnect('mongodb');
+        }
+        return false;
     }
 
 }

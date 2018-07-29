@@ -17,7 +17,7 @@ Auth::routes();
  Route::get('/register', function () {
         return abort('404');
     });
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','domain_setup']], function () {
     Route::get('/', function () {
         return view('dashboard');
     });

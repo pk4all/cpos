@@ -20,7 +20,15 @@
                         <label class="control-label">Email</label><i class="bar"></i>
                     </div>
                     <div class="form-group-custom">
-                        {!! Form::url('domain', $company_data->domain, array('required')) !!}
+                        {!! Form::text('database', isset($company_data->database)?$company_data->database:'', array('readonly')) !!}
+                        <label class="control-label">Database</label><i class="bar"></i>
+                    </div>
+                    <div class="form-group-custom">
+                        {!! Form::select('user_id', $users, $company_data->user_id, array('class' => 'form-control','id'=>'_user_id')) !!}
+                        <label class="control-label">User</label><i class="bar"></i>
+                    </div>
+                    <div class="form-group-custom">
+                        {!! Form::text('domain', $company_data->domain, array('required')) !!}
                         <label class="control-label">Domain</label><i class="bar"></i>
                     </div>
                     <div class="form-group-custom">

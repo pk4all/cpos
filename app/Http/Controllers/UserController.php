@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller {
 
@@ -21,7 +23,6 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    private $elastic;
 
     function __construct() {
         $this->middleware('auth');
@@ -30,7 +31,7 @@ class UserController extends Controller {
     public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('user_view', $request)) !== true) {
-            // return redirect()->action($return);
+             //return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getUserListPaging($request);
@@ -53,7 +54,7 @@ class UserController extends Controller {
         }
 
         /* end permission code */
-        $data['authors'] = $data['user'] = User::getUserDropDownList();
+        $data['user'] = User::getUserDropDownList();
         $data['user_status'] = User::$user_status;
         $data['user_role'] = UserRoles::getRolesDropDownList();
         $data['permissions'] = UserRoles::$permission;
@@ -108,7 +109,7 @@ class UserController extends Controller {
             //return redirect()->action($return);
         }
         /* end permission code */
-        $data['authors'] = $data['user'] = User::getUserDropDownList();
+        $data['user'] = User::getUserDropDownList();
         $data['user_status'] = User::$user_status;
         $data['user_role'] = UserRoles::getRolesDropDownList();
         $data['permissions'] = UserRoles::$permission;
@@ -222,6 +223,6 @@ class UserController extends Controller {
         Cache::forget('login:expiration:' . md5($email));
 
         return Redirect::back();
-    }
-
+    }  
+    
 }
