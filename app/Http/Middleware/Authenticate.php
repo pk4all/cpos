@@ -19,15 +19,17 @@ class DomainSetup {
     public function handle($request, Closure $next) {
 
         $subdomain = $request->getHost();
-        if (!($subdomain == 'localhost' || $subdomain == 'staging.cpos360.com')) {
-            $account_data = Company::where('domain', $subdomain)->where('status', 'enable')->first();
-            if (!$account_data) {
-                return abort(404);
+        $account_data = Company::where('domain', $subdomain)->where('status', 'enable')->first();
+        if (!$account_data) {
+            if ($subdomain == 'localhost' || $subdomain == 'staging.cpos360.com') {
+                return $next($request);
             }
-            Config::set('database.connections.mongodb.database', $account_data->database);
-            DB::purge('mongodb');
-            DB::reconnect('mongodb');
+            return abort(404);
         }
+
+        Config::set('database.connections.mongodb.database', $account_data->database);
+        DB::purge('mongodb');
+        DB::reconnect('mongodb');        
         return $next($request);
     }
 

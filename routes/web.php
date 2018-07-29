@@ -17,10 +17,9 @@ Auth::routes();
  Route::get('/register', function () {
         return abort('404');
     });
-Route::group(['middleware' => ['auth','domain_setup']], function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+Route::group(['middleware' => ['domain_setup','auth']], function () {
+     Route::get('/home', 'HomeController@Index');
+     Route::get('/', 'HomeController@Index');
     Route::resource('users', 'UserController');
     //Route::resource('user-roles', 'UserRolesController');
     
