@@ -39,7 +39,7 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    //protected $hidden = ['password', 'remember_token'];
     public static $user_status = array('enable' => 'Active', 'disable' => 'Blocked');
 
     public function scopeManagerName() {
