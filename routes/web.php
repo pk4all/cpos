@@ -14,7 +14,8 @@
 
 
 Auth::routes();
- Route::get('/register', function () {
+ //Route::post('register', 'Auth\RegisterController@register');
+Route::get('/register', function () {
         return abort('404');
     });
 Route::group(['middleware' => 'auth'], function () {
@@ -46,5 +47,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/company/edit/{id}', 'CompanyController@getEdit');
     Route::post('/company/update/{id}', 'CompanyController@postUpdate');
     Route::get('/company/destroy/{id}', 'CompanyController@getDestroy');
-    
+	
+	Route::get('/discount', 'DiscountController@Index')->name('discount');
+    Route::post('/discount/save-discount', 'DiscountController@saveDiscount');
+	Route::get('/discount/get-categories', 'DiscountController@getCategories');
+	Route::get('/discount/get-items', 'DiscountController@getItems');
+	Route::post('/discount/change-discount-status', 'DiscountController@changeDiscountStatus');
+	Route::get('/discount/edit/{id}', 'DiscountController@getEdit');
+	Route::post('/discount/save-edit-discount', 'DiscountController@saveEditDiscount');
 });
