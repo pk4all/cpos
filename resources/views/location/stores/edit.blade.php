@@ -104,51 +104,26 @@
                         </div>
 
                     </div>
-                   @foreach($stores_data['store_timing'] as $key=>$timing)
                     <div class="row">
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Day From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                 {!! Form::select("store_timing[from_day][]",$days, $timing[''], array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
+                                 {!! Form::select("store_timing[from_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::select("store_timing[to_day][]",$days, $stores_data['address']['country'], array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
+                                {!! Form::select("store_timing[to_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
                             </div>
 
                         </div>
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Time From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::text("store_timing[from_time][]", $stores_data['address']['zip_code'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                                {!! Form::text("store_timing[from_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                               {!! Form::text("store_timing[to_time][]", $stores_data['address']['zip_code'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <div class="row">
-                        <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Day From</label>
-                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                 {!! Form::select("store_timing[from_day][]",$days, $stores_data['address']['country'], array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
-                            </div>
-                            <label class="col-1 col-form-label">To</label>
-                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::select("store_timing[to_day][]",$days, $stores_data['address']['country'], array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
-                            </div>
-
-                        </div>
-                        <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Time From</label>
-                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::text("store_timing[from_time][]", $stores_data['address']['zip_code'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
-                            </div>
-                            <label class="col-1 col-form-label">To</label>
-                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                               {!! Form::text("store_timing[to_time][]", $stores_data['address']['zip_code'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                               {!! Form::text("store_timing[to_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                         </div>
                     </div>
