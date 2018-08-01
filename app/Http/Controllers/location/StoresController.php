@@ -4,7 +4,7 @@ namespace App\Http\Controllers\location;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Company;
+use App\Models\location\Stores;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -29,10 +29,10 @@ class StoresController extends Controller {
             //  return redirect()->action($return);
         }
         /* end permission code */
-        $results = $this->getCompanyListPaging($request);
-        $total_page = Company::getCompanyCount();
-        $table_header = array('Company Name', 'Email', 'Domain', 'Plan', 'Validity', 'Action');
-        $return = view('company.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $results = $this->getStoresListPaging($request);
+        $total_page = Stores::getStoresCount();
+        $table_header = array('Stores Name', 'Email', 'Notify Email', 'Label', 'Phone', 'Action');
+        $return = view('location.stores.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -41,8 +41,7 @@ class StoresController extends Controller {
         if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
             return redirect()->action($return);
         }
-        $users = User::getUserDropDownList();
-        $view = view('company.create', ['users' => $users]);
+       $view = view('location.stores.create',['contryList'=>Stores::$contryList,'days'=>Stores::$days]);
         return $view;
     }
 
@@ -55,28 +54,30 @@ class StoresController extends Controller {
 
         $rules = array(
             'name' => 'required|min:3',
-            'database' => 'required|min:3|unique:company',
-            'plan' => 'required|min:3',
-            'validity' => 'required|min:3',
-            'email' => 'required|email|min:3|unique:company',
-            'domain' => 'required|max:256|unique:company',
+            'email' => 'required|min:3|unique:stores',
+            'print_label' => 'required|min:3',
+            'tax_id' => 'required|min:3|unique:stores'
         );
-        //return $request->all();
+        //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $company = new Company();
-        $company->name = $request->input('name');
-        $company->email = $request->input('email');
-        $company->plan = $request->input('plan');
-        $company->database = $request->input('database');
-        $company->user_id = $request->input('user_id');
-        $company->validity = $request->input('validity');
-        $company->domain = $request->input('domain');
-        $company->created_by = Auth::user()->_id;
-        $this->setUserOtherDB($company->database, $company->user_id);
-        $company->status = 'enable';
-        $company->save();
-        $request->session()->flash('status', 'Company ' . $company->title . ' created successfully!');
-        return redirect()->action('CompanyController@Index');
+        $stores = new Stores();
+        $stores->name = $request->input('name', null);
+        $stores->email = $request->input('email', null);
+        $stores->image = $request->input('image', null);
+        $stores->notification_email = $request->input('notification_email', null);
+        $stores->phone = $request->input('phone', null);
+        $stores->print_label = $request->input('print_label', null);
+        $stores->tax_id = $request->input('tax_id', null);
+        $stores->address = $request->input('address', null);
+        $stores->radius = $request->input('radius', null);
+        $stores->latitude = $request->input('latitude', null);
+        $stores->longitude = $request->input('longitude', null);
+        $stores->store_timing = $request->input('store_timing', []);
+        $stores->created_by = Auth::user()->_id;
+        $stores->updated_by = Auth::user()->_id;
+        $stores->save();
+        $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
+        return redirect()->action('location\StoresController@Index');
     }
 
     /**
@@ -92,15 +93,14 @@ class StoresController extends Controller {
         }
         /* end permission code */
 
-        $company_data = Company::find($id);
-        if (empty($company_data)) {
+        $stores_data = Stores::find($id);
+        if (empty($stores_data)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
-            return redirect()->action('CompanyController@Index');
+            return redirect()->action('StoresController@Index');
         }
-        $users = User::getUserDropDownList();
-        $view = view('company.edit', ['company_data' => $company_data, 'users' => $users]);
+        $view = view('location.stores.edit', ['stores_data' => $stores_data,'contryList'=>Stores::$contryList,'days'=>Stores::$days]);
         return $view;
     }
 
@@ -118,25 +118,30 @@ class StoresController extends Controller {
 
         $rules = array(
             'name' => 'required|min:3',
-            'plan' => 'required|min:3',
-            'validity' => 'required|min:3',
-            'email' => 'required|email|min:3|unique:company,id,' . $id,
-            'domain' => 'required|max:256|unique:company,id,' . $id,
+            'email' => 'required|min:3|unique:stores,id,' . $id,
+            'print_label' => 'required|min:3',
+            'tax_id' => 'required|min:3|unique:stores,id,' . $id,
         );
+        //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $company = Company::find($id);
-        $company->name = $request->input('name');
-        $company->email = $request->input('email');
-        $company->plan = $request->input('plan');
-        $company->validity = $request->input('validity');
-        $company->domain = $request->input('domain');
-        $company->user_id = $request->input('user_id');
-        $this->setUserOtherDB($company->database, $company->user_id);
-        $company->updated_by = Auth::user()->_id;
-        $company->status = 'enable';
-        $company->save();
-        $request->session()->flash('status', 'Company ' . $company->role_name . ' Updated successfully!');
-        return redirect()->action('CompanyController@Index');
+        $stores = Stores::find($id);
+        $stores->name = $request->input('name', null);
+        $stores->email = $request->input('email', null);
+        $stores->image = $request->input('image', null);
+        $stores->notification_email = $request->input('notification_email', null);
+        $stores->phone = $request->input('phone', null);
+        $stores->print_label = $request->input('print_label', null);
+        $stores->tax_id = $request->input('tax_id', null);
+        $stores->address = $request->input('address', null);
+        $stores->radius = $request->input('radius', null);
+        $stores->latitude = $request->input('latitude', null);
+        $stores->longitude = $request->input('longitude', null);
+        //$stores->status = $request->input('status', 'disable');
+        $stores->store_timing = $request->input('store_timing', []);
+        $stores->updated_by = Auth::user()->_id;
+        $stores->save();
+        $request->session()->flash('status', 'Stores ' . $stores->name . ' Updated successfully!');
+        return redirect()->action('location\StoresController@Index');
     }
 
     /**
@@ -152,18 +157,34 @@ class StoresController extends Controller {
         }
         /* end permission code */
 
-        $company = Company::find($id);
-        $company->status = 'disable';
-        $company->deleted_at = Carbon::now();
-        $company->save();
-        $request->session()->flash('status', 'Successfully deleted the Company!');
-        return redirect()->action('CompanyController@Index');
+        $stores = Stores::find($id);
+        $stores->status = 'disable';
+        $stores->deleted_at = Carbon::now();
+        $stores->updated_by = Auth::user()->_id;
+        $stores->save();
+        $request->session()->flash('status', 'Successfully deleted the Stores!');
+        return redirect()->action('location\StoresController@Index');
     }
 
-    public function getCompanyListPaging(Request $request) {
+    public function getUpdateStatus(Request $request, $id) {
+        /* code for check roles and redirect it on index method of current controller if has not access */
+        if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
+            return redirect()->action($return);
+        }
+        /* end permission code */
+        $stores = Stores::find($id);
+        $stores->updated_at = Carbon::now();
+        $stores->updated_by = Auth::user()->_id;
+        $stores->status = $stores->status == 'enable' ? 'disable' : 'enable';
+        $stores->save();
+        $request->session()->flash('status', $stores->name . ' Status changed to ' . $stores->status . ' Successfully!');
+        return redirect()->action('location\StoresController@Index');
+    }
+
+    public function getStoresListPaging(Request $request) {
         $page_no = $request->has('page') ? $request->input('page') : 1;
         $search_value = $request->has('search') ? $request->input('search') : '';
-        $search_field = $request->has('search_by') ? $request->input('search_by') : 'role_name';
+        $search_field = $request->has('search_by') ? $request->input('search_by') : 'name';
         $limit = $request->has('limit') ? (int) $request->input('limit') : 10;
         $search = array(); //this have  as Key=search field and value= search value
         if (!is_numeric($limit)) {
@@ -176,30 +197,8 @@ class StoresController extends Controller {
         $sort_by = $request->has('sort_by') ? $request->input('sort_by') : '_id';
         $sort_dir = $request->has('sort_dir') ? $request->input('sort_dir') : 'desc';
 
-        $results = Company::companyList($sort_by, $sort_dir, $search, true)->paginate($limit);
+        $results = Stores::storesList($sort_by, $sort_dir, $search, true)->paginate($limit);
         return $results;
-    }
-
-    public function setUserOtherDB($database, $user_id) {
-        if ($database && $user_id) {
-            $userData=User::find($user_id);
-            $userData=$userData->toArray();
-            Config::set('database.connections.mongodb.database', $database); //new database name, you want to connect to.
-            DB::purge('mongodb');
-            DB::reconnect('mongodb');
-           
-            $user = User::firstOrNew(['email'=>$userData['email']]);
-            unset($userData['_id']);
-            foreach($userData as $key=>$data){
-             $user->{$key}=$data;
-            }
-            $user->save();
-            
-            Config::set('database.connections.mongodb.database', env('DB_DATABASE')); //new database name, you want to connect to.
-            DB::purge('mongodb');
-            DB::reconnect('mongodb');
-        }
-        return false;
     }
 
 }

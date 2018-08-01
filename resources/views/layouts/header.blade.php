@@ -60,6 +60,9 @@
                             <li>
                                 <a href="/stores">Stores</a>
                             </li>
+                            <li>
+                                <a href="/stores/create">Add New Stores</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

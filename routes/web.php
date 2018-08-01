@@ -45,4 +45,14 @@ Route::group(['middleware' => ['domain_setup','auth']], function () {
     Route::get('/company/edit/{id}', 'CompanyController@getEdit');
     Route::post('/company/update/{id}', 'CompanyController@postUpdate');
     Route::get('/company/destroy/{id}', 'CompanyController@getDestroy');
+    
+    
+     Route::get('/stores', 'location\StoresController@Index');
+    Route::get('/stores/create', 'location\StoresController@create');
+    Route::post('/stores/store', 'location\StoresController@postStore');
+    Route::get('/stores/edit/{id}', 'location\StoresController@getEdit');
+    Route::post('/stores/update/{id}', 'location\StoresController@postUpdate');
+    Route::get('/stores/destroy/{id}', 'location\StoresController@getDestroy');
+    Route::get('/stores/update-status/{id}', 'location\StoresController@getUpdateStatus');   
+    
 });

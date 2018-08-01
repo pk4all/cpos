@@ -6,10 +6,10 @@
 
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'Compnay','path'=>[]])
+            @include('layouts.messages',['title'=>'Stores','path'=>[]])
 
         </div>    
-        @include('company.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))
+        @include('location.stores.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))
         @include('layouts.deleteconfirm')
     </div> <!-- end Panel -->
 </div> <!-- end container -->

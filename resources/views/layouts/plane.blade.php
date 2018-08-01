@@ -10,11 +10,13 @@
         <link rel="shortcut icon" href="{{ asset("assets/images/favicon.ico")}}">
         <!--Morris Chart CSS -->
         <link rel="stylesheet" href="{{ asset("assets/plugins/morris/morris.css")}}">
+        <link rel="stylesheet"  href="{{ asset("assets/plugins/clockpicker/css/bootstrap-clockpicker.min.css")}}"/>
         <!-- App css -->
         <link href="{{ asset("assets/css/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/icons.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/style.css")}}" rel="stylesheet" type="text/css" />
         <script src="{{ asset("assets/js/modernizr.min.js")}}"></script>
+        
         @stack('head')
     </head>
 
@@ -44,6 +46,8 @@
         <script src="{{ asset("assets/plugins/jquery-knob/jquery.knob.js")}}"></script>-->
 
         <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script>
+        <script src="{{ asset("assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js")}}"></script>
+
         <script src="{{ asset("assets/js/jquery.core.js")}}"></script>
         <script src="{{ asset("assets/js/jquery.app.js")}}"></script>
         <script src="{{ asset("assets/js/common.js")}}"></script>
