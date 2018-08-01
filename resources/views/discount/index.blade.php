@@ -348,7 +348,7 @@ function status(obj){
 			method:'POST',
 			url:siteurl+'/discount/change-discount-status',
 			dataType: "JSON",
-			data: {id:$(obj).data('id'),status:status,_token:'{{ csrf_token() }}'},
+			data: {id:$(obj).data('id'),status:status,_token:'{{ csrf_token()}}'},
 			beforeSend:function(){
 				//$('#loader').removeClass('hide');
 			},

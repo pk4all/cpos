@@ -55,4 +55,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/discount/change-discount-status', 'DiscountController@changeDiscountStatus');
 	Route::get('/discount/edit/{id}', 'DiscountController@getEdit');
 	Route::post('/discount/save-edit-discount', 'DiscountController@saveEditDiscount');
+	
+	Route::get('/delivery-area', 'DeliveryController@index')->name('delivery');
+	Route::get('/delivery/edit-delivery/{id}', 'DeliveryController@getEdit');
+	Route::post('/delivery/save-delivery-store', 'DeliveryController@saveDeliveryStore');
+	Route::post('/delivery/change-delivery-status', 'DeliveryController@changeDeliveryStatus');
+	Route::post('/delivery/save-edit-delivery-store', 'DeliveryController@saveEditDeliveryStore');
+	Route::get('/delivery/delivery-area-gmap/{id}', 'DeliveryController@deliveryAreaGmap');
+	Route::post('/delivery/save-gmap-data', 'DeliveryController@saveGmapData');
+	Route::post('/delivery/delete-gmap-area', 'DeliveryController@deleteGmapArea');
+	Route::get('/delivery/delivery-area/{id}', 'DeliveryController@deliveryArea');
+	Route::post('/delivery/save-delivery-area', 'DeliveryController@saveDeliveryArea');
+	Route::post('/delivery/delete-area', 'DeliveryController@deleteArea');
+	
 });
