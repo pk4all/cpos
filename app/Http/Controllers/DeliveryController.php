@@ -117,6 +117,7 @@ class DeliveryController extends Controller {
 		{
 			return response()->json(["response" => 400,'status'=>'error', "msg" => 'An internal error.']);
 		}
+		die;
 	}
 	
 	public function deliveryArea(Request $request,$id){
