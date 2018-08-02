@@ -55,7 +55,7 @@
                         </ul>
                     </li>
                     <li class="has-submenu">
-                        <a href="#"><i class="md  md-settings"></i>Setup</a>
+                        <a href="/set-up"><i class="md  md-settings"></i>Setup</a>
                         <ul class="submenu">
                             <li>
                                 <a href="/stores">Stores</a>

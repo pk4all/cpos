@@ -232,7 +232,6 @@ function saveEditdata(){
 			});
 }
 
-
 function status(obj){
 	if(obj.checked==true){
 		var status='enable';

@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::resource('users', 'UserController');
     //Route::resource('user-roles', 'UserRolesController');
-    
+    Route::get('/set-up', 'HomeController@setup');
     Route::get('/users', 'UserController@getIndex')->name('users');
     Route::get('/users/create', 'UserController@getCreate');
     Route::post('/users/store', 'UserController@postStore');
