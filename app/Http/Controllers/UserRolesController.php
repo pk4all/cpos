@@ -19,10 +19,10 @@ class UserRolesController extends Controller {
         $this->middleware('auth');
     }
 
-    public function Index(Request $request) {
+    public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('userroles_view', $request)) !== true) {
-          //  return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('roles_view', $request)) !== true) {
+            return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getUserRolesListPaging($request);
@@ -34,7 +34,7 @@ class UserRolesController extends Controller {
 
     public function Create(Request $request) {
        /*code for check roles and redirect it on index method of current controller if has not access */
-        if(($return=UserRoles::hasAccess('create user',$request))!==true){
+        if(($return=UserRoles::hasAccess('roles_create',$request))!==true){
            //return redirect()->action($return);
         } 
         /*end permission code */
@@ -44,8 +44,8 @@ class UserRolesController extends Controller {
 
     public function postStore(Request $request) {
         /*code for check roles and redirect it on index method of current controller if has not access */
-        if(($return=UserRoles::hasAccess('create user',$request))!==true){
-           //return redirect()->action($return);
+        if(($return=UserRoles::hasAccess('roles_create',$request))!==true){
+           return redirect()->action($return);
         } 
         /*end permission code */
         
@@ -62,7 +62,7 @@ class UserRolesController extends Controller {
         $user->status = 'enable';
         $user->save();
         $request->session()->flash('status', 'Role ' . $user->title . ' created successfully!');
-        return redirect()->action('UserRolesController@Index');
+        return redirect()->action('UserRolesController@getIndex');
     }
     /**
      * Show the form for editing the specified resource.
@@ -72,8 +72,8 @@ class UserRolesController extends Controller {
      */
     public function getEdit(Request $request,$id) {
         /*code for check roles and redirect it on index method of current controller if has not access */
-        if(($return=UserRoles::hasAccess('update user',$request))!==true){
-           //return redirect()->action($return);
+        if(($return=UserRoles::hasAccess('roles_update',$request))!==true){
+           return redirect()->action($return);
         } 
         /*end permission code */
         
@@ -96,8 +96,8 @@ class UserRolesController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if(($return=UserRoles::hasAccess('update user',$request))!==true){
-           //return redirect()->action($return);
+        if(($return=UserRoles::hasAccess('roles_update',$request))!==true){
+           return redirect()->action($return);
         } 
         
         $rules = array(
@@ -112,7 +112,7 @@ class UserRolesController extends Controller {
         $user->status = 'enable';
         $user->save();
         $request->session()->flash('status', 'Role ' . $user->role_name . ' Updated successfully!');
-        return redirect()->action('UserRolesController@Index');
+        return redirect()->action('UserRolesController@getIndex');
     }
 
     /**
@@ -123,8 +123,8 @@ class UserRolesController extends Controller {
      */
     public function getDestroy(Request $request, $id) {
         /*code for check roles and redirect it on index method of current controller if has not access */
-        if(($return=UserRoles::hasAccess('delete user',$request))!==true){
-          // return redirect()->action($return);
+        if(($return=UserRoles::hasAccess('roles_delete',$request))!==true){
+           return redirect()->action($return);
         } 
         /*end permission code */
         
@@ -133,7 +133,7 @@ class UserRolesController extends Controller {
         $user->deleted_at = Carbon::now();
         $user->save();
         $request->session()->flash('status', 'Successfully deleted the Role!');
-        return redirect()->action('UserRolesController@Index');
+        return redirect()->action('UserRolesController@getIndex');
     }
 
     public function getUserRolesListPaging(Request $request) {

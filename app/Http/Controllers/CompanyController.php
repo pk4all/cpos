@@ -23,10 +23,10 @@ class CompanyController extends Controller {
         $this->middleware('auth');
     }
 
-    public function Index(Request $request) {
+    public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('userroles_view', $request)) !== true) {
-            //  return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
+             return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getCompanyListPaging($request);
@@ -38,8 +38,8 @@ class CompanyController extends Controller {
 
     public function Create(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
-            return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
+          return redirect()->action($return);
         }
         $users = User::getUserDropDownList();
         $view = view('company.create', ['users' => $users]);
@@ -48,7 +48,7 @@ class CompanyController extends Controller {
 
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -76,7 +76,7 @@ class CompanyController extends Controller {
         $company->status = 'enable';
         $company->save();
         $request->session()->flash('status', 'Company ' . $company->title . ' created successfully!');
-        return redirect()->action('CompanyController@Index');
+        return redirect()->action('CompanyController@getIndex');
     }
 
     /**
@@ -87,7 +87,7 @@ class CompanyController extends Controller {
      */
     public function getEdit(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -97,7 +97,7 @@ class CompanyController extends Controller {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
-            return redirect()->action('CompanyController@Index');
+            return redirect()->action('CompanyController@getIndex');
         }
         $users = User::getUserDropDownList();
         $view = view('company.edit', ['company_data' => $company_data, 'users' => $users]);
@@ -112,7 +112,7 @@ class CompanyController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
             return redirect()->action($return);
         }
 
@@ -136,7 +136,7 @@ class CompanyController extends Controller {
         $company->status = 'enable';
         $company->save();
         $request->session()->flash('status', 'Company ' . $company->role_name . ' Updated successfully!');
-        return redirect()->action('CompanyController@Index');
+        return redirect()->action('CompanyController@getIndex');
     }
 
     /**
@@ -147,7 +147,7 @@ class CompanyController extends Controller {
      */
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('demon', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -157,7 +157,7 @@ class CompanyController extends Controller {
         $company->deleted_at = Carbon::now();
         $company->save();
         $request->session()->flash('status', 'Successfully deleted the Company!');
-        return redirect()->action('CompanyController@Index');
+        return redirect()->action('CompanyController@getIndex');
     }
 
     public function getCompanyListPaging(Request $request) {

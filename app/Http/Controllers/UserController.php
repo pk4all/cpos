@@ -30,12 +30,12 @@ class UserController extends Controller {
 
     public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('user_view', $request)) !== true) {
-             //return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_view', $request)) !== true) {
+             return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getUserListPaging($request);
-        $total_page = $results->total(); //User::getUserCount();
+        $total_page = $results->total(); 
         $table_header = array('First Name', 'Last Name', 'Email', 'Role', 'Action');
         $per_page_limit = 10;
         $return = view('user.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header, 'per_page_limit' => $per_page_limit]);
@@ -49,8 +49,8 @@ class UserController extends Controller {
      */
     public function getCreate(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
-            // return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_createaa', $request)) !== true) {
+             return redirect()->action($return);
         }
 
         /* end permission code */
@@ -71,8 +71,8 @@ class UserController extends Controller {
      */
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
-            //return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_create', $request)) !== true) {
+            return redirect()->action($return);
         }
 
         $rules = array(
@@ -105,8 +105,8 @@ class UserController extends Controller {
 
     public function getEdit(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
-            //return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_update', $request)) !== true) {
+            return redirect()->action($return);
         }
         /* end permission code */
         $data['user'] = User::getUserDropDownList();
@@ -131,8 +131,8 @@ class UserController extends Controller {
     
     public function postUpdate(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
-            // return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_update', $request)) !== true) {
+             return redirect()->action($return);
         }
         $user = User::find($id);
         $login = Auth::user();
@@ -169,8 +169,8 @@ class UserController extends Controller {
     
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
-            //return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('users_delete', $request)) !== true) {
+            return redirect()->action($return);
         }
         /* end permission code */
         $user = User::find($id);
@@ -182,7 +182,6 @@ class UserController extends Controller {
     }
 
     public function getUserList(Request $request) {
-        //return User::getCustomQueryResult();
         $pageNo = $request->has('page') ? $request->input('page') : 1;
         $count = $request->has('count') ? $request->input('count') : 10;
         $sortOrderField = $request->has('sortBy') ? $request->input('sortBy') : '_id';

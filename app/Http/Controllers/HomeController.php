@@ -22,7 +22,7 @@ class HomeController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function Index() {
+    public function getIndex() {
          $view = view('dashboard', []);
         return $view;
     }

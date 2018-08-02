@@ -12,16 +12,7 @@ class UserRoles extends Eloquent {
     //use \Venturecraft\Revisionable\RevisionableTrait;
 
     protected $table = 'roles';
-    public static $permission = array('create_user' => 'Create User',
-        'delete_user' => 'Delete User',
-        'update_user' => 'Update User',
-        'create_category' => 'Create Category',
-        'delete_category' => 'Delete Category',
-        'update_category' => 'Update Category',
-        'create_store' => 'Create Store',
-        'update_store' => 'Update Store',
-        'delete_store' => 'Delete Store'
-    );
+    public static $permission = ['company_view'=>'Company View','company_create'=>'Company Create','company_delete'=>'Compnay Delete','company_update'=>'Company update','users_view'=>'Users View','users_create'=>'Users Create','users_delete'=>'Users Delete','users_update'=>'Users Update','roles_view'=>'Roles View','roles_create'=>'Roles Create','roles_delete'=>'Roles Delete','roles_update'=>'Roles Update','stores_view'=>'Stores View','stores_create'=>'Stores Create','stores_delete'=>'Stores Delete','stores_update'=>'Stores Update'];
 
     public static function getRolesDropDownList() {
 
@@ -87,38 +78,33 @@ class UserRoles extends Eloquent {
      * @return boolean true if permission pass otherwise false , this method redirect if request if set
      * and permission not pass
      */
-    public static function hasAccess($permisson, $request = null, $created_by = null) {
+    public static function hasAccess($permisson, $request = null) {
         $return = false;
         if (env('CHECK_PERMISSIONS') === 'No') {
             return TRUE;
         }
-	if(!isset(Auth::user()->permissions)){
-           return false;
-       }
+        if (!isset(Auth::user()->permissions)) {
+           abort(401);
+        } 
+       
         $user_permissions = Auth::user()->permissions;
-        // code for define global access 
-        if(key_exists('demon', $user_permissions) && is_array($user_permissions['demon']) && in_array('yes',$user_permissions['demon'])){
-           return true;
-        }
-        
-        
-        
-        // code end for property access
-        $getController = false;
-        if (strpos($permisson, 'view') !== false) {
-            $return = (Auth::user()->user_type == 'normal') ? true : false;
-            // this will redirect ion story page if permission denied for any view page for city users
-            $getController = $return ? false : 'HomeController@Index';
-        } elseif (!empty($user_permissions) && is_array($user_permissions)) {
-            $permisson = strtolower(str_replace(' ', '_', $permisson));
-            if (is_array($user_permissions) && in_array($permisson, $user_permissions)) {
-                $return = true;
-            }
+            // code for define master access 
+        if (key_exists('demon', $user_permissions) && $user_permissions['demon']=='yes') {
+            return true;
         }
 
+            $getController=false;
+            if (!empty($user_permissions) && is_array($user_permissions)) {
+                $permisson = strtolower(str_replace(' ', '_', $permisson));
+                if (is_array($user_permissions) && in_array($permisson, $user_permissions)) {
+                    $return = true;
+                }else if(strpos($permisson,'view')!==false || strpos($permisson,'demon')!==false){
+                    $getController='HomeController@getIndex';
+                }
+            }
+      
         /* redirect on current controller view page if $request(this is request object of laravel) is set 
           other wise return status(true or false) of permossions */
-
         if ($return === false && $request) {
             $request->session()->flash('error', 'Permisson Denied');
             if (!$getController) {

@@ -23,10 +23,10 @@ class StoresController extends Controller {
         $this->middleware('auth');
     }
 
-    public function Index(Request $request) {
+    public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('userroles_view', $request)) !== true) {
-            //  return redirect()->action($return);
+        if (($return = UserRoles::hasAccess('stores_view', $request)) !== true) {
+              return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getStoresListPaging($request);
@@ -38,7 +38,7 @@ class StoresController extends Controller {
 
     public function Create(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_create', $request)) !== true) {
             return redirect()->action($return);
         }
        $view = view('location.stores.create',['contryList'=>Stores::$contryList,'days'=>Stores::$days]);
@@ -47,7 +47,7 @@ class StoresController extends Controller {
 
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('create user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_create', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -77,7 +77,7 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('location\StoresController@getIndex');
     }
 
     /**
@@ -88,7 +88,7 @@ class StoresController extends Controller {
      */
     public function getEdit(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -98,7 +98,7 @@ class StoresController extends Controller {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
-            return redirect()->action('StoresController@Index');
+            return redirect()->action('StoresController@getIndex');
         }
         $view = view('location.stores.edit', ['stores_data' => $stores_data,'contryList'=>Stores::$contryList,'days'=>Stores::$days]);
         return $view;
@@ -112,7 +112,7 @@ class StoresController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('update user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_update', $request)) !== true) {
             return redirect()->action($return);
         }
 
@@ -141,7 +141,7 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' Updated successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('location\StoresController@getIndex');
     }
 
     /**
@@ -152,7 +152,7 @@ class StoresController extends Controller {
      */
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_delete', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -163,12 +163,12 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Successfully deleted the Stores!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('location\StoresController@getIndex');
     }
 
     public function getUpdateStatus(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('delete user', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('stores_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -178,7 +178,7 @@ class StoresController extends Controller {
         $stores->status = $stores->status == 'enable' ? 'disable' : 'enable';
         $stores->save();
         $request->session()->flash('status', $stores->name . ' Status changed to ' . $stores->status . ' Successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('location\StoresController@getIndex');
     }
 
     public function getStoresListPaging(Request $request) {
