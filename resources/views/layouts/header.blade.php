@@ -64,6 +64,9 @@
                                 <a href="/stores/create">Add New Stores</a>
                             </li> 
 							<li>
+                                <a href="/order-type">Order Type</a>
+                            </li> 
+							<li>
                                 <a href="/discount">Discount</a>
                             </li>
 							<li>

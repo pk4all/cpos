@@ -6,7 +6,7 @@
 
         <!-- Page-Title -->
         <div class="row">
-@include('layouts.messages',['title'=>'Delivery Stores','path'=>['#'=>'Delivery Stores']])
+@include('layouts.messages',['title'=>'Order Types','path'=>['#'=>'Order Types']])
         </div>    
         
 <div class="row">
@@ -17,16 +17,17 @@
   
 </div>
 <div class="col-sm-4">
-	<a href="javascript:void(0)" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" onclick="add();"><i class="md md-add"></i> Add Delivery Store</a>
+	<a href="javascript:void(0)" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" onclick="add();"><i class="md md-add"></i> Add Order Type</a>
 </div>
 </div>
 <div class="table-responsive">
- @if(count($list)>0)  
+ @if(count($list)>0) 
 	<table class="table table-hover m-0 table table-actions-bar">
 		<thead>
 		<tr>
 			<th>#</th>
-			<th>Area Type</th>
+			<th>Name</th>
+			<th>Type</th>
 			<th>Store</th>
 			<th>Status</th>
 			<th>Action</th>
@@ -36,8 +37,15 @@
 		 @foreach($list as $key=>$data)
 		<tr>
 			<td>{{$key+1}}</td>
-			<td>{{$type[$data->type]}}</td>
-			<td>{{$stores[$data->store_id]}}</td>
+			<td>{{$data->name}}</td>
+			<td>{{$data->type}}</td>
+			<td>
+			@if($data->store_id)
+				@foreach($data->store_id as $id)
+				<span class="badge">{{$stores[$id]}}</span>
+				@endforeach
+			@endif
+			</td>
 			<td>
 		@if($data->status=='enable')
 			<input type="checkbox" checked data-plugin="switchery" data-color="#5d9cec" data-size="small" data-id="{{$data->id}}" class="status" onchange="status(this);"/>
@@ -47,11 +55,6 @@
 			</td>
 			<td>
 				<a href="javascript:void(0)" class="btn btn-sm btn-primary waves-effect waves-light" onclick="edit('{{$data->id}}');"><i class="md md-edit"></i></a>
-				@if($data->type=='area')
-				<a href="/delivery/delivery-area/{{$data->id}}" class="btn btn-sm btn-primary waves-effect waves-light">Area List</a>
-				@else
-				<a href="/delivery/delivery-area-gmap/{{$data->id}}" class="btn btn-sm btn-primary waves-effect waves-light">Area List</a>
-				@endif
 			</td>
 		</tr>
 		@endforeach
@@ -81,28 +84,46 @@
 
 {!! Form::open(array('url' => '#',"id"=>"add",'onsubmit'=>"savedata();return false;")) !!}
 <div class="panel panel-default">
-<div class="panel-body panel-body-nopadding">
-	<div class="form-group row">
-	<label class="col-2 col-form-label">Area Type</label>
+<div class="panel-body panel-body-nopadding row">
 	<div class="col-8">
-		<label style="padding:10px" for="type-area">
-		<input name="type" value="area" id="type-area" required="required" type="radio">  Define By Area</label><label style="padding:10px" for="type-gmap"><input name="type" value="gmap" id="type-gmap" required="required" type="radio"> Define On Google Map</label>
+	<div class="form-group row">
+	<label class="col-4 col-form-label">Order Type Label</label>
+	<div class="col-8">
+		<div class="input text required"><input name="name" class="form-control required" required="required" maxlength="255" id="name" type="text"></div>
 	</div>
 	</div>
 	<div class="form-group row">
-	<label class="col-2 col-form-label">Store</label>
-	<div class="col-8">
-		<select name="store_id" class="form-control" required="required" id="store-id">
-		<option value="">Select Store</option>
-		@if($stores)
-			@foreach($stores as $key=>$store)
-		<option value="{{$key}}">{{$store}}</option>
-			@endforeach
-		@endif
-		</select>
-	</div>
+	<label class="col-sm-4 control-label">Order Type</label>
+	<div class="col-sm-8">
+		<label style="padding:10px" for="order-type-pickup"><input name="type" value="Pickup" id="order-type-pickup" type="radio">  Pickup</label><label style="padding:10px" for="order-type-delivery"><input name="type" value="Delivery" id="order-type-delivery" type="radio">  Delivery</label><label style="padding:10px" for="order-type-dining"><input name="type" value="Dining" id="order-type-dining" type="radio">  Dining</label>
 	</div>
 </div>
+	
+	</div>
+	<div class="col-4">
+	<div class="form-group row">
+	<h4>Stores</h4>
+	<div class="col-12">
+		
+		@if($stores)
+			<div class="ckbox ckbox-primary">
+				<input name="store_id[]" value="0" id="checkbox0" onclick="checkAll(this);" type="checkbox">
+				<label for="checkbox0">All Stores</label>
+			</div>
+			@foreach($stores as $key=>$store)
+		<div class="ckbox ckbox-primary">
+			<input name="store_id[]" value="{{$key}}" id="{{$key}}" type="checkbox">
+			<label for="{{$key}}">{{$store}}</label>
+		</div>
+			@endforeach
+		@endif
+		
+	</div>
+	</div>
+
+	
+	</div>
+	</div>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -145,14 +166,13 @@ function add(){
 	$('#add_popup .modal-title').html('Add Delivery Store');
 	$('#add_popup').modal('show');
 }
-
 var $btn;
 function savedata(){
 	var form=$('#add')[0];
 	var formData = new FormData(form);
 	$.ajax({
 				method:'POST',
-				url:siteurl+'/delivery/save-delivery-store',
+				url:siteurl+'/order-type/save',
 				dataType: "JSON",
 				data: formData,
 				processData: false,
@@ -166,7 +186,7 @@ function savedata(){
 					$btn.button('reset');
 					if(res.status=='success'){
 						$('#save').html(res.msg);
-				window.location.href=siteurl+'/delivery-area';
+				window.location.href=siteurl+'/order-type';
 					}
 					if(res.status=='error'){
 						$('#msg').html('<span class="error-message">'+res.msg+'</span>');
@@ -178,7 +198,7 @@ function savedata(){
 function edit(id){
 	//$('#loader').removeClass('hide');
 	$('#edit_popup').modal('show');
-	$.get(siteurl+'/delivery/edit-delivery/'+id,function(data){
+	$.get(siteurl+'/order-type/edit/'+id,function(data){
 			$('#loader').addClass('hide');
 			$('#edit_popup .modal-body').html(data);
 			$('#edit_popup').modal('show');
@@ -189,7 +209,7 @@ function saveEditdata(){
 	var formData = new FormData(form);
 	$.ajax({
 				method:'POST',
-				url:siteurl+'/delivery/save-edit-delivery-store',
+				url:siteurl+'/order-type/save-edit',
 				dataType: "JSON",
 				data: formData,
 				processData: false,
@@ -203,7 +223,7 @@ function saveEditdata(){
 					$btn.button('reset');
 					if(res.status=='success'){
 						$('#saveEdit').html(res.msg);
-						window.location.href=siteurl+'/delivery-area';
+						window.location.href=siteurl+'/order-type';
 					}
 					if(res.status=='error'){
 						$('#edit-msg').html('<span class="error-message">'+res.msg+'</span>');
@@ -211,6 +231,7 @@ function saveEditdata(){
 				}
 			});
 }
+
 
 function status(obj){
 	if(obj.checked==true){
@@ -220,7 +241,7 @@ function status(obj){
 	}
 	$.ajax({
 			method:'POST',
-			url:siteurl+'/delivery/change-delivery-status',
+			url:siteurl+'/order-type/change-status',
 			dataType: "JSON",
 			data: {id:$(obj).data('id'),status:status,_token:'{{ csrf_token()}}'},
 			beforeSend:function(){
@@ -230,6 +251,15 @@ function status(obj){
 				//$('#loader').addClass('hide');
 			}
 		});
+}
+
+function checkAll(obj){
+	if($(obj).prop("checked") == true){
+         $('input[name="store_id[]"]').prop('checked', true);    
+	}
+	else if($(obj).prop("checked") == false){
+		$('input[name="store_id[]"]').prop('checked', false);
+	}
 }
 </script>
  <!-- Modal -->

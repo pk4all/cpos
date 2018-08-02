@@ -77,4 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/delivery/save-delivery-area', 'Location\DeliveryController@saveDeliveryArea');
 	Route::post('/delivery/delete-area', 'Location\DeliveryController@deleteArea');
 	
+	Route::get('/order-type', 'Location\OrderTypeController@index');
+	Route::post('/order-type/save', 'Location\OrderTypeController@save');
+	Route::post('/order-type/change-status', 'Location\OrderTypeController@changeStatus');
+	Route::get('/order-type/edit/{id}', 'Location\OrderTypeController@edit');
+	Route::post('/order-type/save-edit', 'Location\OrderTypeController@saveEdit');
 });
