@@ -30,23 +30,14 @@
         @yield('body')
         @include('layouts.footer')
 
-        <!-- jQuery  -->
+ 
 
-        <script src="{{ asset('assets/js/popper.min.js')}}"></script><!-- Popper for Bootstrap -->
+        <script src="{{ asset('assets/js/popper.min.js')}}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('assets/js/waves.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.slimscroll.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.scrollTo.min.js')}}"></script>
         <script src="{{ asset('assets/plugins/peity/jquery.peity.min.js')}}"></script>
-
-        <!-- jQuery  -->
-       <!-- <script src="{{ asset("assets/plugins/waypoints/lib/jquery.waypoints.min.js")}}"></script>
-        <script src="{{ asset("assets/plugins/counterup/jquery.counterup.min.js")}}"></script>
-
-        <script src="{{ asset("assets/plugins/morris/morris.min.js")}}"></script>
-        <script src="{{ asset("assets/plugins/raphael/raphael-min.js")}}"></script>
-
-        <script src="{{ asset("assets/plugins/jquery-knob/jquery.knob.js")}}"></script>-->
 
         <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script>
         <script src="{{ asset("assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js")}}"></script>
@@ -55,7 +46,7 @@
         <script src="{{ asset("assets/js/jquery.app.js")}}"></script>
         <script src="{{ asset("assets/js/common.js")}}"></script>
 
-        <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script> -->
+        <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script> 
         <script src="{{ asset('assets/plugins/custombox/js/custombox.min.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.core.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.app.js')}}"></script>
