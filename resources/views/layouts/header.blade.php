@@ -21,7 +21,6 @@
 
             <div class="menu-extras topbar-custom">
                 <ul class="navigation-menu list-inline float-left mb-0">
-
                     <li>
                         <a href="/"> <i class="md md-dashboard"></i>Dashboard</a>
                     </li>
@@ -42,6 +41,7 @@
                             </li>
                         </ul>
                     </li>
+                   @if(key_exists('demon', Auth::user()->permissions) && Auth::user()->permissions['demon']=='yes')
                     <li class="has-submenu">
                         <a href="#"><i class="md-account-child"></i>Company</a>
                         <ul class="submenu">
@@ -54,6 +54,7 @@
 
                         </ul>
                     </li>
+                    @else
                     <li class="has-submenu">
                         <a href="#"><i class="md  md-settings"></i>Setup</a>
                         <ul class="submenu">
@@ -65,6 +66,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                 </ul>
 
                 <ul class="list-inline float-right mb-0">

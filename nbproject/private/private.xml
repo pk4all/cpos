@@ -3,8 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/ankush/cpos/resources/views/errors/404.blade.php</file>
-            <file>file:/var/www/html/ankush/cpos/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/company/index.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/.env</file>
+            <file>file:/var/www/html/ankush/cpos/app/Http/Controllers/location/StoresController.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/user/index.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Http/Controllers/UserRolesController.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Helpers/Helper.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/errors/401.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/routes/web.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Models/UserRoles.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/user/table.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Http/Controllers/HomeController.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/company/table.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/resources/views/dashboard.blade.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Http/Controllers/CompanyController.php</file>
+            <file>file:/var/www/html/ankush/cpos/app/Http/Controllers/UserController.php</file>
         </group>
     </open-files>
 </project-private>
