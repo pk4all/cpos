@@ -56,16 +56,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/discount/edit/{id}', 'DiscountController@getEdit');
 	Route::post('/discount/save-edit-discount', 'DiscountController@saveEditDiscount');
 	
-	Route::get('/delivery-area', 'DeliveryController@index')->name('delivery');
-	Route::get('/delivery/edit-delivery/{id}', 'DeliveryController@getEdit');
-	Route::post('/delivery/save-delivery-store', 'DeliveryController@saveDeliveryStore');
-	Route::post('/delivery/change-delivery-status', 'DeliveryController@changeDeliveryStatus');
-	Route::post('/delivery/save-edit-delivery-store', 'DeliveryController@saveEditDeliveryStore');
-	Route::get('/delivery/delivery-area-gmap/{id}', 'DeliveryController@deliveryAreaGmap');
-	Route::post('/delivery/save-gmap-data', 'DeliveryController@saveGmapData');
-	Route::post('/delivery/delete-gmap-area', 'DeliveryController@deleteGmapArea');
-	Route::get('/delivery/delivery-area/{id}', 'DeliveryController@deliveryArea');
-	Route::post('/delivery/save-delivery-area', 'DeliveryController@saveDeliveryArea');
-	Route::post('/delivery/delete-area', 'DeliveryController@deleteArea');
+	Route::get('/delivery-area', 'Location\DeliveryController@index')->name('delivery');
+	Route::get('/delivery/edit-delivery/{id}', 'Location\DeliveryController@getEdit');
+	Route::post('/delivery/save-delivery-store', 'Location\DeliveryController@saveDeliveryStore');
+	Route::post('/delivery/change-delivery-status', 'Location\DeliveryController@changeDeliveryStatus');
+	Route::post('/delivery/save-edit-delivery-store', 'Location\DeliveryController@saveEditDeliveryStore');
+	Route::get('/delivery/delivery-area-gmap/{id}', 'Location\DeliveryController@deliveryAreaGmap');
+	Route::post('/delivery/save-gmap-data', 'Location\DeliveryController@saveGmapData');
+	Route::post('/delivery/delete-gmap-area', 'Location\DeliveryController@deleteGmapArea');
+	Route::get('/delivery/delivery-area/{id}', 'Location\DeliveryController@deliveryArea');
+	Route::post('/delivery/save-delivery-area', 'Location\DeliveryController@saveDeliveryArea');
+	Route::post('/delivery/delete-area', 'Location\DeliveryController@deleteArea');
 	
 });

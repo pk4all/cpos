@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Location;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Session;

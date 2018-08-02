@@ -1,11 +1,11 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Location;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\DeliveryStores;
-use App\Models\GMapAreas;
-use App\Models\DeliveryAreas;
+use App\Models\Location\DeliveryStores;
+use App\Models\Location\GMapAreas;
+use App\Models\Location\DeliveryAreas;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
