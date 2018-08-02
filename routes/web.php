@@ -48,6 +48,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/company/update/{id}', 'CompanyController@postUpdate');
     Route::get('/company/destroy/{id}', 'CompanyController@getDestroy');
 	
+	Route::get('/stores', 'Location\StoresController@getIndex');
+    Route::get('/stores/create', 'Location\StoresController@create');
+    Route::post('/stores/store', 'Location\StoresController@postStore');
+    Route::get('/stores/edit/{id}', 'Location\StoresController@getEdit');
+    Route::post('/stores/update/{id}', 'Location\StoresController@postUpdate');
+    Route::get('/stores/destroy/{id}', 'Location\StoresController@getDestroy');
+    Route::get('/stores/update-status/{id}', 'Location\StoresController@getUpdateStatus'); 
+	
+	
 	Route::get('/discount', 'DiscountController@Index')->name('discount');
     Route::post('/discount/save-discount', 'DiscountController@saveDiscount');
 	Route::get('/discount/get-categories', 'DiscountController@getCategories');
@@ -67,5 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/delivery/delivery-area/{id}', 'Location\DeliveryController@deliveryArea');
 	Route::post('/delivery/save-delivery-area', 'Location\DeliveryController@saveDeliveryArea');
 	Route::post('/delivery/delete-area', 'Location\DeliveryController@deleteArea');
+	
+	
 	
 });

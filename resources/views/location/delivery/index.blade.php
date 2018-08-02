@@ -37,7 +37,7 @@
 		<tr>
 			<td>{{$key+1}}</td>
 			<td>{{$type[$data->type]}}</td>
-			<td>{{$storelist[$data->store_id]}}</td>
+			<td>{{$stores[$data->store_id]}}</td>
 			<td>
 		@if($data->status=='enable')
 			<input type="checkbox" checked data-plugin="switchery" data-color="#5d9cec" data-size="small" data-id="{{$data->id}}" class="status" onchange="status(this);"/>
@@ -92,7 +92,14 @@
 	<div class="form-group row">
 	<label class="col-2 col-form-label">Store</label>
 	<div class="col-8">
-		<select name="store_id" class="form-control" required="required" id="store-id"><option value="">Select Store</option><option value="1">Test Store</option><option value="2">Business Bay</option><option value="3">Dubai Marina</option><option value="4">Motor City</option><option value="5">Noida</option></select>
+		<select name="store_id" class="form-control" required="required" id="store-id">
+		<option value="">Select Store</option>
+		@if($stores)
+			@foreach($stores as $key=>$store)
+		<option value="{{$key}}">{{$store}}</option>
+			@endforeach
+		@endif
+		</select>
 	</div>
 	</div>
 </div>
@@ -169,7 +176,8 @@ function savedata(){
 }
 
 function edit(id){
-	$('#loader').removeClass('hide');
+	//$('#loader').removeClass('hide');
+	$('#edit_popup').modal('show');
 	$.get(siteurl+'/delivery/edit-delivery/'+id,function(data){
 			$('#loader').addClass('hide');
 			$('#edit_popup .modal-body').html(data);
@@ -246,6 +254,6 @@ function status(obj){
 			}
 		});
 }
-</script> 
+</script>
  <!-- Modal -->
 @stop

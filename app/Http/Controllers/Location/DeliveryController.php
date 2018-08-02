@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Location\DeliveryStores;
 use App\Models\Location\GMapAreas;
 use App\Models\Location\DeliveryAreas;
+use App\Models\Location\Stores;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -27,9 +28,15 @@ class DeliveryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-		 $storelist=[1=>'Test Store',2=>'Business Bay',3=>'Dubai Marina',4=>'Motor City',5=>'Noida'];
+		 //'storelist'=>$storelist
+		 $storesLists=Stores::where('status', 'enable')->orderBy('_id', 'asc')->get();
+		 if($storesLists){
+			 foreach($storesLists as $store){
+				 $storeArr[$store->id]=$store->name;
+			 }
+		 }
 		 $allDeliveryStores = DeliveryStores::paginate(20);
-		 $view = view('delivery.index', ['storelist'=>$storelist,'list'=>$allDeliveryStores]);
+		 $view = view('location.delivery.index', ['stores'=>$storeArr,'list'=>$allDeliveryStores]);
 		 return $view;
     }
 	
@@ -69,7 +76,13 @@ class DeliveryController extends Controller {
 	
 	public function getEdit(Request $request,$id=null){
 		$delvStore = DeliveryStores::find($id); 
-		$view = view('delivery.edit',['delvStore'=>$delvStore]);
+		 $storesLists=Stores::where('status', 'enable')->orderBy('_id', 'asc')->get();
+		 if($storesLists){
+			 foreach($storesLists as $store){
+				 $storeArr[$store->id]=$store->name;
+			 }
+		 }
+		$view = view('location.delivery.edit',['delvStore'=>$delvStore,'stores'=>$storeArr]);
          return $view;
 	}
 	
@@ -90,7 +103,7 @@ class DeliveryController extends Controller {
 	
 	public function deliveryAreaGmap(Request $request,$id=null){
 		$areas=GMapAreas::where('delv_store_id','=',$id)->get();
-		$view = view('delivery.gmap',['id'=>$id,'storeLat'=>28.625507,'storeLng'=>77.208287,'SelectedAreas'=>$areas]);
+		$view = view('location.delivery.gmap',['id'=>$id,'storeLat'=>28.625507,'storeLng'=>77.208287,'SelectedAreas'=>$areas]);
          return $view;
 	}
 	
@@ -122,7 +135,7 @@ class DeliveryController extends Controller {
 	
 	public function deliveryArea(Request $request,$id){
 		$areas=DeliveryAreas::where('delv_store_id','=',$id)->get();
-		$view = view('delivery.area',['id'=>$id,'list'=>$areas]);
+		$view = view('location.delivery.area',['id'=>$id,'list'=>$areas]);
         return $view;
 	}
 	

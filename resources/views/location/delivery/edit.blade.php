@@ -14,11 +14,11 @@
 	<div class="col-8">
 		<select name="store_id" class="form-control" required="required" id="store-id">
 		<option value="">Select Store</option>
-		<option value="1" {{$delvStore->store_id==1?'selected':''}}> Test Store</option>
-		<option value="2" {{$delvStore->store_id==2?'selected':''}}> Business Bay</option>
-		<option value="3" {{$delvStore->store_id==3?'selected':''}}> Dubai Marina</option>
-		<option value="4" {{$delvStore->store_id==4?'selected':''}}> Motor City</option>
-		<option value="5" {{$delvStore->store_id==5?'selected':''}}> Noida</option>
+		@if($stores)
+			@foreach($stores as $key=>$store)
+		<option value="{{$key}}" {{$delvStore->store_id==$key?'selected':''}}>{{$store}}</option>
+			@endforeach
+		@endif
 		</select>
 	</div>
 	</div>

@@ -1,0 +1,166 @@
+@extends('layouts.plane')
+@section('body')
+
+<div class="wrapper">
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            @include('layouts.messages',['title'=>'Add New Stores','path'=>['/stores'=>'Stores','#'=>'Create']])
+            <div class="col-12">
+                <div class="card-box">
+                    <p class="text-muted m-b-30 font-14">
+                    </p>
+                    {!! Form::open(array('url' => 'stores/store','class'=>'form-horizontal')) !!}
+
+                    <div class="row">
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Name</label>
+                            <div class="col-9">
+                            {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Store Name')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Email</label>
+                            <div class="col-9">
+                            {!! Form::email('email', Input::old('email'), array('required','class'=>'form-control','placeholder'=>'Enter Store Email')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Notify Email</label>
+                            <div class="col-9">
+                            {!! Form::email('notification_email', Input::old('notification_email'), array('required','class'=>'form-control','placeholder'=>'Enter Store Notification Email')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Phone</label>
+                            <div class="col-9">
+                            {!! Form::text('phone', Input::old('phone'), array('required','class'=>'form-control','placeholder'=>'Enter Store Phone')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Print Label</label>
+                            <div class="col-9">
+                            {!! Form::text('print_label', Input::old('print_label'), array('required','class'=>'form-control','placeholder'=>'Enter Store Print Label')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Tax ID</label>
+                            <div class="col-9">
+                            {!! Form::text('tax_id', Input::old('tax_id'), array('required','class'=>'form-control','placeholder'=>'Enter Store Tax ID')) !!}
+                            </div>
+                        </div>
+                        <!--<div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Image</label>
+                            <div class="col-9">
+                            {!! Form::text('image', Input::old('image'), array('required','class'=>'form-control','placeholder'=>'Enter Store image')) !!}
+                            </div>
+                        </div>-->
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Address</label>
+                            <div class="col-9">
+                            {!! Form::text("address[label]", Input::old("address[label]"), array('required','class'=>'form-control','placeholder'=>'Enter Store Address')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">City</label>
+                            <div class="col-9">
+                            {!! Form::text("address[city]", Input::old("address[city]"), array('required','class'=>'form-control','placeholder'=>'Enter Store City')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">State</label>
+                            <div class="col-9">
+                            {!! Form::text("address[state]", Input::old("address[state]"), array('required','class'=>'form-control','placeholder'=>'Enter Store State')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Country</label>
+                            <div class="col-9">
+                            {!! Form::select("address[country]",$contryList,Input::old("address[country]"), array('required','class'=>'form-control','placeholder'=>'Enter Store Country')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Zip Code</label>
+                            <div class="col-9">
+                            {!! Form::text("address[zip_code]", Input::old("address[zip_code]"), array('required','class'=>'form-control','placeholder'=>'Enter Store Zip Code')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Radius</label>
+                            <div class="col-9">
+                            {!! Form::number('radius', Input::old('radius'), array('required','class'=>'form-control','placeholder'=>'Enter Store Radius')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Latitude</label>
+                            <div class="col-9">
+                            {!! Form::text('latitude', Input::old('latitude'), array('required','class'=>'form-control','placeholder'=>'Enter Store Latitude')) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Longitude</label>
+                            <div class="col-9">
+                            {!! Form::text('longitude', Input::old('longitude'), array('required','class'=>'form-control','placeholder'=>'Enter Store Longitude','placeholder'=>'Enter Store Longitude')) !!}
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row store-timing">
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Day From</label>
+                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
+                                 {!! Form::select("store_timing[from_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                            </div>
+                            <label class="col-1 col-form-label">To</label>
+                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
+                                {!! Form::select("store_timing[to_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                            </div>
+
+                        </div>
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Time From</label>
+                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
+                                {!! Form::text("store_timing[from_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                            </div>
+                            <label class="col-1 col-form-label">To</label>
+                            <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
+                               {!! Form::text("store_timing[to_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                            </div>
+                        </div><span  class='addmoreStoreTiming' style='z-index: 999999'><i class="ion-plus-circled"></i></span>
+                    </div>
+                    {!! Form::submit('Save!', array('class' => 'btn btn-primary')) !!}
+                    {!! Form::close() !!}
+                </div>
+
+            </div> 
+
+
+        </div>
+
+
+
+    </div> <!-- end Panel -->
+
+
+
+
+
+</div> <!-- end container -->
+@section('custome_script')
+<script>
+    $('.clockpicker').clockpicker({
+        donetext: 'Done'
+    });
+    $(document).ready(function(){
+    $(".addmoreStoreTiming").click(function(){
+      $(this).parents('.store-timing').clone().insertAfter(".store-timing:last");
+       $('.clockpicker').clockpicker({
+        donetext: 'Done'
+    });
+    });
+});
+</script>
+@yield('custome_script')
+@overwrite
+@stop
