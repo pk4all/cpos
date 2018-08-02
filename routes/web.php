@@ -77,6 +77,4 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/delivery/save-delivery-area', 'Location\DeliveryController@saveDeliveryArea');
 	Route::post('/delivery/delete-area', 'Location\DeliveryController@deleteArea');
 	
-	
-	
 });

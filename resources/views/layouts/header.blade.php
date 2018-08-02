@@ -20,6 +20,58 @@
 
 
             <div class="menu-extras topbar-custom">
+                <ul class="navigation-menu list-inline float-left mb-0">
+
+                    <li>
+                        <a href="/"> <i class="md md-dashboard"></i>Dashboard</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#"><i class="md md-account-circle"></i>User</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="/users">User List</a>
+                            </li>
+                            <li>
+                                <a href="/users/create">Add New User</a>
+                            </li>
+                            <li>
+                                <a href="/user-roles">Role List</a>
+                            </li>
+                            <li>
+                                <a href="/user-roles/create">Add New Role</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#"><i class="md-account-child"></i>Company</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="/company">Company List</a>
+                            </li>
+                            <li>
+                                <a href="/company/create">Add New Company</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#"><i class="md  md-settings"></i>Setup</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="/stores">Stores</a>
+                            </li>
+                            <li>
+                                <a href="/stores/create">Add New Stores</a>
+                            </li> 
+							<li>
+                                <a href="/discount">Discount</a>
+                            </li>
+							<li>
+                               <a href="/delivery-area">Delivery Area</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <ul class="list-inline float-right mb-0">
 
@@ -120,7 +172,7 @@
         </div> <!-- end container -->
     </div>
     <!-- end topbar-main -->
-    @include('layouts.menus')
-   
+    <!-- menu should be added here -->
+
 </header>
 <!-- End Navigation Bar-->
