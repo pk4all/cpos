@@ -49,7 +49,7 @@ class UserController extends Controller {
      */
     public function getCreate(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('users_createaa', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('users_create', $request)) !== true) {
              return redirect()->action($return);
         }
 
