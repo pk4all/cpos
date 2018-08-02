@@ -7765,4 +7765,11 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     margin-left: 0;
   }
 }
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 6rem;
+    text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -33,6 +33,12 @@
                     </ul>
                 </li>
 
+				 <li class="">
+                    <a href="/discount"><i class="md  md-wallet-giftcard"></i>Discounts</a>
+				</li>
+				<li class="">
+                    <a href="/delivery-area"><i class="md   md-location-on"></i>Delivery Areas</a>
+				</li>
                 <!--<li class="has-submenu">
                     <a href="#"><i class="md md-dashboard"></i>Dashboard</a>
                     <ul class="submenu">

@@ -21,6 +21,7 @@
 
             <div class="menu-extras topbar-custom">
                 <ul class="navigation-menu list-inline float-left mb-0">
+
                     <li>
                         <a href="/"> <i class="md md-dashboard"></i>Dashboard</a>
                     </li>
@@ -56,13 +57,22 @@
                     </li>
                     @else
                     <li class="has-submenu">
-                        <a href="#"><i class="md  md-settings"></i>Setup</a>
+                        <a href="/set-up"><i class="md  md-settings"></i>Setup</a>
                         <ul class="submenu">
                             <li>
                                 <a href="/stores">Stores</a>
                             </li>
                             <li>
                                 <a href="/stores/create">Add New Stores</a>
+                            </li> 
+							<li>
+                                <a href="/order-type">Order Type</a>
+                            </li> 
+							<li>
+                                <a href="/discount">Discount</a>
+                            </li>
+							<li>
+                               <a href="/delivery-area">Delivery Area</a>
                             </li>
                         </ul>
                     </li>

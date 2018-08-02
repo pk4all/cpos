@@ -26,5 +26,10 @@ class HomeController extends Controller {
          $view = view('dashboard', []);
         return $view;
     }
+	
+	 public function setup() {
+         $view = view('setup', []);
+        return $view;
+    }
 
 }
