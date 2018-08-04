@@ -64,7 +64,13 @@
                             </li>
                             <li>
                                 <a href="/stores/create">Add New Stores</a>
-                            </li> 
+                            </li>
+                            <li>
+                                <a href="/brands">Brands</a>
+                            </li>
+                            <li>
+                                <a href="/brands/create">Add New Brands</a>
+                            </li>
 							<li>
                                 <a href="/order-type">Order Type</a>
                             </li> 

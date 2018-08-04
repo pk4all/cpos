@@ -81,7 +81,7 @@ class UserRoles extends Eloquent {
      */
     public static function hasAccess($permisson, $request = null) {
         $return = false;
-        if (env('CHECK_PERMISSIONS','No') === 'No') {
+        if (env('CHECK_PERMISSIONS') === 'No') {
             return TRUE;
         }
         if (!isset(Auth::user()->permissions)) {
