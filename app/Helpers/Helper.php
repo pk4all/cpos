@@ -48,7 +48,18 @@ class Helper {
 
         return ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
     }
-
+    
+    
+    public static function imageFileUploadPath($start_path = 'assets/images/',$dir_name=null) {
+        $path = public_path($start_path);
+        $img_path = $path.$dir_name.'/';
+        if (!is_dir($img_path)) {
+            mkdir($img_path, 0777, true);
+        }
+        return $img_path;
+    }
+    
+    
     public function getDefaultSel() {
         return $this->default_sel;
     }

@@ -13,7 +13,7 @@ class UserRoles extends Eloquent {
 
     protected $table = 'roles';
     //'company_view'=>'Company View','company_create'=>'Company Create','company_delete'=>'Compnay Delete','company_update'=>'Company update',
-    public static $permission = ['users_view'=>'Users View','users_create'=>'Users Create','users_delete'=>'Users Delete','users_update'=>'Users Update','roles_view'=>'Roles View','roles_create'=>'Roles Create','roles_delete'=>'Roles Delete','roles_update'=>'Roles Update','stores_view'=>'Stores View','stores_create'=>'Stores Create','stores_delete'=>'Stores Delete','stores_update'=>'Stores Update'];
+    public static $permission = ['users_view'=>'Users View','users_create'=>'Users Create','users_delete'=>'Users Delete','users_update'=>'Users Update','roles_view'=>'Roles View','roles_create'=>'Roles Create','roles_delete'=>'Roles Delete','roles_update'=>'Roles Update','stores_view'=>'Stores View','stores_create'=>'Stores Create','stores_delete'=>'Stores Delete','stores_update'=>'Stores Update','brands_view'=>'brands View','brands_create'=>'brands Create','brands_delete'=>'brands Delete','brands_update'=>'brands Update'];
 
     public static function getRolesDropDownList() {
 

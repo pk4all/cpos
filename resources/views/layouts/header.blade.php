@@ -42,7 +42,7 @@
                             </li>
                         </ul>
                     </li>
-                   @if(key_exists('demon', Auth::user()->permissions) && Auth::user()->permissions['demon']=='yes')
+                   @if(is_array(Auth::user()->permissions) && key_exists('demon', Auth::user()->permissions) && Auth::user()->permissions['demon']=='yes')
                     <li class="has-submenu">
                         <a href="#"><i class="md-account-child"></i>Company</a>
                         <ul class="submenu">
@@ -64,7 +64,13 @@
                             </li>
                             <li>
                                 <a href="/stores/create">Add New Stores</a>
-                            </li> 
+                            </li>
+                            <li>
+                                <a href="/brands">Brands</a>
+                            </li>
+                            <li>
+                                <a href="/brands/create">Add New Brands</a>
+                            </li>
 							<li>
                                 <a href="/order-type">Order Type</a>
                             </li> 

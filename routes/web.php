@@ -45,13 +45,13 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/company/update/{id}', 'CompanyController@postUpdate');
     Route::get('/company/destroy/{id}', 'CompanyController@getDestroy');
 
-    Route::get('/stores', 'location\StoresController@getIndex');
-    Route::get('/stores/create', 'location\StoresController@create');
-    Route::post('/stores/store', 'location\StoresController@postStore');
-    Route::get('/stores/edit/{id}', 'location\StoresController@getEdit');
-    Route::post('/stores/update/{id}', 'location\StoresController@postUpdate');
-    Route::get('/stores/destroy/{id}', 'location\StoresController@getDestroy');
-    Route::get('/stores/update-status/{id}', 'location\StoresController@getUpdateStatus');
+    Route::get('/stores', 'Location\StoresController@getIndex');
+    Route::get('/stores/create', 'Location\StoresController@create');
+    Route::post('/stores/store', 'Location\StoresController@postStore');
+    Route::get('/stores/edit/{id}', 'Location\StoresController@getEdit');
+    Route::post('/stores/update/{id}', 'Location\StoresController@postUpdate');
+    Route::get('/stores/destroy/{id}', 'Location\StoresController@getDestroy');
+    Route::get('/stores/update-status/{id}', 'Location\StoresController@getUpdateStatus');
 
 
 
@@ -80,4 +80,12 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/order-type/change-status', 'Location\OrderTypeController@changeStatus');
     Route::get('/order-type/edit/{id}', 'Location\OrderTypeController@edit');
     Route::post('/order-type/save-edit', 'Location\OrderTypeController@saveEdit');
+    
+    Route::get('/brands', 'Location\BrandsController@getIndex');
+    Route::get('/brands/create', 'Location\BrandsController@create');
+    Route::post('/brands/store', 'Location\BrandsController@postStore');
+    Route::get('/brands/edit/{id}', 'Location\BrandsController@getEdit');
+    Route::post('/brands/update/{id}', 'Location\BrandsController@postUpdate');
+    Route::get('/brands/destroy/{id}', 'Location\BrandsController@getDestroy');
+    Route::get('/brands/update-status/{id}', 'Location\BrandsController@getUpdateStatus');
 });

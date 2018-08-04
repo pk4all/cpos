@@ -4,7 +4,7 @@ namespace App\Http\Controllers\location;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\location\Stores;
+use App\Models\Location\Stores;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -75,6 +75,7 @@ class StoresController extends Controller {
         $stores->store_timing = $request->input('store_timing', []);
         $stores->created_by = Auth::user()->_id;
         $stores->updated_by = Auth::user()->_id;
+        $stores->status = 'disable';
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
         return redirect()->action('location\StoresController@getIndex');
