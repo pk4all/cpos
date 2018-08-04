@@ -21,7 +21,7 @@ Auth::routes();
 Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/home', 'HomeController@getIndex');
     Route::get('/', 'HomeController@getIndex');
-    Route::get('/set-up', 'HomeController@setup');
+    Route::get('/setup', 'HomeController@setup');
     Route::get('/users', 'UserController@getIndex')->name('users');
     Route::get('/users/create', 'UserController@getCreate');
     Route::post('/users/store', 'UserController@postStore');
@@ -80,7 +80,7 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/order-type/change-status', 'Location\OrderTypeController@changeStatus');
     Route::get('/order-type/edit/{id}', 'Location\OrderTypeController@edit');
     Route::post('/order-type/save-edit', 'Location\OrderTypeController@saveEdit');
-    
+
     Route::get('/brands', 'Location\BrandsController@getIndex');
     Route::get('/brands/create', 'Location\BrandsController@create');
     Route::post('/brands/store', 'Location\BrandsController@postStore');
@@ -88,4 +88,12 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/brands/update/{id}', 'Location\BrandsController@postUpdate');
     Route::get('/brands/destroy/{id}', 'Location\BrandsController@getDestroy');
     Route::get('/brands/update-status/{id}', 'Location\BrandsController@getUpdateStatus');
+
+    Route::get('/surcharge', 'Location\SurchargeController@getIndex');
+    Route::get('/surcharge/create', 'Location\SurchargeController@create');
+    Route::post('/surcharge/store', 'Location\SurchargeController@postStore');
+    Route::get('/surcharge/edit/{id}', 'Location\SurchargeController@getEdit');
+    Route::post('/surcharge/update/{id}', 'Location\SurchargeController@postUpdate');
+    Route::get('/surcharge/destroy/{id}', 'Location\SurchargeController@getDestroy');
+    Route::get('/surcharge/update-status/{id}', 'Location\SurchargeController@getUpdateStatus');
 });

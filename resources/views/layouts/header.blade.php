@@ -57,7 +57,7 @@
                     </li>
                     @else
                     <li class="has-submenu">
-                        <a href="/set-up"><i class="md  md-settings"></i>Setup</a>
+                        <a href="/setup"><i class="md  md-settings"></i>Setup</a>
                         <ul class="submenu">
                             <li>
                                 <a href="/stores">Stores</a>
@@ -71,6 +71,14 @@
                             <li>
                                 <a href="/brands/create">Add New Brands</a>
                             </li>
+                             <li>
+                                <a href="/surcharge">Surcharge</a>
+                            </li>
+                            <li>
+                                <a href="/surcharge/create">Add New Surcharge</a>
+                            </li>
+                            
+                            
 							<li>
                                 <a href="/order-type">Order Type</a>
                             </li> 
