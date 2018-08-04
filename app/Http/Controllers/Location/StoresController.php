@@ -75,10 +75,10 @@ class StoresController extends Controller {
         $stores->store_timing = $request->input('store_timing', []);
         $stores->created_by = Auth::user()->_id;
         $stores->updated_by = Auth::user()->_id;
-		$stores->status = $request->input('status', 'enable');
+        $stores->status = 'disable';
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     /**
@@ -137,12 +137,12 @@ class StoresController extends Controller {
         $stores->radius = $request->input('radius', null);
         $stores->latitude = $request->input('latitude', null);
         $stores->longitude = $request->input('longitude', null);
-        $stores->status = $request->input('status', 'enable');
+        //$stores->status = $request->input('status', 'disable');
         $stores->store_timing = $request->input('store_timing', []);
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' Updated successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     /**
@@ -164,7 +164,7 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Successfully deleted the Stores!');
-        return redirect()->action('location\StoresController@getIndex');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     public function getUpdateStatus(Request $request, $id) {
@@ -179,7 +179,7 @@ class StoresController extends Controller {
         $stores->status = $stores->status == 'enable' ? 'disable' : 'enable';
         $stores->save();
         $request->session()->flash('status', $stores->name . ' Status changed to ' . $stores->status . ' Successfully!');
-        return redirect()->action('location\StoresController@Index');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     public function getStoresListPaging(Request $request) {

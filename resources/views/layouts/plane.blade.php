@@ -14,12 +14,13 @@
         <!-- App css -->
         <link href="{{ asset("assets/css/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/plugins/custombox/css/custombox.css')}}" rel="stylesheet" type="text/css" />
-       	<link rel="stylesheet" href="{{ ('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" />
+       	<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" />
         <link href="{{ asset("assets/css/icons.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/style.css")}}" rel="stylesheet" type="text/css" />
         <script src="{{ asset("assets/js/modernizr.min.js")}}"></script>
         <script src="{{ asset('assets/js/knockout.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js')}}"></script>
         @stack('head')
     </head>
 

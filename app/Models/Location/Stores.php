@@ -32,11 +32,11 @@ class Stores extends Eloquent {
         return self::where('_id', $id)->where('status', 'enable')->get();
     }
 
-    public static function getStoresByIds($ids) {
+    public static function getStoresByIds($ids,$fields=[]) {
 
-        return self::whereIn('_id', $ids)->where('status', 'enable')->get()->toArray();
+        return self::whereIn('_id', $ids)->where('status', 'enable')->get($fields)->toArray();
     }
-
+   
     public static function scopeSearch($query, $keyword) {
 
         $finder = $query->Where('name', 'LIKE', "%{$keyword}%")->where('status', 'enabled')->orderBy('_id', 'asc');
@@ -62,4 +62,21 @@ class Stores extends Eloquent {
         $data = $query->orderBy($sortOrderField, $sortDirection);
         return $data;
     }
+    
+    /*  this function return the store list */
+    public static function getStoreDropDownList() {
+
+        $column = array('_id', 'name');
+        $result = Stores::get($column);
+        
+        $store_list = NULL;
+        foreach ($result as $item) {
+            $store_list[$item->_id] = $item->name;
+        }
+        $helper = new Helper;
+        $def_sel = $helper->getDefaultSel();
+        $storesDropdown = (!empty($store_list)) ? array_merge($def_sel, $store_list) : $def_sel;
+        return $storesDropdown;
+    }
+    
 }
