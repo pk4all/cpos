@@ -27,15 +27,16 @@ class OrderTypeController extends Controller {
      */
     public function index(Request $request) {
 		 //'storelist'=>$storelist
-		 $storesLists=Stores::where('status', 'enable')->orderBy('_id', 'asc')->get();
-		 if($storesLists){
-			 foreach($storesLists as $store){
-				 $storeArr[$store->id]=$store->name;
-			 }
-		 }
-		 $list = OrderTypes::paginate(20);
-		 $view = view('location.orderType.index', ['stores'=>$storeArr,'list'=>$list]);
-		 return $view;
+		 // $storesLists=Stores::where('status', 'enable')->orderBy('_id', 'asc')->get();
+		 // if($storesLists){
+			//  foreach($storesLists as $store){
+			// 	 $storeArr[$store->id]=$store->name;
+			//  }
+		 // }
+		$list = OrderTypes::paginate(20);
+    	$storeArr = Stores::getStoreDropDownList();
+		$view = view('location.orderType.index', ['stores'=>$storeArr,'list'=>$list]);
+		return $view;
     }
 	
 	public function save(Request $request){
