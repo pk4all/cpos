@@ -96,4 +96,23 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/surcharge/update/{id}', 'Location\SurchargeController@postUpdate');
     Route::get('/surcharge/destroy/{id}', 'Location\SurchargeController@getDestroy');
     Route::get('/surcharge/update-status/{id}', 'Location\SurchargeController@getUpdateStatus');
+
+
+    Route::get('/tax', 'Location\TaxController@getIndex');
+    Route::get('/tax/create', 'Location\TaxController@create');
+    Route::post('/tax/store', 'Location\TaxController@postStore');
+    Route::get('/tax/edit/{id}', 'Location\TaxController@getEdit');
+    Route::post('/tax/update/{id}', 'Location\TaxController@postUpdate');
+    Route::get('/tax/destroy/{id}', 'Location\TaxController@getDestroy');
+    Route::get('/tax/update-status/{id}', 'Location\TaxController@getUpdateStatus');
+
+
+
+    Route::get('/payment', 'Location\PaymentsController@getIndex');
+    Route::get('/payment/create', 'Location\PaymentsController@create');
+    Route::post('/payment/store', 'Location\PaymentsController@postStore');
+    Route::get('/payment/edit/{id}', 'Location\PaymentsController@getEdit');
+    Route::post('/payment/update/{id}', 'Location\PaymentsController@postUpdate');
+    Route::get('/payment/destroy/{id}', 'Location\PaymentsController@getDestroy');
+    Route::get('/payment/update-status/{id}', 'Location\PaymentsController@getUpdateStatus');
 });

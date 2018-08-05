@@ -67,7 +67,7 @@ class Stores extends Eloquent {
     public static function getStoreDropDownList() {
 
         $column = array('_id', 'name');
-        $result = Stores::get($column);
+        $result = Stores::where('status', 'enable')->get($column);
         
         $store_list = NULL;
         foreach ($result as $item) {
