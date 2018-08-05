@@ -77,7 +77,18 @@
                             <li>
                                 <a href="/surcharge/create">Add New Surcharge</a>
                             </li>
-                            
+                             <li>
+                                <a href="/tax">Taxes</a>
+                            </li>
+                            <li>
+                                <a href="/tax/create">Add New taxes</a>
+                            </li>
+ <li>
+                                <a href="/payment">Payment Type</a>
+                            </li>
+                            <li>
+                                <a href="/payment/create">Add New Payment</a>
+                            </li>
                             
 							<li>
                                 <a href="/order-type">Order Type</a>
