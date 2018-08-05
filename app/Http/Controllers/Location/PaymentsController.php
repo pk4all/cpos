@@ -207,7 +207,7 @@ class PaymentsController extends Controller {
         $payment->updated_by = Auth::user()->_id;
         $payment->status = $payment->status == 'enable' ? 'disable' : 'enable';
         $payment->save();
-        $request->session()->flash('status', $payments->name . ' Status changed to ' . $payments->status . ' Successfully!');
+        $request->session()->flash('status', $payments->name . ' Status changed to ' . $payment->status . ' Successfully!');
         return redirect()->action('Location\PaymentsController@getIndex');
     }
 
