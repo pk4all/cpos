@@ -657,6 +657,20 @@ class Helper {
 //    }
 //    
 //    
+
+    public static function getCurrentController($onlyName = false) {
+      $currentAction = \Route::currentRouteAction();
+      list($controller, $method) = explode('@', $currentAction);
+      //$controller = preg_replace('/.*\\\/', '', $controller);
+      $controller=explode("Controllers\\",$controller);
+      $controller = $controller[1];
+      $controller = $controller . '@getIndex';
+      if ($onlyName) {
+          $controller = str_replace('Controller@getIndex', '', $controller);
+      }
+        return $controller;
+    }
+
      public static function imageFileUploadPath($start_path = 'assets/images/',$dir_name=null) {
         $path = public_path($start_path);
         $img_path = $path.$dir_name.'/';
