@@ -18,11 +18,10 @@ Route::get('/register', function () {
     return abort('404');
 });
 Auth::routes();
-Route::group(['middleware' => ['domain_setup','auth']], function () {
+Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/home', 'HomeController@getIndex');
     Route::get('/', 'HomeController@getIndex');
-   // Route::resource('users', 'UserController');
-    //Route::resource('user-roles', 'UserRolesController');
+    Route::get('/setup', 'HomeController@setup');
     Route::get('/users', 'UserController@getIndex')->name('users');
     Route::get('/users/create', 'UserController@getCreate');
     Route::post('/users/store', 'UserController@postStore');
@@ -45,14 +44,75 @@ Route::group(['middleware' => ['domain_setup','auth']], function () {
     Route::get('/company/edit/{id}', 'CompanyController@getEdit');
     Route::post('/company/update/{id}', 'CompanyController@postUpdate');
     Route::get('/company/destroy/{id}', 'CompanyController@getDestroy');
-    
-    
-     Route::get('/stores', 'location\StoresController@getIndex');
-    Route::get('/stores/create', 'location\StoresController@create');
-    Route::post('/stores/store', 'location\StoresController@postStore');
-    Route::get('/stores/edit/{id}', 'location\StoresController@getEdit');
-    Route::post('/stores/update/{id}', 'location\StoresController@postUpdate');
-    Route::get('/stores/destroy/{id}', 'location\StoresController@getDestroy');
-    Route::get('/stores/update-status/{id}', 'location\StoresController@getUpdateStatus');   
-    
+
+    Route::get('/stores', 'Location\StoresController@getIndex');
+    Route::get('/stores/create', 'Location\StoresController@create');
+    Route::post('/stores/store', 'Location\StoresController@postStore');
+    Route::get('/stores/edit/{id}', 'Location\StoresController@getEdit');
+    Route::post('/stores/update/{id}', 'Location\StoresController@postUpdate');
+    Route::get('/stores/destroy/{id}', 'Location\StoresController@getDestroy');
+    Route::get('/stores/update-status/{id}', 'Location\StoresController@getUpdateStatus');
+
+
+
+    Route::get('/discount', 'DiscountController@Index')->name('discount');
+    Route::post('/discount/save-discount', 'DiscountController@saveDiscount');
+    Route::get('/discount/get-categories', 'DiscountController@getCategories');
+    Route::get('/discount/get-items', 'DiscountController@getItems');
+    Route::post('/discount/change-discount-status', 'DiscountController@changeDiscountStatus');
+    Route::get('/discount/edit/{id}', 'DiscountController@getEdit');
+    Route::post('/discount/save-edit-discount', 'DiscountController@saveEditDiscount');
+
+    Route::get('/delivery-area', 'Location\DeliveryController@index')->name('delivery');
+    Route::get('/delivery/edit-delivery/{id}', 'Location\DeliveryController@getEdit');
+    Route::post('/delivery/save-delivery-store', 'Location\DeliveryController@saveDeliveryStore');
+    Route::post('/delivery/change-delivery-status', 'Location\DeliveryController@changeDeliveryStatus');
+    Route::post('/delivery/save-edit-delivery-store', 'Location\DeliveryController@saveEditDeliveryStore');
+    Route::get('/delivery/delivery-area-gmap/{id}', 'Location\DeliveryController@deliveryAreaGmap');
+    Route::post('/delivery/save-gmap-data', 'Location\DeliveryController@saveGmapData');
+    Route::post('/delivery/delete-gmap-area', 'Location\DeliveryController@deleteGmapArea');
+    Route::get('/delivery/delivery-area/{id}', 'Location\DeliveryController@deliveryArea');
+    Route::post('/delivery/save-delivery-area', 'Location\DeliveryController@saveDeliveryArea');
+    Route::post('/delivery/delete-area', 'Location\DeliveryController@deleteArea');
+
+    Route::get('/order-type', 'Location\OrderTypeController@index');
+    Route::post('/order-type/save', 'Location\OrderTypeController@save');
+    Route::post('/order-type/change-status', 'Location\OrderTypeController@changeStatus');
+    Route::get('/order-type/edit/{id}', 'Location\OrderTypeController@edit');
+    Route::post('/order-type/save-edit', 'Location\OrderTypeController@saveEdit');
+
+    Route::get('/brands', 'Location\BrandsController@getIndex');
+    Route::get('/brands/create', 'Location\BrandsController@create');
+    Route::post('/brands/store', 'Location\BrandsController@postStore');
+    Route::get('/brands/edit/{id}', 'Location\BrandsController@getEdit');
+    Route::post('/brands/update/{id}', 'Location\BrandsController@postUpdate');
+    Route::get('/brands/destroy/{id}', 'Location\BrandsController@getDestroy');
+    Route::get('/brands/update-status/{id}', 'Location\BrandsController@getUpdateStatus');
+
+    Route::get('/surcharge', 'Location\SurchargeController@getIndex');
+    Route::get('/surcharge/create', 'Location\SurchargeController@create');
+    Route::post('/surcharge/store', 'Location\SurchargeController@postStore');
+    Route::get('/surcharge/edit/{id}', 'Location\SurchargeController@getEdit');
+    Route::post('/surcharge/update/{id}', 'Location\SurchargeController@postUpdate');
+    Route::get('/surcharge/destroy/{id}', 'Location\SurchargeController@getDestroy');
+    Route::get('/surcharge/update-status/{id}', 'Location\SurchargeController@getUpdateStatus');
+
+
+    Route::get('/tax', 'Location\TaxController@getIndex');
+    Route::get('/tax/create', 'Location\TaxController@create');
+    Route::post('/tax/store', 'Location\TaxController@postStore');
+    Route::get('/tax/edit/{id}', 'Location\TaxController@getEdit');
+    Route::post('/tax/update/{id}', 'Location\TaxController@postUpdate');
+    Route::get('/tax/destroy/{id}', 'Location\TaxController@getDestroy');
+    Route::get('/tax/update-status/{id}', 'Location\TaxController@getUpdateStatus');
+
+
+
+    Route::get('/payment', 'Location\PaymentsController@getIndex');
+    Route::get('/payment/create', 'Location\PaymentsController@create');
+    Route::post('/payment/store', 'Location\PaymentsController@postStore');
+    Route::get('/payment/edit/{id}', 'Location\PaymentsController@getEdit');
+    Route::post('/payment/update/{id}', 'Location\PaymentsController@postUpdate');
+    Route::get('/payment/destroy/{id}', 'Location\PaymentsController@getDestroy');
+    Route::get('/payment/update-status/{id}', 'Location\PaymentsController@getUpdateStatus');
 });

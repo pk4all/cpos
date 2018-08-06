@@ -24,8 +24,8 @@
                                 {{ ucwords(str_replace("_"," ",implode($data->permission,', ')))}}
                                 @endif
                             </td>
-                            <td>
-                                <a href="{{ URL::to('user-roles/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <td class="table-actions-bar">
+                                <a href="{{ URL::to('user-roles/edit/' .$data->_id) }}" class="on-default edit-row table-action-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('user-roles/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Role ?"><i class="fa fa-trash-o"></i></a>
                             </td>
 

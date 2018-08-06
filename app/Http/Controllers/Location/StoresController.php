@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\location;
+namespace App\Http\Controllers\Location;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\location\Stores;
+use App\Models\Location\Stores;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -75,9 +75,10 @@ class StoresController extends Controller {
         $stores->store_timing = $request->input('store_timing', []);
         $stores->created_by = Auth::user()->_id;
         $stores->updated_by = Auth::user()->_id;
+        $stores->status = 'disable';
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
-        return redirect()->action('location\StoresController@getIndex');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     /**
@@ -141,7 +142,7 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' Updated successfully!');
-        return redirect()->action('location\StoresController@getIndex');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     /**
@@ -163,7 +164,7 @@ class StoresController extends Controller {
         $stores->updated_by = Auth::user()->_id;
         $stores->save();
         $request->session()->flash('status', 'Successfully deleted the Stores!');
-        return redirect()->action('location\StoresController@getIndex');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     public function getUpdateStatus(Request $request, $id) {
@@ -178,7 +179,7 @@ class StoresController extends Controller {
         $stores->status = $stores->status == 'enable' ? 'disable' : 'enable';
         $stores->save();
         $request->session()->flash('status', $stores->name . ' Status changed to ' . $stores->status . ' Successfully!');
-        return redirect()->action('location\StoresController@getIndex');
+        return redirect()->action('Location\StoresController@getIndex');
     }
 
     public function getStoresListPaging(Request $request) {

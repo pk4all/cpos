@@ -6,7 +6,7 @@
 
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'Stores','path'=>[]])
+            @include('layouts.messages',['title'=>'Stores','path'=>['/setup'=>'Setup']])
 
         </div>    
         @include('location.stores.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))
