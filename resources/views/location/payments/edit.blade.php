@@ -64,7 +64,9 @@
                                     {!! Form::text('value[]', $value, array('class'=>'form-control','placeholder'=>'Option Value')) !!}
                                 
                                 </div>
-                                <div class="col-1 add-new">+</div>
+                                <div class="col-1 add-new">
+                                    <span class="addmoreStoreTiming" style="z-index: 999999" title="Add more Option"><i class="ion-plus-circled"></i></span>
+                                </div>
                             </div>
                         </div>
                         @endforeach

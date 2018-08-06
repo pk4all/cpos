@@ -113,8 +113,9 @@ class PaymentsController extends Controller {
         /* end permission code */
 
         $payment_data = Payment::find($id);
-        print_r($payment_data);
-
+        if(count($payment_data->quick_options) < 1){
+            $payment_data->quick_options = array('NA'=> 'NA');
+        }
         $paymentType= Payment::$type;
         if (empty($payment_data)) {
             $msg_status = 'error';
@@ -176,8 +177,6 @@ class PaymentsController extends Controller {
                     $customOptions[$label] = $values[$index];
                 }
             }
-        }else{
-            $customOptions['NA'] = 'NA';
         }
         $payment->quick_options = $customOptions;
         $payment->updated_by = Auth::user()->_id;
