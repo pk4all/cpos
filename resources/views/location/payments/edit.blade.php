@@ -21,10 +21,11 @@
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Payment Type</label>
                             <div class="col-9">
-                                {!! Form::select('payment_type', $paymentType, $payment_data->type, ['class' => 'form-control margin']) !!}
+                                {!! Form::select('payment_type', $paymentType, $payment_data->type, ['class' => 'form-control margin', 'id' => 'paymentType']) !!}
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Payment Icon</label>
@@ -36,7 +37,41 @@
                         </div>
 
                     </div>
+                    <div class="row quick-options">
+                        <label class="col-12 col-form-label">Quick Cash Options</label>
+                    </div>
+                    <div class="row quick-options" id="quickOptions">
 
+                        @if(count($payment_data->quick_options)>0)  
+                        @foreach($payment_data->quick_options as $label => $value)
+                        @if($label == 'NA')
+                        {{$label = $value =''}}
+                        @endif
+                        <div class="row col-sm-12 quick-option">
+                            <div class="form-group row  col-sm-6">
+                                <label class="col-3 col-form-label">Label</label>
+                                <div class="col-9">
+                                   
+                                    {!! Form::text('label[]', $label, array('class'=>'form-control','placeholder'=>'Option Label')) !!}
+                                
+                                </div>
+                            </div>
+
+                            <div class="form-group row  col-sm-6">
+                                <label class="col-3 col-form-label">Value</label>
+                                <div class="col-8">
+                                    
+                                    {!! Form::text('value[]', $value, array('class'=>'form-control','placeholder'=>'Option Value')) !!}
+                                
+                                </div>
+                                <div class="col-1 add-new">
+                                    <span class="addmoreStoreTiming" style="z-index: 999999" title="Add more Option"><i class="ion-plus-circled"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
+                    </div>
 
 
 
@@ -44,7 +79,8 @@
                     {!! Form::close() !!}
                 </div>
 
-            </div> </div>
+            </div> 
+        </div>
 
 
 
@@ -52,7 +88,24 @@
 </div> <!-- end container -->
 @section('custome_script')
 <script>
-
+$(function(){
+    @if($payment_data->type != 'Cash') 
+    $('.quick-options').hide();
+    @endif
+$(document).on('click', '.add-new', function(){
+     var newOption = $("#quickOptions .quick-option:first").clone();
+     newOption.find('input[name="label[]"]').val('');
+     newOption.find('input[name="value[]"]').val('');
+     $("#quickOptions").append(newOption);
+});
+$('#paymentType').change(function(){
+    if($(this).val() == 'Cash'){
+        $('.quick-options').show();
+    }else{
+        $('.quick-options').hide();
+    }
+});
+});
 </script>
 @yield('custome_script')
 @overwrite

@@ -113,7 +113,9 @@ class PaymentsController extends Controller {
         /* end permission code */
 
         $payment_data = Payment::find($id);
-
+        if(count($payment_data->quick_options) < 1){
+            $payment_data->quick_options = array('NA'=> 'NA');
+        }
         $paymentType= Payment::$type;
         if (empty($payment_data)) {
             $msg_status = 'error';
@@ -141,7 +143,7 @@ class PaymentsController extends Controller {
         $rules = array(
             'name' => 'required|min:3',
             'payment_type' => 'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
@@ -164,6 +166,19 @@ class PaymentsController extends Controller {
                 $payment->logo=$newName;  
             }    
         }
+
+        $labels = $request->input('label', null);
+        $values = $request->input('value', null);
+
+        $customOptions = array();
+        if($payment->type == 'Cash'){
+            foreach($labels as $index => $label){
+                if($values[$index] != '' &&  $label != ''){
+                    $customOptions[$label] = $values[$index];
+                }
+            }
+        }
+        $payment->quick_options = $customOptions;
         $payment->updated_by = Auth::user()->_id;
         $payment->save();
         $request->session()->flash('status', 'Payment ' . $payment->name . ' Updated successfully!');
@@ -207,7 +222,7 @@ class PaymentsController extends Controller {
         $payment->updated_by = Auth::user()->_id;
         $payment->status = $payment->status == 'enable' ? 'disable' : 'enable';
         $payment->save();
-        $request->session()->flash('status', $payments->name . ' Status changed to ' . $payment->status . ' Successfully!');
+        $request->session()->flash('status', $payment->name . ' status changed to ' . $payment->status . ' Successfully!');
         return redirect()->action('Location\PaymentsController@getIndex');
     }
 

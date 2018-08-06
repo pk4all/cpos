@@ -15,7 +15,7 @@ class Payment extends Eloquent {
     use SoftDeletes;
 
     protected $table = 'brands';
-    public static $type=['Card'=>'Card','Cash'=>'cash'];
+    public static $type=['Card'=>'Card','Cash'=>'Cash'];
     
     public static function getPaymentCount() {
         return self::where('status', 'enable')->count();
