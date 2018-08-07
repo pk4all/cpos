@@ -55,4 +55,8 @@ class Brands extends Eloquent {
         $data = $query->orderBy($sortOrderField, $sortDirection);
         return $data;
     }
+
+    public static function getBrandByStoreId($id) {
+        return self::where('status', 'enable')->get(array('_id', 'name'))->toArray();
+    }
 }

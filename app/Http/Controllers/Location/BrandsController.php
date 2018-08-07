@@ -116,7 +116,6 @@ class BrandsController extends Controller {
         /* end permission code */
 
         $brands_data = Brands::find($id);
-
         $storeCity= Stores::getStoreDropDownList();
         if (empty($brands_data)) {
             $msg_status = 'error';
@@ -233,6 +232,11 @@ class BrandsController extends Controller {
 
         $results = Brands::brandsList($sort_by, $sort_dir, $search, true)->paginate($limit);
         return $results;
+    }
+
+    public function getStoreBrand(Request $request, $storeId){
+        $brands = Brands::getBrandByStoreId($storeId);
+        echo json_encode($brands);
     }
 
 }
