@@ -85,6 +85,7 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/brands/create', 'Location\BrandsController@create');
     Route::post('/brands/store', 'Location\BrandsController@postStore');
     Route::get('/brands/edit/{id}', 'Location\BrandsController@getEdit');
+    Route::get('/brands/get_store_brand/{id}', 'Location\BrandsController@getStoreBrand');
     Route::post('/brands/update/{id}', 'Location\BrandsController@postUpdate');
     Route::get('/brands/destroy/{id}', 'Location\BrandsController@getDestroy');
     Route::get('/brands/update-status/{id}', 'Location\BrandsController@getUpdateStatus');
@@ -115,4 +116,14 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/payment/update/{id}', 'Location\PaymentsController@postUpdate');
     Route::get('/payment/destroy/{id}', 'Location\PaymentsController@getDestroy');
     Route::get('/payment/update-status/{id}', 'Location\PaymentsController@getUpdateStatus');
+
+
+
+    Route::get('/category', 'Menu\CategoryController@getIndex');
+    Route::get('/category/create', 'Menu\CategoryController@create');
+    Route::post('/category/store', 'Menu\CategoryController@postStore');
+    Route::get('/category/edit/{id}', 'Menu\CategoryController@getEdit');
+    Route::post('/category/update/{id}', 'Menu\CategoryController@postUpdate');
+    Route::get('/category/destroy/{id}', 'Menu\CategoryController@getDestroy');
+    Route::get('/category/update-status/{id}', 'Menu\CategoryController@getUpdateStatus');
 });

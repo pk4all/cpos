@@ -99,6 +99,16 @@
 							<li>
                                <a href="/delivery-area">Delivery Area</a>
                             </li>
+
+                            <li>
+                                <a href="/category">Categories</a>
+                            </li>
+                            <li>
+                               <a href="/category/create">Add Category</a>
+                            </li>
+
+
+
                         </ul>
                     </li>
                     @endif
