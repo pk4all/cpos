@@ -163,7 +163,6 @@ $(document).ready(function(){
     });
 
     $(".addmoreStoreTiming").click(function(){
-        alert('gggg');
       var newTimimng = $(this).parents('.store-timing').clone();
       newTimimng.find('input, select').val('');
       newTimimng.insertAfter(".store-timing:last");
