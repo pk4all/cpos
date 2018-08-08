@@ -182,7 +182,7 @@ class CategoryController extends Controller {
         $category = Category::find($id);
         $dest = Helper::imageFileUploadPath('assets/images/',$dir_name='uploaded_image');
         if(file_exists($dest.$category->logo)){
-            @unlink($dest.$category->logo);
+         //   @unlink($dest.$category->logo);
         }
         $category->status = 'disable';
         $category->deleted_at = Carbon::now();
