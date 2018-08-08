@@ -119,22 +119,22 @@
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Day From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                 {!! Form::select("from_day[]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                 {!! Form::select("from_day[]",$days, null, array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::select("to_day[]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                {!! Form::select("to_day[]",$days, null, array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
 
                         </div>
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Time From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::text("from_time[]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                                {!! Form::text("from_time[]", null, array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                               {!! Form::text("to_time[]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                               {!! Form::text("to_time[]", null, array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                         </div><span  class='addmoreStoreTiming' style='z-index: 999999'><i class="ion-plus-circled"></i></span>
                     </div>
@@ -163,7 +163,9 @@
     });
     $(document).ready(function(){
     $(".addmoreStoreTiming").click(function(){
-      $(this).parents('.store-timing').clone().insertAfter(".store-timing:last");
+      var newTimimng = $(this).parents('.store-timing').clone();
+      newTimimng.find('input, select').val('');
+      newTimimng.insertAfter(".store-timing:last");
        $('.clockpicker').clockpicker({
         donetext: 'Done'
     });

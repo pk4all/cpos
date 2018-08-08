@@ -18,6 +18,16 @@
                                 {!! Form::text('name', $stores_data['name'],  array('required','class'=>'form-control','placeholder'=>'Enter Store Name')) !!}
                             </div>
                         </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Store Logo</label>
+                            <div class="col-9">
+                                <img src="{{env('IMAGE_PATH').$stores_data->logo}}" style="width: 50px; height: 50px;">
+                                {!! Form::file('logo', Input::old('logo'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
+                            </div>
+                        </div>
+
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Email</label>
                             <div class="col-9">
@@ -111,22 +121,22 @@
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Day From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                 {!! Form::select("from_day[]",$days, $timing['from_day'], array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                 {!! Form::select("from_day[]",$days, $timing['from_day'], array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::select("to_day[]",$days, $timing['to_day'], array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                {!! Form::select("to_day[]",$days, $timing['to_day'], array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
 
                         </div>
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Time From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::text("from_time[]", $timing['from_time'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                                {!! Form::text("from_time[]", $timing['from_time'], array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                               {!! Form::text("to_time[]", $timing['to_time'], array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                               {!! Form::text("to_time[]", $timing['to_time'], array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                         </div>
                         <span  class='addmoreStoreTiming' style='z-index: 999999'><i class="ion-plus-circled"></i></span>
@@ -147,9 +157,22 @@
 </div> <!-- end container -->
 @section('custome_script')
 <script>
+$(document).ready(function(){
     $('.clockpicker').clockpicker({
         donetext: 'Done'
     });
+
+    $(".addmoreStoreTiming").click(function(){
+        alert('gggg');
+      var newTimimng = $(this).parents('.store-timing').clone();
+      newTimimng.find('input, select').val('');
+      newTimimng.insertAfter(".store-timing:last");
+       $('.clockpicker').clockpicker({
+           donetext: 'Done'
+       });
+});
+});
+    
 </script>
 @yield('custome_script')
 @overwrite
