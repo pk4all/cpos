@@ -15,36 +15,31 @@
                         @foreach($tbl_data as $data)
                         
                         <tr>
+                            <td>
+                                @if(is_array($data->parent))
+                                    @foreach($data->parent as $parent)
+                                        <span class="">{{$parent['name']}}</span>&nbsp;&nbsp;
+                                    @endforeach
+                                @endif
+                            </td>
+
                             <td>{{$data->name}}</td>
                             <td>
                                 @if(is_array($data->store))
                                     @foreach($data->store as $store)
-                                        <span class="badge">{{$store['name']}}</span>&nbsp;&nbsp;
+                                        <span class="">{{$store['name']}}</span>&nbsp;&nbsp;
                                     @endforeach
                                 @endif
                             </td>
                             <td>
                                 @if(is_array($data->brand))
                                     @foreach($data->brand as $brand)
-                                        <span class="badge">{{$brand['name']}}</span>&nbsp;&nbsp;
+                                        <span class="">{{$brand['name']}}</span>&nbsp;&nbsp;
                                     @endforeach
                                 @endif
 
                             </td>
-                            @if(is_array($data->order_type))
-                                <td>
-                                    @foreach($data->order_type as $city)
-                                    <span class="badge">{{$city['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
-                                </td>
-                            @endif
-                            @if(is_array($data->stores))
-                                <td>
-                                    @foreach($data->stores as $store)
-                                    <span class="badge">{{$store['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
-                                </td>
-                            @endif
+                            
                             
                             <td>
                                 <a href="{{ URL::to('category/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>

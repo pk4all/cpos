@@ -36,7 +36,7 @@ class CategoryController extends Controller {
         /* end permission code */
         $results = $this->getCategoryListPaging($request);
         $total_page = Category::getCategoryCount();
-        $table_header = array('Name', 'Store Name', 'Brand Name','Action');
+        $table_header = array('Parent Category','Name', 'Store Name', 'Brand Name','Action');
         $return = view('menu.category.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -73,8 +73,8 @@ class CategoryController extends Controller {
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
         $category = new Category();
-        $parentId = $request->input('parent_id', null);
-        $category->parent_id = Category::getCategoryByIds(array($parentId), ['name']);
+        $parentId = $request->input('parent', null);
+        $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
         $category->name = $request->input('name', null);
         $storeId = $request->input('store', null);
         $category->store = Stores::getStoresByIds(array($storeId), ['name']);
@@ -103,8 +103,8 @@ class CategoryController extends Controller {
         /* end permission code */
 
         $category_data = Category::find($id);
-        if(!is_array($category_data->parent_id)){
-            $category_data->parent_id = array();
+        if(!is_array($category_data->parent)){
+            $category_data->parent = array();
         }
         
         if (empty($category_data)) {
@@ -118,6 +118,7 @@ class CategoryController extends Controller {
         $storeId = array_pop($storeIdList); 
 
         $categoryList = Category::getCategoryDropDownList();
+        unset($categoryList[$id]);
         $storeList = Stores::getStoreDropDownList();
         $brandsOfSelectedStore = Brands::getBrandByStoreId($storeId);
         foreach ($brandsOfSelectedStore as $brand) {
@@ -151,8 +152,8 @@ class CategoryController extends Controller {
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
         $category = Category::find($id);
-        $parentId = $request->input('parent_id', null);
-        $category->parent_id = Category::getCategoryByIds(array($parentId), ['name']);
+        $parentId = $request->input('parent', null);
+        $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
         $category->name = $request->input('name', null);
         $storeId = $request->input('store', null);
         $category->store = Stores::getStoresByIds(array($storeId), ['name']);

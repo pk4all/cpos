@@ -16,7 +16,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Parent Category</label>
                             <div class="col-9">
-                            {!! Form::select('parent_id', $category_list, null, ['class' => 'form-control margin']) !!}
+                            {!! Form::select('parent', $category_list, null, ['class' => 'form-control margin']) !!}
                             </div>
                         </div>
 
