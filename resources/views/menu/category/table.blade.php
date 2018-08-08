@@ -16,14 +16,14 @@
                         
                         <tr>
                             <td>
-                                @if(is_array($data->parent))
+                                {{$data->name}}
+                            </td>
+
+                            <td>@if(is_array($data->parent))
                                     @foreach($data->parent as $parent)
                                         <span class="">{{$parent['name']}}</span>&nbsp;&nbsp;
                                     @endforeach
-                                @endif
-                            </td>
-
-                            <td>{{$data->name}}</td>
+                                @endif</td>
                             <td>
                                 @if(is_array($data->store))
                                     @foreach($data->store as $store)
