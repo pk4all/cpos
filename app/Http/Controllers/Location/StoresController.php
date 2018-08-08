@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Helper;
 
 class StoresController extends Controller {
 
@@ -56,11 +57,28 @@ class StoresController extends Controller {
             'name' => 'required|min:3',
             'email' => 'required|min:3|unique:stores',
             'print_label' => 'required|min:3',
-            'tax_id' => 'required|min:3|unique:stores'
+            'tax_id' => 'required|min:3|unique:stores',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
         $stores = new Stores();
+        $uploaded_file = $request->file('logo');
+        $orgname= $uploaded_file->getClientOriginalName();
+        $extension = $uploaded_file->getClientOriginalExtension();
+
+        $name=  str_replace(".".$extension, '', $orgname);
+        $logoFileName = str_slug($name) . '_' . uniqid().'.' . $extension;
+
+        $dest = Helper::imageFileUploadPath('assets/images/',$dir_name='uploaded_image');
+
+        $response = $uploaded_file->move($dest, $logoFileName);
+        
+        if($response){
+            $stores->logo=$logoFileName;  
+        }  
+
+
         $stores->name = $request->input('name', null);
         $stores->email = $request->input('email', null);
         $stores->image = $request->input('image', null);
@@ -72,10 +90,30 @@ class StoresController extends Controller {
         $stores->radius = $request->input('radius', null);
         $stores->latitude = $request->input('latitude', null);
         $stores->longitude = $request->input('longitude', null);
-        $stores->store_timing = $request->input('store_timing', []);
+
+        //STORE TIMING*****************************************
+        $storeTiming = array();
+        $fromDay = $request->input('from_day', null);
+        $toDay = $request->input('to_day', null);
+        $fromTime = $request->input('from_time', null);
+        $toTime = $request->input('to_time', null);
+        foreach($fromDay as $index => $fromDay){
+            if(!empty($fromDay) && !empty($toDay[$index]) && !empty($fromTime[$index]) && !empty($toTime[$index])){
+                array_push($storeTiming, array(
+                    'from_day' => $fromDay,
+                    'to_day' => $toDay[$index],
+                    'from_time' => $fromTime[$index],
+                    'to_time' => $toTime[$index]
+                ));
+            }
+
+        }
+        //STORE TIMING*****************************************
+        $stores->store_timing = $storeTiming;
         $stores->created_by = Auth::user()->_id;
         $stores->updated_by = Auth::user()->_id;
         $stores->status = 'disable';
+
         $stores->save();
         $request->session()->flash('status', 'Stores ' . $stores->name . ' created successfully!');
         return redirect()->action('Location\StoresController@getIndex');
@@ -95,6 +133,7 @@ class StoresController extends Controller {
         /* end permission code */
 
         $stores_data = Stores::find($id);
+        print_r($stores_data);
         if (empty($stores_data)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
