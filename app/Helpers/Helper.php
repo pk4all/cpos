@@ -22,6 +22,10 @@ class Helper {
         return $this->default_sel;
     }
     
+    public static $stafftab=[['name'=>'Users','link'=>'users'],['name'=>'Roles','link'=>'user-roles']];
+     public static $menutab=[['name'=>'Menu','link'=>'menu'],['name'=>'Categories','link'=>'category',],['name'=>'Modifiers','link'=>'modifiers',]];
+    public static $locationtab=[['name'=>'Stores','link'=>'stores'],['name'=>'Brands','link'=>'brands'],['name'=>'Order Type','link'=>'order-type'],['name'=>'Surcharge','link'=>'surcharge'],['name'=>'Tax Rates','link'=>'tax'],['name'=>'Payment Option','link'=>'payment'],['name'=>'Delivery Area','link'=>'delivery-area']];
+    
 //    public static $per_page_limit = [10, 25, 50, 100];
 //
 //    public static function prettyJson($inputArray, $statusCode) {

@@ -6,6 +6,7 @@
         <!-- Page-Title -->
         <div class="row">
             @include('layouts.messages',['title'=>'Add New Stores','path'=>['/stores'=>'Stores','#'=>'Create']])
+            @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">

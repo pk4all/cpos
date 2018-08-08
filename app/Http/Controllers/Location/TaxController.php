@@ -19,8 +19,12 @@ class TaxController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$locationtab;
+        $this->tabList['selected'] = 'tax';
     }
 
     public function getIndex(Request $request) {
@@ -35,7 +39,7 @@ class TaxController extends Controller {
         $total_page = Tax::getTaxCount();
         $table_header = array('Name', 'Type', 'Amount', 'Order Types', 'Store', 'Action');
 
-        $return = view('location.tax.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('location.tax.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -117,7 +121,7 @@ class TaxController extends Controller {
         //dd($tax_update);
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
         $storeList = Stores::getStoreDropDownList();
-        $view = view('location.tax.edit', ['tax_data' => $tax_data, 'order_type_list' => $orderTypeList, 'store_list' => $storeList,'tax_type' => Tax::$type]);
+        $view = view('location.tax.edit', ['tabList' => $this->tabList, 'tax_data' => $tax_data, 'order_type_list' => $orderTypeList, 'store_list' => $storeList,'tax_type' => Tax::$type]);
         return $view;
     }
 

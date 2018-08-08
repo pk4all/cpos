@@ -2,6 +2,14 @@
     <div class="col-sm-12">
         <div class="card-box">
             <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-8">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="/category/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
+                    </div>
+                </div>
                 <table id="mainTable" class="table table-striped m-b-0" style="cursor: pointer;">
                     <thead>
                         <tr>

@@ -20,8 +20,12 @@ class StoresController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$locationtab;
+        $this->tabList['selected'] = 'stores';
     }
 
     public function getIndex(Request $request) {
@@ -33,7 +37,7 @@ class StoresController extends Controller {
         $results = $this->getStoresListPaging($request);
         $total_page = Stores::getStoresCount();
         $table_header = array('Stores Name', 'Email', 'Notify Email', 'Label', 'Phone', 'Action');
-        $return = view('location.stores.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('location.stores.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -42,7 +46,7 @@ class StoresController extends Controller {
         if (($return = UserRoles::hasAccess('stores_create', $request)) !== true) {
             return redirect()->action($return);
         }
-       $view = view('location.stores.create',['contryList'=>Stores::$contryList,'days'=>Stores::$days]);
+       $view = view('location.stores.create',['contryList'=>Stores::$contryList,'days'=>Stores::$days,'tabList' => $this->tabList]);
         return $view;
     }
 
@@ -151,7 +155,7 @@ class StoresController extends Controller {
                 'to_time'=> ''
             );
         }
-        $view = view('location.stores.edit', ['stores_data' => $stores_data,'contryList'=>Stores::$contryList,'days'=>Stores::$days]);
+        $view = view('location.stores.edit', ['tabList' => $this->tabList, 'stores_data' => $stores_data,'contryList'=>Stores::$contryList,'days'=>Stores::$days]);
         return $view;
     }
 

@@ -22,9 +22,14 @@ class PaymentsController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$locationtab;
+        $this->tabList['selected'] = 'payment';
     }
+
 
     public function getIndex(Request $request) {
 
@@ -37,7 +42,7 @@ class PaymentsController extends Controller {
         
         $total_page = Payment::getPaymentCount();
         $table_header = array('Payment Icon', 'Name', 'Type', 'Action');
-        $return = view('location.payments.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('location.payments.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -51,7 +56,8 @@ class PaymentsController extends Controller {
         
         $data=[
             'storeCity'=>$storeCity,
-            'paymentTypes' => Payment::$type
+            'paymentTypes' => Payment::$type,
+            'tabList' => $this->tabList, 
         ];
         $view = view('location.payments.create',$data);
         return $view;
@@ -124,7 +130,7 @@ class PaymentsController extends Controller {
             return redirect()->action('PaymentsController@getIndex');
         }
         //dd($payments_update);
-        $view = view('location.payments.edit', ['payment_data' => $payment_data,'paymentType'=>$paymentType]);
+        $view = view('location.payments.edit', ['tabList' => $this->tabList, 'payment_data' => $payment_data,'paymentType'=>$paymentType]);
         return $view;
     }
 

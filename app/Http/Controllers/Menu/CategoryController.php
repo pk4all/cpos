@@ -23,8 +23,12 @@ class CategoryController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$menutab;
+        $this->tabList['selected'] = 'category';
     }
 
     public function getIndex(Request $request) {
@@ -37,7 +41,7 @@ class CategoryController extends Controller {
         $results = $this->getCategoryListPaging($request);
         $total_page = Category::getCategoryCount();
         $table_header = array('Name','Parent Category', 'Store Name', 'Brand Name','Action');
-        $return = view('menu.category.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('menu.category.index', ['tabList' => $this->tabList,'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -53,7 +57,8 @@ class CategoryController extends Controller {
 
         $data=[
             'store_list'=>$storeList,
-            'category_list' => $categoryList
+            'category_list' => $categoryList,
+            'tabList' => $this->tabList,
         ];
         $view = view('menu.category.create',$data);
         return $view;
@@ -126,7 +131,7 @@ class CategoryController extends Controller {
         }
         $brandsOfSelectedStore = $list;
 
-        $view = view('menu.category.edit', ['category_data' => $category_data,'store_list'=>$storeList, 'brand_list' => $brandsOfSelectedStore,'category_list' => $categoryList]);
+        $view = view('menu.category.edit', ['tabList' => $this->tabList,'category_data' => $category_data,'store_list'=>$storeList, 'brand_list' => $brandsOfSelectedStore,'category_list' => $categoryList]);
         return $view;
     }
 
