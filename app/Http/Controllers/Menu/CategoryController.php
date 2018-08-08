@@ -36,7 +36,7 @@ class CategoryController extends Controller {
         /* end permission code */
         $results = $this->getCategoryListPaging($request);
         $total_page = Category::getCategoryCount();
-        $table_header = array('Parent Category','Name', 'Store Name', 'Brand Name','Action');
+        $table_header = array('Name','Parent Category', 'Store Name', 'Brand Name','Action');
         $return = view('menu.category.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -138,7 +138,7 @@ class CategoryController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('stores_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('category_update', $request)) !== true) {
             return redirect()->action($return);
         }
 
@@ -182,7 +182,7 @@ class CategoryController extends Controller {
         $category = Category::find($id);
         $dest = Helper::imageFileUploadPath('assets/images/',$dir_name='uploaded_image');
         if(file_exists($dest.$category->logo)){
-            @unlink($dest.$category->logo);
+         //   @unlink($dest.$category->logo);
         }
         $category->status = 'disable';
         $category->deleted_at = Carbon::now();

@@ -56,7 +56,9 @@ class Brands extends Eloquent {
         return $data;
     }
 
-    public static function getBrandByStoreId($id) {
-        return self::where('status', 'enable')->get(array('_id', 'name'))->toArray();
+    public static function getBrandByStoreId($id,$fields=['name']) {
+        
+        return self::where('status', 'enable')->whereraw(['stores._id'=>$id])->get($fields)->toArray();
     }
+
 }
