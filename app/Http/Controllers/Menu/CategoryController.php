@@ -36,7 +36,7 @@ class CategoryController extends Controller {
         /* end permission code */
         $results = $this->getCategoryListPaging($request);
         $total_page = Category::getCategoryCount();
-        $table_header = array('Parent Category','Name', 'Store Name', 'Brand Name','Action');
+        $table_header = array('Name','Parent Category', 'Store Name', 'Brand Name','Action');
         $return = view('menu.category.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
