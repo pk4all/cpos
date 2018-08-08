@@ -23,22 +23,25 @@ class UserController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
 
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$stafftab;
+        $this->tabList['selected'] = 'users';
     }
 
     public function getIndex(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('users_view', $request)) !== true) {
-             return redirect()->action($return);
+            return redirect()->action($return);
         }
         /* end permission code */
         $results = $this->getUserListPaging($request);
-        $total_page = $results->total(); 
+        $total_page = $results->total();
         $table_header = array('First Name', 'Last Name', 'Email', 'Role', 'Action');
         $per_page_limit = 10;
-        $return = view('user.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header, 'per_page_limit' => $per_page_limit]);
+        $return = view('user.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header, 'per_page_limit' => $per_page_limit]);
         return $return;
     }
 
@@ -50,7 +53,7 @@ class UserController extends Controller {
     public function getCreate(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('users_create', $request)) !== true) {
-             return redirect()->action($return);
+            return redirect()->action($return);
         }
 
         /* end permission code */
@@ -59,6 +62,7 @@ class UserController extends Controller {
         $data['user_role'] = UserRoles::getRolesDropDownList();
         $data['permissions'] = UserRoles::$permission;
         $data['user_status'] = User::$user_status;
+        $data['tabList'] = $this->tabList;
         $view = view('user.create', $data);
         return $view;
     }
@@ -123,20 +127,19 @@ class UserController extends Controller {
             $request->session()->flash($msg_status, $message);
             return redirect()->action('UserController@getIndex');
         }
-
+        $data['tabList'] = $this->tabList;
         $view = view('user.edit', $data);
         return $view;
     }
 
-    
     public function postUpdate(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('users_update', $request)) !== true) {
-             return redirect()->action($return);
+            return redirect()->action($return);
         }
         $user = User::find($id);
         $login = Auth::user();
-        $selfPermisson=($user->email == $login->email)?false:true;
+        $selfPermisson = ($user->email == $login->email) ? false : true;
 
         $rules = array(
             'first_name' => 'required|min:1|max:250',
@@ -166,7 +169,6 @@ class UserController extends Controller {
         return redirect()->action('UserController@getIndex');
     }
 
-    
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('users_delete', $request)) !== true) {
@@ -188,7 +190,7 @@ class UserController extends Controller {
         $sortDirection = $request->has('sortDir') ? $request->input('sortDir') : 'desc';
 
         $results = User::getUserList($pageNo, $count, $sortOrderField, $sortDirection, $search = array());
-        //dd($results);
+//dd($results);
         return $results;
     }
 
@@ -222,6 +224,6 @@ class UserController extends Controller {
         Cache::forget('login:expiration:' . md5($email));
 
         return Redirect::back();
-    }  
-    
+    }
+
 }

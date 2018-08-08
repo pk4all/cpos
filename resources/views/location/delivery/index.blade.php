@@ -7,6 +7,7 @@
         <!-- Page-Title -->
         <div class="row">
 @include('layouts.messages',['title'=>'Delivery Stores','path'=>['#'=>'Delivery Stores']])
+@include('layouts.menu',['tabList'=>$tabList])
         </div>    
         
 <div class="row">

@@ -7,6 +7,7 @@
         <!-- Page-Title -->
         <div class="row">
             @include('layouts.messages',['title'=>'Surcharge','path'=>[]])
+            @include('layouts.menu',['tabList'=>$tabList])
 
         </div>    
         @include('location.surcharge.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))

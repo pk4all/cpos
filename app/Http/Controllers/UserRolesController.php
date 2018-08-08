@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserRoles;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Helpers\Helper;
 
 class UserRolesController extends Controller {
 
@@ -15,8 +16,13 @@ class UserRolesController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+    
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab']=Helper::$stafftab;
+        $this->tabList['selected']='user-roles';
+        
     }
 
     public function getIndex(Request $request) {
@@ -28,7 +34,7 @@ class UserRolesController extends Controller {
         $results = $this->getUserRolesListPaging($request);
         $total_page = UserRoles::getUserRolesCount();
         $table_header = array('Roles Name', 'Permissions', 'Action');
-        $return = view('userRoles.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('userRoles.index', ['tabList'=> $this->tabList,'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -38,7 +44,7 @@ class UserRolesController extends Controller {
            //return redirect()->action($return);
         } 
         /*end permission code */
-        $view = view('userRoles.create', ['permissions' => UserRoles::$permission]);
+        $view = view('userRoles.create', ['permissions' => UserRoles::$permission,'tabList'=> $this->tabList,]);
         return $view;
     }
 
@@ -84,7 +90,7 @@ class UserRolesController extends Controller {
             $request->session()->flash($msg_status, $message);
             return redirect()->action('UserRolesController@getIndex');
         }
-        $view = view('userRoles.edit', ['permissions' => UserRoles::$permission, 'role_data' => $role_data]);
+        $view = view('userRoles.edit', ['permissions' => UserRoles::$permission, 'role_data' => $role_data,'tabList'=> $this->tabList,]);
         return $view;
     }
 

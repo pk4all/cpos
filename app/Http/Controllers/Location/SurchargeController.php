@@ -19,9 +19,14 @@ class SurchargeController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$locationtab;
+        $this->tabList['selected'] = 'surcharge';
     }
+
 
     public function getIndex(Request $request) {
 
@@ -33,7 +38,7 @@ class SurchargeController extends Controller {
         $results = $this->getSurchargeListPaging($request);
         $total_page = Surcharge::getSurchargeCount();
         $table_header = array('Name', 'Type', 'Amount', 'Order Types', 'Action');
-        $return = view('location.surcharge.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('location.surcharge.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -46,7 +51,7 @@ class SurchargeController extends Controller {
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
 
         $data = [
-            'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type
+            'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type,'tabList' => $this->tabList, 
         ];
         $view = view('location.surcharge.create', $data);
         return $view;
@@ -105,7 +110,7 @@ class SurchargeController extends Controller {
         }
         //dd($surcharge_update);
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
-        $view = view('location.surcharge.edit', ['surcharge_data' => $surcharge_data, 'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type]);
+        $view = view('location.surcharge.edit', ['tabList' => $this->tabList, 'surcharge_data' => $surcharge_data, 'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type]);
         return $view;
     }
 

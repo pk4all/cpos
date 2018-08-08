@@ -7,6 +7,7 @@
         <!-- Page-Title -->
         <div class="row">
             @include('layouts.messages',['title'=>'User Roles','path'=>['/user-roles'=>'User Role','/user-roles/create'=>'Create']])
+            @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
                  <div class="card-box">
                     <div class="row">

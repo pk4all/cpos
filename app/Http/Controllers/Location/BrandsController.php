@@ -22,8 +22,12 @@ class BrandsController extends Controller {
      *
      * @return Response
      */
+    public $tabList;
+
     function __construct() {
         $this->middleware('auth');
+        $this->tabList['tab'] = Helper::$locationtab;
+        $this->tabList['selected'] = 'brands';
     }
 
     public function getIndex(Request $request) {
@@ -37,7 +41,7 @@ class BrandsController extends Controller {
         
         $total_page = Brands::getBrandsCount();
         $table_header = array('Logo', 'Name', 'Stores', 'Action');
-        $return = view('location.brands.index', ['count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $return = view('location.brands.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -50,7 +54,8 @@ class BrandsController extends Controller {
         $storeCity= Stores::getStoreDropDownList();
         
         $data=[
-            'storeCity'=>$storeCity
+            'storeCity'=>$storeCity,
+            'tabList' => $this->tabList, 
         ];
         $view = view('location.brands.create',$data);
         return $view;
@@ -124,7 +129,7 @@ class BrandsController extends Controller {
             return redirect()->action('BrandsController@getIndex');
         }
         //dd($brands_update);
-        $view = view('location.brands.edit', ['brands_data' => $brands_data,'storeCity'=>$storeCity]);
+        $view = view('location.brands.edit', ['tabList' => $this->tabList, 'brands_data' => $brands_data,'storeCity'=>$storeCity]);
         return $view;
     }
 

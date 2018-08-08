@@ -25,7 +25,7 @@
                     <li>
                         <a href="/"> <i class="md md-dashboard"></i>Dashboard</a>
                     </li>
-                    <li class="has-submenu">
+                    <!--<li class="has-submenu">
                         <a href="#"><i class="md md-account-circle"></i>User</a>
                         <ul class="submenu">
                             <li>
@@ -41,7 +41,7 @@
                                 <a href="/user-roles/create">Add New Role</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                    @if(is_array(Auth::user()->permissions) && key_exists('demon', Auth::user()->permissions) && Auth::user()->permissions['demon']=='yes')
                     <li class="has-submenu">
                         <a href="#"><i class="md-account-child"></i>Company</a>
@@ -58,7 +58,7 @@
                     @else
                     <li class="has-submenu">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
-                        <ul class="submenu">
+                        <!--<ul class="submenu">
                             <li>
                                 <a href="/stores">Stores</a>
                             </li>
@@ -109,7 +109,7 @@
 
 
 
-                        </ul>
+                        </ul>-->
                     </li>
                     @endif
                 </ul>

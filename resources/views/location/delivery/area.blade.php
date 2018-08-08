@@ -5,6 +5,7 @@
         <!-- Page-Title -->
         <div class="row">
 @include('layouts.messages',['title'=>'Delivery Store Areas','path'=>['#'=>'Delivery Store Areas']])
+@include('layouts.menu',['tabList'=>$tabList])
         </div>      
 <div class="row">
 <div class="col-lg-12">
