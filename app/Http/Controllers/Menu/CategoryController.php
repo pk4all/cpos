@@ -138,7 +138,7 @@ class CategoryController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('stores_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('category_update', $request)) !== true) {
             return redirect()->action($return);
         }
 
