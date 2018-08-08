@@ -10,7 +10,7 @@
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'stores/store','class'=>'form-horizontal')) !!}
+                    {!! Form::open(array('url' => 'stores/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
 
                     <div class="row">
                         <div class="form-group row  col-sm-6">
@@ -19,6 +19,15 @@
                             {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Store Name')) !!}
                             </div>
                         </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Store Logo</label>
+                            <div class="col-9">
+                                {!! Form::file('logo', Input::old('logo'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
+                            </div>
+                        </div>
+
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Email</label>
                             <div class="col-9">
@@ -110,22 +119,22 @@
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Day From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                 {!! Form::select("store_timing[from_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                 {!! Form::select("from_day[]",$days, null, array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::select("store_timing[to_day][]",$days, null, array('required','class'=>'form-control','placeholder'=>'Store Open Day')) !!}
+                                {!! Form::select("to_day[]",$days, null, array('class'=>'form-control','placeholder'=>'Store Open Day')) !!}
                             </div>
 
                         </div>
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Time From</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                                {!! Form::text("store_timing[from_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                                {!! Form::text("from_time[]", null, array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                             <label class="col-1 col-form-label">To</label>
                             <div class="col-4 clockpicker " data-placement="top" data-align="top" data-autoclose="true">
-                               {!! Form::text("store_timing[to_time][]", null, array('required','class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
+                               {!! Form::text("to_time[]", null, array('class'=>'form-control','placeholder'=>'Select Store Timing')) !!}
                             </div>
                         </div><span  class='addmoreStoreTiming' style='z-index: 999999'><i class="ion-plus-circled"></i></span>
                     </div>
@@ -154,7 +163,9 @@
     });
     $(document).ready(function(){
     $(".addmoreStoreTiming").click(function(){
-      $(this).parents('.store-timing').clone().insertAfter(".store-timing:last");
+      var newTimimng = $(this).parents('.store-timing').clone();
+      newTimimng.find('input, select').val('');
+      newTimimng.insertAfter(".store-timing:last");
        $('.clockpicker').clockpicker({
         donetext: 'Done'
     });
