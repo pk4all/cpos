@@ -13,7 +13,52 @@ class UserRoles extends Eloquent {
 
     protected $table = 'roles';
     //'company_view'=>'Company View','company_create'=>'Company Create','company_delete'=>'Compnay Delete','company_update'=>'Company update',
-    public static $permission = ['category_view'=>'Category View','category_create'=>'Category Create','category_delete'=>'Category Delete','category_update'=>'Category update','payments_view'=>'payment View','payments_create'=>'payment Create','payments_delete'=>'payment Delete','payments_update'=>'payment Update','tax_view'=>'tax View','tax_create'=>'tax Create','tax_delete'=>'tax Delete','tax_update'=>'tax Update','users_view'=>'Users View','users_create'=>'Users Create','users_delete'=>'Users Delete','users_update'=>'Users Update','roles_view'=>'Roles View','roles_create'=>'Roles Create','roles_delete'=>'Roles Delete','roles_update'=>'Roles Update','stores_view'=>'Stores View','stores_create'=>'Stores Create','stores_delete'=>'Stores Delete','stores_update'=>'Stores Update','brands_view'=>'brands View','brands_create'=>'brands Create','brands_delete'=>'brands Delete','brands_update'=>'brands Update','surcharge_view'=>'surcharge View','surcharge_create'=>'surcharge Create','surcharge_delete'=>'surcharge Delete','surcharge_update'=>'surcharge Update'];
+    public static $permission = [
+    'category_view'=>'Category View',
+    'category_create'=>'Category Create',
+    'category_delete'=>'Category Delete',
+    'category_update'=>'Category update',
+    'payments_view'=>'payment View',
+    'payments_create'=>'payment Create',
+    'payments_delete'=>'payment Delete',
+    'payments_update'=>'payment Update',
+    'tax_view'=>'tax View',
+    'tax_create'=>'tax Create',
+    'tax_delete'=>'tax Delete',
+    'tax_update'=>'tax Update',
+    'users_view'=>'Users View',
+    'users_create'=>'Users Create',
+    'users_delete'=>'Users Delete',
+    'users_update'=>'Users Update',
+    'roles_view'=>'Roles View',
+    'roles_create'=>'Roles Create',
+    'roles_delete'=>'Roles Delete',
+    'roles_update'=>'Roles Update',
+    'stores_view'=>'Stores View',
+    'stores_create'=>'Stores Create',
+    'stores_delete'=>'Stores Delete',
+    'stores_update'=>'Stores Update',
+    'brands_view'=>'brands View',
+    'brands_create'=>'brands Create',
+    'brands_delete'=>'brands Delete',
+    'brands_update'=>'brands Update',
+    'surcharge_view'=>'surcharge View',
+    'surcharge_create'=>'surcharge Create',
+    'surcharge_delete'=>'surcharge Delete',
+    'surcharge_update'=>'surcharge Update',
+    'modifier_choice_view' => 'Modifier Choice View',
+    'modifier_choice_create' => 'Modifier Choice Create',
+    'modifier_choice_update' => 'Modifier Choice Update',
+    'modifier_choice_delete' => 'Modifier Choice Delete',
+    'modifier_view' => 'Modifier View',
+    'modifier_create' => 'Modifier Create',
+    'modifier_update' => 'Modifier Update',
+    'modifier_delete' => 'Modifier Delete',
+    'modifier_group_view' => 'Modifier Group View',
+    'modifier_group_create' => 'Modifier Group Create',
+    'modifier_group__update' => 'Modifier Group Update',
+    'modifier_group__delete' => 'Modifier Group Delete'
+    ];
 
     public static function getRolesDropDownList() {
 

@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'Add New Category','path'=>['/location'=>'Location','#'=>'Category']])
+            @include('layouts.messages',['title'=>'Add New Category','path'=>['/category'=>'Category','#'=>'Category']])
             @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
                 <div class="card-box">
