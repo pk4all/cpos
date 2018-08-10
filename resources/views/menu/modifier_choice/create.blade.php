@@ -5,13 +5,13 @@
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'Add New Modifier Choice','path'=>['/modifier_choice'=>'modifier_choice','#'=>'Create']])
+            @include('layouts.messages',['title'=>'Add New Modifier Choice','path'=>['/modifier-choice'=>'modifier-choice','#'=>'Create']])
             @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'modifier_choice/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
+                    {!! Form::open(array('url' => 'modifier-choice/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
 
                     <div class="row">
                         <div class="form-group row  col-sm-6">
