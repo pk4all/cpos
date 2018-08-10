@@ -27,7 +27,7 @@ class ModifierChoiceController extends Controller {
     function __construct() {
         $this->middleware('auth');
         $this->tabList['tab'] = Helper::$menutab;
-        $this->tabList['selected'] = 'modifier_choice';
+        $this->tabList['selected'] = 'modifier-choice';
     }
 
 
