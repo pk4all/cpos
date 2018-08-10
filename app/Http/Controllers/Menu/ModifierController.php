@@ -8,6 +8,7 @@ use App\Models\UserRoles;
 use App\Models\User;
 use App\Models\Menu\Modifier;
 use App\Models\Menu\ModifierChoice;
+use App\Models\Menu\ModifierGroup;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -54,7 +55,7 @@ class ModifierController extends Controller {
             return redirect()->action($return);
         }
         $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
-        $dependentModifierGroups = [];
+        $dependentModifierGroups = ModifierGroup::getModifierGroupDropDownList();
         $dependentModifiers = [];
         unset($modifierChoices[0]);
         
@@ -104,12 +105,12 @@ class ModifierController extends Controller {
         $modifier->price = $request->input('price', null);
         $modifier->choice_charge = $request->input('choice_charge', null);
         $dependentModifierGroup = $dependentModifier = [];
-        /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
+        $dependentModifierGroupId = $request->input('dependent_modifier_group', null);
+        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array($dependentModifierGroupId), ['name']);
         
         $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
-        */
+        $dependentModifier = Modifier::getModifierByIds(array($dependentModifierId), ['name']);
+        
         $modifierChoicesId = $request->input('modifier_choices', null);
         $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
 
@@ -139,10 +140,22 @@ class ModifierController extends Controller {
             return redirect()->action($return);
         }
         /* end permission code */
-        $dependentModifierGroups = $dependentModifiers = [];
+        $dependentModifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        $dependentModifiers = [];
         $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
         unset($modifierChoices[0]);
         $modifier = Modifier::find($id);
+        
+        $selectGroupsModifiers = [];
+        if(count($modifier->dependent_modifier_group) > 0){
+            $depenedenGroupId = $modifier->dependent_modifier_group[0]['_id'];
+            $selectGroupsDetails = ModifierGroup::getModifiersOfGroup($depenedenGroupId);
+            $modifiers = $selectGroupsDetails[0]['modifiers'];
+            foreach($modifiers as $m){
+                $selectGroupsModifiers[$m['_id']] = $m['name'];
+            }
+        }
+
         
         if (empty($modifier)) {
             $msg_status = 'error';
@@ -157,7 +170,8 @@ class ModifierController extends Controller {
             'dependentModifierGroups' => $dependentModifierGroups,
             'dependentModifiers' => $dependentModifiers,
             'modifierChoices' => $modifierChoices,
-            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No')
+            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
+            'selectGroupsModifiers' => $selectGroupsModifiers
         ]);
         return $view;
     }
@@ -203,12 +217,12 @@ class ModifierController extends Controller {
         $modifier->price = $request->input('price', null);
         $modifier->choice_charge = $request->input('choice_charge', null);
         $dependentModifierGroup = $dependentModifier = [];
-        /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
+        $dependentModifierGroupId = $request->input('dependent_modifier_group', null);
+        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds([$dependentModifierGroupId], ['name']);
         
         $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
-        */
+        $dependentModifier = Modifier::getModifierByIds([$dependentModifierId], ['name']);
+        
         $modifierChoicesId = $request->input('modifier_choices', null);
         $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
 

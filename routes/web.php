@@ -142,4 +142,13 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/modifier/update/{id}', 'Menu\ModifierController@postUpdate');
     Route::get('/modifier/destroy/{id}', 'Menu\ModifierController@getDestroy');
     Route::get('/modifier/update-status/{id}', 'Menu\ModifierController@getUpdateStatus');
+
+    Route::get('/modifier-group', 'Menu\ModifierGroupController@getIndex');
+    Route::get('/modifier-group/create', 'Menu\ModifierGroupController@create');
+    Route::post('/modifier-group/store', 'Menu\ModifierGroupController@postStore');
+    Route::get('/modifier-group/edit/{id}', 'Menu\ModifierGroupController@getEdit');
+    Route::post('/modifier-group/update/{id}', 'Menu\ModifierGroupController@postUpdate');
+    Route::get('/modifier-group/destroy/{id}', 'Menu\ModifierGroupController@getDestroy');
+    Route::get('/modifier-group/update-status/{id}', 'Menu\ModifierGroupController@getUpdateStatus');
+    Route::get('/modifier-group/get-group-modfiers/{id}', 'Menu\ModifierGroupController@getGroupModifiers');
 });

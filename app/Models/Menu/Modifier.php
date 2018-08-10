@@ -26,9 +26,9 @@ class Modifier extends Eloquent {
         return self::where('_id', $id)->where('status', 'enable')->get();
     }
 
-    public static function getModifierByIds($ids) {
+    public static function getModifierByIds($ids, $fields=[]) {
 
-        return self::whereIn('_id', $ids)->where('status', 'enable')->get()->toArray();
+        return self::whereIn('_id', $ids)->where('status', 'enable')->get($fields)->toArray();
     }
 
     public static function scopeSearch($query, $keyword) {
