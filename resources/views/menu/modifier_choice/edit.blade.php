@@ -4,13 +4,13 @@
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'Edit Brands','path'=>['/modifier_choice'=>'modifier_choice','#'=>'Edit']])
+            @include('layouts.messages',['title'=>'Edit Brands','path'=>['/modifier-choice'=>'modifier-choice','#'=>'Edit']])
             @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'modifier_choice/update/'.$choice_data->_id,'class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
+                    {!! Form::open(array('url' => 'modifier-choice/update/'.$choice_data->_id,'class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
 
                     <div class="row">
                         <div class="form-group row  col-sm-6">

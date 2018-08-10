@@ -7,7 +7,7 @@
 
                     </div>
                     <div class="col-sm-4">
-                        <a href="/modifier_choice/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
+                        <a href="/modifier-choice/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
                     </div>
                 </div>
                 <table id="mainTable" class="table table-striped m-b-0" style="cursor: pointer;">
@@ -26,15 +26,15 @@
                             <td>{{$data->name}}</td>
                             <td>{{$data->multiplied_by}}</td>
                             <td>
-                                <a href="{{ URL::to('modifier_choice/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ URL::to('modifier-choice/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
-                                <a class="md md-visibility" href="{{ URL::to('modifier_choice/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
+                                <a class="md md-visibility" href="{{ URL::to('modifier-choice/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
                                 @else
-                                <a class="md md-visibility-off" href="{{ URL::to('modifier_choice/update-status/' .$data['_id']) }}" title="click for Enable " data-value="Status"></a>
+                                <a class="md md-visibility-off" href="{{ URL::to('modifier-choice/update-status/' .$data['_id']) }}" title="click for Enable " data-value="Status"></a>
                                 @endif
 
 
-                                <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('modifier_choice/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
+                                <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('modifier-choice/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
                             </td>
 
                         </tr>

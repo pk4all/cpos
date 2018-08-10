@@ -25,6 +25,14 @@
                            
                             <td>{{$data->name}}</td>
                             <td>{{$data->plu_code}}</td>
+                            <td>{{$data->price}}</td>
+                            <td>
+                            @if(is_array($data->modifier_choices))
+                                @foreach($data->modifier_choices as $choice)
+                                <span class="badge">{{$choice['name']}}</span>&nbsp;&nbsp;
+                                @endforeach
+                            @endif
+                            </td>
                             <td>
                                 <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
                             </td>
