@@ -126,4 +126,20 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/category/update/{id}', 'Menu\CategoryController@postUpdate');
     Route::get('/category/destroy/{id}', 'Menu\CategoryController@getDestroy');
     Route::get('/category/update-status/{id}', 'Menu\CategoryController@getUpdateStatus');
+
+    Route::get('/modifier_choice', 'Menu\ModifierChoiceController@getIndex');
+    Route::get('/modifier_choice/create', 'Menu\ModifierChoiceController@create');
+    Route::post('/modifier_choice/store', 'Menu\ModifierChoiceController@postStore');
+    Route::get('/modifier_choice/edit/{id}', 'Menu\ModifierChoiceController@getEdit');
+    Route::post('/modifier_choice/update/{id}', 'Menu\ModifierChoiceController@postUpdate');
+    Route::get('/modifier_choice/destroy/{id}', 'Menu\ModifierChoiceController@getDestroy');
+    Route::get('/modifier_choice/update-status/{id}', 'Menu\ModifierChoiceController@getUpdateStatus');
+
+    Route::get('/modifier', 'Menu\ModifierController@getIndex');
+    Route::get('/modifier/create', 'Menu\ModifierController@create');
+    Route::post('/modifier/store', 'Menu\ModifierController@postStore');
+    Route::get('/modifier/edit/{id}', 'Menu\ModifierController@getEdit');
+    Route::post('/modifier/update/{id}', 'Menu\ModifierController@postUpdate');
+    Route::get('/modifier/destroy/{id}', 'Menu\ModifierController@getDestroy');
+    Route::get('/modifier/update-status/{id}', 'Menu\ModifierController@getUpdateStatus');
 });
