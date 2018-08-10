@@ -14,7 +14,7 @@ class ModifierGroup extends Eloquent {
     //use \Venturecraft\Revisionable\RevisionableTrait;
     use SoftDeletes;
 
-    protected $table = 'modifier_choices';
+    protected $table = 'modifier_groups';
     public static $type=['Card'=>'Card','Cash'=>'Cash'];
     
     public static function getModifierGroupCount() {

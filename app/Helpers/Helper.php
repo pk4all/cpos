@@ -23,7 +23,7 @@ class Helper {
     }
     
     public static $stafftab=[['name'=>'Users','link'=>'users'],['name'=>'Roles','link'=>'user-roles']];
-     public static $menutab=[['name'=>'Menu','link'=>'menu'],['name'=>'Categories','link'=>'category'],['name'=>'Modifier Choices','link'=>'modifier-choice'],['name'=>'Modifiers','link'=>'modifier'],['name'=>'Modifier Groups','link'=>'modifier_group']];
+     public static $menutab=[['name'=>'Menu','link'=>'menu'],['name'=>'Categories','link'=>'category'],['name'=>'Modifier Choices','link'=>'modifier-choice'],['name'=>'Modifiers','link'=>'modifier'],['name'=>'Modifier Groups','link'=>'modifier-group']];
     public static $locationtab=[['name'=>'Stores','link'=>'stores'],['name'=>'Brands','link'=>'brands'],['name'=>'Order Type','link'=>'order-type'],['name'=>'Surcharge','link'=>'surcharge'],['name'=>'Tax Rates','link'=>'tax'],['name'=>'Payment Option','link'=>'payment'],['name'=>'Delivery Area','link'=>'delivery-area']];
     
     public static function getCurrentController($onlyName = false) {

@@ -28,7 +28,7 @@ class ModifierGroupController extends Controller {
     function __construct() {
         $this->middleware('auth');
         $this->tabList['tab'] = Helper::$menutab;
-        $this->tabList['selected'] = 'modifier';
+        $this->tabList['selected'] = 'modifier-group';
     }
 
 
@@ -43,8 +43,8 @@ class ModifierGroupController extends Controller {
         //print_r($results); die;
         
         $total_page = ModifierGroup::getModifierGroupCount();
-        $table_header = array('Modifier Group Name', 'PLU Code', 'Image', 'Action');
-        $return = view('menu.modifier.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $table_header = array('Modifier Group Name', 'Image', 'Modifiers', 'Action');
+        $return = view('menu.modifier_group.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -53,17 +53,11 @@ class ModifierGroupController extends Controller {
         if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
             return redirect()->action($return);
         }
-        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
-        $dependentModifierGroups = [];
-        $dependentModifiers = [];
-        unset($modifierChoices[0]);
-        
-        $view = view('menu.modifier.create', [
+        $modifiers = Modifier::getModifierDropDownList();
+        unset($modifiers[0]);
+        $view = view('menu.modifier_group.create', [
             'tabList' => $this->tabList,
-            'dependentModifierGroups' => $dependentModifierGroups,
-            'dependentModifiers' => $dependentModifiers,
-            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
-            'modifierChoices' => $modifierChoices
+            'modifiers' => $modifiers
         ]);
         return $view;
     }
@@ -76,13 +70,12 @@ class ModifierGroupController extends Controller {
         /* end permission code */
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifiers',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = new ModifierGroup();
-        $modifier->name = $request->input('name', null);
+        $modifierGroup = new ModifierGroup();
+        $modifierGroup->name = $request->input('name', null);
 
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){
@@ -97,34 +90,23 @@ class ModifierGroupController extends Controller {
             $response = $uploaded_file->move($dest, $imageFileName);
             
             if($response){
-                $modifier->image=$imageFileName;  
+                $modifierGroup->image=$imageFileName;  
             }  
         }
-        $modifier->plu_code = $request->input('plu_code', null);
-        $modifier->price = $request->input('price', null);
-        $modifier->choice_charge = $request->input('choice_charge', null);
-        $dependentModifierGroup = $dependentModifier = [];
-        /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
+        $modifierGroup->description = $request->input('description', null);
         
-        $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
-        */
-        $modifierChoicesId = $request->input('modifier_choices', null);
-        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
+        
+        $modifiersId = $request->input('modifiers', null);
+        $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
 
-        $modifier->dependent_modifier_group = $dependentModifierGroup;
-        $modifier->dependent_modifier = $dependentModifier;
-        $modifier->modifier_choices = $modifierChoices;
-        $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
-        $modifier->no_modifier = $request->input('no_modifier', null);
+        $modifierGroup->modifiers = $modifiers;
 
-        $modifier->created_by = Auth::user()->_id;
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->status = 'disable';
-        $modifier->save();
-        $request->session()->flash('status', 'Modifier ' . $modifier->name . ' created successfully!');
-        return redirect()->action('Menu\ModifierController@getIndex');
+        $modifierGroup->created_by = Auth::user()->_id;
+        $modifierGroup->updated_by = Auth::user()->_id;
+        $modifierGroup->status = 'disable';
+        $modifierGroup->save();
+        $request->session()->flash('status', 'Modifier Group' . $modifierGroup->name . ' created successfully!');
+        return redirect()->action('Menu\ModifierGroupController@getIndex');
     }
 
     /**
@@ -139,25 +121,22 @@ class ModifierGroupController extends Controller {
             return redirect()->action($return);
         }
         /* end permission code */
-        $dependentModifierGroups = $dependentModifiers = [];
-        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
-        unset($modifierChoices[0]);
-        $modifier = ModifierGroup::find($id);
         
-        if (empty($modifier)) {
+        $modifiers = Modifier::getModifierDropDownList();
+        unset($modifiers[0]);
+        $modifierGroup = ModifierGroup::find($id);
+        
+        if (empty($modifierGroup)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
             return redirect()->action('ModifierGroupController@getIndex');
         }
         //dd($modifier_update);
-        $view = view('menu.modifier.edit', [
+        $view = view('menu.modifier_group.edit', [
             'tabList' => $this->tabList, 
-            'modifier_data' => $modifier,
-            'dependentModifierGroups' => $dependentModifierGroups,
-            'dependentModifiers' => $dependentModifiers,
-            'modifierChoices' => $modifierChoices,
-            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No')
+            'modifier_group_data' => $modifierGroup,
+            'modifiers' => $modifiers
         ]);
         return $view;
     }
@@ -176,13 +155,13 @@ class ModifierGroupController extends Controller {
 
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifier',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = ModifierGroup::find($id);
-        $modifier->name = $request->input('name', null);
+        $modifierGroup = ModifierGroup::find($id);
+        $modifierGroup->name = $request->input('name', null);
+
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){
             $orgname= $uploaded_file->getClientOriginalName();
@@ -196,32 +175,20 @@ class ModifierGroupController extends Controller {
             $response = $uploaded_file->move($dest, $imageFileName);
             
             if($response){
-                $modifier->image=$imageFileName;  
+                $modifierGroup->image=$imageFileName;  
             }  
         }
-        $modifier->plu_code = $request->input('plu_code', null);
-        $modifier->price = $request->input('price', null);
-        $modifier->choice_charge = $request->input('choice_charge', null);
-        $dependentModifierGroup = $dependentModifier = [];
-        /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
+        $modifierGroup->description = $request->input('description', null);
         
-        $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
-        */
-        $modifierChoicesId = $request->input('modifier_choices', null);
-        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
+        
+        $modifiersId = $request->input('modifiers', null);
+        $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
 
-        $modifier->dependent_modifier_group = $dependentModifierGroup;
-        $modifier->dependent_modifier = $dependentModifier;
-        $modifier->modifier_choices = $modifierChoices;
-        $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
-        $modifier->no_modifier = $request->input('no_modifier', null);
-        $modifier->price = $request->input('price', null);
+        $modifierGroup->modifiers = $modifiers;
 
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->save();
-        $request->session()->flash('status', 'Modifier Group ' . $modifier->name . ' Updated successfully!');
+        $modifierGroup->updated_by = Auth::user()->_id;
+        $modifierGroup->save();
+        $request->session()->flash('status', 'Modifier Group ' . $modifierGroup->name . ' Updated successfully!');
         return redirect()->action('Menu\ModifierGroupController@getIndex');
     }
 
@@ -238,12 +205,12 @@ class ModifierGroupController extends Controller {
         }
         /* end permission code */
 
-        $modifier = ModifierGroup::find($id);
+        $modifierGroup = ModifierGroup::find($id);
         
-        $modifier->status = 'disable';
-        $modifier->deleted_at = Carbon::now();
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->save();
+        $modifierGroup->status = 'disable';
+        $modifierGroup->deleted_at = Carbon::now();
+        $modifierGroup->updated_by = Auth::user()->_id;
+        $modifierGroup->save();
         $request->session()->flash('status', 'Successfully deleted the Modifier Group!');
         return redirect()->action('Menu\ModifierGroupController@getIndex');
     }
@@ -254,12 +221,12 @@ class ModifierGroupController extends Controller {
             return redirect()->action($return);
         }
         /* end permission code */
-        $modifier = ModifierGroup::find($id);
-        $modifier->updated_at = Carbon::now();
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->status = $modifier->status == 'enable' ? 'disable' : 'enable';
-        $modifier->save();
-        $request->session()->flash('status', $modifier->name . ' status changed to ' . $modifier->status . ' Successfully!');
+        $modifierGroup = ModifierGroup::find($id);
+        $modifierGroup->updated_at = Carbon::now();
+        $modifierGroup->updated_by = Auth::user()->_id;
+        $modifierGroup->status = $modifierGroup->status == 'enable' ? 'disable' : 'enable';
+        $modifierGroup->save();
+        $request->session()->flash('status', $modifierGroup->name . ' status changed to ' . $modifierGroup->status . ' Successfully!');
         return redirect()->action('Menu\ModifierGroupController@getIndex');
     }
 
