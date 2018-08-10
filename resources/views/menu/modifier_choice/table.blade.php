@@ -24,6 +24,7 @@
                         <tr>
                            
                             <td>{{$data->name}}</td>
+                            <td>{{$data->multiplied_by}}</td>
                             <td>
                                 <a href="{{ URL::to('modifier_choice/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')

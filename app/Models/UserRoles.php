@@ -46,18 +46,10 @@ class UserRoles extends Eloquent {
     'surcharge_create'=>'surcharge Create',
     'surcharge_delete'=>'surcharge Delete',
     'surcharge_update'=>'surcharge Update',
-    'modifier_choice_view' => 'Modifier Choice View',
-    'modifier_choice_create' => 'Modifier Choice Create',
-    'modifier_choice_update' => 'Modifier Choice Update',
-    'modifier_choice_delete' => 'Modifier Choice Delete',
-    'modifier_view' => 'Modifier View',
-    'modifier_create' => 'Modifier Create',
-    'modifier_update' => 'Modifier Update',
-    'modifier_delete' => 'Modifier Delete',
-    'modifier_group_view' => 'Modifier Group View',
-    'modifier_group_create' => 'Modifier Group Create',
-    'modifier_group__update' => 'Modifier Group Update',
-    'modifier_group__delete' => 'Modifier Group Delete'
+    'modifier_view' => 'Modifiers View',
+    'modifier_create' => 'Modifiers Create',
+    'modifier_update' => 'Modifiers Update',
+    'modifier_cdelete' => 'Modifiers Delete'
     ];
 
     public static function getRolesDropDownList() {

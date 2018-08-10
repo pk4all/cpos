@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserRoles;
 use App\Models\User;
 use App\Models\Menu\Modifier;
+use App\Models\Menu\ModifierChoice;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -52,14 +53,17 @@ class ModifierController extends Controller {
         if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
             return redirect()->action($return);
         }
+        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
         $dependentModifierGroups = [];
         $dependentModifiers = [];
+        unset($modifierChoices[0]);
         
         $view = view('menu.modifier.create', [
             'tabList' => $this->tabList,
             'dependentModifierGroups' => $dependentModifierGroups,
             'dependentModifiers' => $dependentModifiers,
-            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No')
+            'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
+            'modifierChoices' => $modifierChoices
         ]);
         return $view;
     }
@@ -72,7 +76,7 @@ class ModifierController extends Controller {
         /* end permission code */
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifier',
+            'plu_code' => 'required |unique:modifiers',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -97,6 +101,8 @@ class ModifierController extends Controller {
             }  
         }
         $modifier->plu_code = $request->input('plu_code', null);
+        $modifier->price = $request->input('price', null);
+        $modifier->choice_charge = $request->input('choice_charge', null);
         $dependentModifierGroup = $dependentModifier = [];
         /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
         $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
@@ -104,8 +110,12 @@ class ModifierController extends Controller {
         $dependentModifierId = $request->input('dependent_modifier', null);
         $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
         */
+        $modifierChoicesId = $request->input('modifier_choices', null);
+        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
+
         $modifier->dependent_modifier_group = $dependentModifierGroup;
         $modifier->dependent_modifier = $dependentModifier;
+        $modifier->modifier_choices = $modifierChoices;
         $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
         $modifier->no_modifier = $request->input('no_modifier', null);
 
@@ -130,6 +140,8 @@ class ModifierController extends Controller {
         }
         /* end permission code */
         $dependentModifierGroups = $dependentModifiers = [];
+        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
+        unset($modifierChoices[0]);
         $modifier = Modifier::find($id);
         
         if (empty($modifier)) {
@@ -144,6 +156,7 @@ class ModifierController extends Controller {
             'modifier_data' => $modifier,
             'dependentModifierGroups' => $dependentModifierGroups,
             'dependentModifiers' => $dependentModifiers,
+            'modifierChoices' => $modifierChoices,
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No')
         ]);
         return $view;
@@ -164,7 +177,7 @@ class ModifierController extends Controller {
         $rules = array(
             'name' => 'required',
             'plu_code' => 'required |unique:modifier',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
@@ -187,6 +200,8 @@ class ModifierController extends Controller {
             }  
         }
         $modifier->plu_code = $request->input('plu_code', null);
+        $modifier->price = $request->input('price', null);
+        $modifier->choice_charge = $request->input('choice_charge', null);
         $dependentModifierGroup = $dependentModifier = [];
         /*$dependentModifierGroupId = $request->input('dependent_modifier_group', null);
         $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array_values($dependentModifierGroupId), ['name']);
@@ -194,10 +209,15 @@ class ModifierController extends Controller {
         $dependentModifierId = $request->input('dependent_modifier', null);
         $dependentModifier = ModifierGroup::getModifierByIds(array_values($dependentModifierId), ['name']);
         */
+        $modifierChoicesId = $request->input('modifier_choices', null);
+        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
+
         $modifier->dependent_modifier_group = $dependentModifierGroup;
         $modifier->dependent_modifier = $dependentModifier;
+        $modifier->modifier_choices = $modifierChoices;
         $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
         $modifier->no_modifier = $request->input('no_modifier', null);
+        $modifier->price = $request->input('price', null);
 
         $modifier->updated_by = Auth::user()->_id;
         $modifier->save();

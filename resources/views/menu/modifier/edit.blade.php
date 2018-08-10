@@ -16,7 +16,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Name</label>
                             <div class="col-9">
-                                {!! Form::text('name', $modifier_data['name'], array('required','class'=>'form-control','placeholder'=>'Enter Brand Name')) !!}
+                                {!! Form::text('name', $modifier_data->name, array('required','class'=>'form-control','placeholder'=>'Enter Brand Name')) !!}
                             </div>
                         </div>
 
@@ -32,7 +32,21 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">PLU Code</label>
                             <div class="col-9">
-                            {!! Form::text('plu_code', $modifier_data['plu_code'], array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
+                            {!! Form::text('plu_code', $modifier_data->plu_code, array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Price</label>
+                            <div class="col-9">
+                            {!! Form::number('price', $modifier_data->price, array('required','class'=>'form-control','placeholder'=>'Enter Price', 'step' => '0.01')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Choice Charge</label>
+                            <div class="col-9">
+                            {!! Form::select('choice_charge', $yesNoOptions, $modifier_data->choice_charge, array('required','class'=>'form-control')) !!}
                             </div>
                         </div>
 
@@ -61,6 +75,13 @@
                             <label class="col-3 col-form-label">No Modifier</label>
                             <div class="col-9">
                             {!! Form::select("no_modifier",$yesNoOptions, $modifier_data->no_modifier, array('class'=>'form-control')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Modifier Choices</label>
+                            <div class="col-9">
+                            {!! Form::select("modifier_choices[]",$modifierChoices, array_column($modifier_data->modifier_choices,'_id'), array('multiple'=> true, 'class'=>'form-control')) !!}
                             </div>
                         </div>
                     

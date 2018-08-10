@@ -15,12 +15,18 @@
 
                     <div class="row">
                         <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Choice Name dfgfdg</label>
+                            <label class="col-3 col-form-label">Choice Name </label>
                             <div class="col-9">
                             {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Choice Name')) !!}
                             </div>
                         </div>
                         
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Multiplied By</label>
+                            <div class="col-9">
+                            {!! Form::number('multiplied_by', Input::old('multiplied_by'), array('required','class'=>'form-control','placeholder'=>'Enter Multiplied By value', 'step' => '0.01')) !!}
+                            </div>
+                        </div>
                         
 
                         <div class="form-group row  col-sm-6">

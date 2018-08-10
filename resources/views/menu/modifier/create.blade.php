@@ -17,7 +17,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Name</label>
                             <div class="col-9">
-                            {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Choice Name')) !!}
+                            {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Modifier Name')) !!}
                             </div>
                         </div>
 
@@ -34,6 +34,20 @@
                             <label class="col-3 col-form-label">PLU Code</label>
                             <div class="col-9">
                             {!! Form::text('plu_code', Input::old('plu_code'), array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Price</label>
+                            <div class="col-9">
+                            {!! Form::number('price', Input::old('price'), array('required','class'=>'form-control','placeholder'=>'Enter Price', 'step' => '0.01')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Choice Charge</label>
+                            <div class="col-9">
+                            {!! Form::select('choice_charge', $yesNoOptions,Input::old('choice_charge'), array('required','class'=>'form-control')) !!}
                             </div>
                         </div>
 
@@ -62,6 +76,13 @@
                             <label class="col-3 col-form-label">No Modifier</label>
                             <div class="col-9">
                             {!! Form::select("no_modifier",$yesNoOptions,Input::old("no_modifier"), array('class'=>'form-control')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Modifier Choices</label>
+                            <div class="col-9">
+                            {!! Form::select("modifier_choices[]",$modifierChoices,Input::old("modifier_choices"), array('multiple'=> true, 'class'=>'form-control')) !!}
                             </div>
                         </div>
                         

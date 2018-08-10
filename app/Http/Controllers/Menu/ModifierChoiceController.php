@@ -34,7 +34,7 @@ class ModifierChoiceController extends Controller {
     public function getIndex(Request $request) {
 
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_view', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_view', $request)) !== true) {
               return redirect()->action($return);
         }
         /* end permission code */
@@ -42,14 +42,14 @@ class ModifierChoiceController extends Controller {
         //print_r($results); die;
         
         $total_page = ModifierChoice::getModifierChoiceCount();
-        $table_header = array('Name', 'Action');
+        $table_header = array('Name', 'Multiplied By', 'Action');
         $return = view('menu.modifier_choice.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
     public function Create(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_create', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
             return redirect()->action($return);
         }
         
@@ -59,7 +59,7 @@ class ModifierChoiceController extends Controller {
 
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_create', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -70,6 +70,7 @@ class ModifierChoiceController extends Controller {
         $this->validate($request, $rules);
         $modifierChoice = new ModifierChoice();
         $modifierChoice->name = $request->input('name', null);
+        $modifierChoice->multiplied_by = $request->input('multiplied_by', null);
         $modifierChoice->description = $request->input('description', null);
         $modifierChoice->created_by = Auth::user()->_id;
         $modifierChoice->updated_by = Auth::user()->_id;
@@ -87,7 +88,7 @@ class ModifierChoiceController extends Controller {
      */
     public function getEdit(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -113,7 +114,7 @@ class ModifierChoiceController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('modifier_choice_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
             return redirect()->action($return);
         }
 
@@ -124,7 +125,8 @@ class ModifierChoiceController extends Controller {
         $this->validate($request, $rules);
         $modifierChoice = ModifierChoice::find($id);
         $modifierChoice->name = $request->input('name', null);
-        $modifierChoice->name = $request->input('description', null);
+        $modifierChoice->multiplied_by = $request->input('multiplied_by', null);
+        $modifierChoice->description = $request->input('description', null);
         $modifierChoice->updated_by = Auth::user()->_id;
         $modifierChoice->save();
         $request->session()->flash('status', 'ModifierChoice ' . $modifierChoice->name . ' Updated successfully!');
@@ -139,7 +141,7 @@ class ModifierChoiceController extends Controller {
      */
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_delete', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_delete', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -156,7 +158,7 @@ class ModifierChoiceController extends Controller {
 
     public function getUpdateStatus(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_choice_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
