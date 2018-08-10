@@ -54,14 +54,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Dependent Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("dependent_modifier_group",$dependentModifierGroups,Input::old("dependent_modifier_group"), array('class'=>'form-control','placeholder'=>'Select Dependent Modifier Group')) !!}
+                            {!! Form::select("dependent_modifier_group",$dependentModifierGroups,Input::old("dependent_modifier_group"), array('class'=>'form-control','id' => 'dependentModifierGroup')) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Dependent Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("dependent_modifier",$dependentModifiers,Input::old("dependent_modifier"), array('class'=>'form-control','placeholder'=>'Select Dependent Modifier')) !!}
+                            {!! Form::select("dependent_modifier",$dependentModifiers,Input::old("dependent_modifier"), array('class'=>'form-control','placeholder'=>'Select', 'id' => 'dependentModifiers')) !!}
                             </div>
                         </div>
 
@@ -109,7 +109,27 @@
 @section('custome_script')
 <script>
 $(function(){
-   
+   $(document).on('change', '#dependentModifierGroup', function(){
+    //alert('gggg');
+    if($(this).val() != 0){
+        var option = "<option value='0'>Select</option>";
+        $.ajax({
+            url : '/modifier-group/get-group-modfiers/'+$(this).val(),
+            type : 'get',
+            success : function(data){
+                var modifiers = JSON.parse(data);
+                for(modifier of modifiers){
+                    option += "<option value=" + modifier['_id'] + ">" + modifier['name'] + "</option>";
+                }
+                $('#dependentModifiers').html(option);
+                
+            },
+            error : function(err){
+
+            }
+        });
+    }
+   });
 });   
 </script>
 @yield('custome_script')

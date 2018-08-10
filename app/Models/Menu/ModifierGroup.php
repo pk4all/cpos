@@ -26,9 +26,9 @@ class ModifierGroup extends Eloquent {
         return self::where('_id', $id)->where('status', 'enable')->get();
     }
 
-    public static function getModifierGroupByIds($ids) {
+    public static function getModifierGroupByIds($ids, $fields=[]) {
 
-        return self::whereIn('_id', $ids)->where('status', 'enable')->get()->toArray();
+        return self::whereIn('_id', $ids)->where('status', 'enable')->get($fields)->toArray();
     }
 
     public static function scopeSearch($query, $keyword) {
@@ -63,13 +63,31 @@ class ModifierGroup extends Eloquent {
         $column = array('_id', 'name');
         $result = self::where('status', 'enable')->get($column);
         
-        $choice_list = NULL;
+        $group_list = NULL;
         foreach ($result as $item) {
-            $choice_list[$item->_id] = $item->name;
+            $group_list[$item->_id] = $item->name;
         }
         $helper = new Helper;
         $def_sel = $helper->getDefaultSel();
-        $modifierGroupDropdown = (!empty($choice_list)) ? array_merge($def_sel, $choice_list) : $def_sel;
+        $modifierGroupDropdown = (!empty($group_list)) ? array_merge($def_sel, $group_list) : $def_sel;
+        return $modifierGroupDropdown;
+    }
+
+    public static function getModifiersOfGroup($groupId){
+        return self::where('_id', $groupId)->get(array('modifiers'))->toArray();
+    }
+
+    public static function getModifiersOfGroupDropDownList($groupId) {
+
+        $column = array('_id', 'modifiers');
+        $result = self::where('status', 'enable')->where('_id', $groupId)->get($column);
+        $group_list = NULL;
+        foreach ($result->modifiers as $item) {
+            $group_list[$item->_id] = $item->name;
+        }
+        $helper = new Helper;
+        $def_sel = $helper->getDefaultSel();
+        $modifierGroupDropdown = $group_list;
         return $modifierGroupDropdown;
     }
 }

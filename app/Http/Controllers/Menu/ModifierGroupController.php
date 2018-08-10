@@ -250,4 +250,10 @@ class ModifierGroupController extends Controller {
         return $results;
     }
 
+    public function getGroupModifiers(Request $request, $id){
+        //die($id);
+        $modifiers = ModifierGroup::getModifiersOfGroup($id);
+        echo json_encode($modifiers[0]['modifiers']);
+    }
+
 }
