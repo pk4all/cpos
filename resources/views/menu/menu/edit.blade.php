@@ -11,7 +11,7 @@
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'menu/update/'.$menu_data->_id,'class'=>'form-horizontal', 'method'=>'post')) !!}
+                    {!! Form::open(array('url' => 'item/update/'.$menu_data->_id,'class'=>'form-horizontal', 'method'=>'post')) !!}
 
                     <div class="row">
 
