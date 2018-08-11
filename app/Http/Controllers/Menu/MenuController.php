@@ -82,14 +82,26 @@ class MenuController extends Controller {
         }
         /* end permission code */
         $rules = array(
+            'category' => 'required',
             'name' => 'required',
-            'plu_code' => 'required |unique:modifiers',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            'plu_code' => 'required |unique:menus',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'price' => 'required|number'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = new Menu();
-        $modifier->name = $request->input('name', null);
+        $menu = new Menu();
+        $menu->name = $request->input('name', null);
+        $menu->plu_code = $request->input('plu_code', null);
+        $menu->price_title = $request->input('price_title', null);
+        $menu->price = $request->input('price', null);
+        $menu->tax = $request->input('tax', null);
+        $menu->groups = $request->input('groups', null);
+        $menu->seo_title = $request->input('seo_title', null);
+        $menu->short_description = $request->input('short_description', null);
+        $menu->spl_instruction = $request->input('spl_instruction', null);
+        
+        
 
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){

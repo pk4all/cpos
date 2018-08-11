@@ -112,14 +112,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_group",$modifierGroups,Input::old("modifier_group"), array('class'=>'form-control','id' => 'includedModifierGroup')) !!}
+                            {!! Form::select("included_modifier_groups[]",$modifierGroups ,Input::old("included_modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'includedModifierGroup')) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("modifiers[]",$modifiers,Input::old("modifiers"), array('multiple' => true, 'class'=>'form-control','placeholder'=>'Select', 'id' => 'includedModifiers')) !!}
+                            {!! Form::select("included_modifiers[]",$modifiers,Input::old("included_modifiers"), array('multiple' => true, 'class'=>'form-control','placeholder'=>'Select', 'id' => 'includedModifiers')) !!}
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,8 @@
                         </div>
 
                         <div class ="row col-12 modifier-options" id="modifierOptions">
-                            <hr>
+                            {!! Form::hidden("group_name[]", Input::old("group_name"), array('class'=>'form-control  group_name')) !!}
+                            {!! Form::hidden("group_id[]", Input::old("group_id"), array('class'=>'form-control  group_id')) !!}
                             <label class="col-12 col-form-label font-weight-bold group-name">FFFF</label>
                             <div class="form-group row  col-sm-6">
                                 <label class="col-3 col-form-label">Modifier</label>
@@ -238,25 +239,36 @@ $(function(){
 
 
    $(document).on('change', '#includedModifierGroup', function(){
-    if($(this).val() != 0){
-        var option = "<option value='0'>Select</option>";
-        $.ajax({
-            url : '/modifier-group/get-group-modfiers/'+$(this).val(),
-            type : 'get',
-            success : function(data){
-                var modifiers = JSON.parse(data);
-                for(modifier of modifiers){
-                    option += "<option value=" + modifier['_id'] + ">" + modifier['name'] + "</option>";
+    var selectedGroups = $(this).val();
+    var count = 0;
+    selectedGroups.forEach(function(group){
+        $('#includedModifiers').html('');
+        count++;
+        if(group != 0){
+                if(count == 1){
+                    var option = "<option value='0'>Select</option>";
+                }else{
+                    var option = "";
                 }
-                $('#includedModifiers').html(option);
-                
-            },
-            error : function(err){
+                var option = "";
+                $.ajax({
+                    url : '/modifier-group/get-group-modfiers/'+group,
+                    type : 'get',
+                    success : function(data){
+                        var modifiers = JSON.parse(data);
+                        for(modifier of modifiers){
+                            option += "<option value=" + modifier['_id'] + ">" + modifier['name'] + "</option>";
+                        }
+                        $('#includedModifiers').html(option);
+                        
+                    },
+                    error : function(err){
 
+                    }
+                });
             }
-        });
-    }
-   });
+    });
+});
 
    $(document).on('change', '#modifierGroup', function(){
     var selectedGroups = $(this).val();
@@ -268,6 +280,8 @@ $(function(){
             var modifierOptions = $('#modifierOptions').clone();
             modifierOptions.removeClass('hide').addClass('newlyAdded').attr('id', '');
             modifierOptions.find('.group-name').html(groupName);
+            modifierOptions.find('.group_name').val(groupName);
+            modifierOptions.find('.group_id').val(group);
             modifierOptions.insertBefore('#modifierOptions');
             var option = "<option value='0'>Select</option>";
             $.ajax({
