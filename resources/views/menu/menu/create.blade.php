@@ -77,7 +77,7 @@
  <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Short Description</label>
                             <div class="col-9">
-                            {!! Form::textarea('short_description', Input::old('short_description'), array('class'=>'form-control','placeholder'=>'Enter Short Description')) !!}
+                            {!! Form::textarea('short_description', Input::old('short_description'), array('class'=>'form-control','placeholder'=>'Enter Short Description','rows'=>3)) !!}
                             </div>
                         </div>
                         <div class="form-group row  col-sm-6">
