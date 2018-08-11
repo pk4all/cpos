@@ -11,7 +11,7 @@
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'menu/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
+                    {!! Form::open(array('url' => 'item/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
 
                     <div class="row">
 
