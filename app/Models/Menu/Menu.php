@@ -9,24 +9,24 @@ use \App\Helpers\Helper;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 
 
-class ModifierGroup extends Eloquent {
+class Modifier extends Eloquent {
 
     //use \Venturecraft\Revisionable\RevisionableTrait;
     use SoftDeletes;
 
-    protected $table = 'modifier_groups';
+    protected $table = 'modifiers';
     public static $type=['Card'=>'Card','Cash'=>'Cash'];
     
-    public static function getModifierGroupCount() {
+    public static function getModifierCount() {
         return self::where('status', 'enable')->count();
     }
 
-    public static function getModifierGroupById($id) {
+    public static function getModifierById($id) {
 
         return self::where('_id', $id)->where('status', 'enable')->get();
     }
 
-    public static function getModifierGroupByIds($ids, $fields=[]) {
+    public static function getModifierByIds($ids, $fields=[]) {
 
         return self::whereIn('_id', $ids)->where('status', 'enable')->get($fields)->toArray();
     }
@@ -38,17 +38,17 @@ class ModifierGroup extends Eloquent {
         return $finder;
     }
 
-    public static function getModifierGroupList($pageNo = 0, $count = 10, $sortOrderField = "_id", $sortDirection = 'desc', $search = array()) {
+    public static function getModifierList($pageNo = 0, $count = 10, $sortOrderField = "_id", $sortDirection = 'desc', $search = array()) {
         //die('gggg');
         $skip = ($pageNo - 1) * $count;
         $take = $count;
-        $total = self::getModifierGroupCount();
+        $total = self::getModifierCount();
         $data = self::orderBy($sortOrderField, $sortDirection)->skip($skip)->take($take)->get();
         $result = array('total' => "$total", 'curPage' => "$pageNo", 'perPage' => "$count", 'data' => $data);
         return $result;
     }
 
-    public static function scopeModifierGroupList($query, $sortOrderField = "_id", $sortDirection = 'desc', $search = array(), $parent = null) {
+    public static function scopeModifierList($query, $sortOrderField = "_id", $sortDirection = 'desc', $search = array(), $parent = null) {
         if (!empty($search)) {
             $query->where($search['key'], 'LIKE', "%{$search['value']}%");
         }
@@ -56,25 +56,19 @@ class ModifierGroup extends Eloquent {
         $data = $query->orderBy($sortOrderField, $sortDirection);
         return $data;
     }
-
     /*  this function return the store list */
-    public static function getModifierGroupDropDownList() {
+    public static function getModifierDropDownList() {
 
         $column = array('_id', 'name');
         $result = self::where('status', 'enable')->get($column);
         
-        $group_list = NULL;
+        $choice_list = NULL;
         foreach ($result as $item) {
-            $group_list[$item->_id] = $item->name;
+            $choice_list[$item->_id] = $item->name;
         }
         $helper = new Helper;
         $def_sel = $helper->getDefaultSel();
-        $modifierGroupDropdown = (!empty($group_list)) ? array_merge($def_sel, $group_list) : $def_sel;
-        return $modifierGroupDropdown;
+        $modifierChoiceDropdown = (!empty($choice_list)) ? array_merge($def_sel, $choice_list) : $def_sel;
+        return $modifierChoiceDropdown;
     }
-
-    public static function getModifiersOfGroup($groupId){
-        return self::where('_id', $groupId)->get(array('modifiers'))->toArray();
-    }
-
 }
