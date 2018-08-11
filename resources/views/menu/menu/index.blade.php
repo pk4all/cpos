@@ -10,7 +10,7 @@
             @include('layouts.menu',['tabList'=>$tabList])
 
         </div>    
-        @include('menu.modifier.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))
+        @include('menu.menu.table', array('class'=>'table-hover table-bordered table-striped', 'tbl_header'=>$tbl_header, 'tbl_data'=>$results))
         @include('layouts.deleteconfirm')
     </div> <!-- end Panel -->
 </div> <!-- end container -->

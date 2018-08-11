@@ -15,7 +15,7 @@ class Tax extends Eloquent {
     use SoftDeletes;
 
     protected $table = 'taxes';
-    public static $type=['Inclusive'=>'Inclusive','Exclusive'=>'Exclusive', 'Both' => 'Both'];
+    public static $type=['Inclusive'=>'Inclusive','Exclusive'=>'Exclusive', 'None' => 'None'];
 
     
 
