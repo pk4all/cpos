@@ -220,7 +220,7 @@ class MenuController extends Controller {
             $request->session()->flash($msg_status, $message);
             return redirect()->action('MenuController@getIndex');
         }
-        print_r($menu);
+       // print_r($menu);
         //dd(array_column($menu->category,'_id'));
         $view = view('menu.menu.edit', [
             'tabList' => $this->tabList, 
