@@ -73,26 +73,26 @@
                             </div>
                         </div>
 
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Tax</label>
+                       
+ <div class="form-group row  col-sm-12">
+                            <label class="col-3 col-form-label">Short Description</label>
                             <div class="col-9">
-                            {!! Form::select('tax', $taxType, Input::old('tax'), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
+                            {!! Form::textarea('short_description', Input::old('short_description'), array('class'=>'form-control','placeholder'=>'Enter Short Description')) !!}
                             </div>
                         </div>
-
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Group</label>
                             <div class="col-9">
                             {!! Form::select("groups[]",$groups,Input::old("groups"), array('multiple' => true, 'class'=>'form-control','id' => 'dependentModifierGroup', 'placeholder' => 'Select')) !!}
                             </div>
                         </div>
-
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Short Description</label>
+ <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Tax</label>
                             <div class="col-9">
-                            {!! Form::textarea('short_description', Input::old('short_description'), array('class'=>'form-control','placeholder'=>'Enter Short Description')) !!}
+                            {!! Form::select('tax', $taxType, Input::old('tax'), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
                             </div>
                         </div>
+                       
 
                     </div>
                     <div class="row">
