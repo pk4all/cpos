@@ -37,7 +37,7 @@ class MenuController extends Controller {
     public function getIndex(Request $request) {
 
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_view', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_view', $request)) !== true) {
               return redirect()->action($return);
         }
         /* end permission code */
@@ -79,7 +79,7 @@ class MenuController extends Controller {
 
     public function postStore(Request $request) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_create', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
@@ -246,7 +246,7 @@ class MenuController extends Controller {
      * @return Response
      */
     public function postUpdate(Request $request, $id) {
-        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_update', $request)) !== true) {
             return redirect()->action($return);
         }
 
