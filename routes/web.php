@@ -126,6 +126,7 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/category/update/{id}', 'Menu\CategoryController@postUpdate');
     Route::get('/category/destroy/{id}', 'Menu\CategoryController@getDestroy');
     Route::get('/category/update-status/{id}', 'Menu\CategoryController@getUpdateStatus');
+    Route::get('/category/get-sub-category/{id}', 'Menu\CategoryController@getSubCategories');
 
     Route::get('/modifier-choice', 'Menu\ModifierChoiceController@getIndex');
     Route::get('/modifier-choice/create', 'Menu\ModifierChoiceController@create');
@@ -151,4 +152,12 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/modifier-group/destroy/{id}', 'Menu\ModifierGroupController@getDestroy');
     Route::get('/modifier-group/update-status/{id}', 'Menu\ModifierGroupController@getUpdateStatus');
     Route::get('/modifier-group/get-group-modfiers/{id}', 'Menu\ModifierGroupController@getGroupModifiers');
+
+    Route::get('/menu', 'Menu\MenuController@getIndex');
+    Route::get('/menu/create', 'Menu\MenuController@create');
+    Route::post('/menu/store', 'Menu\MenuController@postStore');
+    Route::get('/menu/edit/{id}', 'Menu\MenuController@getEdit');
+    Route::post('/menu/update/{id}', 'Menu\MenuController@postUpdate');
+    Route::get('/menu/destroy/{id}', 'Menu\MenuController@getDestroy');
+    Route::get('/menu/update-status/{id}', 'Menu\MenuController@getUpdateStatus');
 });

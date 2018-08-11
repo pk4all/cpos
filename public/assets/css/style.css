@@ -7777,3 +7777,8 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   }
 }
 /*# sourceMappingURL=style.css.map */
+.section {
+  border: 1px solid #ccc;
+  padding-top :1rem;
+  margin:0 2px 10px;
+}

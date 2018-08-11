@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserRoles;
 use App\Models\User;
-use App\Models\Menu\Modifier;
+use App\Models\Menu\Menu;
+use App\Models\Menu\Category;
 use App\Models\Menu\ModifierChoice;
 use App\Models\Menu\ModifierGroup;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ use App\Helpers\Helper;
 
 
 
-class ModifierController extends Controller {
+class MenuController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -29,7 +30,7 @@ class ModifierController extends Controller {
     function __construct() {
         $this->middleware('auth');
         $this->tabList['tab'] = Helper::$menutab;
-        $this->tabList['selected'] = 'modifier';
+        $this->tabList['selected'] = 'menu';
     }
 
 
@@ -40,11 +41,11 @@ class ModifierController extends Controller {
               return redirect()->action($return);
         }
         /* end permission code */
-        $results = $this->getModifierListPaging($request);
+        $results = $this->getMenuListPaging($request);
         //print_r($results); die;
         
-        $total_page = Modifier::getModifierCount();
-        $table_header = array('Modifier Name', 'PLU Code', 'Price','Choices','Image' , 'Action');
+        $total_page = Menu::getMenuCount();
+        $table_header = array('Menu Name', 'PLU Code', 'Price','Choices','Image' , 'Action');
         $return = view('menu.modifier.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -54,17 +55,22 @@ class ModifierController extends Controller {
         if (($return = UserRoles::hasAccess('modifier_create', $request)) !== true) {
             return redirect()->action($return);
         }
-        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
-        $dependentModifierGroups = ModifierGroup::getModifierGroupDropDownList();
-        $dependentModifiers = [];
-        unset($modifierChoices[0]);
+        $groups = Menu::$groups;
+        $choices = Menu::$choices;
+        $categories = Category::getCategoryDropDownList();
+        $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        $modifiers = $subCategories = [];
+        //print_r($categories); die;
         
-        $view = view('menu.modifier.create', [
+        $view = view('menu.menu.create', [
             'tabList' => $this->tabList,
-            'dependentModifierGroups' => $dependentModifierGroups,
-            'dependentModifiers' => $dependentModifiers,
+            'modifierGroups' => $modifierGroups,
+            'modifiers' => $modifiers,
+            'categories' => $categories,
+            'subCategories' => $subCategories,
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
-            'modifierChoices' => $modifierChoices
+            'groups' => $groups,
+            'choices' =>$choices
         ]);
         return $view;
     }
@@ -82,7 +88,7 @@ class ModifierController extends Controller {
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = new Modifier();
+        $modifier = new Menu();
         $modifier->name = $request->input('name', null);
 
         $uploaded_file = $request->file('image');
@@ -124,8 +130,8 @@ class ModifierController extends Controller {
         $modifier->updated_by = Auth::user()->_id;
         $modifier->status = 'disable';
         $modifier->save();
-        $request->session()->flash('status', 'Modifier ' . $modifier->name . ' created successfully!');
-        return redirect()->action('Menu\ModifierController@getIndex');
+        $request->session()->flash('status', 'Menu ' . $modifier->name . ' created successfully!');
+        return redirect()->action('Menu\MenuController@getIndex');
     }
 
     /**
@@ -144,7 +150,7 @@ class ModifierController extends Controller {
         $dependentModifiers = [];
         $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
         unset($modifierChoices[0]);
-        $modifier = Modifier::find($id);
+        $modifier = Menu::find($id);
         
         $selectGroupsModifiers = [];
         if(count($modifier->dependent_modifier_group) > 0){
@@ -161,7 +167,7 @@ class ModifierController extends Controller {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
-            return redirect()->action('ModifierController@getIndex');
+            return redirect()->action('MenuController@getIndex');
         }
         //dd($modifier_update);
         $view = view('menu.modifier.edit', [
@@ -195,7 +201,7 @@ class ModifierController extends Controller {
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = Modifier::find($id);
+        $modifier = Menu::find($id);
         $modifier->name = $request->input('name', null);
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){
@@ -235,8 +241,8 @@ class ModifierController extends Controller {
 
         $modifier->updated_by = Auth::user()->_id;
         $modifier->save();
-        $request->session()->flash('status', 'Modifier ' . $modifier->name . ' Updated successfully!');
-        return redirect()->action('Menu\ModifierController@getIndex');
+        $request->session()->flash('status', 'Menu ' . $modifier->name . ' Updated successfully!');
+        return redirect()->action('Menu\MenuController@getIndex');
     }
 
     /**
@@ -252,14 +258,14 @@ class ModifierController extends Controller {
         }
         /* end permission code */
 
-        $modifier = Modifier::find($id);
+        $modifier = Menu::find($id);
         
         $modifier->status = 'disable';
         $modifier->deleted_at = Carbon::now();
         $modifier->updated_by = Auth::user()->_id;
         $modifier->save();
-        $request->session()->flash('status', 'Successfully deleted the Modifier Choice!');
-        return redirect()->action('Menu\ModifierController@getIndex');
+        $request->session()->flash('status', 'Successfully deleted the Menu!');
+        return redirect()->action('Menu\MenuController@getIndex');
     }
 
     public function getUpdateStatus(Request $request, $id) {
@@ -268,13 +274,13 @@ class ModifierController extends Controller {
             return redirect()->action($return);
         }
         /* end permission code */
-        $modifier = Modifier::find($id);
+        $modifier = Menu::find($id);
         $modifier->updated_at = Carbon::now();
         $modifier->updated_by = Auth::user()->_id;
         $modifier->status = $modifier->status == 'enable' ? 'disable' : 'enable';
         $modifier->save();
         $request->session()->flash('status', $modifier->name . ' status changed to ' . $modifier->status . ' Successfully!');
-        return redirect()->action('Menu\ModifierController@getIndex');
+        return redirect()->action('Menu\MenuController@getIndex');
     }
 
     public function getModifierListPaging(Request $request) {
@@ -293,7 +299,7 @@ class ModifierController extends Controller {
         }
         $sort_by = $request->has('sort_by') ? $request->input('sort_by') : '_id';
         $sort_dir = $request->has('sort_dir') ? $request->input('sort_dir') : 'desc';
-        $results = Modifier::ModifierList($sort_by, $sort_dir, $search, true)->paginate($limit);
+        $results = Menu::ModifierList($sort_by, $sort_dir, $search, true)->paginate($limit);
         return $results;
     }
 

@@ -65,10 +65,14 @@ class Category extends Eloquent {
     }
     
     /*  this function return the category list */
-    public static function getCategoryDropDownList() {
+    public static function getCategoryDropDownList($options= array()) {
 
         $column = array('_id', 'name');
-        $result = Category::where('status', 'enable')->get($column);
+        $query = Category::where('status', 'enable');
+        if(isset($options['parentId'])){
+            $query = $query->whereraw(array('parent._id'=>$options['parentId']));
+        }
+        $result = $query->get($column);
         
         $category_list = NULL;
         foreach ($result as $item) {
