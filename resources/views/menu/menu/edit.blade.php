@@ -73,13 +73,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Tax</label>
+                        
+<div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Short Description</label>
                             <div class="col-9">
-                            {!! Form::select('tax', $taxType, array($menu_data->tax), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
+                            {!! Form::textarea('short_description', $menu_data->short_description, array('class'=>'form-control','placeholder'=>'Enter Short Description','rows'=>3)) !!}
                             </div>
                         </div>
-
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Group</label>
                             <div class="col-9">
@@ -88,9 +88,9 @@
                         </div>
 
                         <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Short Description</label>
+                            <label class="col-3 col-form-label">Tax</label>
                             <div class="col-9">
-                            {!! Form::textarea('short_description', $menu_data->short_description, array('class'=>'form-control','placeholder'=>'Enter Short Description')) !!}
+                            {!! Form::select('tax', $taxType, array($menu_data->tax), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
                             </div>
                         </div>
 
