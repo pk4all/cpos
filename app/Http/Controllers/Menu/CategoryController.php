@@ -232,4 +232,10 @@ class CategoryController extends Controller {
         return $results;
     }
 
+    public function getSubCategories(Request $request, $categoryId){
+        $options = array('parentId' => $categoryId);
+        $subCategoryList = Category::getCategoryDropDownList($options);
+        echo json_encode($subCategoryList); 
+    }
+
 }
