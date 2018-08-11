@@ -49,7 +49,11 @@ class UserRoles extends Eloquent {
     'modifier_view' => 'Modifiers View',
     'modifier_create' => 'Modifiers Create',
     'modifier_update' => 'Modifiers Update',
-    'modifier_cdelete' => 'Modifiers Delete'
+    'modifier_cdelete' => 'Modifiers Delete',
+    'menu_view' => 'Item View',
+    'menu_create' => 'Item Create',
+    'menu_update' => 'Item Update',
+    'menu_cdelete' => 'Item Delete'
     ];
 
     public static function getRolesDropDownList() {
