@@ -8,7 +8,7 @@ use App\Models\UserRoles;
 use App\Models\User;
 use App\Models\Menu\Menu;
 use App\Models\Menu\Category;
-use App\Models\Menu\ModifierChoice;
+use App\Models\Menu\Modifier;
 use App\Models\Menu\ModifierGroup;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -45,8 +45,8 @@ class MenuController extends Controller {
         //print_r($results); die;
         
         $total_page = Menu::getMenuCount();
-        $table_header = array('Menu Name', 'PLU Code', 'Price','Choices','Image' , 'Action');
-        $return = view('menu.modifier.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
+        $table_header = array('Menu Name', 'Category', 'PLU Code', 'Price', 'Image', 'Action');
+        $return = view('menu.menu.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
 
@@ -86,22 +86,11 @@ class MenuController extends Controller {
             'name' => 'required',
             'plu_code' => 'required |unique:menus',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-            'price' => 'required|number'
+            'price' => 'required'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
         $menu = new Menu();
-        $menu->name = $request->input('name', null);
-        $menu->plu_code = $request->input('plu_code', null);
-        $menu->price_title = $request->input('price_title', null);
-        $menu->price = $request->input('price', null);
-        $menu->tax = $request->input('tax', null);
-        $menu->groups = $request->input('groups', null);
-        $menu->seo_title = $request->input('seo_title', null);
-        $menu->short_description = $request->input('short_description', null);
-        $menu->spl_instruction = $request->input('spl_instruction', null);
-        
-        
 
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){
@@ -116,33 +105,74 @@ class MenuController extends Controller {
             $response = $uploaded_file->move($dest, $imageFileName);
             
             if($response){
-                $modifier->image=$imageFileName;  
+                $menu->image=$imageFileName;  
             }  
         }
-        $modifier->plu_code = $request->input('plu_code', null);
-        $modifier->price = $request->input('price', null);
-        $modifier->choice_charge = $request->input('choice_charge', null);
-        $dependentModifierGroup = $dependentModifier = [];
-        $dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds(array($dependentModifierGroupId), ['name']);
-        
-        $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = Modifier::getModifierByIds(array($dependentModifierId), ['name']);
-        
-        $modifierChoicesId = $request->input('modifier_choices', null);
-        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
 
-        $modifier->dependent_modifier_group = $dependentModifierGroup;
-        $modifier->dependent_modifier = $dependentModifier;
-        $modifier->modifier_choices = $modifierChoices;
-        $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
-        $modifier->no_modifier = $request->input('no_modifier', null);
+        $menu->name = $request->input('name', null);
+        $menu->plu_code = $request->input('plu_code', null);
+        $menu->price_title = $request->input('price_title', null);
+        $menu->price = $request->input('price', null);
+        $menu->tax = $request->input('tax', null);
+        $menu->groups = $request->input('groups', null);
+        $menu->seo_title = $request->input('seo_title', null);
+        $menu->short_description = $request->input('short_description', null);
+        $menu->spl_instruction = $request->input('spl_instruction', null);
 
-        $modifier->created_by = Auth::user()->_id;
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->status = 'disable';
-        $modifier->save();
-        $request->session()->flash('status', 'Menu ' . $modifier->name . ' created successfully!');
+        $categoryId = $request->input('category', null);
+        $category = Category::getCategoryByIds(array($categoryId), ['name']);
+        $menu->category = $category;
+
+        $subCategoryId = $request->input('sub_category', null);
+        $subCategory = Category::getCategoryByIds(array($subCategoryId), ['name']);
+        $menu->sub_category = $subCategory;
+
+        $includedModifierGroupsId = $request->input('included_modifier_groups', null);
+        $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array($includedModifierGroupsId), ['name']);
+        $menu->included_modifier_groups = $includedModifierGroups;  
+
+        $includedModifiersId = $request->input('included_modifiers', null);
+        $includedModifiers = Modifier::getModifierByIds(array($includedModifiersId), ['name']);
+        $menu->included_modifiers = $includedModifiers;  
+
+        $modifierGroupsId = $request->input('modifier_groups', null);
+        $modifierGroups = ModifierGroup::getModifierGroupByIds(array($modifierGroupsId), ['name']);
+        $menu->modifier_groups = $modifierGroups;  
+
+        
+        $groupName = $request->input('group_name', null);
+        $groupIds = $request->input('group_id', null);
+        $modifier = $request->input('modifier', null);
+        $isRequired = $request->input('is_required', null);
+        $choice = $request->input('choice', null);
+        $minChoice = $request->input('min_choice', null);
+        $maxChoice = $request->input('max_choice', null);
+        $freeModifier = $request->input('free_modifier', null);
+        $displayPrice = $request->input('display_price', null);
+
+        $modifiers = array();
+        foreach($groupIds as $index=>$groupId){
+            if(!empty($modifier[$index])){
+                $modifiers[$groupId] = array(
+                    'group_name' => $groupName[$index],
+                    'modifier' => $modifier[$index],
+                    'is_required' => $isRequired[$index],
+                    'choice' => $choice[$index],
+                    'min_choice' => $minChoice[$index],
+                    'max_choice' => $maxChoice[$index],
+                    'free_modifier' => $freeModifier[$index],
+                    'display_price' => $displayPrice[$index],
+                );
+            }
+        }
+        //print_r($modifiers); die;
+        $menu->modifiers = $modifiers;
+
+        $menu->created_by = Auth::user()->_id;
+        $menu->updated_by = Auth::user()->_id;
+        $menu->status = 'disable';
+        $menu->save();
+        $request->session()->flash('status', 'Menu ' . $menu->name . ' created successfully!');
         return redirect()->action('Menu\MenuController@getIndex');
     }
 
@@ -265,37 +295,37 @@ class MenuController extends Controller {
      */
     public function getDestroy(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_delete', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_delete', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
 
-        $modifier = Menu::find($id);
+        $menu = Menu::find($id);
         
-        $modifier->status = 'disable';
-        $modifier->deleted_at = Carbon::now();
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->save();
+        $menu->status = 'disable';
+        $menu->deleted_at = Carbon::now();
+        $menu->updated_by = Auth::user()->_id;
+        $menu->save();
         $request->session()->flash('status', 'Successfully deleted the Menu!');
         return redirect()->action('Menu\MenuController@getIndex');
     }
 
     public function getUpdateStatus(Request $request, $id) {
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
-        $modifier = Menu::find($id);
-        $modifier->updated_at = Carbon::now();
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->status = $modifier->status == 'enable' ? 'disable' : 'enable';
-        $modifier->save();
-        $request->session()->flash('status', $modifier->name . ' status changed to ' . $modifier->status . ' Successfully!');
+        $menu = Menu::find($id);
+        $menu->updated_at = Carbon::now();
+        $menu->updated_by = Auth::user()->_id;
+        $menu->status = $menu->status == 'enable' ? 'disable' : 'enable';
+        $menu->save();
+        $request->session()->flash('status', $menu->name . ' status changed to ' . $menu->status . ' Successfully!');
         return redirect()->action('Menu\MenuController@getIndex');
     }
 
-    public function getModifierListPaging(Request $request) {
+    public function getMenuListPaging(Request $request) {
 
         $page_no = $request->has('page') ? $request->input('page') : 1;
         $search_value = $request->has('search') ? $request->input('search') : '';
@@ -311,7 +341,7 @@ class MenuController extends Controller {
         }
         $sort_by = $request->has('sort_by') ? $request->input('sort_by') : '_id';
         $sort_dir = $request->has('sort_dir') ? $request->input('sort_dir') : 'desc';
-        $results = Menu::ModifierList($sort_by, $sort_dir, $search, true)->paginate($limit);
+        $results = Menu::MenuList($sort_by, $sort_dir, $search, true)->paginate($limit);
         return $results;
     }
 

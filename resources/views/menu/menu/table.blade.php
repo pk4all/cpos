@@ -7,7 +7,7 @@
 
                     </div>
                     <div class="col-sm-4">
-                        <a href="/modifier/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
+                        <a href="/menu/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
                     </div>
                 </div>
                 <table id="mainTable" class="table table-striped m-b-0" style="cursor: pointer;">
@@ -24,28 +24,29 @@
                         <tr>
                            
                             <td>{{$data->name}}</td>
-                            <td>{{$data->plu_code}}</td>
-                            <td>{{$data->price}}</td>
                             <td>
-                            @if(is_array($data->modifier_choices))
-                                @foreach($data->modifier_choices as $choice)
-                                <span class="badge">{{$choice['name']}}</span>&nbsp;&nbsp;
+                            @if(is_array($data->category))
+                                @foreach($data->category as $category)
+                                <span class="badge">{{$category['name']}}</span>&nbsp;&nbsp;
                                 @endforeach
                             @endif
                             </td>
+                            <td>{{$data->plu_code}}</td>
+                            <td>{{$data->price}}</td>
+                            
                             <td>
                                 <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
                             </td>
                             <td>
-                                <a href="{{ URL::to('modifier/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ URL::to('menu/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
-                                <a class="md md-visibility" href="{{ URL::to('modifier/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
+                                <a class="md md-visibility" href="{{ URL::to('menu/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
                                 @else
-                                <a class="md md-visibility-off" href="{{ URL::to('modifier/update-status/' .$data['_id']) }}" title="click for Enable " data-value="Status"></a>
+                                <a class="md md-visibility-off" href="{{ URL::to('menu/update-status/' .$data['_id']) }}" title="click for Enable " data-value="Status"></a>
                                 @endif
 
 
-                                <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('modifier/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
+                                <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('menu/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
                             </td>
 
                         </tr>

@@ -188,8 +188,6 @@
                                 {!! Form::select('display_price[]', $yesNoOptions, Input::old('display_price'), array('class'=>'form-control')) !!}
                                 </div>
                             </div>
-
-                            
                         </div>
 
 
