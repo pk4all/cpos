@@ -57,10 +57,14 @@ class Modifier extends Eloquent {
         return $data;
     }
     /*  this function return the store list */
-    public static function getModifierDropDownList() {
-
+    public static function getModifierDropDownList($options= array()) {
+        //dd($options['in_id']);
         $column = array('_id', 'name');
-        $result = self::where('status', 'enable')->get($column);
+        $query = self::where('status', 'enable');
+        if(isset($options['in_id'])){
+            $query = $query->whereIn('_id', $options['in_id']);
+        }
+        $result = $query->get($column);
         
         $choice_list = NULL;
         foreach ($result as $item) {

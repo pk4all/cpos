@@ -153,11 +153,11 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/modifier-group/update-status/{id}', 'Menu\ModifierGroupController@getUpdateStatus');
     Route::get('/modifier-group/get-group-modfiers/{id}', 'Menu\ModifierGroupController@getGroupModifiers');
 
-    Route::get('/menu', 'Menu\MenuController@getIndex');
-    Route::get('/menu/create', 'Menu\MenuController@create');
-    Route::post('/menu/store', 'Menu\MenuController@postStore');
-    Route::get('/menu/edit/{id}', 'Menu\MenuController@getEdit');
-    Route::post('/menu/update/{id}', 'Menu\MenuController@postUpdate');
-    Route::get('/menu/destroy/{id}', 'Menu\MenuController@getDestroy');
-    Route::get('/menu/update-status/{id}', 'Menu\MenuController@getUpdateStatus');
+    Route::get('/item', 'Menu\MenuController@getIndex');
+    Route::get('/item/create', 'Menu\MenuController@create');
+    Route::post('/item/store', 'Menu\MenuController@postStore');
+    Route::get('/item/edit/{id}', 'Menu\MenuController@getEdit');
+    Route::post('/item/update/{id}', 'Menu\MenuController@postUpdate');
+    Route::get('/item/destroy/{id}', 'Menu\MenuController@getDestroy');
+    Route::get('/item/update-status/{id}', 'Menu\MenuController@getUpdateStatus');
 });

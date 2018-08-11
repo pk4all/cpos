@@ -15,8 +15,9 @@ class Menu extends Eloquent {
     use SoftDeletes;
 
     protected $table = 'menu';
-    public static $groups=['Protein'=>'Protein','Vegan'=>'Vegan', 'Hot' =>'Hot', 'Gluten-Free' =>'Gluten Free'];
-    public static $choices=['Single' => 'Single', 'Multiple' => 'Multiple'];
+    public static $groups = ['Protein'=>'Protein','Vegan'=>'Vegan', 'Hot' =>'Hot', 'Gluten-Free' =>'Gluten Free'];
+    public static $choices = ['Single' => 'Single', 'Multiple' => 'Multiple'];
+    public static $taxType = ['Inclusive'=>'Inclusive','Exclusive'=>'Exclusive', 'None' => 'None'];
 
 
     public static function getMenuCount() {
@@ -59,10 +60,17 @@ class Menu extends Eloquent {
         return $data;
     }
     /*  this function return the store list */
-    public static function getMenuDropDownList() {
+    public static function getMenuDropDownList($options= array()) {
+        print_r($options); die;
 
         $column = array('_id', 'name');
-        $result = self::where('status', 'enable')->get($column);
+        //$result = self::where('status', 'enable')->get($column);
+
+        $query = self::where('status', 'enable');
+        if(isset($options['in_id'])){
+            $query = $query->where_in('_id', $options['in_id']);
+        }
+        $result = $query->get($column);
         
         $menu_list = NULL;
         foreach ($result as $item) {

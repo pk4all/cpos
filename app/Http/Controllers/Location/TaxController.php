@@ -55,7 +55,8 @@ class TaxController extends Controller {
         $data = [
             'order_type_list' => $orderTypeList, 
             'tax_type' => Tax::$type,
-            'store_list' => $storeList
+            'store_list' => $storeList,
+            'tabList' => $this->tabList,
         ];
         $view = view('location.tax.create', $data);
         return $view;

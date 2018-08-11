@@ -30,7 +30,7 @@ class MenuController extends Controller {
     function __construct() {
         $this->middleware('auth');
         $this->tabList['tab'] = Helper::$menutab;
-        $this->tabList['selected'] = 'menu';
+        $this->tabList['selected'] = 'item';
     }
 
 
@@ -57,6 +57,7 @@ class MenuController extends Controller {
         }
         $groups = Menu::$groups;
         $choices = Menu::$choices;
+        $taxType = Menu::$taxType;
         $categories = Category::getCategoryDropDownList();
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
         $modifiers = $subCategories = [];
@@ -70,7 +71,8 @@ class MenuController extends Controller {
             'subCategories' => $subCategories,
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
             'groups' => $groups,
-            'choices' =>$choices
+            'choices' =>$choices,
+            'taxType' => $taxType
         ]);
         return $view;
     }
@@ -117,7 +119,6 @@ class MenuController extends Controller {
         $menu->groups = $request->input('groups', null);
         $menu->seo_title = $request->input('seo_title', null);
         $menu->short_description = $request->input('short_description', null);
-        $menu->spl_instruction = $request->input('spl_instruction', null);
 
         $categoryId = $request->input('category', null);
         $category = Category::getCategoryByIds(array($categoryId), ['name']);
@@ -128,43 +129,21 @@ class MenuController extends Controller {
         $menu->sub_category = $subCategory;
 
         $includedModifierGroupsId = $request->input('included_modifier_groups', null);
-        $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array($includedModifierGroupsId), ['name']);
+        $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array_values($includedModifierGroupsId), ['name']);
         $menu->included_modifier_groups = $includedModifierGroups;  
 
         $includedModifiersId = $request->input('included_modifiers', null);
-        $includedModifiers = Modifier::getModifierByIds(array($includedModifiersId), ['name']);
+        $includedModifiers = Modifier::getModifierByIds(array_values($includedModifiersId), ['name']);
         $menu->included_modifiers = $includedModifiers;  
 
         $modifierGroupsId = $request->input('modifier_groups', null);
-        $modifierGroups = ModifierGroup::getModifierGroupByIds(array($modifierGroupsId), ['name']);
+        $modifierGroups = ModifierGroup::getModifierGroupByIds(array_values($modifierGroupsId), ['name']);
         $menu->modifier_groups = $modifierGroups;  
-
         
-        $groupName = $request->input('group_name', null);
-        $groupIds = $request->input('group_id', null);
-        $modifier = $request->input('modifier', null);
-        $isRequired = $request->input('is_required', null);
-        $choice = $request->input('choice', null);
-        $minChoice = $request->input('min_choice', null);
-        $maxChoice = $request->input('max_choice', null);
-        $freeModifier = $request->input('free_modifier', null);
-        $displayPrice = $request->input('display_price', null);
+        $modifiersId = $request->input('modifiers', null);
+        $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
+        $menu->modifiers = $modifiers;
 
-        $modifiers = array();
-        foreach($groupIds as $index=>$groupId){
-            if(!empty($modifier[$index])){
-                $modifiers[$groupId] = array(
-                    'group_name' => $groupName[$index],
-                    'modifier' => $modifier[$index],
-                    'is_required' => $isRequired[$index],
-                    'choice' => $choice[$index],
-                    'min_choice' => $minChoice[$index],
-                    'max_choice' => $maxChoice[$index],
-                    'free_modifier' => $freeModifier[$index],
-                    'display_price' => $displayPrice[$index],
-                );
-            }
-        }
         //print_r($modifiers); die;
         $menu->modifiers = $modifiers;
 
@@ -183,43 +162,78 @@ class MenuController extends Controller {
      * @return Response
      */
     public function getEdit(Request $request, $id) {
+        //echo "<pre>";
         /* code for check roles and redirect it on index method of current controller if has not access */
-        if (($return = UserRoles::hasAccess('modifier_update', $request)) !== true) {
+        if (($return = UserRoles::hasAccess('menu_update', $request)) !== true) {
             return redirect()->action($return);
         }
         /* end permission code */
-        $dependentModifierGroups = ModifierGroup::getModifierGroupDropDownList();
-        $dependentModifiers = [];
-        $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
-        unset($modifierChoices[0]);
-        $modifier = Menu::find($id);
+        $groups = Menu::$groups;
+        $choices = Menu::$choices;
+        $taxType = Menu::$taxType;
+        $categories = Category::getCategoryDropDownList();
+        $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        $modifiers = $subCategories = [];
+
+        $menu = Menu::find($id);
+        //print_r($menu);
+
+        $categoryId = $menu->category[0]['_id'];
+        $subCategoriesOfselectcategory = [];
+        if($categoryId){
+            $options = array('parentId' => $categoryId);
+            $subCategoriesOfselectcategory = Category::getCategoryDropDownList($options);
+        }
         
-        $selectGroupsModifiers = [];
-        if(count($modifier->dependent_modifier_group) > 0){
-            $depenedenGroupId = $modifier->dependent_modifier_group[0]['_id'];
-            $selectGroupsDetails = ModifierGroup::getModifiersOfGroup($depenedenGroupId);
-            $modifiers = $selectGroupsDetails[0]['modifiers'];
-            foreach($modifiers as $m){
-                $selectGroupsModifiers[$m['_id']] = $m['name'];
+        $includedModifiers = [];
+        if(count($menu->included_modifier_groups)>0){
+            foreach($menu->included_modifier_groups as $group){
+                $modifierGroupId = $group['_id'];
+                $modifiersOfGroup = ModifierGroup::getModifiersOfGroup($modifierGroupId);
+                $includedModifiers = array_merge($includedModifiers, $modifiersOfGroup[0]['modifiers']);
+            }
+            $includedModifiersId = array_column($includedModifiers, '_id');
+            if(count($includedModifiersId)>0){
+                $options = array('in_id' => $includedModifiersId);
+                $includedModifiers = Modifier::getModifierDropDownList($options);
             }
         }
 
-        
-        if (empty($modifier)) {
+        $groupModifiers = [];
+        if(count($menu->modifier_groups)>0){
+            foreach($menu->modifier_groups as $group){
+                $modifierGroupId = $group['_id'];
+                $modifiersOfGroup = ModifierGroup::getModifiersOfGroup($modifierGroupId);
+                $groupModifiers = array_merge($groupModifiers, $modifiersOfGroup[0]['modifiers']);
+            }
+            $groupModifiersId = array_column($groupModifiers, '_id');
+            if(count($groupModifiersId)>0){
+                $options = array('in_id' => $groupModifiersId);
+                $groupModifiers = Modifier::getModifierDropDownList($options);
+            }
+
+        }
+                
+        if (empty($menu)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
             $request->session()->flash($msg_status, $message);
             return redirect()->action('MenuController@getIndex');
         }
-        //dd($modifier_update);
-        $view = view('menu.modifier.edit', [
+        print_r($menu);
+        //dd(array_column($menu->category,'_id'));
+        $view = view('menu.menu.edit', [
             'tabList' => $this->tabList, 
-            'modifier_data' => $modifier,
-            'dependentModifierGroups' => $dependentModifierGroups,
-            'dependentModifiers' => $dependentModifiers,
-            'modifierChoices' => $modifierChoices,
+            'menu_data' => $menu,
+            'modifierGroups' => $modifierGroups,
+            'includedModifiers' => $includedModifiers,
+            'groupModifiers' => $groupModifiers,
+            'categories' => $categories,
+            'subCategories' => $subCategoriesOfselectcategory,
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
-            'selectGroupsModifiers' => $selectGroupsModifiers
+            'groups' => $groups,
+            'choices' =>$choices,
+            'taxType' => $taxType
         ]);
         return $view;
     }
