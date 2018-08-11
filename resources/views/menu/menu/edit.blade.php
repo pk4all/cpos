@@ -110,7 +110,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifiers[]",$includedModifiers, Input::old("included_modifiers"), array('multiple' => true, 'class'=>'form-control', 'id' => 'includedModifiers')) !!}
+                            {!! Form::select("included_modifiers[]",$includedModifiers, array_column($menu_data->included_modifiers,'_id'), array('multiple' => true, 'class'=>'form-control', 'id' => 'includedModifiers')) !!}
                             </div>
                         </div>
                     </div>
@@ -123,14 +123,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_groups[]",$modifierGroups,Input::old("modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup')) !!}
+                            {!! Form::select("modifier_groups[]",$modifierGroups, array_column($menu_data->modifier_groups,'_id'), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup')) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("modifiers[]",$groupModifiers, Input::old("modifiers"), array('multiple' => true, 'class'=>'form-control', 'id' => 'modifiers')) !!}
+                            {!! Form::select("modifiers[]",$groupModifiers, array_column($menu_data->modifiers,'_id'), array('multiple' => true, 'class'=>'form-control', 'id' => 'modifiers')) !!}
                             </div>
                         </div>
                         
