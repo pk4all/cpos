@@ -57,7 +57,9 @@ class ModifierGroupController extends Controller {
         unset($modifiers[0]);
         $view = view('menu.modifier_group.create', [
             'tabList' => $this->tabList,
-            'modifiers' => $modifiers
+            'modifiers' => $modifiers,
+            'choices' => ModifierGroup::$choices,
+            'yesNoOptions' => Helper::$yesNoOptions
         ]);
         return $view;
     }
@@ -101,6 +103,17 @@ class ModifierGroupController extends Controller {
 
         $modifierGroup->modifiers = $modifiers;
 
+        //*******************************************************
+        $modifierGroup->choice = $request->input('choice', null);
+        $modifierGroup->is_required = $request->input('is_required', null);
+        $modifierGroup->min_choice = $request->input('min_choice', null);
+        $modifierGroup->max_choice = $request->input('max_choice', null);
+        $modifierGroup->no_of_modifiers = $request->input('no_of_modifiers', null);
+        $defaultModifiers = $request->input('default_modifier', null);
+        $defaultModifiers = Modifier::getModifierByIds(array($defaultModifiers), ['name']);
+        $modifierGroup->default_modifier = $defaultModifiers;
+        //*******************************************************
+
         $modifierGroup->created_by = Auth::user()->_id;
         $modifierGroup->updated_by = Auth::user()->_id;
         $modifierGroup->status = 'disable';
@@ -132,11 +145,19 @@ class ModifierGroupController extends Controller {
             $request->session()->flash($msg_status, $message);
             return redirect()->action('ModifierGroupController@getIndex');
         }
-        //dd($modifier_update);
+        $defaultModifiers = [];
+        foreach($modifierGroup->modifiers as $modifier){
+            $defaultModifiers[$modifier['_id']] = $modifier['name'];
+        }
+        //dd($defaultModifiers);
         $view = view('menu.modifier_group.edit', [
             'tabList' => $this->tabList, 
             'modifier_group_data' => $modifierGroup,
-            'modifiers' => $modifiers
+            'modifiers' => $modifiers,
+            'choices' => ModifierGroup::$choices,
+            'yesNoOptions' => Helper::$yesNoOptions,
+            'defaultModifiers' => $defaultModifiers
+
         ]);
         return $view;
     }
@@ -185,6 +206,17 @@ class ModifierGroupController extends Controller {
         $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
 
         $modifierGroup->modifiers = $modifiers;
+
+        //*******************************************************
+        $modifierGroup->choice = $request->input('choice', null);
+        $modifierGroup->is_required = $request->input('is_required', null);
+        $modifierGroup->min_choice = $request->input('min_choice', null);
+        $modifierGroup->max_choice = $request->input('max_choice', null);
+        $modifierGroup->no_of_modifiers = $request->input('no_of_modifiers', null);
+        $defaultModifiers = $request->input('default_modifier', null);
+        $defaultModifiers = Modifier::getModifierByIds(array($defaultModifiers), ['name']);
+        $modifierGroup->default_modifier = $defaultModifiers;
+        //*******************************************************
 
         $modifierGroup->updated_by = Auth::user()->_id;
         $modifierGroup->save();

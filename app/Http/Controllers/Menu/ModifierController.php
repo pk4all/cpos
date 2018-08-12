@@ -190,7 +190,7 @@ class ModifierController extends Controller {
 
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifier',
+            'plu_code' => 'required |unique:modifier,id,' . $id,
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 

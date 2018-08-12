@@ -11,7 +11,7 @@
                 <div class="card-box">
                     <p class="text-muted m-b-30 font-14">
                     </p>
-                    {!! Form::open(array('url' => 'item/update/'.$menu_data->_id,'class'=>'form-horizontal', 'method'=>'post')) !!}
+                    {!! Form::open(array('url' => 'item/update/'.$menu_data->_id,'class'=>'form-horizontal', 'method'=>'post', 'enctype'=>'multipart/form-data')) !!}
 
                     <div class="row">
 
@@ -36,19 +36,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Image</label>
-                            <div class="col-9">
-                                {!! Form::file('image', Input::old('image'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
-                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
-                            </div>
-                        </div>
-
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">PLU Code</label>
                             <div class="col-9">
                             {!! Form::text('plu_code', $menu_data->plu_code, array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Image</label>
+                            <div class="col-9">
+                                <img src="{{env('IMAGE_PATH').$menu_data->image}}" style="width: 50px; height: 50px;">
+                                {!! Form::file('image', Input::old('image'), array('class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
+                            </div>
+                        </div>
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Thumb-Image</label>
+                            <div class="col-9">
+                                <img src="{{env('IMAGE_PATH').$menu_data->thumb_image}}" style="width: 50px; height: 50px;">
+                                {!! Form::file('thumb_image', Input::old('thumb_image'), array('class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>
                         </div>
 
@@ -156,9 +166,113 @@
 </div> <!-- end container -->
 @section('custome_script')
 <script>
-    $(function () {
-        
+$(function(){
+   $(document).on('change', '#menuCategory', function(){
+    if($(this).val() != 0){
+        var option = "";
+        $.ajax({
+            url : '/category/get-sub-category/'+$(this).val(),
+            type : 'get',
+            success : function(data){
+                var subCategories = JSON.parse(data);
+                for(subCategoryId in subCategories){
+                    option += "<option value=" + subCategoryId + ">" + subCategories[subCategoryId] + "</option>";
+                }
+                $('#subCategory').html(option);
+                
+            },
+            error : function(err){
+
+            }
+        });
+    }
+   });
+
+
+   $(document).on('change', '#includedModifierGroup', function(){
+    var selectedGroups = $(this).val();
+    var count = 0;
+    var selectedModifiers = $('#includedModifiers').val();
+    var addedModifiers = [];
+    $('#includedModifiers').html('');
+    selectedGroups.forEach(function(group){
+        if(group != 0){
+                count++;
+                if(count == 1){
+                    var option = "<option value='0' >Select</option>";
+                }else{
+                    var option = "";
+                }
+                $.ajax({
+                    url : '/modifier-group/get-group-modfiers/'+group,
+                    type : 'get',
+                    success : function(data){
+                        var modifiers = JSON.parse(data);
+                        for(modifier of modifiers){
+                            var selected = '';
+                            if(selectedModifiers.indexOf(modifier['_id']) > -1){
+                                selected = 'selected';
+                            }
+                            if(addedModifiers.indexOf(modifier['_id']) < 0){
+                                addedModifiers.push(modifier['_id']);
+                                option += "<option value=" + modifier['_id'] + " "+selected+">" + modifier['name'] + "</option>";
+                            }
+                        }
+                        $('#includedModifiers').append(option);
+                        
+                    },
+                    error : function(err){
+
+                    }
+                });
+            }
     });
+});
+
+   $(document).on('change', '#modifierGroup', function(){
+    var selectedGroups = $(this).val();
+    var selectedModifiers = $('#modifiers').val();
+    var addedModifiers = [];
+    var count = 0;
+    $('#modifiers').html('');
+    selectedGroups.forEach(function(group){       
+        if(group != 0){
+                count++;
+                if(count == 1){
+                    var option = "<option value='0'>Select</option>";
+                }else{
+                    var option = "";
+                }
+                $.ajax({
+                    url : '/modifier-group/get-group-modfiers/'+group,
+                    type : 'get',
+                    success : function(data){
+                        var modifiers = JSON.parse(data);
+                        for(modifier of modifiers){
+                            var selected = '';
+                            if(selectedModifiers.indexOf(modifier['_id']) > -1){
+                                selected = 'selected';
+                            }
+                            if(addedModifiers.indexOf(modifier['_id']) < 0){
+                                addedModifiers.push(modifier['_id']);
+                                option += "<option value=" + modifier['_id'] + " "+selected+">" + modifier['name'] + "</option>";
+                            }
+                        }
+                        $('#modifiers').append(option);
+                        
+                    },
+                    error : function(err){
+
+                    }
+                });
+            }
+    });
+    
+
+
+   });
+
+});   
 </script>
 @yield('custome_script')
 @overwrite
