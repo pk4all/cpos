@@ -37,21 +37,11 @@
                         </div>
 
                         <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Image</label>
-                            <div class="col-9">
-                                {!! Form::file('image', Input::old('image'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
-                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">PLU Code</label>
                             <div class="col-9">
                             {!! Form::text('plu_code', Input::old('plu_code'), array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
                             </div>
                         </div>
-
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Price Title</label>
                             <div class="col-9">
@@ -67,11 +57,37 @@
                         </div>
 
                         <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Image</label>
+                            <div class="col-9">
+                                {!! Form::file('image', Input::old('image'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Thumb-Image</label>
+                            <div class="col-9">
+                                {!! Form::file('thumb_image', Input::old('thumb_image'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Tax</label>
+                            <div class="col-9">
+                            {!! Form::select('tax', $taxType, Input::old('tax'), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">SEO Title</label>
                             <div class="col-9">
                             {!! Form::text('seo_title', Input::old('seo_title'), array('class'=>'form-control','placeholder'=>'Enter SEO Title')) !!}
                             </div>
                         </div>
+                        
+
 
                        
  <div class="form-group row  col-sm-6">
@@ -83,15 +99,10 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Group</label>
                             <div class="col-9">
-                            {!! Form::select("groups[]",$groups,Input::old("groups"), array('multiple' => true, 'class'=>'form-control','id' => 'dependentModifierGroup', 'placeholder' => 'Select')) !!}
+                            {!! Form::select("groups[]",$groups,Input::old("groups"), array('multiple' => true, 'class'=>'form-control', 'placeholder' => 'Select')) !!}
                             </div>
                         </div>
- <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Tax</label>
-                            <div class="col-9">
-                            {!! Form::select('tax', $taxType, Input::old('tax'), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
-                            </div>
-                        </div>
+                        
                        
 
                     </div>
@@ -103,7 +114,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifier_groups[]",$modifierGroups ,Input::old("included_modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'includedModifierGroup')) !!}
+                            {!! Form::select("included_modifier_groups[]",$modifierGroups ,Input::old("included_modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'includedModifierGroup', 'placeholder' => 'Select')) !!}
                             </div>
                         </div>
 
@@ -123,7 +134,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_groups[]",$modifierGroups,Input::old("modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup')) !!}
+                            {!! Form::select("modifier_groups[]",$modifierGroups,Input::old("modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup', 'placeholder' => 'Select')) !!}
                             </div>
                         </div>
 
@@ -165,7 +176,6 @@ $(function(){
             type : 'get',
             success : function(data){
                 var subCategories = JSON.parse(data);
-                console.log(subCategories);
                 for(subCategoryId in subCategories){
                     option += "<option value=" + subCategoryId + ">" + subCategories[subCategoryId] + "</option>";
                 }
@@ -183,25 +193,33 @@ $(function(){
    $(document).on('change', '#includedModifierGroup', function(){
     var selectedGroups = $(this).val();
     var count = 0;
+    var selectedModifiers = $('#includedModifiers').val();
+    var addedModifiers = [];
+    $('#includedModifiers').html('');
     selectedGroups.forEach(function(group){
-        $('#includedModifiers').html('');
-        count++;
         if(group != 0){
+                count++;
                 if(count == 1){
-                    var option = "<option value='0'>Select</option>";
+                    var option = "<option value='0' >Select</option>";
                 }else{
                     var option = "";
                 }
-                var option = "";
                 $.ajax({
                     url : '/modifier-group/get-group-modfiers/'+group,
                     type : 'get',
                     success : function(data){
                         var modifiers = JSON.parse(data);
                         for(modifier of modifiers){
-                            option += "<option value=" + modifier['_id'] + ">" + modifier['name'] + "</option>";
+                            var selected = '';
+                            if(selectedModifiers.indexOf(modifier['_id']) > -1){
+                                selected = 'selected';
+                            }
+                            if(addedModifiers.indexOf(modifier['_id']) < 0){
+                                addedModifiers.push(modifier['_id']);
+                                option += "<option value=" + modifier['_id'] + " "+selected+">" + modifier['name'] + "</option>";
+                            }
                         }
-                        $('#includedModifiers').html(option);
+                        $('#includedModifiers').append(option);
                         
                     },
                     error : function(err){
@@ -214,28 +232,34 @@ $(function(){
 
    $(document).on('change', '#modifierGroup', function(){
     var selectedGroups = $(this).val();
-    $('.newlyAdded').remove();
-    $('#modifierOptions').addClass('hide');
+    var selectedModifiers = $('#modifiers').val();
+    var addedModifiers = [];
     var count = 0;
-    selectedGroups.forEach(function(group){
-        $('#modifiers').html('');
-        count++;
+    $('#modifiers').html('');
+    selectedGroups.forEach(function(group){       
         if(group != 0){
+                count++;
                 if(count == 1){
                     var option = "<option value='0'>Select</option>";
                 }else{
                     var option = "";
                 }
-                var option = "";
                 $.ajax({
                     url : '/modifier-group/get-group-modfiers/'+group,
                     type : 'get',
                     success : function(data){
                         var modifiers = JSON.parse(data);
                         for(modifier of modifiers){
-                            option += "<option value=" + modifier['_id'] + ">" + modifier['name'] + "</option>";
+                            var selected = '';
+                            if(selectedModifiers.indexOf(modifier['_id']) > -1){
+                                selected = 'selected';
+                            }
+                            if(addedModifiers.indexOf(modifier['_id']) < 0){
+                                addedModifiers.push(modifier['_id']);
+                                option += "<option value=" + modifier['_id'] + " "+selected+">" + modifier['name'] + "</option>";
+                            }
                         }
-                        $('#modifiers').html(option);
+                        $('#modifiers').append(option);
                         
                     },
                     error : function(err){

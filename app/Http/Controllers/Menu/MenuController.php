@@ -60,6 +60,7 @@ class MenuController extends Controller {
         $taxType = Menu::$taxType;
         $categories = Category::getCategoryDropDownList();
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        unset($modifierGroups[0]);
         $modifiers = $subCategories = [];
         //print_r($categories); die;
         
@@ -111,6 +112,23 @@ class MenuController extends Controller {
             }  
         }
 
+        $uploaded_file = $request->file('thumb_image');
+        if(!empty($uploaded_file)){
+            $orgname= $uploaded_file->getClientOriginalName();
+            $extension = $uploaded_file->getClientOriginalExtension();
+
+            $name=  str_replace(".".$extension, '', $orgname);
+            $imageFileName = str_slug($name) . '_' . uniqid().'.' . $extension;
+
+            $dest = Helper::imageFileUploadPath('assets/images/',$dir_name='uploaded_image');
+
+            $response = $uploaded_file->move($dest, $imageFileName);
+            
+            if($response){
+                $menu->thumb_image=$imageFileName;  
+            }  
+        }
+
         $menu->name = $request->input('name', null);
         $menu->plu_code = $request->input('plu_code', null);
         $menu->price_title = $request->input('price_title', null);
@@ -133,6 +151,8 @@ class MenuController extends Controller {
         $menu->included_modifier_groups = $includedModifierGroups;  
 
         $includedModifiersId = $request->input('included_modifiers', null);
+        $includedModifiersId = is_array($includedModifiersId)? $includedModifiersId : array(0);
+           
         $includedModifiers = Modifier::getModifierByIds(array_values($includedModifiersId), ['name']);
         $menu->included_modifiers = $includedModifiers;  
 
@@ -141,6 +161,7 @@ class MenuController extends Controller {
         $menu->modifier_groups = $modifierGroups;  
         
         $modifiersId = $request->input('modifiers', null);
+        $modifiersId = is_array($modifiersId)? $modifiersId : array(0);
         $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
         $menu->modifiers = $modifiers;
 
@@ -252,13 +273,14 @@ class MenuController extends Controller {
 
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifier',
+            'plu_code' => 'required |unique:menu,id,' . $id,
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
+
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);
-        $modifier = Menu::find($id);
-        $modifier->name = $request->input('name', null);
+        $menu = Menu::find($id);
+        //dd($rules);
         $uploaded_file = $request->file('image');
         if(!empty($uploaded_file)){
             $orgname= $uploaded_file->getClientOriginalName();
@@ -272,32 +294,69 @@ class MenuController extends Controller {
             $response = $uploaded_file->move($dest, $imageFileName);
             
             if($response){
-                $modifier->image=$imageFileName;  
+                $menu->image=$imageFileName;  
             }  
         }
-        $modifier->plu_code = $request->input('plu_code', null);
-        $modifier->price = $request->input('price', null);
-        $modifier->choice_charge = $request->input('choice_charge', null);
-        $dependentModifierGroup = $dependentModifier = [];
-        $dependentModifierGroupId = $request->input('dependent_modifier_group', null);
-        $dependentModifierGroup = ModifierGroup::getModifierGroupByIds([$dependentModifierGroupId], ['name']);
-        
-        $dependentModifierId = $request->input('dependent_modifier', null);
-        $dependentModifier = Modifier::getModifierByIds([$dependentModifierId], ['name']);
-        
-        $modifierChoicesId = $request->input('modifier_choices', null);
-        $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
 
-        $modifier->dependent_modifier_group = $dependentModifierGroup;
-        $modifier->dependent_modifier = $dependentModifier;
-        $modifier->modifier_choices = $modifierChoices;
-        $modifier->dependent_modifier_count = $request->input('dependent_modifier_count', null);
-        $modifier->no_modifier = $request->input('no_modifier', null);
-        $modifier->price = $request->input('price', null);
+        $uploaded_file = $request->file('thumb_image');
+        if(!empty($uploaded_file)){
+            $orgname= $uploaded_file->getClientOriginalName();
+            $extension = $uploaded_file->getClientOriginalExtension();
 
-        $modifier->updated_by = Auth::user()->_id;
-        $modifier->save();
-        $request->session()->flash('status', 'Menu ' . $modifier->name . ' Updated successfully!');
+            $name=  str_replace(".".$extension, '', $orgname);
+            $imageFileName = str_slug($name) . '_' . uniqid().'.' . $extension;
+
+            $dest = Helper::imageFileUploadPath('assets/images/',$dir_name='uploaded_image');
+
+            $response = $uploaded_file->move($dest, $imageFileName);
+            
+            if($response){
+                $menu->thumb_image=$imageFileName;  
+            }  
+        }
+
+        $menu->name = $request->input('name', null);
+        $menu->plu_code = $request->input('plu_code', null);
+        $menu->price_title = $request->input('price_title', null);
+        $menu->price = $request->input('price', null);
+        $menu->tax = $request->input('tax', null);
+        $menu->groups = $request->input('groups', null);
+        $menu->seo_title = $request->input('seo_title', null);
+        $menu->short_description = $request->input('short_description', null);
+
+        $categoryId = $request->input('category', null);
+        $category = Category::getCategoryByIds(array($categoryId), ['name']);
+        $menu->category = $category;
+
+        $subCategoryId = $request->input('sub_category', null);
+        $subCategory = Category::getCategoryByIds(array($subCategoryId), ['name']);
+        $menu->sub_category = $subCategory;
+
+        $includedModifierGroupsId = $request->input('included_modifier_groups', null);
+        $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array_values($includedModifierGroupsId), ['name']);
+        $menu->included_modifier_groups = $includedModifierGroups;  
+
+        $includedModifiersId = $request->input('included_modifiers', null);
+        $includedModifiersId = is_array($includedModifiersId)? $includedModifiersId : array(0);
+           
+        $includedModifiers = Modifier::getModifierByIds(array_values($includedModifiersId), ['name']);
+        $menu->included_modifiers = $includedModifiers;  
+
+        $modifierGroupsId = $request->input('modifier_groups', null);
+        $modifierGroups = ModifierGroup::getModifierGroupByIds(array_values($modifierGroupsId), ['name']);
+        $menu->modifier_groups = $modifierGroups;  
+        
+        $modifiersId = $request->input('modifiers', null);
+        $modifiersId = is_array($modifiersId)? $modifiersId : array(0);
+        $modifiers = Modifier::getModifierByIds(array_values($modifiersId), ['name']);
+        $menu->modifiers = $modifiers;
+
+        //print_r($modifiers); die;
+        $menu->modifiers = $modifiers;
+
+        $menu->updated_by = Auth::user()->_id;
+        $menu->save();
+        $request->session()->flash('status', 'Menu ' . $menu->name . ' Updated successfully!');
         return redirect()->action('Menu\MenuController@getIndex');
     }
 
