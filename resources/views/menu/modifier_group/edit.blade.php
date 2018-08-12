@@ -32,7 +32,53 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Add Modifiers</label>
                             <div class="col-9">
-                            {!! Form::select('modifiers[]', $modifiers, array_column($modifier_group_data->modifiers,'_id'), array('multiple' => true,'class'=>'form-control')) !!}
+                            {!! Form::select('modifiers[]', $modifiers, array_column($modifier_group_data->modifiers,'_id'), array('multiple' => true,'class'=>'form-control', 'id' => 'modifier')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Choice</label>
+                            <div class="col-9">
+                                {!! Form::select('choice', $choices, $modifier_group_data->choice, array('class'=>'form-control','placeholder'=> 'Select Choice')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Is required</label>
+                            <div class="col-9">
+                                {!! Form::select('is_required', $yesNoOptions, $modifier_group_data->is_required, array('class'=>'form-control')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Min Choice</label>
+                            <div class="col-9">
+                                {!! Form::number('min_choice', $modifier_group_data->min_choice, array('class'=>'form-control','placeholder'=> 'Enter Min Choice')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Max Choice</label>
+                            <div class="col-9">
+                                {!! Form::number('max_choice', $modifier_group_data->max_choice, array('class'=>'form-control','placeholder'=> 'Enter Max Choice')) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">No. Of Modifiers</label>
+                            <div class="col-9">
+                                {!! Form::number('no_of_modifiers', $modifier_group_data->no_of_modifiers, array('class'=>'form-control','placeholder'=> 'Enter No Of Modifiers')) !!}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Default Modifiers</label>
+                            <div class="col-9">
+                                {!! Form::select('default_modifier', $defaultModifiers, array_column($modifier_group_data->default_modifier,'_id'), array('class'=>'form-control','placeholder'=> 'Select', 'id'=>'defaultModifier')) !!}
                             </div>
                         </div>
                         
@@ -61,6 +107,18 @@
 @section('custome_script')
 <script>
 $(function(){
+   $(document).on('change', '#modifier', function(){
+    var selectedModifiers = $('#defaultModifier').val();
+    console.log(selectedModifiers);
+    $('#defaultModifier').html("<option value='0'>Select</option>");
+    $(this).find('option:selected').each(function(){
+        var selectedOption = $(this).clone();
+        if(selectedOption.attr('value') != selectedModifiers){
+            selectedOption.prop('selected', false);
+        }
+        $('#defaultModifier').append(selectedOption);
+    });
+   });
 });
 </script>
 @yield('custome_script')

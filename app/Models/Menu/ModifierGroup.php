@@ -15,7 +15,7 @@ class ModifierGroup extends Eloquent {
     use SoftDeletes;
 
     protected $table = 'modifier_groups';
-    public static $type=['Card'=>'Card','Cash'=>'Cash'];
+    public static $choices=['Single'=>'Single','Multiple'=>'Multiple'];
     
     public static function getModifierGroupCount() {
         return self::where('status', 'enable')->count();
