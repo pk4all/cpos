@@ -418,4 +418,52 @@ class MenuController extends Controller {
         return $results;
     }
 
+    public function getSortOrder(Request $request, $id) {
+        //echo "<pre>";
+        /* code for check roles and redirect it on index method of current controller if has not access */
+        if (($return = UserRoles::hasAccess('menu_update', $request)) !== true) {
+            return redirect()->action($return);
+        }
+
+        $menu = Menu::find($id);
+        if (empty($menu)) {
+            $msg_status = 'error';
+            $message = "Invalid Request URL";
+            $request->session()->flash($msg_status, $message);
+            return redirect()->action('MenuController@getIndex');
+        }
+        $view = view('menu.menu.sort', [
+            'tabList' => $this->tabList, 
+            'data' => $menu
+        ]);
+        return $view;
+    }
+    
+    
+    public function postSortOrder(Request $request, $id) {
+        if (($return = UserRoles::hasAccess('menu_update', $request)) !== true) {
+            return redirect()->action($return);
+        }
+        $menu = Menu::find($id);
+        $groupsInNewOrder = array();
+        $groupIds = $request->input('newOrder');
+        if(is_array($groupIds)){
+            foreach($groupIds as $groupId){
+                foreach($menu->included_modifier_groups as $modfierGroup){
+                    if($groupId == $modfierGroup['_id']){
+                        array_push($groupsInNewOrder, $modfierGroup);
+                    }
+                }
+            }
+        }
+        $menu->included_modifier_groups = $groupsInNewOrder;
+        $menu->updated_by = Auth::user()->_id;
+        $menu->save();
+        echo json_encode(array(
+            'status' => 'success',
+            'message' => 'Sorting order has been update.'
+        ));
+    }
+
+
 }
