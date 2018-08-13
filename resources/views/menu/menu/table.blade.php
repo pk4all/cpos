@@ -47,6 +47,8 @@
 
 
                                 <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('item/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
+                                
+                                <a class="md md-visibility sort-now" data-item-id="{{$data->_id}}" href="#" data-toggle="modal" ></a>
                             </td>
 
                         </tr>
@@ -64,5 +66,23 @@
                 <input style="position: absolute; display: none;"></div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="sortModalCenter" tabindex="-1" role="dialog" aria-labelledby="sortModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sort Modifier Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="groups">
+        ...
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
 </div>
 {!! $tbl_data->render()!!}

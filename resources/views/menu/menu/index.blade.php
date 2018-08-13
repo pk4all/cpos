@@ -14,4 +14,29 @@
         @include('layouts.deleteconfirm')
     </div> <!-- end Panel -->
 </div> <!-- end container -->
+@section('custome_script')
+<script src="/assets/js/jquery-ui.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.js"></script>
+<script>
+$(function(){
+	$(document).on('click', '.sort-now', function(){
+		var itemId = $(this).attr('data-item-id');
+		$.ajax({
+			url : '/item/sort/'+itemId,
+			type :'GET',
+			success : function(data){
+				$('#groups').html(data);
+			},
+			error : function(err){
+
+			}
+
+		});
+		$('#sortModalCenter').modal('show');
+	})
+});
+</script>
+@yield('custome_script')
+@overwrite
 @stop
+
