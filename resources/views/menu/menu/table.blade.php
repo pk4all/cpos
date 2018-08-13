@@ -48,7 +48,8 @@
 
                                 <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('item/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
                                 
-                                <a class="md md-visibility sort-now" data-item-id="{{$data->_id}}" href="#" data-toggle="modal" ></a>
+                                <a class="on-default sort-now" data-item-id="{{$data->_id}}" href="#" data-toggle="modal" ><i class="fa fa-sort" aria-hidden="true"></i>
+</a>
                             </td>
 
                         </tr>
