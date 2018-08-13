@@ -334,11 +334,28 @@ class MenuController extends Controller {
 
         $includedModifierGroupsId = $request->input('included_modifier_groups', null);
         $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array_values($includedModifierGroupsId), ['name']);
-        $menu->included_modifier_groups = $includedModifierGroups;  
+        
+        //LOGIC TO MAINTAIN THE SORT ORDER OF OLD GOUPS
+        $oldModifiers = $menu->included_modifier_groups;
+        $oldModifiersOrder = array_column($oldModifiers, '_id');  
+        $orderedExistingGroups = [];
+        foreach($oldModifiersOrder as $groupId){
+            foreach($includedModifierGroups as $index => $includedGroup){
+                if($groupId == $includedGroup['_id']){
+                    array_push($orderedExistingGroups, $includedGroup);
+                    unset($includedModifierGroups[$index]);
+                }
+
+            }
+        }
+        $orderedGroups = array_merge($orderedExistingGroups, $includedModifierGroups);
+        //LOGIC TO MAINTAIN THE SORT ORDER OF OLD GOUPS
+
+        $menu->included_modifier_groups = $orderedGroups;  
 
         $includedModifiersId = $request->input('included_modifiers', null);
         $includedModifiersId = is_array($includedModifiersId)? $includedModifiersId : array(0);
-           
+          
         $includedModifiers = Modifier::getModifierByIds(array_values($includedModifiersId), ['name']);
         $menu->included_modifiers = $includedModifiers;  
 
