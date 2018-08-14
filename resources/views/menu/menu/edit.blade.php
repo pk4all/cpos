@@ -56,7 +56,9 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Thumb-Image</label>
                             <div class="col-9">
+                                @if($menu_data->thumb_image)
                                 <img src="{{env('IMAGE_PATH').$menu_data->thumb_image}}" style="width: 50px; height: 50px;">
+                                @endif
                                 {!! Form::file('thumb_image', Input::old('thumb_image'), array('class'=>'form-control','id'=>'fileHelp')) !!}
                                 <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>

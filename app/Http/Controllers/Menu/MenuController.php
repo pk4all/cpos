@@ -478,7 +478,7 @@ class MenuController extends Controller {
         $menu->save();
         echo json_encode(array(
             'status' => 'success',
-            'message' => 'Sorting order has been update.'
+            'message' => 'Sorting order has been updated.'
         ));
     }
 

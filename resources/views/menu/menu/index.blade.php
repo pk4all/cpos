@@ -15,8 +15,8 @@
     </div> <!-- end Panel -->
 </div> <!-- end container -->
 @section('custome_script')
-<script src="/assets/js/jquery-ui.js"></script>
-<script src="/assets/js/jquery.ui.touch-punch.js"></script>
+<script src="{{ asset('/assets/js/jquery-ui.js')}}"></script>
+<script src="{{ asset('/assets/js/jquery.ui.touch-punch.js')}}"></script>
 <script>
 $(function(){
 	$(document).on('click', '.sort-now', function(){
