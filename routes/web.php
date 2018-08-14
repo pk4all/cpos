@@ -162,4 +162,6 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::get('/item/update-status/{id}', 'Menu\MenuController@getUpdateStatus');
     Route::get('/item/sort/{id}', 'Menu\MenuController@getSortOrder');
     Route::post('/item/save-sort-order/{id}', 'Menu\MenuController@postSortOrder');
+	
+	Route::get('/pos/customer', 'Pos\CustomerController@getIndex');
 });

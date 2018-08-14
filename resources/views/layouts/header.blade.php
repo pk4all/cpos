@@ -111,6 +111,9 @@
 
                         </ul>-->
                     </li>
+					<li class="has-submenu">
+                        <a href="/pos/customer"><i class="md  md-settings"></i>Pos</a>
+					</li>
                     @endif
                 </ul>
 

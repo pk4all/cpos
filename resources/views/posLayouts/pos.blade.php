@@ -8,23 +8,27 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico')}}">
-       
-        
+		
         <!-- App css -->
-        <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+       <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css" />
+       <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+       <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" type="text/css" />
+		
 		
         <script src="{{ asset('assets/js/modernizr.min.js')}}"></script>
         <script src="{{ asset('assets/js/knockout.js')}}"></script>
+		
         <script src="{{ asset('assets/js/jquery.min.js')}}"></script>
        
         @stack('head')
     </head>
 
-    <body>
+    <body class="graybg fullheight">
         @if(Auth::user())
-        @include('layouts.pos_header')
+        @include('posLayouts.pos_header')
         @endif
         @yield('body')
-        @include('layouts.pos_footer')
+        @include('posLayouts.pos_footer')
     </body>
 </html>
