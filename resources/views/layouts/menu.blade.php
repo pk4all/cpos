@@ -1,9 +1,7 @@
 <div class="col-sm-12">
     <div class="starterpage_tabs">
-        <ul class="nav nav-tabs navtab-bg nav-justified">
-            <li class="nav-item">
-                <a href="history.back()" class="nav-link back-link"><i class="fa fa-arrow-left"></i>Back</a>
-            </li>
+        <a href="javascript:history.back()" class="back-link"><i class="fa fa-arrow-left"></i>Back</a>
+        <ul class="nav nav-tabs navtab-bg">
             @if(isset($tabList) && count($tabList)>0)
             @foreach($tabList['tab'] as $tab)
             <li class="nav-item">
