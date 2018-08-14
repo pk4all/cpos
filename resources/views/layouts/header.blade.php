@@ -56,7 +56,7 @@
                         </ul>
                     </li>
                     @else
-                    <li class="has-submenu">
+                    <li class="has-submenu {{Request::segment(1)==null?'':'active'}}">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
                     </li>
                     @endif
