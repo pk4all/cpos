@@ -26,6 +26,7 @@ File: Icons
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  border-radius: 5px;
 }
 
 /* makes the font 33% larger relative to the icon container */

@@ -56,60 +56,8 @@
                         </ul>
                     </li>
                     @else
-                    <li class="has-submenu">
+                    <li class="has-submenu {{Request::segment(1)==null?'':'active'}}">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
-                        <!--<ul class="submenu">
-                            <li>
-                                <a href="/stores">Stores</a>
-                            </li>
-                            <li>
-                                <a href="/stores/create">Add New Stores</a>
-                            </li>
-                            <li>
-                                <a href="/brands">Brands</a>
-                            </li>
-                            <li>
-                                <a href="/brands/create">Add New Brands</a>
-                            </li>
-                             <li>
-                                <a href="/surcharge">Surcharge</a>
-                            </li>
-                            <li>
-                                <a href="/surcharge/create">Add New Surcharge</a>
-                            </li>
-                             <li>
-                                <a href="/tax">Taxes</a>
-                            </li>
-                            <li>
-                                <a href="/tax/create">Add New taxes</a>
-                            </li>
- <li>
-                                <a href="/payment">Payment Type</a>
-                            </li>
-                            <li>
-                                <a href="/payment/create">Add New Payment</a>
-                            </li>
-                            
-							<li>
-                                <a href="/order-type">Order Type</a>
-                            </li> 
-							<li>
-                                <a href="/discount">Discount</a>
-                            </li>
-							<li>
-                               <a href="/delivery-area">Delivery Area</a>
-                            </li>
-
-                            <li>
-                                <a href="/category">Categories</a>
-                            </li>
-                            <li>
-                               <a href="/category/create">Add Category</a>
-                            </li>
-
-
-
-                        </ul>-->
                     </li>
                     @endif
                 </ul>
