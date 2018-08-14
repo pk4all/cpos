@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
-            @include('layouts.messages',['title'=>'setup','path'=>['#'=>'Setup']])
+            @include('layouts.messages',['title'=>'','path'=>[]])
 
         </div> 
         <!-- end page title end breadcrumb -->
