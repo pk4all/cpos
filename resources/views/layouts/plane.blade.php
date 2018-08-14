@@ -49,9 +49,6 @@
 
         <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script> 
         <script src="{{ asset('assets/plugins/custombox/js/custombox.min.js')}}"></script>
-        <script src="{{ asset('assets/js/jquery.core.js')}}"></script>
-        <script src="{{ asset('assets/js/jquery.app.js')}}"></script>
-        <script src="{{ asset('assets/js/common.js')}}"></script>
         <script type="text/javascript">
 
         </script>

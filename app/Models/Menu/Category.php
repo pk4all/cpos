@@ -82,6 +82,5 @@ class Category extends Eloquent {
         $def_sel = $helper->getDefaultSel();
         $categoryDropdown = (!empty($category_list)) ? array_merge($def_sel, $category_list) : $def_sel;
         return $categoryDropdown;
-    }
-    
+    }  
 }

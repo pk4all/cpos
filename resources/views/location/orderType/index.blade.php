@@ -161,106 +161,106 @@
     }
 </style>
 <script>
-                                            var siteurl = '<?php echo url('/'); ?>';
-                                            var crsf = '{{csrf_token()}}';
-                                            function add(){
-                                            $('#add_popup .modal-title').html('Add Delivery Store');
-                                            $('#add_popup').modal('show');
-                                            }
-                                            var $btn;
-                                            function savedata(){
-                                            var form = $('#add')[0];
-                                            var formData = new FormData(form);
-                                            $.ajax({
-                                            method:'POST',
-                                                    url:siteurl + '/order-type/save',
-                                                    dataType: "JSON",
-                                                    data: formData,
-                                                    processData: false,
-                                                    contentType: false,
-                                                    cache: false,
-                                                    beforeSend:function(){
-                                                    $btn = $('#save').button('loading');
-                                                    $('.error-message').remove();
-                                                    },
-                                                    success:function(res){
-                                                    $btn.button('reset');
-                                                    if (res.status == 'success'){
-                                                    $('#save').html(res.msg);
-                                                    window.location.href = siteurl + '/order-type';
-                                                    }
-                                                    if (res.status == 'error'){
-                                                    $('#msg').html('<span class="error-message">' + res.msg + '</span>');
-                                                    }
-                                                    }
-                                            });
-                                            }
+var siteurl = '<?php echo url('/'); ?>';
+var crsf = '{{csrf_token()}}';
+function add(){
+$('#add_popup .modal-title').html('Add Delivery Store');
+$('#add_popup').modal('show');
+}
+var $btn;
+function savedata(){
+var form = $('#add')[0];
+var formData = new FormData(form);
+$.ajax({
+method:'POST',
+		url:siteurl + '/order-type/save',
+		dataType: "JSON",
+		data: formData,
+		processData: false,
+		contentType: false,
+		cache: false,
+		beforeSend:function(){
+		$btn = $('#save').button('loading');
+		$('.error-message').remove();
+		},
+		success:function(res){
+		$btn.button('reset');
+		if (res.status == 'success'){
+		$('#save').html(res.msg);
+		window.location.href = siteurl + '/order-type';
+		}
+		if (res.status == 'error'){
+		$('#msg').html('<span class="error-message">' + res.msg + '</span>');
+		}
+		}
+});
+}
 
-                                            function edit(id){
-                                            //$('#loader').removeClass('hide');
-                                            $('#edit_popup').modal('show');
-                                            $.get(siteurl + '/order-type/edit/' + id, function(data){
-                                            $('#loader').addClass('hide');
-                                            $('#edit_popup .modal-body').html(data);
-                                            $('#edit_popup').modal('show');
-                                            });
-                                            }
-                                            function saveEditdata(){
-                                            var form = $('#edit')[0];
-                                            var formData = new FormData(form);
-                                            $.ajax({
-                                            method:'POST',
-                                                    url:siteurl + '/order-type/save-edit',
-                                                    dataType: "JSON",
-                                                    data: formData,
-                                                    processData: false,
-                                                    contentType: false,
-                                                    cache: false,
-                                                    beforeSend:function(){
-                                                    $btn = $('#saveEdit').button('loading');
-                                                    $('.error-message').remove();
-                                                    },
-                                                    success:function(res){
-                                                    $btn.button('reset');
-                                                    if (res.status == 'success'){
-                                                    $('#saveEdit').html(res.msg);
-                                                    window.location.href = siteurl + '/order-type';
-                                                    }
-                                                    if (res.status == 'error'){
-                                                    $('#edit-msg').html('<span class="error-message">' + res.msg + '</span>');
-                                                    }
-                                                    }
-                                            });
-                                            }
+function edit(id){
+//$('#loader').removeClass('hide');
+$('#edit_popup').modal('show');
+$.get(siteurl + '/order-type/edit/' + id, function(data){
+$('#loader').addClass('hide');
+$('#edit_popup .modal-body').html(data);
+$('#edit_popup').modal('show');
+});
+}
+function saveEditdata(){
+var form = $('#edit')[0];
+var formData = new FormData(form);
+$.ajax({
+method:'POST',
+		url:siteurl + '/order-type/save-edit',
+		dataType: "JSON",
+		data: formData,
+		processData: false,
+		contentType: false,
+		cache: false,
+		beforeSend:function(){
+		$btn = $('#saveEdit').button('loading');
+		$('.error-message').remove();
+		},
+		success:function(res){
+		$btn.button('reset');
+		if (res.status == 'success'){
+		$('#saveEdit').html(res.msg);
+		window.location.href = siteurl + '/order-type';
+		}
+		if (res.status == 'error'){
+		$('#edit-msg').html('<span class="error-message">' + res.msg + '</span>');
+		}
+		}
+});
+}
 
-                                            function status(obj){
-                                            if (obj.checked == true){
-                                            var status = 'enable';
-                                            } else{
-                                            var status = 'disable';
-                                            }
-                                            $.ajax({
-                                            method:'POST',
-                                                    url:siteurl + '/order-type/change-status',
-                                                    dataType: "JSON",
-                                                    data: {id:$(obj).data('id'), status:status, _token:'{{ csrf_token()}}'},
-                                                    beforeSend:function(){
-                                                    //$('#loader').removeClass('hide');
-                                                    },
-                                                    success:function(res){
-                                                    //$('#loader').addClass('hide');
-                                                    }
-                                            });
-                                            }
+function status(obj){
+if (obj.checked == true){
+var status = 'enable';
+} else{
+var status = 'disable';
+}
+$.ajax({
+method:'POST',
+		url:siteurl + '/order-type/change-status',
+		dataType: "JSON",
+		data: {id:$(obj).data('id'), status:status, _token:'{{ csrf_token()}}'},
+		beforeSend:function(){
+		//$('#loader').removeClass('hide');
+		},
+		success:function(res){
+		//$('#loader').addClass('hide');
+		}
+});
+}
 
-                                            function checkAll(obj){
-                                            if ($(obj).prop("checked") == true){
-                                            $('input[name="store_id[]"]').prop('checked', true);
-                                            }
-                                            else if ($(obj).prop("checked") == false){
-                                            $('input[name="store_id[]"]').prop('checked', false);
-                                            }
-                                            }
+function checkAll(obj){
+if ($(obj).prop("checked") == true){
+$('input[name="store_id[]"]').prop('checked', true);
+}
+else if ($(obj).prop("checked") == false){
+$('input[name="store_id[]"]').prop('checked', false);
+}
+}
 </script>
 <!-- Modal -->
 @stop
