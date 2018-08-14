@@ -17,6 +17,7 @@
        	<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" />
         <link href="{{ asset("assets/css/icons.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/style.css")}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset("assets/css/custom.css")}}" rel="stylesheet" type="text/css" />
         <script src="{{ asset("assets/js/modernizr.min.js")}}"></script>
         <script src="{{ asset('assets/js/knockout.js')}}"></script>
         <script src="{{ asset('assets/js/jquery.min.js')}}"></script>

@@ -30,3 +30,28 @@ $('#selecctall').click(function (event) {
         });
     }
 });
+
+$(function(){
+    $('.catname-lists ul li').click(function(){
+     var current = $(this).index();
+     $('.catname-lists ul li').removeClass('active');
+     $('.catname-lists ul li').eq(current).addClass('active');
+
+     $('.cat_description .tab-content .boxes').removeClass('active');
+     $('.cat_description .tab-content .boxes').eq(current).addClass('active');
+   });
+
+    
+    $(".cat_description .tab-content .boxes").mCustomScrollbar({
+      axis:"x" ,
+      scrollButtons:{
+        enable:true
+      }
+    });
+    
+    $(".categories_list ul").mCustomScrollbar({
+      scrollButtons:{
+        enable:true
+      }
+    });
+});
