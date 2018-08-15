@@ -237,3 +237,6 @@ body.graybg{ background: rgb(211, 223, 228)}
 .cat-pagination a{ flex: 1 0 0; background: #b7edd3; color: #fff; font-size: 30px; line-height: 30px;  margin: 0 2px; text-align: center; padding: 5px 0;}
 .cat-pagination a:first-child{ margin-left: 0;}
 .cat-pagination a:last-child{ margin-right: 0;}
+.hide {
+    display: none !important;
+}

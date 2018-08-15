@@ -18,5 +18,9 @@ class Customers extends Eloquent {
     public static function getCustomersByIds($ids) {
         return self::whereIn('_id', $ids)->where('status', 'enable')->get()->toArray();
     }
+    
+    public static function getCustomerByPhone($phone) {
+        return self::where('phone', $phone)->where('status', 'enable')->first();
+    }
 
 }
