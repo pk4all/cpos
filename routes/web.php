@@ -164,5 +164,6 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/item/save-sort-order/{id}', 'Menu\MenuController@postSortOrder');
 
 
-    Route::get('/pos', 'Pos\PosController@getIndex');
+    Route::get('/pos/itemlist', 'Pos\PosController@getIndex');
+     Route::get('/pos', 'Pos\CustomerController@getIndex');
 });

@@ -2,7 +2,7 @@
 .wrapper.no_navigation{
     padding-top: 64px;
 }
-.starterpage_tabs .back-link{ background: #62a3ff; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
+.starterpage_tabs .back-link{ background: #54565b; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: normal; width: 100px; text-align: center; float: left;}
 .starterpage_tabs .back-link i{ margin-right: 10px;}
 .starterpage_tabs .nav.nav-tabs > li > a{ line-height: 42px;}
  .scrtabs-tab-container * {
@@ -56,11 +56,11 @@
 
   @font-face {
     font-family: 'Glyphicons Halflings';
-
+  
     src: url('../fonts/glyphicons-halflings-regular.eot');
     src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
   }
-
+  
   .glyphicon {
     position: relative;
     top: 1px;
@@ -92,7 +92,7 @@ body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; h
 .loginpage .container-fluid .row{ display: flex; height: 100%;}
 
 .loginpage .banner_info{ position: relative; z-index: 1; padding: 0 7%; margin-top: 35%; color: #fff; width: 80%;}
-.loginpage .banner_info h3{ margin: 20px 0; font-weight: 600; color: #fff; font-size: 25px; line-height: 30px;}
+.loginpage .banner_info h3{ margin: 20px 0; font-weight: 600; color: #fff; font-size: 25px; line-height: 30px;} 
 .loginpage .banner_info p{ font-size: 16px; line-height: 20px;}
 
 .login_footer{ color: #fff; border-top: 2px solid rgba(255,255,255,.2); margin:0 7%; width: 80%; position: absolute; bottom: 10px; left: 2%; font-size: 12px; z-index: 1; padding: 10px 0 0;}
@@ -193,25 +193,17 @@ body.graybg{ background: rgb(211, 223, 228)}
 
 .pickup-page .categories_list{ width: 9%; float: left; position: relative; background: #fff; margin: 0 10px;  box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; min-height: 20px;}
 .pickup-page .categories_list ul{ list-style: none; margin: 0; padding: 0; height: 100%; max-height: 100%; overflow-y: auto; overflow-x: hidden; border-radius: 5px;}
-.pickup-page .categories_list ul li{ text-align: center; margin: 15px 0; border: 3px solid rgba(0,0,0,0);}
-.pickup-page .categories_list ul li.active{ border: 3px solid #333;}
-.pickup-page .categories_list ul li a{ display: inline-block; position: relative; z-index: 9;}
-.pickup-page .categories_list ul li a img{max-width: 100%;}
+.pickup-page .categories_list ul li{ text-align: center; margin: 15px 0;}
 .pickup-page .categories_list .mCSB_inside > .mCSB_container{ margin-right: 0;}
 .pickup-page .categories_list .mCSB_draggerContainer{ opacity: 0;}
 .pickup-page .categories_list .mCSB_container{ padding: 50px 0;}
 .pickup-page .categories_list .mCSB_scrollTools{ width: 100%; opacity: 1; display: block !important;}
-.pickup-page .categories_list .mCSB_buttonUp{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius: 5px 5px 0 0;}
+.pickup-page .categories_list .mCSB_buttonUp{ background: #10c469; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius: 5px 5px 0 0;}
 .pickup-page .categories_list .mCSB_buttonUp:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/top-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
-.pickup-page .categories_list .mCSB_buttonDown{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius:0 0 5px 5px;}
+.pickup-page .categories_list .mCSB_buttonDown{ background: #10c469; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius:0 0 5px 5px;}
 .pickup-page .categories_list .mCSB_buttonDown:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/bottom-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
 
-.pickup-page .categories_list .mCS_no_scrollbar_y + .mCSB_scrollTools .mCSB_buttonUp{ opacity: .5; pointer-events: none;}
-.pickup-page .categories_list .mCS_no_scrollbar_y + .mCSB_scrollTools .mCSB_buttonDown{ opacity: .5; pointer-events: none;}
 .pickup-page .cat_description{ float: left; width: calc(60% - 20px);  background: #fff; box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; min-height: 20px;}
-
-.brandtab_content{ display: none; height: 100%;}
-.brandtab_content.active{ display: block;}
 
 .catname-lists{ background: #52575b; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;}
 .catname-lists ul{ margin: 0; padding: 0; list-style: none;}
@@ -221,13 +213,10 @@ body.graybg{ background: rgb(211, 223, 228)}
 .catname-lists .nav.nav-tabs > li.gradient2 > a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
 .catname-lists .nav.nav-tabs > li.gradient3 > a{ background: linear-gradient(blue, purple); color: #fff!important;}
 
-.catname-lists .scrtabs-tabs-fixed-container{ height: 70px; min-width: calc(100% - 80px);}
-.catname-lists .scrtabs-tabs-fixed-container .scrtabs-tabs-movable-container{ min-width: 100%;}
-.catname-lists .scrtabs-tab-scroll-arrow{ display: block; height: 70px; padding-top: 23px; background: #10c469; color: #fff; border: none; width: 40px;}
-.catname-lists .scrtabs-disable.scrtabs-tab-scroll-arrow{ opacity: .5;}
-.catname-lists .scrtabs-disable.scrtabs-tab-scroll-arrow + .scrtabs-tabs-fixed-container{ max-width: calc(100% - 80px);}
-.cat_description .tab-content{ padding: 10px; display: inline-block; vertical-align: top; width: 100%; box-shadow: none; height: calc(100% - 90px); overflow-y: auto;}
-.cat_description .tab-content .boxes{ display: none; width: 100%; overflow-y: auto; height: 100%;}
+.catname-lists .scrtabs-tabs-fixed-container{ height: 70px;}
+.catname-lists .scrtabs-tab-scroll-arrow{ height: 70px; padding-top: 23px; background: #10c469; color: #fff; border: none; width: 40px;}
+.cat_description .tab-content{ padding: 10px; display: inline-block; vertical-align: top; width: 100%; box-shadow: none; height: calc(100% - 90px);}
+.cat_description .tab-content .boxes{ display: none; width: 100%; overflow-x: auto; overflow-y: hidden; white-space: nowrap; height: 100%;}
 .cat_description .tab-content .boxes .mCSB_container{ height: 100%;}
 .cat_description .tab-content .boxes .mCSB_scrollTools{ opacity: 1;}
 .cat_description .tab-content .boxes .mCSB_buttonLeft{ background: #b7edd3; color: #fff; opacity: 1; width: calc(50% - 2px); left: 2px; top: -20px; height: 35px; line-height: 35px;}
@@ -239,7 +228,7 @@ body.graybg{ background: rgb(211, 223, 228)}
 
 .cat_description .tab-content .boxes.active{ display: block}
 .cat_description .tab-content .boxes .common{ float: left; width: 16.66%; max-width: 128px; padding: 2px; display: table-cell; height: 100px;}
-.cat_description .tab-content .boxes .common a{ background: #d3dde6; height: 100%; padding: 5px; display: flex; text-align: center; justify-content: center; color: #222; display: flex; align-items: center}
+.cat_description .tab-content .boxes .common a{ background: #d3dde6; height: 100%; display: flex; text-align: center; justify-content: center; color: #222; display: flex; align-items: center}
 .cat_description .tab-content .boxes.gradient1 .common a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
 .cat_description .tab-content .boxes.gradient2 .common a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
 .cat_description .tab-content .boxes.gradient3 .common a{ background: linear-gradient(blue, purple); color: #fff!important;}
@@ -248,18 +237,3 @@ body.graybg{ background: rgb(211, 223, 228)}
 .cat-pagination a{ flex: 1 0 0; background: #b7edd3; color: #fff; font-size: 30px; line-height: 30px;  margin: 0 2px; text-align: center; padding: 5px 0;}
 .cat-pagination a:first-child{ margin-left: 0;}
 .cat-pagination a:last-child{ margin-right: 0;}
-
-@media (max-width:1024px){
-
-.pickup-page .orderlists{width: 42%;}
-.pickup-page .categories_list{width: 12%;}
-.pickup-page .cat_description{width: calc(46% - 20px);}
-}
-
-@media (max-width:960px){
-.orderlists .itemlist{
-    height: calc(100% - 330px);
-}
-}
-
-

@@ -11,4 +11,5 @@ npm-debug.log
 yarn-error.log
 .env
 *.lock
-/public/assets/images/
+#/public/assets/images/
+/nbproject/
