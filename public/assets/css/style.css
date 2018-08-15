@@ -9,7 +9,7 @@ File: Main Css
    Common
 ============= */
 body {
-  background: #f5f5f5;
+  background: #eeeeee;
   margin: 0;
   overflow-x: hidden;
   font-family: "Roboto", sans-serif;
@@ -20,7 +20,7 @@ body {
 html {
   position: relative;
   min-height: 100%;
-  background: #f5f5f5;
+  background: #eeeeee;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1415,7 +1415,7 @@ select[multiple] {
 }
 
 .navtab-bg {
-  background-color: #ededed;
+  background-color: #f5f5f5;
 }
 
 .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus,
@@ -1616,13 +1616,13 @@ select[multiple] {
 
 #topnav .has-submenu.active a {
   color: #54565b;
-  background-color:#f5f5f5 !important;
+  background-color:#eeeeee !important;
   border-right: 1px solid #801114;
   border-left: 1px solid #801114
 }
 
 #topnav .has-submenu.active .submenu li.active > a {
-  color: #62a3ff;
+  color: #ed1f24;
 }
 
 #topnav .topbar-main {
