@@ -59,6 +59,7 @@ class MenuController extends Controller {
         $choices = Menu::$choices;
         $taxType = Menu::$taxType;
         $categories = Category::getCategoryDropDownList();
+        unset($categories[0]);
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
         unset($modifierGroups[0]);
         $modifiers = $subCategories = [];
@@ -147,6 +148,7 @@ class MenuController extends Controller {
         $menu->sub_category = $subCategory;
 
         $includedModifierGroupsId = $request->input('included_modifier_groups', null);
+        $includedModifierGroupsId = is_array($includedModifierGroupsId)? $includedModifierGroupsId : array(0);
         $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array_values($includedModifierGroupsId), ['name']);
         $menu->included_modifier_groups = $includedModifierGroups;  
 
@@ -157,6 +159,7 @@ class MenuController extends Controller {
         $menu->included_modifiers = $includedModifiers;  
 
         $modifierGroupsId = $request->input('modifier_groups', null);
+        $modifierGroupsId = is_array($modifierGroupsId)? $modifierGroupsId : array(0);
         $modifierGroups = ModifierGroup::getModifierGroupByIds(array_values($modifierGroupsId), ['name']);
         $menu->modifier_groups = $modifierGroups;  
         
@@ -333,6 +336,7 @@ class MenuController extends Controller {
         $menu->sub_category = $subCategory;
 
         $includedModifierGroupsId = $request->input('included_modifier_groups', null);
+        $includedModifierGroupsId = is_array($includedModifierGroupsId)? $includedModifierGroupsId : array(0);
         $includedModifierGroups = ModifierGroup::getModifierGroupByIds(array_values($includedModifierGroupsId), ['name']);
         
         //LOGIC TO MAINTAIN THE SORT ORDER OF OLD GOUPS
@@ -360,6 +364,7 @@ class MenuController extends Controller {
         $menu->included_modifiers = $includedModifiers;  
 
         $modifierGroupsId = $request->input('modifier_groups', null);
+        $modifierGroupsId = is_array($modifierGroupsId)? $modifierGroupsId : array(0);
         $modifierGroups = ModifierGroup::getModifierGroupByIds(array_values($modifierGroupsId), ['name']);
         $menu->modifier_groups = $modifierGroups;  
         
@@ -478,7 +483,7 @@ class MenuController extends Controller {
         $menu->save();
         echo json_encode(array(
             'status' => 'success',
-            'message' => 'Sorting order has been update.'
+            'message' => 'Sorting order has been updated.'
         ));
     }
 

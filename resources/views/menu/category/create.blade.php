@@ -27,26 +27,33 @@
                             {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Category Name')) !!}
                             </div>
                         </div>
+
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Display Name</label>
+                            <div class="col-9">
+                            {!! Form::text('display_name', Input::old('display_name'), array('required','class'=>'form-control','placeholder'=>'Enter Display Name')) !!}
+                            </div>
+                        </div>
                        
                          
-                        <div class="form-group row col-sm-6">
+                        <!-- <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Select Store</label>
                             <div class="col-9">
                             {!! Form::select('store', $store_list, null, ['required', 'id' => 'store',  'class' => 'form-control margin']) !!}
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Select Barnd</label>
+                            <label class="col-3 col-form-label">Select Brand</label>
                             <div class="col-9">
-                            {!! Form::select('brand', [0=>'Select Brand'], null, ['required', 'id' => 'brand',  'class' => 'form-control margin']) !!}
+                            {!! Form::select('brand[]', $brandList , null, ['required', 'multiple' => true, 'id' => 'brand',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Category Short Description</label>
+                            <label class="col-3 col-form-label">Short Description</label>
                             <div class="col-9">
-                            {!! Form::textarea('description', Input::old('description'), array('class'=>'form-control','placeholder'=>'Enter Category Short Description')) !!}
+                            {!! Form::textarea('description', Input::old('description'), array('class'=>'form-control','placeholder'=>'Enter Category Short Description', 'rows' => 3)) !!}
                             </div>
                         </div>
 

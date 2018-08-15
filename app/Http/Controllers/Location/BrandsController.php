@@ -52,7 +52,7 @@ class BrandsController extends Controller {
         }
         
         $storeCity= Stores::getStoreDropDownList();
-        
+        unset($storeCity[0]);
         $data=[
             'storeCity'=>$storeCity,
             'tabList' => $this->tabList, 
@@ -70,7 +70,7 @@ class BrandsController extends Controller {
 
         $rules = array(
             'name' => 'required|min:3',
-            'description' => 'required|min:10',
+            'store_city' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -122,6 +122,7 @@ class BrandsController extends Controller {
 
         $brands_data = Brands::find($id);
         $storeCity= Stores::getStoreDropDownList();
+        unset($storeCity[0]);
         if (empty($brands_data)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
@@ -147,7 +148,6 @@ class BrandsController extends Controller {
 
         $rules = array(
             'name' => 'required|min:3',
-            'description' => 'required|min:10',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 

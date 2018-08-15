@@ -14,7 +14,10 @@
         <!-- App css -->
         <link href="{{ asset("assets/css/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/plugins/custombox/css/custombox.css')}}" rel="stylesheet" type="text/css" />
-       	<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" />
+       	 
+        <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.min.css')}}" rel="stylesheet" />
+        
+        <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" />
         <link href="{{ asset("assets/css/icons.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/style.css")}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset("assets/css/custom.css")}}" rel="stylesheet" type="text/css" />
@@ -43,6 +46,9 @@
 
         <script src="{{ asset("assets/pages/jquery.dashboard.js")}}"></script>
         <script src="{{ asset("assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js")}}"></script>
+         
+        <script src="{{ asset('assets/plugins/bootstrap-select/js/bootstrap-select.min.js')}}" type="text/javascript"></script>
+
 
         <script src="{{ asset("assets/js/jquery.core.js")}}"></script>
         <script src="{{ asset("assets/js/jquery.app.js")}}"></script>

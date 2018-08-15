@@ -40,7 +40,7 @@ class CategoryController extends Controller {
         /* end permission code */
         $results = $this->getCategoryListPaging($request);
         $total_page = Category::getCategoryCount();
-        $table_header = array('Name','Parent Category', 'Store Name', 'Brand Name','Action');
+        $table_header = array('Name','Parent Category', 'Display Name', 'Brand Name','Action');
         $return = view('menu.category.index', ['tabList' => $this->tabList,'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -53,10 +53,12 @@ class CategoryController extends Controller {
         
         $categoryList = Category::getCategoryDropDownList();
         $storeList = Stores::getStoreDropDownList();
-
+        $brandList = Brands::getBrandDropDownList();
+        unset($brandList[0]);
 
         $data=[
             'store_list'=>$storeList,
+            'brandList' => $brandList,
             'category_list' => $categoryList,
             'tabList' => $this->tabList,
         ];
@@ -71,8 +73,8 @@ class CategoryController extends Controller {
         }
         /* end permission code */
         $rules = array(
-            'name' => 'required|min:3',
-            'store' => 'required',
+            'name' => 'required|unique:categories',
+            'display_name' => 'required',
             'brand' => 'required'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -81,10 +83,11 @@ class CategoryController extends Controller {
         $parentId = $request->input('parent', null);
         $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
         $category->name = $request->input('name', null);
-        $storeId = $request->input('store', null);
-        $category->store = Stores::getStoresByIds(array($storeId), ['name']);
+        $category->display_name = $request->input('display_name', null);
+        //$storeId = $request->input('store', null);
+        //$category->store = Stores::getStoresByIds(array($storeId), ['name']);
         $brandId = $request->input('brand', null);
-        $category->brand = Brands::getBrandsByIds(array($brandId), ['name']);
+        $category->brand = Brands::getBrandsByIds(array_values($brandId), ['name']);
         $category->description = $request->input('description', null);
         $category->created_by = Auth::user()->_id;
         $category->updated_by = Auth::user()->_id;
@@ -119,19 +122,13 @@ class CategoryController extends Controller {
             return redirect()->action('CategoryController@getIndex');
         }
 
-        $storeIdList = array_column($category_data->store, '_id'); 
-        $storeId = array_pop($storeIdList); 
 
         $categoryList = Category::getCategoryDropDownList();
         unset($categoryList[$id]);
         $storeList = Stores::getStoreDropDownList();
-        $brandsOfSelectedStore = Brands::getBrandByStoreId($storeId);
-        foreach ($brandsOfSelectedStore as $brand) {
-            $list[$brand['_id']] = $brand['name'];
-        }
-        $brandsOfSelectedStore = $list;
-
-        $view = view('menu.category.edit', ['tabList' => $this->tabList,'category_data' => $category_data,'store_list'=>$storeList, 'brand_list' => $brandsOfSelectedStore,'category_list' => $categoryList]);
+        $brandsList = Brands::getBrandDropDownList();
+        unset($brandsList[0]);
+        $view = view('menu.category.edit', ['tabList' => $this->tabList,'category_data' => $category_data,'store_list'=>$storeList, 'brand_list' => $brandsList,'category_list' => $categoryList]);
         return $view;
     }
 
@@ -151,7 +148,7 @@ class CategoryController extends Controller {
 
         $rules = array(
             'name' => 'required|min:3',
-            'store' => 'required',
+            'display_name' => 'required',
             'brand' => 'required'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -160,10 +157,11 @@ class CategoryController extends Controller {
         $parentId = $request->input('parent', null);
         $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
         $category->name = $request->input('name', null);
-        $storeId = $request->input('store', null);
-        $category->store = Stores::getStoresByIds(array($storeId), ['name']);
+        $category->display_name = $request->input('display_name', null);
+        //$storeId = $request->input('store', null);
+        //$category->store = Stores::getStoresByIds(array($storeId), ['name']);
         $brandId = $request->input('brand', null);
-        $category->brand = Brands::getBrandsByIds(array($brandId), ['name']);
+        $category->brand = Brands::getBrandsByIds(array_values($brandId), ['name']);
         $category->description = $request->input('description', null);
         $category->updated_by = Auth::user()->_id;
         $category->save();

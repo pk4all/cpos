@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>CPOS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta content="CPOS" name="description">
+        <meta content="Coderthemes" name="author">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="http://localhost:8000/assets/images/favicon.ico">
+        <!--Morris Chart CSS -->
+        <link rel="stylesheet" href="CPOS_files/morris.css">
+        <link rel="stylesheet" href="CPOS_files/bootstrap-clockpicker.css">
+        <!-- App css -->
+        <link href="CPOS_files/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="CPOS_files/custombox.css" rel="stylesheet" type="text/css">
+       	<link rel="stylesheet" href="CPOS_files/bootstrap-tagsinput.css">
+        <link href="CPOS_files/icons.css" rel="stylesheet" type="text/css">
+        <link href="CPOS_files/style.css" rel="stylesheet" type="text/css">
+        <link href="CPOS_files/custom.css" rel="stylesheet" type="text/css">
+        <script src="CPOS_files/modernizr.js"></script>
+        <script src="CPOS_files/knockout.js"></script>
+        <script src="CPOS_files/jquery_003.js"></script>
+        <script src="CPOS_files/bootstrap-tagsinput.js"></script>
+            </head>
+
+    <body>
+                <!-- Navigation Bar-->
+<header id="topnav">
+    <div class="topbar-main">
+        <div class="container-fluid">
+
+            <!-- Logo container-->
+            <div class="logo">
+                <!-- Text Logo -->
+                <!--<a href="index.html" class="logo">-->
+                <!--UBold-->
+                <!--</a>-->
+                <!-- Image Logo -->
+                <a href="http://localhost:8000/" class="logo">
+                    <img src="CPOS_files/logo_dark.png" alt="" class="logo-lg" height="20">
+                    <img src="CPOS_files/logo_sm.png" alt="" class="logo-sm" height="24">
+                </a>
+
+            </div>
+            <!-- End Logo container-->
+
+
+            <div class="menu-extras topbar-custom">
+                <ul class="navigation-menu list-inline float-left mb-0">
+
+                    <li class="last-elements">
+                        <a href="http://localhost:8000/"> <i class="md md-dashboard"></i>Dashboard</a>
+                    </li>
+                    <!--<li class="has-submenu">
+                        <a href="#"><i class="md md-account-circle"></i>User</a>
+                        <ul class="submenu">
+                            <li>
+                                <a href="/users">User List</a>
+                            </li>
+                            <li>
+                                <a href="/users/create">Add New User</a>
+                            </li>
+                            <li>
+                                <a href="/user-roles">Role List</a>
+                            </li>
+                            <li>
+                                <a href="/user-roles/create">Add New Role</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                                       <li class="has-submenu active last-elements">
+                        <a href="http://localhost:8000/setup"><i class="md  md-settings"></i>Setup</a>
+                    </li>
+                                    </ul>
+
+                <ul class="list-inline float-right mb-0">
+
+                    <li class="menu-item list-inline-item">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle nav-link">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="dripicons-bell noti-icon"></i>
+                            <span class="badge badge-pink noti-icon-badge">4</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg" aria-labelledby="Preview">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5><span class="badge badge-danger float-right">5</span>Notification</h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-success"><i class="icon-bubble"></i></div>
+                                <p class="notify-details">Robert S. Taylor commented on Admin<small class="text-muted">1 min ago</small></p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-info"><i class="icon-user"></i></div>
+                                <p class="notify-details">New user registered.<small class="text-muted">1 min ago</small></p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <div class="notify-icon bg-danger"><i class="icon-like"></i></div>
+                                <p class="notify-details">Carlos Crouch liked <b>Admin</b><small class="text-muted">1 min ago</small></p>
+                            </a>
+
+                            <!-- All-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item notify-all">
+                                View All
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="CPOS_files/avatar-1.jpg" alt="user" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                            <!-- item-->
+                                                        <a href="http://localhost:8000/profile" class="dropdown-item notify-item">
+                                <i class="md md-account-circle"></i> <span></span>
+                            </a>
+                            
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="md md-settings"></i> <span>Settings</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="md md-lock-open"></i> <span>Lock Screen</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:.submit();" class="dropdown-item notify-item">
+                                <form action="http://localhost:8000/logout" method="POST">
+                                    <input name="_token" value="STLdAwevdZgLItqxnlb7dk3k86GCv8hDJ7kkhNos" type="hidden">
+                                    <i class="md md-settings-power"></i> <span onclick="$('form:first').submit()">Logout</span>
+                                </form>
+
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- end menu-extras -->
+
+            <div class="clearfix"></div>
+
+        </div> <!-- end container -->
+    </div>
+    <!-- end topbar-main -->
+    <!-- menu should be added here -->
+
+</header>
+<!-- End Navigation Bar-->
+                
+<div class="wrapper">
+    <div class="container-fluid">
+
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="btn-group pull-right">
+                                            </div>
+                    <h4 class="page-title">Brands</h4>
+                </div>
+                                            </div>
+            <div class="col-sm-12">
+    <div class="starterpage_tabs">
+        <a href="http://localhost:8000/setup" class="back-link"><i class="fa fa-arrow-left"></i>Back</a>
+        <ul class="nav nav-tabs navtab-bg">
+                                    <li class="nav-item">
+                <a href="http://localhost:8000/stores" aria-expanded="" class="nav-link ">Stores</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/brands" aria-expanded="1" class="nav-link active">Brands</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/order-type" aria-expanded="" class="nav-link ">Order Type</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/surcharge" aria-expanded="" class="nav-link ">Surcharge</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/tax" aria-expanded="" class="nav-link ">Tax Rates</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/payment" aria-expanded="" class="nav-link ">Payment Option</a>
+            </li>
+                        <li class="nav-item">
+                <a href="http://localhost:8000/delivery-area" aria-expanded="" class="nav-link ">Delivery Area</a>
+            </li>
+                                </ul>
+    </div>
+</div>
+
+
+
+        </div>    
+        <div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-8">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="http://localhost:8000/brands/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
+                    </div>
+                </div>
+                <table id="mainTable" class="table table-striped m-b-0" style="cursor: pointer;">
+                    <thead>
+                        <tr>
+                                                        <th>Logo</th>
+                                                        <th>Name</th>
+                                                        <th>Stores</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                    </thead>
+                    <tbody>
+                          
+                                                <tr>
+                            <td>
+                                <img src="CPOS_files/ballon1_5b74021da3eef.png" style="width: 50px; height: 50px;">
+                            </td>
+                            <td>TEST</td>
+                            
+
+                                <td>
+                                                                           
+                                                                    </td>
+                                
+                            <td>
+                                <a href="http://localhost:8000/brands/edit/5b74021d727b8b08b71f098a" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                <a class="md md-visibility-off" href="http://localhost:8000/brands/update-status/5b74021d727b8b08b71f098a" title="click for Enable " data-value="Status"></a>
+                                
+
+                                <a href="javascript:void(0);" class="on-default remove-row" data-placement="top" data-href="http://localhost:8000/brands/destroy/5b74021d727b8b08b71f098a" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
+                            </td>
+
+                        </tr>
+                                                <tr>
+                            <td>
+                                <img src="CPOS_files/ballon2_5b7401bff1452.png" style="width: 50px; height: 50px;">
+                            </td>
+                            <td>BRAND</td>
+                            
+
+                                <td>
+                                                                                                            <span class="badge">nnvbn</span>&nbsp;&nbsp;
+                                       
+                                                                    </td>
+                                
+                            <td>
+                                <a href="http://localhost:8000/brands/edit/5b7401bf727b8b08b71f0989" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                <a class="md md-visibility-off" href="http://localhost:8000/brands/update-status/5b7401bf727b8b08b71f0989" title="click for Enable " data-value="Status"></a>
+                                
+
+                                <a href="javascript:void(0);" class="on-default remove-row" data-placement="top" data-href="http://localhost:8000/brands/destroy/5b7401bf727b8b08b71f0989" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Brands ?"><i class="fa fa-trash-o"></i></a>
+                            </td>
+
+                        </tr>
+                                                                    </tbody>
+
+                </table>
+                <input style="position: absolute; display: none;"></div>
+        </div>
+    </div>
+</div>
+        <div id="confirmDelete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="CenterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="CenterModalLabel">Delete Permanently</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure about this ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary waves-effect waves-light" id="confirm">Delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->    </div> <!-- end Panel -->
+</div> <!-- end container -->
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        ©2018 CPOS
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+ 
+
+        <script src="CPOS_files/popper.js"></script>
+        <script src="CPOS_files/bootstrap.js"></script>
+        <script src="CPOS_files/waves.js"></script>
+        <script src="CPOS_files/jquery.js"></script>
+        <script src="CPOS_files/jquery_006.js"></script>
+        <script src="CPOS_files/jquery.html"></script>
+
+        <script src="CPOS_files/jquery_005.js"></script>
+        <script src="CPOS_files/bootstrap-clockpicker.js"></script>
+
+        <script src="CPOS_files/jquery_002.js"></script>
+        <script src="CPOS_files/jquery_004.js"></script>
+        <script src="CPOS_files/common.js"></script>
+
+        <script src="CPOS_files/jquery_005.js"></script> 
+        <script src="CPOS_files/custombox.js"></script>
+        <script src="CPOS_files/jquery_002.js"></script>
+        <script src="CPOS_files/jquery_004.js"></script>
+        <script src="CPOS_files/common.js"></script>
+        <script type="text/javascript">
+
+        </script>
+
+
+         
+    
+
+</body></html>

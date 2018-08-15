@@ -49,7 +49,7 @@ class SurchargeController extends Controller {
         }
 
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
-
+        unset($orderTypeList[0]);
         $data = [
             'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type,'tabList' => $this->tabList, 
         ];
@@ -76,6 +76,7 @@ class SurchargeController extends Controller {
         $surcharge->type = $request->input('type', null);
         $surcharge->amount = $request->input('amount', null);
         $order_id = $request->input('order_type', null);
+        $order_id = is_array($order_id)?$order_id:array(0);
         $order_type_name = OrderTypes::getOrderTypesByIds(array_values($order_id), ['name']);
         $surcharge->order_type = $order_type_name;
         $surcharge->created_by = Auth::user()->_id;
@@ -110,6 +111,7 @@ class SurchargeController extends Controller {
         }
         //dd($surcharge_update);
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
+        unset($orderTypeList[0]);
         $view = view('location.surcharge.edit', ['tabList' => $this->tabList, 'surcharge_data' => $surcharge_data, 'order_type_list' => $orderTypeList, 'surcharge_type' => Surcharge::$type]);
         return $view;
     }
@@ -138,6 +140,7 @@ class SurchargeController extends Controller {
         $surcharge->type = $request->input('type', null);
         $surcharge->amount = $request->input('amount', null);
         $order_id = $request->input('order_type', null);
+        $order_id = is_array($order_id)?$order_id:array(0);
         $order_type_name = OrderTypes::getOrderTypesByIds(array_values($order_id), ['name']);
         $surcharge->order_type = $order_type_name;
         $surcharge->updated_by = Auth::user()->_id;

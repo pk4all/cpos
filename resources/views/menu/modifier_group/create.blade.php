@@ -32,7 +32,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Add Modifiers</label>
                             <div class="col-9">
-                                {!! Form::select('modifiers[]', $modifiers, Input::old('modifiers'), array('multiple' => true,'class'=>'form-control', 'placeholder'  => 'Select',  'id'=>'modifier')) !!}
+                                {!! Form::select('modifiers[]', $modifiers, Input::old('modifiers'), array('required', 'multiple' => true, 'id'=>'modifier',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Description</label>
                             <div class="col-9">
-                                {!! Form::textarea('description', Input::old('description'), array('required','class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'5','required'=>'required')) !!}
+                                {!! Form::textarea('description', Input::old('description'), array('class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'3')) !!}
                             </div>
                         </div>
                     

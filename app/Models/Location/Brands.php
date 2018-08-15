@@ -25,9 +25,9 @@ class Brands extends Eloquent {
         return self::where('_id', $id)->where('status', 'enable')->get();
     }
 
-    public static function getBrandsByIds($ids) {
+    public static function getBrandsByIds($ids, $fields=[]) {
 
-        return self::whereIn('_id', $ids)->where('status', 'enable')->get()->toArray();
+        return self::whereIn('_id', $ids)->where('status', 'enable')->get($fields)->toArray();
     }
 
     public static function scopeSearch($query, $keyword) {
@@ -59,6 +59,24 @@ class Brands extends Eloquent {
     public static function getBrandByStoreId($id,$fields=['name']) {
         
         return self::where('status', 'enable')->whereraw(['stores._id'=>$id])->get($fields)->toArray();
+    }
+    public static function getBrandDropDownList($options= array()) {
+
+        $column = array('_id', 'name');
+        $query = self::where('status', 'enable');
+        if(isset($options['parentId'])){
+            $query = $query->whereraw(array('parent._id'=>$options['parentId']));
+        }
+        $result = $query->get($column);
+        
+        $list = NULL;
+        foreach ($result as $item) {
+            $list[$item->_id] = $item->name;
+        }
+        $helper = new Helper;
+        $def_sel = $helper->getDefaultSel();
+        $brandDropdown = (!empty($list)) ? array_merge($def_sel, $list) : $def_sel;
+        return $brandDropdown;
     }
 
 }

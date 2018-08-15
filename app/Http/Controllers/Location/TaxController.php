@@ -50,7 +50,9 @@ class TaxController extends Controller {
         }
 
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
+        unset($orderTypeList[0]);
         $storeList = Stores::getStoreDropDownList();
+        unset($storeList[0]);
 
         $data = [
             'order_type_list' => $orderTypeList, 
@@ -112,7 +114,6 @@ class TaxController extends Controller {
 
         $tax_data = Tax::find($id);
 
-        $storeCity = Stores::getStoreDropDownList();
         if (empty($tax_data)) {
             $msg_status = 'error';
             $message = "Invalid Request URL";
@@ -120,8 +121,12 @@ class TaxController extends Controller {
             return redirect()->action('TaxController@getIndex');
         }
         //dd($tax_update);
+        
         $orderTypeList = OrderTypes::getOrderTypeDropDownList();
+        unset($orderTypeList[0]);
         $storeList = Stores::getStoreDropDownList();
+        unset($storeList[0]);
+        
         $view = view('location.tax.edit', ['tabList' => $this->tabList, 'tax_data' => $tax_data, 'order_type_list' => $orderTypeList, 'store_list' => $storeList,'tax_type' => Tax::$type]);
         return $view;
     }

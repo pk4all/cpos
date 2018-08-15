@@ -41,6 +41,7 @@ class OrderTypeController extends Controller {
         // }
         $list = OrderTypes::paginate(20);
         $storeArr = Stores::getStoreDropDownList();
+        unset($storeArr[0]);
         $view = view('location.orderType.index', ['tabList' => $this->tabList, 'stores' => $storeArr, 'list' => $list]);
         return $view;
     }
@@ -50,7 +51,7 @@ class OrderTypeController extends Controller {
         //print_r($request->all());die;
         $orderType->name = $request->input('name');
         $orderType->type = $request->input('type');
-        $orderType->store_id = $request->input('store_id');
+        $orderType->store_id = array_filter($request->input('store_id'));
         $orderType->status = 'enable';
         if ($orderType->save()) {
             return response()->json(["response" => 200, 'status' => 'success', "msg" => 'Order Type has been saved']);
@@ -78,11 +79,8 @@ class OrderTypeController extends Controller {
     public function edit(Request $request, $id = null) {
         $ordType = OrderTypes::find($id);
         $storesLists = Stores::where('status', 'enable')->orderBy('_id', 'asc')->get();
-        if ($storesLists) {
-            foreach ($storesLists as $store) {
-                $storeArr[$store->id] = $store->name;
-            }
-        }
+        $storeArr = Stores::getStoreDropDownList();
+        unset($storeArr[0]);
         $view = view('location.orderType.edit', ['data' => $ordType, 'stores' => $storeArr]);
         return $view;
     }
@@ -91,7 +89,7 @@ class OrderTypeController extends Controller {
         $ordType = OrderTypes::find($request->input('id'));
         $ordType->name = $request->input('name');
         $ordType->type = $request->input('type');
-        $ordType->store_id = $request->input('store_id');
+        $ordType->store_id = array_filter($request->input('store_id'));
         if ($ordType->save()) {
             return response()->json(["response" => 200, 'status' => 'success', "msg" => 'Order Type has been saved']);
         } else {
