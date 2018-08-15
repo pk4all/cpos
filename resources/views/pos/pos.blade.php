@@ -3,11 +3,9 @@
 
 <div class="pickup-page">
     <div class="container-fluid">
-    	<div class="row">
     		@include('pos.cart')
     		@include('pos.brand')
     		@include('pos.pos-item')
-    	</div>
     </div> 
 </div>
 
