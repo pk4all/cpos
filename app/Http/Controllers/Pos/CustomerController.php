@@ -40,7 +40,8 @@ class CustomerController extends Controller {
         }
         die;
     }
-    public static function saveCustomer(Request $request){
+
+    public function saveCustomer(Request $request){
          $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'phone' => 'required|unique:customers',
