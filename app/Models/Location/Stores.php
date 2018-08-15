@@ -78,5 +78,14 @@ class Stores extends Eloquent {
         $storesDropdown = (!empty($store_list)) ? array_merge($def_sel, $store_list) : $def_sel;
         return $storesDropdown;
     }
+
+    public static function getCustomerStore($arg=[]){
+        
+        $column = array('_id', 'name');
+        $result = self::where('status', 'enable')->get($column)->first();
+        $storeId=$result->id;
+        return $storeId;
+        
+    }
     
 }

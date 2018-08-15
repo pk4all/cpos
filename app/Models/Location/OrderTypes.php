@@ -36,5 +36,8 @@ class OrderTypes extends Eloquent {
         $storesDropdown = (!empty($store_list)) ? array_merge($def_sel, $store_list) : $def_sel;
         return $storesDropdown;
     }
-
+     public static function getOrderTypesByStoreId($id) {
+        $column = array('_id', 'name','type');
+        return self::whereraw(['store_id'=>$id])->where('status', 'enable')->get($column)->toArray();
+    }
 }
