@@ -19,26 +19,30 @@
                                 {!! Form::text('name', $brands_data['name'], array('required','class'=>'form-control','placeholder'=>'Enter Brand Name')) !!}
                             </div>
                         </div>
-                        <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Select Stores</label>
-                            <div class="col-9">
-                                {!! Form::select('store_city[]', $storeCity, array_column($brands_data->stores,'_id'), ['multiple' => true, 'class' => 'form-control margin']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Logo</label>
                             <div class="col-9">
-                                {!! Form::file('logo', Input::old('logo'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                <img src="{{env('IMAGE_PATH').$brands_data->logo}}" style="width: 50px; height: 50px;">
+                                {!! Form::file('logo', Input::old('logo'), array('class'=>'form-control','id'=>'fileHelp')) !!}
                                 <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>
                         </div>
 
+
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Select Stores</label>
+                            <div class="col-9">
+                                {!! Form::select('store_city[]', $storeCity, array_column($brands_data->stores,'_id'), ['required', 'multiple' => true,  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
+                            </div>
+                        </div>
+                   
+                        
+
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Description</label>
                             <div class="col-9">
-                                {!! Form::textarea('description', $brands_data['description'], array('required','class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'5','required'=>'required')) !!}
+                                {!! Form::textarea('description', $brands_data['description'], array('class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'5')) !!}
                             </div>
                         </div>
                     </div>

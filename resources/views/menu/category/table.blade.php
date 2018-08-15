@@ -33,16 +33,12 @@
                                     @endforeach
                                 @endif</td>
                             <td>
-                                @if(is_array($data->store))
-                                    @foreach($data->store as $store)
-                                        <span class="">{{$store['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
-                                @endif
+                                {{$data->display_name}}
                             </td>
                             <td>
                                 @if(is_array($data->brand))
                                     @foreach($data->brand as $brand)
-                                        <span class="">{{$brand['name']}}</span>&nbsp;&nbsp;
+                                        <span class="badge">{{$brand['name']}}</span>&nbsp;&nbsp;
                                     @endforeach
                                 @endif
 

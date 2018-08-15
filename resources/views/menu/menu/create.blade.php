@@ -18,7 +18,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Category</label>
                             <div class="col-9">
-                            {!! Form::select('category', $categories, Input::old('category'), array('required','class'=>'form-control', 'id' => 'menuCategory')) !!}
+                            {!! Form::select('category', $categories, Input::old('category'), array('required','class'=>'form-control', 'id' => 'menuCategory','placeholder'=>'Select')) !!}
                             </div>
                         </div>
 
@@ -99,7 +99,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Group</label>
                             <div class="col-9">
-                            {!! Form::select("groups[]",$groups,Input::old("groups"), array('multiple' => true, 'class'=>'form-control', 'placeholder' => 'Select')) !!}
+                            {!! Form::select("groups[]",$groups,Input::old("groups"), array('multiple' => true,'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                         
@@ -114,14 +114,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifier_groups[]",$modifierGroups ,Input::old("included_modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'includedModifierGroup', 'placeholder' => 'Select')) !!}
+                            {!! Form::select("included_modifier_groups[]",$modifierGroups ,Input::old("included_modifier_groups"), array('multiple' => true,'id' => 'includedModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifiers[]",$modifiers,Input::old("included_modifiers"), array('multiple' => true, 'class'=>'form-control','placeholder'=>'Select', 'id' => 'includedModifiers')) !!}
+                            {!! Form::select("included_modifiers[]",$modifiers,Input::old("included_modifiers"), array('multiple' => true, 'id' => 'includedModifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                     </div>
@@ -134,14 +134,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_groups[]",$modifierGroups,Input::old("modifier_groups"), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup', 'placeholder' => 'Select')) !!}
+                            {!! Form::select("modifier_groups[]",$modifierGroups,Input::old("modifier_groups"), array('multiple' => true, 'id' => 'modifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("modifiers[]",$modifiers,Input::old("modifiers"), array('multiple' => true, 'class'=>'form-control','placeholder'=>'Select', 'id' => 'modifiers')) !!}
+                            {!! Form::select("modifiers[]",$modifiers,Input::old("modifiers"), array('multiple' => true, 'id' => 'modifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                         

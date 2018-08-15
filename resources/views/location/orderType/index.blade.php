@@ -43,7 +43,11 @@
                                     <td>
                                         @if($data->store_id)
                                         @foreach($data->store_id as $id)
-                                        <span class="badge">{{$stores[$id]}}</span>
+                                        <span class="badge">
+                                            @if(isset($stores[$id]))
+                                                {{$stores[$id]}}
+                                            @endif 
+                                        </span>
                                         @endforeach
                                         @endif
                                     </td>

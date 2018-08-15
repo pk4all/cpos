@@ -26,15 +26,16 @@
                                 <img src="{{env('IMAGE_PATH').$data->logo}}" style="width: 50px; height: 50px;">
                             </td>
                             <td>{{$data->name}}</td>
-                            @if(is_array($data->stores))
+                            
 
                                 <td>
+                                    @if(is_array($data->stores))
                                     @foreach($data->stores as $city)
                                     <span class="badge">{{$city['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
+                                    @endforeach   
+                                    @endif
                                 </td>
-                                   
-                            @endif
+                                
                             <td>
                                 <a href="{{ URL::to('brands/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')

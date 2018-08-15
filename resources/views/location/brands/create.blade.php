@@ -20,14 +20,7 @@
                             {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Brand Name')) !!}
                             </div>
                         </div>
-                        <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Select Stores</label>
-                            <div class="col-9">
-                            {!! Form::select('store_city[]', $storeCity, null, ['multiple' => true, 'class' => 'form-control margin']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Logo</label>
                             <div class="col-9">
@@ -35,11 +28,19 @@
                                 <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>
                         </div>
+
+                        <div class="form-group row col-sm-6">
+                            <label class="col-3 col-form-label">Select Stores</label>
+                            <div class="col-9">
+                            {!! Form::select('store_city[]', $storeCity, 0, ['required', 'multiple' => true,  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
+                            </div>
+                        </div>
+                        
                         
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Description</label>
                             <div class="col-9">
-                                {!! Form::textarea('description', Input::old('description'), array('required','class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'5','required'=>'required')) !!}
+                                {!! Form::textarea('description', Input::old('description'), array('class'=>'form-control','placeholder'=> 'Write description here', 'cols'=>'10', 'rows'=>'3')) !!}
                             </div>
                         </div>
                     </div>

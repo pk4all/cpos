@@ -145,6 +145,7 @@ class ModifierController extends Controller {
         $modifierChoices = ModifierChoice::getModifierChoiceDropDownList();
         unset($modifierChoices[0]);
         $modifier = Modifier::find($id);
+
         
         $selectGroupsModifiers = [];
         if(count($modifier->dependent_modifier_group) > 0){
@@ -222,8 +223,9 @@ class ModifierController extends Controller {
         
         $dependentModifierId = $request->input('dependent_modifier', null);
         $dependentModifier = Modifier::getModifierByIds([$dependentModifierId], ['name']);
-        
+        $modifierChoices = [];
         $modifierChoicesId = $request->input('modifier_choices', null);
+        if(count($modifierChoicesId))
         $modifierChoices = ModifierChoice::getModifierChoiceByIds(array_values($modifierChoicesId), ['name']);
 
         $modifier->dependent_modifier_group = $dependentModifierGroup;

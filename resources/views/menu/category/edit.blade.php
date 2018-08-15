@@ -28,18 +28,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Select Store</label>
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Display Name</label>
                             <div class="col-9">
-                            {!! Form::select('store', $store_list,  array_column($category_data->store,'_id'), ['class' => 'form-control margin']) !!}
+                                {!! Form::text('display_name', $category_data->display_name, array('required','class'=>'form-control','placeholder'=>'Enter Display Name')) !!}
                             </div>
                         </div>
 
-
                         <div class="form-group row col-sm-6">
-                            <label class="col-3 col-form-label">Select Order Type</label>
+                            <label class="col-3 col-form-label">Select Brand Type</label>
                             <div class="col-9">
-                                {!! Form::select('brand', $brand_list, array_column($category_data->brand,'_id'), ['class' => 'form-control margin']) !!}
+                                {!! Form::select('brand[]', $brand_list, array_column($category_data->brand,'_id'), ['required', 'multiple' => true, 'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
                             </div>
                         </div>
 
@@ -47,7 +46,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Category Short Description</label>
                             <div class="col-9">
-                            {!! Form::textarea('description', $category_data->description, array('class'=>'form-control','placeholder'=>'Enter Category Short Description')) !!}
+                            {!! Form::textarea('description', $category_data->description, array('class'=>'form-control','placeholder'=>'Enter Category Short Description', 'rows' => 3)) !!}
                             </div>
                         </div>
 

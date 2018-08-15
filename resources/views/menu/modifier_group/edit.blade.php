@@ -32,7 +32,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Add Modifiers</label>
                             <div class="col-9">
-                            {!! Form::select('modifiers[]', $modifiers, array_column($modifier_group_data->modifiers,'_id'), array('multiple' => true,'class'=>'form-control', 'id' => 'modifier')) !!}
+                            {!! Form::select('modifiers[]', $modifiers, array_column($modifier_group_data->modifiers,'_id'), array('multiple' => true,'id' => 'modifier', 'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 

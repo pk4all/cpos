@@ -95,7 +95,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Group</label>
                             <div class="col-9">
-                            {!! Form::select("groups[]",$groups, $menu_data->groups, array('multiple' => true, 'class'=>'form-control','id' => 'dependentModifierGroup', 'placeholder' => 'Select')) !!}
+                            {!! Form::select("groups[]",$groups, $menu_data->groups, array('multiple' => true, 'id' => 'dependentModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
@@ -115,14 +115,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifier_groups[]",$modifierGroups , array_column($menu_data->included_modifier_groups,'_id'), array('multiple' => true, 'class'=>'form-control','id' => 'includedModifierGroup')) !!}
+                            {!! Form::select("included_modifier_groups[]",$modifierGroups , array_column($menu_data->included_modifier_groups,'_id'), array('multiple' => true,'id' => 'includedModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("included_modifiers[]",$includedModifiers, array_column($menu_data->included_modifiers,'_id'), array('multiple' => true, 'class'=>'form-control', 'id' => 'includedModifiers')) !!}
+                            {!! Form::select("included_modifiers[]",$includedModifiers, array_column($menu_data->included_modifiers,'_id'), array('multiple' => true, 'id' => 'includedModifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                     </div>
@@ -135,14 +135,14 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Group</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_groups[]",$modifierGroups, array_column($menu_data->modifier_groups,'_id'), array('multiple' => true, 'class'=>'form-control','id' => 'modifierGroup')) !!}
+                            {!! Form::select("modifier_groups[]",$modifierGroups, array_column($menu_data->modifier_groups,'_id'), array('multiple' => true, 'id' => 'modifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
 
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier</label>
                             <div class="col-9">
-                            {!! Form::select("modifiers[]",$groupModifiers, array_column($menu_data->modifiers,'_id'), array('multiple' => true, 'class'=>'form-control', 'id' => 'modifiers')) !!}
+                            {!! Form::select("modifiers[]",$groupModifiers, array_column($menu_data->modifiers,'_id'), array('multiple' => true, 'id' => 'modifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                         

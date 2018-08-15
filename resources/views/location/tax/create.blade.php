@@ -36,13 +36,13 @@
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Select Store</label>
                             <div class="col-9">
-                            {!! Form::select('store[]', $store_list, null, ['required', 'multiple' => true, 'class' => 'form-control margin']) !!}
+                            {!! Form::select('store[]', $store_list, null, ['required', 'multiple' => true,  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
                             </div>
                         </div>
                         <div class="form-group row col-sm-6">
                             <label class="col-3 col-form-label">Select Order Type</label>
                             <div class="col-9">
-                            {!! Form::select('order_type[]', $order_type_list, null, ['multiple' => true, 'class' => 'form-control margin']) !!}
+                            {!! Form::select('order_type[]', $order_type_list, null, ['required', 'multiple' => true,  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white"]) !!}
                             </div>
                         </div>
                     </div>

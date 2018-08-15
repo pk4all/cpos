@@ -82,7 +82,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Modifier Choices</label>
                             <div class="col-9">
-                            {!! Form::select("modifier_choices[]",$modifierChoices,Input::old("modifier_choices"), array('multiple'=> true, 'class'=>'form-control')) !!}
+                            {!! Form::select("modifier_choices[]",$modifierChoices,Input::old("modifier_choices"), array('multiple'=> true, 'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
                             </div>
                         </div>
                         
