@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-box">
-            <div class="table-responsive">
+            <div class="">
                 <div class="row">
                     <div class="col-sm-8">
 

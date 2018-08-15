@@ -42,7 +42,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <div class="table-responsive calculation">
         <table class="table">
             <tbody>
@@ -65,8 +65,8 @@
                 </tr>
             </tbody>
         </table>
-    </div>	
-    
+    </div>
+
     <div class="btn-group">
         <button type="button" class="btn btn-success">
             <i class="fa fa-money"></i>
