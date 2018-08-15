@@ -41,7 +41,7 @@ class PosController extends Controller {
               return redirect()->action($return);
         }
         /* end permission code */
-        $return = view('pos.index', ['tabList' => $this->tabList]);
+        $return = view('pos.pos', ['tabList' => $this->tabList]);
         return $return;
     }
 }

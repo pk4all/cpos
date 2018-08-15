@@ -21,7 +21,7 @@
                             <a href="javascript:void(0)" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right" onclick="add();"><i class="md md-add"></i> Add Order Type</a>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="">
                         @if(count($list)>0) 
                         <table class="table table-hover m-0 table table-actions-bar">
                             <thead>
