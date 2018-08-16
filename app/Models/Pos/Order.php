@@ -34,8 +34,9 @@ class Order extends Eloquent {
         $category=[];
         $products=[];
         foreach($brands as $key=>$brand){
-            $category[$brand['_id']][]= Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
-            foreach($category[$brand['_id']] as $cat){
+            $tmpCat=Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
+            $category[$brand['_id']][]= $tmpCat;
+            foreach($tmpCat as $cat){
                $products[$cat['_id']][]= Menu::getMenuByCategoryId($cat['_id']);
             }
         }
