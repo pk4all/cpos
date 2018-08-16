@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             @foreach($tbl_header as $header)
-                            <th>{{$header}}</th>
+                            <th class="{{$header=='Action'?'alright':''}}">{{$header}}</th>
                             @endforeach
                         </tr>
                     </thead>
