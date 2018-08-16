@@ -19,7 +19,7 @@
                             <td><a href="{{$data->domain}}" target="_xyz">{{ substr($data->domain,0,20)}}...</td>
                             <td>{{$data->plan}}</td>
                             <td>{{$data->validity}}</td>
-                            <td>
+                            <td class="aright">
                                 <a href="{{ URL::to('company/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 <a href="javascript:void(0);" class="on-default remove-row"  data-placement="top" data-href="{{ URL::to('company/destroy/' . $data->_id) }}" title="Delete" data-toggle="modal" data-target="#confirmDelete" data-original-title="Delete" data-message="Are you sure you want to delete this Company ?"><i class="fa fa-trash-o"></i></a>
                             </td>

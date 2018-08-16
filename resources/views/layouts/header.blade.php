@@ -59,6 +59,9 @@
                     <li class="has-submenu {{Request::segment(1)==null?'':'active'}}">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
                     </li>
+                     <li class="has-submenu">
+                        <a href="/pos"><i class="md  md-settings"></i>POS</a>
+                    </li>
                     @endif
                 </ul>
 
