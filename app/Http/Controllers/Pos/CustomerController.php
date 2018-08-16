@@ -7,6 +7,7 @@ use App\Models\Location\Stores;
 use App\Models\Pos\Customers;
 use App\Models\Location\OrderTypes;
 use Carbon\Carbon;
+use App\Models\Pos\Order;
 class CustomerController extends Controller {
 
     /**
@@ -15,7 +16,7 @@ class CustomerController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
 

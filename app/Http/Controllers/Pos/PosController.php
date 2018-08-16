@@ -44,4 +44,8 @@ class PosController extends Controller {
         $return = view('pos.pos', ['tabList' => $this->tabList]);
         return $return;
     }
+    
+    public function getPosData($id){
+          dd(Order::getPosDatafromStoreId($id));
+    }
 }
