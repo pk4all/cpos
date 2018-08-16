@@ -48,6 +48,6 @@ class PosController extends Controller {
     }
     
     public function getPosData($id){
-          dd(Order::getPosDatafromStoreId($id));
+        return response()->json(["response" => 200, 'status' => 'success', "data" => Order::getPosDatafromStoreId($id)]);
     }
 }

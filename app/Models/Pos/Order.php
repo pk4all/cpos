@@ -35,8 +35,7 @@ class Order extends Eloquent {
         foreach($brands as $key=>$brand){
             $category[]= Category::getCategoryByBrandId($brand['_id']);
         }
-        foreach($category as $cat){
-            dd($cat);
-        }            
+        $return=['brands'=>$brands,'category'=>$category,'items'=>[],'modifer'=>[]];
+        return $return;
     }
 }
