@@ -85,7 +85,7 @@ class Category extends Eloquent {
     }
     
     public static function getCategoryByBrandId($id){
-         return self::where('brand', $id)->where('status', 'enable')->get()->toArray();
+         return self::whereraw(['brand._id'=> $id])->where('status', 'enable')->get()->toArray();
     }
     
 }
