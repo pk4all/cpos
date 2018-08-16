@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
 
+use App\Models\Pos\Order;
+
 
 
 class PosController extends Controller {
@@ -46,6 +48,6 @@ class PosController extends Controller {
     }
     
     public function getPosData($id){
-          dd(Order::getPosDatafromStoreId($id));
+        return response()->json(["response" => 200, 'status' => 'success', "data" => Order::getPosDatafromStoreId($id)]);
     }
 }
