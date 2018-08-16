@@ -16,10 +16,10 @@ $(function(){
     $('.cat_description .tab-content .boxes').removeClass('active');
     $('.cat_description .brandtab_content:eq('+current_tab+') .tab-content .boxes').eq(current).addClass('active');
   });
-*/
+
   $(".categories_list ul").mCustomScrollbar({
      scrollButtons:{
        enable:true
      }
-   });
+   });*/
 });

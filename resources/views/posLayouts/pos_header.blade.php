@@ -11,8 +11,9 @@
                 <a href="" class="{{$typ['_id']==$ordertype['_id']?'greenbtn':'graybtn'}}">{{$typ['name']}}</a>
                 @endforeach
                 @endif
- 
+                @if($store)
                 <p>{{$store['name']}}, {{$store['address']['label']}}, {{$store['address']['city']}}, {{$store['address']['state']}}, {{$store['address']['country']}}, {{$store['phone']}}</p>
+                @endif
                 <button class="graybtn expandbtn"><i class="fa fa-arrows-alt"></i></button>
         </div>
      
