@@ -32,10 +32,17 @@ class Order extends Eloquent {
     public static function getPosDatafromStoreId($id){
         $brands= Brands::getBrandByStoreId($id,['name','logo']);
         $category=[];
+        $products=[];
         foreach($brands as $key=>$brand){
-            $category[$brand['_id']][]= Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
+            $tmpCat=Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
+            $category[$brand['_id']][]= $tmpCat;
+            foreach($tmpCat as $cat){
+               $products[$cat['_id']][]= Menu::getMenuByCategoryId($cat['_id']);
+            }
         }
-        $return=['brands'=>$brands,'category'=>$category,'items'=>[],'modifer'=>[]];
+        
+        
+        $return=['brands'=>$brands,'category'=>$category,'items'=>$products,'modifer'=>[]];
         return $return;
     }
 }
