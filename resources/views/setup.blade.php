@@ -1,7 +1,7 @@
 @extends('layouts.plane')
 @section('body')
 <div class="wrapper">
-    <div class="container-fluid main-grid">
+    <div class="container main-grid">
         <!-- Page-Title -->
         <div class="row">
             @include('layouts.messages',['title'=>'','path'=>[]])
