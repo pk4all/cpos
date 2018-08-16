@@ -73,7 +73,7 @@ class ModifierGroupController extends Controller {
         $rules = array(
             'name' => 'required',
             'modifiers' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
         $this->validate($request, $rules);

@@ -24,7 +24,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Image</label>
                             <div class="col-9">
-                                {!! Form::file('image', Input::old('image'), array('required','class'=>'form-control','id'=>'fileHelp')) !!}
+                                {!! Form::file('image', Input::old('image'), array('class'=>'form-control','id'=>'fileHelp')) !!}
                                 <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>
                         </div>
