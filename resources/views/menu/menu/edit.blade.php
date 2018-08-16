@@ -200,11 +200,7 @@ $(function(){
     selectedGroups.forEach(function(group){
         if(group != 0){
                 count++;
-                if(count == 1){
-                    var option = "<option value='0' >Select</option>";
-                }else{
-                    var option = "";
-                }
+                var option = "";
                 $.ajax({
                     url : '/modifier-group/get-group-modfiers/'+group,
                     type : 'get',
@@ -240,11 +236,7 @@ $(function(){
     selectedGroups.forEach(function(group){       
         if(group != 0){
                 count++;
-                if(count == 1){
-                    var option = "<option value='0'>Select</option>";
-                }else{
-                    var option = "";
-                }
+                var option = "";
                 $.ajax({
                     url : '/modifier-group/get-group-modfiers/'+group,
                     type : 'get',

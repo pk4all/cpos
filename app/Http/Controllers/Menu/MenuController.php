@@ -197,6 +197,7 @@ class MenuController extends Controller {
         $taxType = Menu::$taxType;
         $categories = Category::getCategoryDropDownList();
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        unset($modifierGroups[0]);
         $modifiers = $subCategories = [];
 
         $menu = Menu::find($id);
