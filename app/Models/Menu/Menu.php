@@ -81,4 +81,10 @@ class Menu extends Eloquent {
         $menuDropdown = (!empty($menu_list)) ? array_merge($def_sel, $menu_list) : $def_sel;
         return $menuDropdown;
     }
+    
+     public static function getMenuByCategoryId($id,$fields=[]) {
+        
+        return self::where('status', 'enable')->whereraw(['category._id'=>$id])->get($fields)->toArray();
+    }
+    
 }
