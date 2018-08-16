@@ -28,7 +28,7 @@
             <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
-                        <a href="/item" class="card-link"><h5 class="card-title"><i class="fa fa-cutlery"></i><br/>
+                        <a href="/category" class="card-link"><h5 class="card-title"><i class="fa fa-cutlery"></i><br/>
                                 <span>Menu Setup</span></h5></a>
                     </div>
                 </div>

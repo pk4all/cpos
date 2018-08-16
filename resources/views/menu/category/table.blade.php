@@ -21,30 +21,30 @@
                     <tbody>
                         @if(count($tbl_data)>0)  
                         @foreach($tbl_data as $data)
-                        
+
                         <tr>
                             <td>
                                 {{$data->name}}
                             </td>
 
                             <td>@if(is_array($data->parent))
-                                    @foreach($data->parent as $parent)
-                                        <span class="">{{$parent['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
+                                @foreach($data->parent as $parent)
+                                <span class="">{{$parent['name']}}</span>&nbsp;&nbsp;
+                                @endforeach
                                 @endif</td>
                             <td>
                                 {{$data->display_name}}
                             </td>
                             <td>
                                 @if(is_array($data->brand))
-                                    @foreach($data->brand as $brand)
-                                        <span class="badge">{{$brand['name']}}</span>&nbsp;&nbsp;
-                                    @endforeach
+                                @foreach($data->brand as $brand)
+                                <span class="badge">{{$brand['name']}}</span>&nbsp;&nbsp;
+                                @endforeach
                                 @endif
 
                             </td>
-                            
-                            
+
+
                             <td>
                                 <a href="{{ URL::to('category/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
