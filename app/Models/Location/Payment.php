@@ -14,7 +14,7 @@ class Payment extends Eloquent {
     //use \Venturecraft\Revisionable\RevisionableTrait;
     use SoftDeletes;
 
-    protected $table = 'brands';
+    protected $table = 'payment_type';
     public static $type=['Card'=>'Card','Cash'=>'Cash'];
     
     public static function getPaymentCount() {

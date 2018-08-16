@@ -171,3 +171,4 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/save-customer', 'Pos\CustomerController@saveCustomer');
     Route::post('/order', 'Pos\CustomerController@order'); 
 });
+ 

@@ -50,4 +50,8 @@ class PosController extends Controller {
         
         return $return;
     }
+    
+    public function getPosData($id){
+        return response()->json(["response" => 200, 'status' => 'success', "data" => Order::getPosDatafromStoreId($id)]);
+    }
 }

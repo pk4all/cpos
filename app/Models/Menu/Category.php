@@ -84,4 +84,8 @@ class Category extends Eloquent {
         return $categoryDropdown;
     }
     
+    public static function getCategoryByBrandId($id,$fields=[]){
+         return self::whereraw(['brand._id'=> $id])->where('status', 'enable')->get($fields)->toArray();
+    }
+    
 }
