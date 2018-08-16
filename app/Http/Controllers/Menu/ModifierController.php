@@ -44,7 +44,7 @@ class ModifierController extends Controller {
         //print_r($results); die;
         
         $total_page = Modifier::getModifierCount();
-        $table_header = array('Modifier Name', 'PLU Code', 'Price','Choices','Image' , 'Action');
+        $table_header = array('Image', 'Modifier Name', 'PLU Code', 'Price','Choices', 'Action');
         $return = view('menu.modifier.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }

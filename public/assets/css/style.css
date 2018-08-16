@@ -3634,7 +3634,7 @@ table.focus-on tbody tr.focused td {
   text-align: left;
 }
 
-.alright{
+.al-right{
   text-align:right;
 }
 
@@ -7973,7 +7973,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-   background-color: #1CAF9A;
-   border-color: #1CAF9A;
+   background-color: #505050;
+   border-color: #505050;
 }
 }

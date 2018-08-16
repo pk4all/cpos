@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             @foreach($tbl_header as $header)
-                            <th>{{$header}}</th>
+                            <th class="{{$header=='Action'?'al-right':''}}">{{$header}}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -22,11 +22,12 @@
                         @if(count($tbl_data)>0)  
                         @foreach($tbl_data as $data)
                         <tr>
-                           
-                            <td>{{$data->name}}</td>
-                            <td>
+                        <td>
                                 <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
                             </td>
+                           
+                            <td>{{$data->name}}</td>
+                           
                             <td>
                             @if(is_array($data->modifiers))
                                 @foreach($data->modifiers as $modifier)
@@ -34,7 +35,7 @@
                                 @endforeach
                             @endif
                             </td>
-                            <td>
+                            <td class="al-right">
                                 <a href="{{ URL::to('modifier-group/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
                                 <a class="md md-visibility" href="{{ URL::to('modifier-group/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>

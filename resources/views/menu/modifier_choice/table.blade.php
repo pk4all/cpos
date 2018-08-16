@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             @foreach($tbl_header as $header)
-                            <th>{{$header}}</th>
+                            <th class="{{$header=='Action'?'al-right':''}}">{{$header}}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -25,7 +25,7 @@
                            
                             <td>{{$data->name}}</td>
                             <td>{{$data->multiplied_by}}</td>
-                            <td>
+                            <td class="al-right">
                                 <a href="{{ URL::to('modifier-choice/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
                                 <a class="md md-visibility" href="{{ URL::to('modifier-choice/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
