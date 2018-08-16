@@ -648,7 +648,7 @@ a:focus {
 }
 
 .card-header, .card-title {
-  margin-top: 0;
+  /*margin-top: 0;*/
 }
 
 /* Dropdown */
@@ -2122,10 +2122,11 @@ select[multiple] {
   bottom: 0;
   text-align: left !important;
   padding: 20px 0;
-  position: inherit;
+  position: absolute;
   right: 0;
   background-color: #ffffff;
   left: 0;
+  display: none;
 }
 
 .footer ul li {
@@ -3631,6 +3632,10 @@ table.focus-on tbody tr.focused td {
   padding: 0;
   position: relative;
   text-align: left;
+}
+
+.aright{
+  text-align:right;
 }
 
 /* Data table */
@@ -7832,24 +7837,32 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 ===========================*/
 
 @media (min-width: 768px){
- .main-grid .row .col-md-3{
-  max-width: 21%;
-  padding-bottom: 21%;
-  margin: .5% 2%;
+  .main-grid{ margin:auto 3%;}
+ .main-grid .row .col-md-2{
+  margin:auto 1.5%;
  }
- .main-grid .row .col-md-3 .card{
+ .main-grid .row .col-md-2 .card{
   position: absolute; 
   display: table;
   height: 100%;
   width: 100%;
 }
-.main-grid .row .col-md-3 .card .card-body{
+.main-grid .row .col-md-2 .card .card-body{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    padding: 3rem;
 }
-.main-grid .row .col-md-3 .card .card-body h5{
-  font-size: 28px;
+.main-grid .row .col-md-2 .card .card-body h5{
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.main-grid .row .col-md-2 .card .card-body h5 .fa {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 30px;
+  margin-bottom: 5px;
+
 }
 .card-box table tr td a.edit-row,.card-box table tr td a.md-visibility,.card-box table tr td a.remove-row{
     border: 1px solid #54565b;
