@@ -30,10 +30,10 @@ class Order extends Eloquent {
     }
     
     public static function getPosDatafromStoreId($id){
-        $brands= Brands::getBrandByStoreId($id);
+        $brands= Brands::getBrandByStoreId($id,['name','logo']);
         $category=[];
         foreach($brands as $key=>$brand){
-            $category[]= Category::getCategoryByBrandId($brand['_id']);
+            $category[$brand['_id']][]= Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
         }
         $return=['brands'=>$brands,'category'=>$category,'items'=>[],'modifer'=>[]];
         return $return;
