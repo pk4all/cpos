@@ -3634,7 +3634,7 @@ table.focus-on tbody tr.focused td {
   text-align: left;
 }
 
-.aright{
+.alright{
   text-align:right;
 }
 
@@ -7837,7 +7837,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 ===========================*/
 
 @media (min-width: 768px){
-  .main-grid{ margin:auto 3%;}
+  .main-grid{}
  .main-grid .row .col-md-2{
   margin:auto 1.5%;
  }
@@ -7851,20 +7851,20 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    padding: 3rem;
+    padding: 2rem;
 }
 .main-grid .row .col-md-2 .card .card-body h5{
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 100;
 }
 
 .main-grid .row .col-md-2 .card .card-body h5 .fa {
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 
 }
-.card-box table tr td a.edit-row,.card-box table tr td a.md-visibility,.card-box table tr td a.remove-row{
+.card-box table tr td a.edit-row,.card-box table tr td a.md-visibility,.card-box table tr td a.md-visibility-off,.card-box table tr td a.remove-row,.card-box table tr td a.sort-now{
     border: 1px solid #54565b;
     color: #54565b;
     border-radius: 3px;
@@ -7877,7 +7877,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     text-align: center;
     display: inline-block;
 }
-.card-box table tr td a.edit-row:hover,.card-box table tr td a.md-visibility:hover,.card-box table tr td a.remove-row:hover
+.card-box table tr td a.edit-row:hover,.card-box table tr td a.md-visibility:hover,.card-box table tr td a.md-visibility-off:hover,.card-box table tr td a.remove-row:hover,.card-box table tr td a.sort-now:hover
 {
   background: #54565b; 
   color: #fff;

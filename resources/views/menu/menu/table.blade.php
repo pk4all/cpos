@@ -37,7 +37,7 @@
                             <td>
                                 <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
                             </td>
-                            <td>
+                            <td class="alright">
                                 <a href="{{ URL::to('item/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
                                 <a class="md md-visibility" href="{{ URL::to('item/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
