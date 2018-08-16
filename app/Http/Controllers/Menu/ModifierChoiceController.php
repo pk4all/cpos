@@ -74,7 +74,7 @@ class ModifierChoiceController extends Controller {
         $modifierChoice->description = $request->input('description', null);
         $modifierChoice->created_by = Auth::user()->_id;
         $modifierChoice->updated_by = Auth::user()->_id;
-        $modifierChoice->status = 'disable';
+        $modifierChoice->status = 'enable';
         $modifierChoice->save();
         $request->session()->flash('status', 'Modifier Choice ' . $modifierChoice->name . ' created successfully!');
         return redirect()->action('Menu\ModifierChoiceController@getIndex');
