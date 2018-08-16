@@ -2,7 +2,7 @@
 .wrapper.no_navigation{
     padding-top: 64px;
 }
-.starterpage_tabs .back-link{ background: #62a3ff; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
+.starterpage_tabs .back-link{ background: #505050; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
 .starterpage_tabs .back-link i{ margin-right: 10px;}
 .starterpage_tabs .nav.nav-tabs > li > a{ line-height: 42px;}
  .scrtabs-tab-container * {

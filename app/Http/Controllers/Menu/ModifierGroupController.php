@@ -43,7 +43,7 @@ class ModifierGroupController extends Controller {
         //print_r($results); die;
         
         $total_page = ModifierGroup::getModifierGroupCount();
-        $table_header = array('Modifier Group Name', 'Image', 'Modifiers', 'Action');
+        $table_header = array('Image', 'Modifier Group Name', 'Modifiers', 'Action');
         $return = view('menu.modifier_group.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
