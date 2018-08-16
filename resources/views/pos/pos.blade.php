@@ -9,7 +9,7 @@
                     <div class="table-responsive itemlist">
                         <table class="table">
                             <thead>
-                                <tr>
+                                <tr> 
                                     <th>Items</th>
                                     <th>Unit Price</th>
                                     <th class="quantity">Quantity</th>
