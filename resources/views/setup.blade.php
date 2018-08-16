@@ -9,7 +9,7 @@
         </div> 
         <!-- end page title end breadcrumb -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
                         <a href="/stores" class="card-link"><h5 class="card-title"><i class="fa fa-users"></i><br/>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
                         <a href="/users" class="card-link"><h5 class="card-title"><i class="fa fa-users"></i><br/>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
                         <a href="/category" class="card-link"><h5 class="card-title"><i class="fa fa-cutlery"></i><br/>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
                         <a href="admin/stores" class="card-link">
@@ -44,8 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 clearfix" style="padding-top:20px"></div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="card">
                     <div class="card-body">
                         <a href="/discount" class="card-link">
@@ -56,6 +55,8 @@
                     </div>
                 </div>
             </div>
+            <!--<div class="col-md-12 clearfix" style="padding-top:20px"></div>-->
+            
 
         </div>
     </div> <!-- end container -->
