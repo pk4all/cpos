@@ -15,7 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
-
+use App\Models\Location\OrderTypes;
 
 
 class PosController extends Controller {
@@ -41,7 +41,13 @@ class PosController extends Controller {
               return redirect()->action($return);
         }
         /* end permission code */
-        $return = view('pos.pos', ['tabList' => $this->tabList]);
+        
+       // dd($request->session()->get('order_type'));
+       // dd($request->session()->get('store'));
+       $customer=$request->session()->get('customer');
+        $ordTypes=OrderTypes::getOrderTypesByStoreId($customer['store_id']);
+        $return = view('pos.pos', ['tabList' => $this->tabList,'orderTypes'=>$ordTypes]);
+        
         return $return;
     }
 }

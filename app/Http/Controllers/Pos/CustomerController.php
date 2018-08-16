@@ -25,7 +25,7 @@ class CustomerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getIndex() {
-         $view = view('pos.index', []);
+         $view = view('pos.index', ['orderTypes'=>'']);
         return $view;
     }
 	
@@ -34,6 +34,8 @@ class CustomerController extends Controller {
         if($customer){
            $store=Stores::getStoresById($customer->store_id)->first();
            $ordTypes=OrderTypes::getOrderTypesByStoreId($customer->store_id);
+           $request->session()->put('store', $store->toArray());
+           $request->session()->put('customer', $customer->toArray());
            return response()->json(["response" => 200, 'status' => 'success', "customer" =>$customer,'store'=>$store,'orderTypes'=>$ordTypes]);
         }else{
            return response()->json(["response" => 200, 'status' => 'new','phone'=>$request->input('phone')]);
@@ -66,13 +68,23 @@ class CustomerController extends Controller {
         $customer->store_id=Stores::getCustomerStore();
         $customer->status = 'enable';
         if ($customer->save()) {
-             $store=Stores::getStoresById($customer->store_id);
-             $ordTypes=OrderTypes::getOrderTypesByStoreId($customer->store_id);
+            $store=Stores::getStoresById($customer->store_id);
+            $ordTypes=OrderTypes::getOrderTypesByStoreId($customer->store_id);
+            $request->session()->put('store', $store->toArray());
+            $request->session()->put('customer', $customer->toArray());
             return response()->json(["response" => 200, 'status' => 'success', "msg" => 'Customer has been saved', "customer" =>$customer,'store'=>$store->first(),'orderTypes'=>$ordTypes]);
         } else {
             return response()->json(["response" => 400, 'status' => 'error', "errors" => ['An internal error.']]);
         }
         die;
+    }
+    
+    public static function order(Request $request){
+        if($request->input('ordertype')){
+            $request->session()->put('order_type', $request->input('ordertype'));
+            return response()->json(["response" => 200, 'status' => 'success','action'=>'/pos/itemlist' ]);
+            die;
+        }
     }
 
 }
