@@ -164,12 +164,11 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/item/save-sort-order/{id}', 'Menu\MenuController@postSortOrder');
 
 
-     Route::get('/pos/itemlist', 'Pos\PosController@getIndex');
+    Route::get('/pos/itemlist', 'Pos\PosController@getIndex');
 
-     Route::get('/pos', 'Pos\CustomerController@getIndex');
-     Route::post('/customer', 'Pos\CustomerController@getCustomer');
-     Route::post('/save-customer', 'Pos\CustomerController@saveCustomer');
-     Route::get('/positem/{id}', 'Pos\PosController@getPosData');
-     
+    Route::get('/pos', 'Pos\CustomerController@getIndex');
+    Route::post('/customer', 'Pos\CustomerController@getCustomer');
+    Route::post('/save-customer', 'Pos\CustomerController@saveCustomer');
+    Route::post('/order', 'Pos\CustomerController@order'); 
 });
  

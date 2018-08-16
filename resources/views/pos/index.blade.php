@@ -40,7 +40,7 @@
           </div>
           <!-- ko if: orderTypes().length>0 --> 
             <div data-bind="foreach:orderTypes"> 
-                <button data-bind="text:$data.name" class="green-btn">Pickup</button>
+                <button data-bind="text:$data.name,click:$parent.order" class="green-btn">Pickup</button>
             </div>
           <!-- /ko -->
        </div>
@@ -150,6 +150,29 @@ var siteurl='<?php echo url('/');?>';
         self.actionMsg=ko.observable();
 	self.phone=ko.observable(false);
         self.orderTypes=ko.observableArray(0);
+        self.order=function(type){
+            $.ajax({
+                method:'POST',
+                url:siteurl+'/order',
+                data:{'_token':crsf,'ordertype':type},
+                dataType: "JSON",
+                beforeSend:function(){
+                        $('#loader').removeClass('hide');
+
+                },
+                success:function(res){
+                        $('#loader').addClass('hide');
+                        if(res.status==='success'){
+                                window.location.href=siteurl+res.action;
+                        }
+                },
+                statusCode: {
+                        403: function() {
+                          window.location.reload();
+                        }
+                  }
+            });
+        }
     }
  var pm=new PosModel();
  
@@ -240,6 +263,7 @@ function changeCustomer(){
     $('#customer').removeClass('hide');
     $('#change-customer').addClass('hide');
 }
+
 ko.options.useOnlyNativeEvents = true;
 ko.options.deferUpdates = true;
 ko.applyBindings(pm);   
