@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
 use App\Models\Location\OrderTypes;
+use App\Models\Pos\Order;
 
 
 class PosController extends Controller {
