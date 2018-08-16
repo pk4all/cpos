@@ -33,7 +33,7 @@ class Order extends Eloquent {
         $brands= Brands::getBrandByStoreId($id);
         $category=[];
         foreach($brands as $key=>$brand){
-            $category[]= Category::getCategoryByBrandId($brand['_id']);
+            $category[$brand['_id']][]= Category::getCategoryByBrandId($brand['_id'],['name','description','parent']);
         }
         $return=['brands'=>$brands,'category'=>$category,'items'=>[],'modifer'=>[]];
         return $return;
