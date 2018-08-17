@@ -65,10 +65,12 @@ class PosController extends Controller {
     
     public function addOrder(Request $request){
         $customer=$request->session()->get('customer');
-        $data=$request->input('data');
-        //echo '<pre>';
-        //print_r($data);die;
-        if($data){
+        
+        if($request->input('data')){
+            $cart_items=$request->input('data.cart_items');
+            foreach($cart_items as $item){
+                   $brand_status[$item['brand']['_id']]='In Kitchen';
+            }
            $order=new Order();
            $order->store_id=$request->input('data.store_id');
            $order->cart_items=$request->input('data.cart_items');
@@ -77,6 +79,7 @@ class PosController extends Controller {
            $order->discount=$request->input('data.discount');
            $order->shipping=$request->input('data.shipping');
            $order->order_status='In Kitchen';
+           $order->brand_status=$brand_status;
            $order->customer=$customer;
         if ($order->save()){
                 $request->session()->forget('customer');

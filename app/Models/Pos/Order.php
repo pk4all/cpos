@@ -47,4 +47,10 @@ class Order extends Eloquent {
         $return=['brands'=>$brands,'category'=>$category,'items'=>$products,'modifer'=>[]];
         return $return;
     }
+    
+     public static function getOrdersfromStoreId($id){
+       $ord_sataus=['In Kitchen','Ready'];
+       $return=self::whereIn('order_status', $ord_sataus)->where('store_id', $id)->get()->toArray();
+        return $return;
+    }
 }
