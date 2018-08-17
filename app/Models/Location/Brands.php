@@ -78,5 +78,7 @@ class Brands extends Eloquent {
         $brandDropdown = (!empty($list)) ? array_merge($def_sel, $list) : $def_sel;
         return $brandDropdown;
     }
+	
+	
 
 }
