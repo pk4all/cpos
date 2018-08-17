@@ -4,7 +4,7 @@
     <ul class="grid-list" id="Completed-list">
         @if(count($orderData)>0)
         @foreach($orderData as $order)
-        <li>
+        <li id="{{$order['_id']}}">
             <div class="head-sec">
                 <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}}</div>
             </div>
@@ -24,6 +24,7 @@
                         @if(is_array($order['cart_items']))
                         @php ($count = 1)
                         @foreach($order['cart_items'] as $key=>$product)
+						
                         @if($brand['_id'] == $product['brand']['_id'])
                         <div class="item-list">
                             <div class="item">
@@ -88,7 +89,7 @@
             <div class="footer-sec">
                 <div class="left-sec timer">00:00</div>
                 <div class="right-sec">
-                    <button type="button" class="dispach_btn{{strtolower($order['order_status'])=='ready'?'':'.disabled'}}">Dispatch</button>
+                    <button type="button" class="dispach_btn{{strtolower($order['order_status'])=='ready'?'':'.disabled'}}" onclick="dispatch('{{$order['_id']}}');">Dispatch</button>
                 </div>
             </div>
 
@@ -101,9 +102,9 @@
     @if(count($orderData)>0)
     @foreach($orderData as $order)
     @if(is_array($order['brand_status']))
-    <ul class="grid-list" id="Completed-list">
+    <ul class="grid-list" id="Completed-list-brand">
         @foreach($order['brand_status'] as $key=>$brand)
-        @if(strtolower($brand['status'])!='ready')  
+        @if(strtolower($brand['status'])!='ready') 
         @include('pos.brand_kitchen',['brand'=>$brand,'order'=>$order,'key'=>$key,'count'=>count($order['brand_status'])])
         @endif
         @endforeach
@@ -113,8 +114,5 @@
     @endforeach
     @endif
 </div>
-
-
-
 
 @stop

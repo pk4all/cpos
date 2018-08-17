@@ -1,5 +1,5 @@
 
-<li class='{{$brand['_id']}} hide'>
+<li class="{{$brand['_id']}}" id="{{$order['_id']}}-{{$brand['_id']}}">
     <div class="head-sec">
         <div class="left-sec">{{$brand['name']}}</div>
         <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}} {{$key+1}}/{{$count}}</div>
@@ -30,7 +30,7 @@
 
     <div class="footer-sec">
         <div class="left-sec timer">00:00</div>
-        <div class="right-sec"><a href="javascript:void(0)">Complete</a>
+        <div class="right-sec"><a href="javascript:void(0)" onclick="complete('{{$order['_id']}}','{{$brand['_id']}}')">Complete</a>
         </div>
     </div>
 

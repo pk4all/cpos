@@ -17,7 +17,9 @@ class Order extends Eloquent {
     protected $table = 'orders';
 
     public static function getOrdersById($id) {
-        return self::where('_id', $id)->where('status', 'enable')->first();
+        return self::where('_id', $id)
+		//->where('status', 'enable')
+		->first();
     }
 
     public static function getOrderssByIds($ids) {
