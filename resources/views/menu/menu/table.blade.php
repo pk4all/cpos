@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             @foreach($tbl_header as $header)
-                            <th>{{$header}}</th>
+                            <th class="{{$header=='Action'?'al-right':''}}">{{$header}}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -22,6 +22,9 @@
                         @if(count($tbl_data)>0)  
                         @foreach($tbl_data as $data)
                         <tr>
+                        <td>
+                                <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
+                            </td>
                            
                             <td>{{$data->name}}</td>
                             <td>
@@ -34,10 +37,8 @@
                             <td>{{$data->plu_code}}</td>
                             <td>{{$data->price}}</td>
                             
-                            <td>
-                                <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
-                            </td>
-                            <td class="alright">
+                            
+                            <td class="al-right">
                                 <a href="{{ URL::to('item/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                                 @if(isset($data['status']) && $data['status']=='enable')
                                 <a class="md md-visibility" href="{{ URL::to('item/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>

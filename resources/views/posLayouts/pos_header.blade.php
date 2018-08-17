@@ -2,7 +2,6 @@
  <div class="topwhite_bar">
      <?php $store=session('store');
            $ordertype=session('order_type');
-          
      ?>
 	<div class="container-fluid">
 		<button class="graybtn" onclick="window.location.href='/';">Dashboard</button>

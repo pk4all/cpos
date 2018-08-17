@@ -45,7 +45,7 @@ class MenuController extends Controller {
         //print_r($results); die;
         
         $total_page = Menu::getMenuCount();
-        $table_header = array('Menu Name', 'Category', 'PLU Code', 'Price', 'Image', 'Action');
+        $table_header = array('Image', 'Menu Name', 'Category', 'PLU Code', 'Price', 'Action');
         $return = view('menu.menu.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -197,6 +197,7 @@ class MenuController extends Controller {
         $taxType = Menu::$taxType;
         $categories = Category::getCategoryDropDownList();
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
+        unset($modifierGroups[0]);
         $modifiers = $subCategories = [];
 
         $menu = Menu::find($id);
