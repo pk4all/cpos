@@ -27,7 +27,7 @@
                         <div class="item-list">
                             <div class="item">
                                 <h3>
-                                    <span class="num">{{$key+1}}</span>
+                                    <!--<span class="num">{{$key+1}}</span>-->
                                     <span class="title">{{$product['item']['name']}}</span>
                                 </h3>
 <!--                                <ul class="menu-list">
