@@ -545,7 +545,7 @@ a:focus {
   padding: 20px;
   -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+  border-radius: 0px 0px 3px;
   margin-bottom: 30px;
   background-clip: padding-box;
   background-color: #ffffff;
@@ -1410,7 +1410,6 @@ select[multiple] {
 }
 
 .nav.nav-tabs {
-  border-bottom: 0;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   position: relative;
 }
@@ -1593,12 +1592,12 @@ select[multiple] {
 }
 
 .page-title-box {
-  padding: 22px 0;
+  padding: 20px 0;
 }
 .sub-tab-list .page-title-box:before {
     content: '';
     position: absolute;
-    background: #566676;
+    background: #505050;
     left: 0px;
     width: 120%;
     top: 0px;
@@ -1615,7 +1614,7 @@ select[multiple] {
 .sub-tab-list .starterpage_tabs:before {
     content: '';
     position: absolute;
-    background: #566676;
+    background: #505050;
     left: 0px;
     width: 120%;
     top: 0px;
@@ -1637,10 +1636,10 @@ select[multiple] {
 }
 
 #topnav .has-submenu.active a {
-  color: #ed1f24;
-  background-color:#eeeeee !important;
-  border-right: 1px solid #801114;
-  border-left: 1px solid #801114
+  color: #fff;
+  background-color:#505050 !important;
+  border-right: 1px solid #4b4b4b;
+  border-left: 1px solid #4b4b4b
 }
 #topnav .has-submenu.active:hover a,#topnav .has-submenu.active:focus a{
   color: #ed1f24;
@@ -1900,8 +1899,8 @@ select[multiple] {
 */
 @media (min-width: 992px) {
   #topnav .navigation-menu > li > a {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
   #topnav .navigation-menu > li.last-elements .submenu {
     left: auto;
@@ -2147,7 +2146,7 @@ select[multiple] {
   right: 0;
   background-color: #ffffff;
   left: 0;
-  display: block;
+  display: none;
 }
 
 .footer ul li {
