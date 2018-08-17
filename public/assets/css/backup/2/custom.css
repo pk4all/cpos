@@ -1,0 +1,267 @@
+/*==========Custom tab css start here===============*/
+.wrapper.no_navigation{
+    padding-top: 64px;
+}
+.starterpage_tabs .back-link{ background: #505050; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
+.starterpage_tabs .back-link i{ margin-right: 10px;}
+.starterpage_tabs .nav.nav-tabs > li > a{ line-height: 42px;}
+ .scrtabs-tab-container * {
+  box-sizing: border-box; }
+
+.starterpage_tabs .scrtabs-tab-container {
+  height: 42px; width: calc(100% - 100px); float: left}
+  .scrtabs-tab-container + .tab-content {
+    clear: left; background: #ffffff;
+    margin-bottom: 30px;
+    padding: 30px;}
+
+.scrtabs-tabs-fixed-container {
+  float: left;
+  height: 42px;
+  overflow: hidden;
+  width: 100%; }
+
+.scrtabs-allow-scrollbar .scrtabs-tabs-fixed-container {
+  overflow-x: auto; }
+  .scrtabs-allow-scrollbar .scrtabs-tabs-fixed-container::-webkit-scrollbar {
+    display: none; }
+
+.scrtabs-tabs-movable-container {
+  position: relative; }
+  .scrtabs-tabs-movable-container .tab-content {
+    display: none; }
+
+.scrtabs-tab-scroll-arrow {
+  border: 1px solid #dddddd;
+  border-top: none;
+  color: #428bca;
+  cursor: pointer;
+  display: none;
+  float: left;
+  font-size: 15px;
+  height: 42px;
+  margin-bottom: -1px;
+  padding-left: 2px;
+  padding-top: 10px;
+  width: 44px; text-align: center; background: #fff;}
+  .scrtabs-tab-scroll-arrow:hover {
+    background-color: #eeeeee; }
+
+.scrtabs-tab-scroll-arrow.scrtabs-disable {
+  color: #ddd;
+  cursor: default; }
+
+.scrtabs-tabs-fixed-container ul.nav-tabs > li {
+  white-space: nowrap; }
+
+  @font-face {
+    font-family: 'Glyphicons Halflings';
+
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+
+  .glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .glyphicon-chevron-left:before {
+    content: "\e079";
+  }
+  .glyphicon-chevron-right:before {
+    content: "\e080";
+  }
+
+
+
+/*==========Login page css start here===============*/
+html{ height: 100%;}
+body.nopadd{ padding-bottom: 0;}
+body.fullheight{ height: 100%;}
+body.loginbg{ position: relative; background: url(../images/login/banner.jpg) no-repeat top left; background-size: contain;}
+body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; height: 100%; content: ''; background: rgba(0,0,0,.5);}
+.loginpage{ height: 100%;}
+.loginpage .container-fluid{ max-width: 100%; padding: 0; height: 100%;}
+.loginpage .container-fluid .row{ display: flex; height: 100%;}
+
+.loginpage .banner_info{ position: relative; z-index: 1; padding: 0 7%; margin-top: 35%; color: #fff; width: 80%;}
+.loginpage .banner_info h3{ margin: 20px 0; font-weight: 600; color: #fff; font-size: 25px; line-height: 30px;}
+.loginpage .banner_info p{ font-size: 16px; line-height: 20px;}
+
+.login_footer{ color: #fff; border-top: 2px solid rgba(255,255,255,.2); margin:0 7%; width: 80%; position: absolute; bottom: 10px; left: 2%; font-size: 12px; z-index: 1; padding: 10px 0 0;}
+.login_footer a{ color: #fff;}
+.login_footer a:hover{ text-decoration: underline}
+.login_footer span{ display: inline-block; margin: 0 5px;}
+.login_footer .tost{ font-size: 14px; font-weight: 600; color: #f46233;}
+
+.loginpage .dialpad_sec{ display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 1; height: 100%; background: #fff;}
+.dialpad_sec .content{display: inline-block; width: 280px; max-width: 90%;}
+.dialpad_sec input[type="password"]{ width: 100%; letter-spacing: 5px; font-size: 60px; line-height: 30px; height: 40px; text-align: center; border: none; border-bottom: 1px solid #dbdfe0; color: #585858;}
+.dialpad_sec .dailer{ width: 100%; display: inline-block; margin: 15px 0 35px;}
+.dialpad_sec .dailer table{ width: 100%;}
+
+.dialpad_sec .checkin-btn{ display: block; color: #c72a3d; border: 1px solid #c72a3d; line-height: 25px; font-size: 15px; border-radius: 2px; padding: 5px; transition: .4s;}
+.dialpad_sec .checkin-btn:hover{ background: #c72a3d; color: #fff;}
+.dialpad_sec table td{ padding: 2px; width: 33.33%;}
+.dialpad_sec table td span{ display: block; background: #b0b0b0; color: #fff; font-size: 30px; height:80px; line-height: 80px; text-align: center; cursor: pointer; transition: .3s; border-radius: 2px;}
+.dialpad_sec table td span:hover{ background: #9a9898;}
+.dialpad_sec table input{ width: 100%; border: none; background: #b0b0b0; color: #fff; font-size: 30px; height: 80px; text-align: center; cursor: pointer; transition: .3s; border-radius: 2px;}
+
+.dialpad_sec table input[type="reset"]{ background: #ff1315; font-size: 16px;}
+.dialpad_sec table input[type="reset"]:hover{ background:#e81214 }
+.dialpad_sec table input[type="submit"]{ background: #45c50e; font-size: 16px;}
+.dialpad_sec table input[type="submit"]:hover{ background:#3ca70e }
+
+
+/*==========Number page css start here===============*/
+body.graybg{ background: rgb(211, 223, 228)}
+.topwhite_bar{ background: #fff; padding: 13px 0;}
+.topwhite_bar .container-fluid{ max-width: 100%;}
+.topwhite_bar .graybtn{ background: #dae6ec; border: none; border-bottom: 2px solid #c2d6e0; padding: 5px 10px; border-radius: 2px; font-size: 12px; color: #333; margin-right: 10px; cursor: pointer; display: inline-block}
+.topwhite_bar .graybtn:hover{ background: #daddde}
+.topwhite_bar .greenbtn{background: #10c469 ; border: none; border-bottom: 2px solid #0da357 !important; padding: 5px 10px; border-radius: 2px; font-size: 12px; color: #fff; margin-right: 10px; cursor: pointer; display: inline-block}
+.topwhite_bar .greenbtn:hover{background: #0ca557}
+.topwhite_bar p{ display: inline-block; color: #505458; font-size: 12px; font-weight: 500;}
+.topwhite_bar .expandbtn{ float: right; margin: 0;}
+
+.numberbox{ width: 420px; max-width: 95%; padding: 30px 35px 50px; box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; background: #fff; display: inline-block; margin: 12px 0 0;}
+.numberbox h3{ font-size: 18px; line-height: 22px; font-weight: 700; margin: 0 0 10px;}
+.numberbox input[type="tel"]{ margin: 25px 0 30px; width: 100%; border:1px solid #E3E3E3; height: 38px; border-radius: 4px; padding: 7px 12px; color: #565656;}
+.numberbox button{ border-bottom: 2px solid #ff2828!important; width: 100%; background: #ff5b5b; color: #fff; transition: all 0.3s ease-out; cursor: pointer; border: 1px solid #ff5b5b; padding: 6px 10px; border-radius: 2px;}
+.numberbox button:hover{ background: #ff4242;}
+
+
+/*==========User login page css start here===============*/
+.userlogin-page .whitebox{ width: 420px; max-width: 95%; padding:20px; box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; background: #fff; display:block; margin: 12px auto 20px; text-align: left;}
+
+.userlogin-page .whitebox .dropdown-toggle:after{ display: none;}
+.userlogin-page .whitebox .dropdown-toggle{ display: inline-block; width: 20px; text-align: center; color: #98a6ad; font-size: 14px;}
+.userlogin-page .whitebox .dropdown-menu{ left: auto!important; right: 0;}
+.userlogin-page .whitebox .dropdown-menu li a{ color: #333; padding: 6px 20px; display: block}
+.userlogin-page .whitebox .dropdown-menu li a:hover{ background: rgba(218, 230, 236, 0.3) !important;}
+
+.userlogin-page .whitebox h4{ color: #505458; font-size: 16px; line-height: 16px; font-weight: 600; margin:0;}
+.userlogin-page .whitebox h2{ color: #505458; font-size: 30px; line-height: 35px; margin: 10px 0; font-weight: 500;}
+.userlogin-page .whitebox p{ color: #98a6ad ; font-size: 13px;}
+.userlogin-page .whitebox p span{ margin-left: 15px;}
+.userlogin-page .whitebox p.address{ font-size: 14px; line-height: 20px; color: #797979;}
+.userlogin-page .whitebox .green-btn{ background: #10c469 !important; border: 1px solid #10c469 !important; padding: 10px 16px !important; font-size: 16px; line-height: 20px; border-radius: 2px; color: #fff; transition: all 0.3s ease-out; }
+.userlogin-page .whitebox .green-btn:hover{ background: #0eac5c !important; border: 1px solid #0eac5c !important; cursor: pointer}
+
+.userlogin-page .whitebox .red-btn{ border-bottom: 2px solid #ff2828!important; width: 100%; background: #ff5b5b; color: #fff; transition: all 0.3s ease-out; cursor: pointer; border: 1px solid #ff5b5b; padding: 6px 10px; border-radius: 2px;}
+.userlogin-page .whitebox .red-btn:hover{background: #ff4242; }
+
+
+/*==========Pickup/delivery page css start here===============*/
+.pickup-page{ height: calc(100% - 60px)}
+.pickup-page .container-fluid{ height: calc(100% - 12px); max-width: 100%; padding-top: 12px; display: flex}
+.pickup-page .orderlists{ float: left; background: #fff; width: 31%; padding: 15px 20px 20px 20px; box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px;}
+.pickup-page .orderlists h2{ font-size: 18px; line-height: 25px; font-weight: 600; margin: 0 0 15px;}
+.pickup-page .orderlists .editbtn{ background: #dae6ec; border-bottom: 2px solid #c2d6e0 !important; padding: 3px 7px; border-radius: 2px; color: #333; font-size: 14px; line-height: 15px; margin-right: 10px;}
+
+.orderlists .itemlist{ height: calc(100% - 230px); overflow-y: auto}
+.orderlists .itemlist thead{ background: #ebeff2; border: none;}
+.orderlists .itemlist table th{ padding: 8px 5px;}
+.orderlists .itemlist table td{ padding: 8px 5px; color: #868181; font-size: 14px;}
+.orderlists .itemlist table td p{ font-weight: 500; display: inline-block; width: calc(100% - 70px); vertical-align: top; font-size: 13px; line-height: 15px; color: #333;}
+.orderlists .itemlist table a.action{ background: #dae6ec; padding: 4px 7px; border-radius: 2px;
+    color: #333; font-size: 14px; line-height: 15px; margin-right: 5px; display: inline-block}
+.orderlists .itemlist table .quantity{ width: 86px;}
+.orderlists .itemlist table .quantity button{background: #dae6ec; cursor: pointer; border: 1px solid #ccc; width: 25px; height: 25px; border-radius: 0; float: left; padding: 0; font-size: 12px;}
+.orderlists .itemlist table .quantity span{ background: #dae6ec; border: 1px solid #ccc; width: 25px; height: 25px; border-left: 0; border-right: 0; float: left; text-align: center; font-size: 14px; color: #222;}
+
+.orderlists .calculation table{ background: #f4f8fb}
+.orderlists .calculation table td{ padding: 8px; color: #797979; text-align: right}
+.orderlists .calculation table td.count{ text-align: left;}
+.orderlists .calculation table .net{ background: #dff0d8;}
+.orderlists .btn-group{ width: 100%;}
+.orderlists .btn-group button{ width: 33.33%; box-shadow: none;}
+.orderlists .btn-group .btn-success{ background: #10c469!important; border-color: #10c469!important;}
+.orderlists .btn-group .btn-warning{ background: #f9c851!important; border-color: #f9c851!important ;}
+.orderlists .btn-group .btn-danger{ background: #ff5b5b!important; border-color: #ff5b5b!important ;}
+
+.orderlists .btn-group .btn-success:hover{ background:#0eac5c!important; border-color: #0eac5c!important;}
+.orderlists .btn-group .btn-warning:hover{ background:#f8c038!important; border-color: #f8c038!important;}
+.orderlists .btn-group .btn-danger:hover{ background:#ff4242!important; border-color: #ff4242!important;}
+
+.pickup-page .categories_list{ width: 9%; float: left; position: relative; background: #fff; margin: 0 10px;  box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; min-height: 20px;}
+.pickup-page .categories_list ul{ list-style: none; margin: 0; padding: 0; height: 100%; max-height: 100%; overflow-y: auto; overflow-x: hidden; border-radius: 5px;}
+.pickup-page .categories_list ul li{ text-align: center; margin: 15px 0; border: 3px solid rgba(0,0,0,0);}
+.pickup-page .categories_list ul li.active{ border: 3px solid #333;}
+.pickup-page .categories_list ul li a{ display: inline-block; position: relative; z-index: 9;}
+.pickup-page .categories_list ul li a img{max-width: 100%;}
+.pickup-page .categories_list .mCSB_inside > .mCSB_container{ margin-right: 0;}
+.pickup-page .categories_list .mCSB_draggerContainer{ opacity: 0;}
+.pickup-page .categories_list .mCSB_container{ padding: 50px 0;}
+.pickup-page .categories_list .mCSB_scrollTools{ width: 100%; opacity: 1; display: block !important;}
+.pickup-page .categories_list .mCSB_buttonUp{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius: 5px 5px 0 0;}
+.pickup-page .categories_list .mCSB_buttonUp:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/top-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
+.pickup-page .categories_list .mCSB_buttonDown{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius:0 0 5px 5px;}
+.pickup-page .categories_list .mCSB_buttonDown:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/bottom-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
+
+.pickup-page .categories_list .mCS_no_scrollbar_y + .mCSB_scrollTools .mCSB_buttonUp{ opacity: .5; pointer-events: none;}
+.pickup-page .categories_list .mCS_no_scrollbar_y + .mCSB_scrollTools .mCSB_buttonDown{ opacity: .5; pointer-events: none;}
+.pickup-page .cat_description{ float: left; width: calc(60% - 20px);  background: #fff; box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; min-height: 20px;}
+
+.brandtab_content{ display: none; height: 100%;}
+.brandtab_content.active{ display: block;}
+
+.catname-lists{ background: #52575b; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;}
+.catname-lists ul{ margin: 0; padding: 0; list-style: none;}
+.catname-lists ul li{ display: inline-block; padding: 0 1px; }
+.catname-lists .nav.nav-tabs > li > a{ line-height: 70px; background: #cce2f0; color: #222; display: block; font-weight: 600}
+.catname-lists .nav.nav-tabs > li.gradient1 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
+.catname-lists .nav.nav-tabs > li.gradient2 > a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
+.catname-lists .nav.nav-tabs > li.gradient3 > a{ background: linear-gradient(blue, purple); color: #fff!important;}
+
+.catname-lists .scrtabs-tabs-fixed-container{ height: 70px; min-width: calc(100% - 80px);}
+.catname-lists .scrtabs-tabs-fixed-container .scrtabs-tabs-movable-container{ min-width: 100%;}
+.catname-lists .scrtabs-tab-scroll-arrow{ display: block; height: 70px; padding-top: 23px; background: #10c469; color: #fff; border: none; width: 40px;}
+.catname-lists .scrtabs-disable.scrtabs-tab-scroll-arrow{ opacity: .5;}
+.catname-lists .scrtabs-disable.scrtabs-tab-scroll-arrow + .scrtabs-tabs-fixed-container{ max-width: calc(100% - 80px);}
+.cat_description .tab-content{ padding: 10px; display: inline-block; vertical-align: top; width: 100%; box-shadow: none; height: calc(100% - 90px); overflow-y: auto;}
+.cat_description .tab-content .boxes{ display: none; width: 100%; overflow-y: auto; height: 100%;}
+.cat_description .tab-content .boxes .mCSB_container{ height: 100%;}
+.cat_description .tab-content .boxes .mCSB_scrollTools{ opacity: 1;}
+.cat_description .tab-content .boxes .mCSB_buttonLeft{ background: #b7edd3; color: #fff; opacity: 1; width: calc(50% - 2px); left: 2px; top: -20px; height: 35px; line-height: 35px;}
+.cat_description .tab-content .boxes .mCSB_buttonLeft:after{ position: absolute; top: 0; left: 50%; color: #fff; font-size: 30px; font-family: 'FontAwesome'; content: ""; width: 20px; text-align: center; margin-left: -10px;}
+.cat_description .tab-content .boxes .mCSB_draggerContainer{ display: none;}
+.cat_description .tab-content .boxes .mCSB_buttonRight{ background: #b7edd3; color: #fff; opacity: 1; width: calc(50% - 4px); right: 0; top: -20px; height: 35px; line-height: 35px;}
+.cat_description .tab-content .boxes .mCSB_buttonRight:after{ position: absolute; top: 0; left: 50%; color: #fff; font-size: 30px; font-family: 'FontAwesome'; content: ""; width: 20px; text-align: center; margin-left: -10px;}
+.cat_description .tab-content .boxes .wrapper{ display: inline-block; vertical-align: top; padding: 0; height: 100%; max-width: 765px;}
+
+.cat_description .tab-content .boxes.active{ display: block}
+.cat_description .tab-content .boxes .common{ float: left; width: 16.66%; max-width: 128px; padding: 2px; display: table-cell; height: 100px;}
+.cat_description .tab-content .boxes .common a{ background: #d3dde6; height: 100%; padding: 5px; display: flex; text-align: center; justify-content: center; color: #222; display: flex; align-items: center}
+.cat_description .tab-content .boxes.gradient1 .common a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
+.cat_description .tab-content .boxes.gradient2 .common a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
+.cat_description .tab-content .boxes.gradient3 .common a{ background: linear-gradient(blue, purple); color: #fff!important;}
+
+.cat-pagination{ display: flex;}
+.cat-pagination a{ flex: 1 0 0; background: #b7edd3; color: #fff; font-size: 30px; line-height: 30px;  margin: 0 2px; text-align: center; padding: 5px 0;}
+.cat-pagination a:first-child{ margin-left: 0;}
+.cat-pagination a:last-child{ margin-right: 0;}
+
+@media (max-width:1024px){
+
+.pickup-page .orderlists{width: 42%;}
+.pickup-page .categories_list{width: 12%;}
+.pickup-page .cat_description{width: calc(46% - 20px);}
+}
+
+@media (max-width:960px){
+.orderlists .itemlist{
+    height: calc(100% - 330px);
+}
+}
+
+.hide{display:none !important;}
+
+
