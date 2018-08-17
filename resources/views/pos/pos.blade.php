@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success">
+                        <button data-bind="click:pay" type="button" class="btn btn-success">
                             <i class="fa fa-money"></i>
                             <span>Pay</span>
                         </button>
@@ -95,106 +95,46 @@
         </div>
         <!-- /ko -->
     <div class="tab-content">
-    <div class="boxes active gradient1" data-bind="foreach:items">
-        <div class="common" data-bind="click:$parent.addToCart"><a href="javascript:void(0)" data-bind="text:$data.name">Item Name 1 <br> 2 lines</a></div>
-        
+        <div class="boxes active gradient1" data-bind="foreach:items">
+            <div class="common" data-bind="click:$parent.addToCart"><a href="javascript:void(0)" data-bind="text:$data.name">Item Name 1 <br> 2 lines</a></div>    
     </div>
-
     </div>
     </div>
 </div>
     </div> 
 </div>
 
+	<div id="pay_order" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h4 class="modal-title">Order Payment</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+    <div class="modal-body">
+    <div id="pay_sec" class="row" >
+	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;" data-bind="click:order">Cash</button>
+	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;" data-bind="click:order">Card</button>
+		
+					</div>
+				</div>
+				<div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-info waves-effect" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger btn-info waves-effect hide" onclick="order();">OK</button>
+                </div>
+			</div>
+			</div>	
+	</div>
+	
+<?php $store=session('store'); ?>
 <script>
   var getDataVar='';
   var crsf='{{ csrf_token()}}';
   var siteurl='<?php echo url('/');?>';
-  
-  var brandImgUrl='http://nkd.com/assets/images/uploaded_image/';
-    function PosModel() {
-        var self = this;
-        self.brands=ko.observableArray(0);
-        self.selBrandId=ko.observable(0);
-        self.categories=ko.observableArray(0);
-        self.selCategory=ko.observable(0);
-        self.items=ko.observableArray(0);
-        self.cartItems=ko.observableArray(0);
-        $.get(siteurl+'/positem/5b6711bc71add87dab29cc52',function(data){
-            getDataVar = JSON.parse(data);
-            //console.log(getDataVar);
-            self.brands(getDataVar.data.brands);
-            self.selBrandId(self.brands()[0]._id);
-            self.categories(getDataVar.data.category[self.selBrandId()]);
-            self.selCategory(self.categories()[0]._id);
-            self.items(getDataVar.data.items[self.selCategory()]);
-        });
-        self.changeCats=function(indx,data){
-            self.selBrandId(data._id);
-            self.categories(getDataVar.data.category[data._id]);
-            self.selCategory(self.categories()[0]._id);
-            self.items(getDataVar.data.items[self.selCategory()]);
-            $('.categories_list ul li').removeClass('active');
-            $('.categories_list ul li').eq(indx).addClass('active');
-        }
-        
-       self.changeItems=function(indx,data){
-           self.selCategory(data._id);
-           self.items(getDataVar.data.items[self.selCategory()]);
-        }
-        
-       self.subCartValue=ko.observable(0.00);
-       self.totalCartValue=ko.observable(0);
-       var sCV=0;
-       var tCV=0;
-       self.addToCart=function(data){
-           var brandId=self.selBrandId();
-           var cdata={item:data,brand:brandId}
-          self.cartItems.push(cdata);
-          sCV+=Number(data.price);
-          self.subCartValue(sCV.toFixed(2));
-           tCV+=Number(data.price);
-          self.totalCartValue(tCV.toFixed(2));
-         
-       } 
-    }
- var pm=new PosModel();
-ko.bindingHandlers.brandCro = {
-    init: function() {
-        $(".categories_list ul").mCustomScrollbar({
-            scrollButtons:{
-              enable:true
-            }
-      });
-    }
- }
- 
-ko.bindingHandlers.catTab = {
-    init: function() {
-	setTimeout(function(){
-            /* $('.catname-lists ul')
-            .scrollingTabs({
-                enableSwiping: true
-            })
-            .on('ready.scrtabs', function() {
-                $('.tab-content').show();
-            });*/
-        },2000);
-    },
-    update:function(){
-        setTimeout(function(){
-          /* $('.catname-lists ul')
-            .scrollingTabs({
-                enableSwiping: true
-            })
-            .on('ready.scrtabs', function() {
-                $('.tab-content').show();
-            });*/
-        },2000);
-    }
-};
-ko.options.useOnlyNativeEvents = true;
-ko.options.deferUpdates = true;
-ko.applyBindings(pm);   
+  var store_id="{{$store['_id']}}";
+  var customer='<?php echo json_encode($customer); ?>';
+  var brandImgUrl='http://nkd.com/assets/images/uploaded_image/';  
 </script>
+<script src="{{ asset('js/pos.js')}}"></script>
 @stop

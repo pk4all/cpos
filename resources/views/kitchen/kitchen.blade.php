@@ -8,7 +8,6 @@
         <div class="head-sec">
           <div class="right-sec">Order#{{$order['order_id']}}</div>
         </div>
-
         <div class="body-sec">
           <div class="all-brand">
             @if(is_array($order['orderTracking']))
@@ -81,8 +80,6 @@
               </div>
             </div>
  -->
-
-
           </div>
         </div>
 

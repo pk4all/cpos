@@ -43,8 +43,7 @@ class Order extends Eloquent {
                }
             }
         }
-        
-        
+
         $return=['brands'=>$brands,'category'=>$category,'items'=>$products,'modifer'=>[]];
         return $return;
     }
