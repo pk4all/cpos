@@ -11,9 +11,9 @@
             <div class="body-sec">
                 <div class="all-brand">
                     @if(is_array($order['brand_status']))
-                    @foreach($order['brand_status'] as $brand)
+                    @foreach($order['brand_status'] as $key=>$brand)
                     <div class="brand">
-                        <div class="brand1">
+                        <div class="brand{{$key+1}}">
                             <div class="left-sec">{{$brand['name']}}</div>
 
                             <!-- <div class="right-sec">Ready</div> -->
@@ -23,7 +23,7 @@
                         </div>
                         @if(is_array($order['cart_items']))
                         @foreach($order['cart_items'] as $key=>$product)
-                        @if($brand['id'] == $product['brand']['_id'])
+                        @if($brand['_id'] == $product['brand']['_id'])
                         <div class="item-list">
                             <div class="item">
                                 <h3>
@@ -99,20 +99,23 @@
 
 
     </ul>
+    @if(count($orderData)>0)
+    @foreach($orderData as $order)
+    @if(is_array($order['brand_status']))
+    <ul class="grid-list" id="Completed-list">
+        @foreach($order['brand_status'] as $key=>$brand)
+        @if(strtolower($brand['status'])!='ready')  
+        @include('pos.brand_kitchen',['brand'=>$brand,'order'=>$order,'key'=>$key,'count'=>count($order['brand_status'])])
+        @endif
+        @endforeach
+    </ul>
 
+    @endif           
+    @endforeach
+    @endif
 </div>
 
 
 
-@if(is_array($order['brand_status']))
-<ul class="grid-list hide" id="Completed-list">
-@foreach($order['brand_status'] as $key=>$brand)
-  @if(strtolower($brand['status'])!='ready')  
- @include('pos.brand_kitchen',['brand'=>$brand,'order'=>$order,'key'=>$key,'count'=>count($order['brand_status'])])
- @endif
-@endforeach
-</ul>
-
-@endif           
 
 @stop

@@ -1,5 +1,5 @@
 
-<li>
+<li class='{{$brand['_id']}} hide'>
     <div class="head-sec">
         <div class="left-sec">{{$brand['name']}}</div>
         <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}} {{$key}}/{{$count}}</div>
