@@ -1,6 +1,6 @@
 
 <li class="{{$brand['_id']}}" id="{{$order['_id']}}-{{$brand['_id']}}">
-    <div class="head-sec">
+    <div class="head-sec brand{{$key}}">
         <div class="left-sec">{{$brand['name']}}</div>
         <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}} {{$key+1}}/{{$count}}</div>
     </div>
