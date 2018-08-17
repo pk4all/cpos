@@ -22,7 +22,7 @@
 
                         </div>
                         @if(is_array($order['cart_items']))
-                        {{-- */$count=1;/* --}}
+                        @php ($count = 0)
                         @foreach($order['cart_items'] as $key=>$product)
                         @if($brand['_id'] == $product['brand']['_id'])
                         <div class="item-list">
