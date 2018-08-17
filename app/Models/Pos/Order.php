@@ -38,13 +38,19 @@ class Order extends Eloquent {
             $category[$brand['_id']]= $tmpCat;
             foreach($tmpCat as $cat){
                $tmpproduct= Menu::getMenuByCategoryId($cat['_id']);
-               if(!empty($tmpproduct)){
-               $products[$cat['_id']]= $tmpproduct;
-               }
+              if(!empty($tmpproduct)){
+                $products[$cat['_id']]= $tmpproduct;
+              }
             }
         }
 
         $return=['brands'=>$brands,'category'=>$category,'items'=>$products,'modifer'=>[]];
+        return $return;
+    }
+    
+     public static function getOrdersfromStoreId($id){
+       $ord_sataus=['In Kitchen','Ready'];
+       $return=self::whereIn('order_status', $ord_sataus)->where('store_id', $id)->get()->toArray();
         return $return;
     }
 }

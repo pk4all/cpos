@@ -2,7 +2,7 @@
 .wrapper.no_navigation{
     padding-top: 64px;
 }
-.starterpage_tabs .back-link{ background: #ed1f24; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left; position: relative;}
+.starterpage_tabs .back-link{ background: #62a3ff; color: #fff; position: relative; padding: 0 20px; line-height: 41px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
 .starterpage_tabs .back-link i{ margin-right: 10px;}
 .starterpage_tabs .nav.nav-tabs > li > a{ line-height: 42px;}
  .scrtabs-tab-container * {
@@ -82,7 +82,7 @@
 
 
 /*==========Login page css start here===============*/
-html{ height: 100%;}
+html,body{ height: 100%;}
 body.nopadd{ padding-bottom: 0;}
 body.fullheight{ height: 100%;}
 body.loginbg{ position: relative; background: url(../images/login/banner.jpg) no-repeat top left; background-size: contain;}
@@ -121,7 +121,7 @@ body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; h
 
 
 /*==========Number page css start here===============*/
-body.graybg{ background:#eeeeee;}
+body.graybg{ background: rgb(211, 223, 228)}
 .topwhite_bar{ background: #fff; padding: 13px 0;}
 .topwhite_bar .container-fluid{ max-width: 100%;}
 .topwhite_bar .graybtn{ background: #dae6ec; border: none; border-bottom: 2px solid #c2d6e0; padding: 5px 10px; border-radius: 2px; font-size: 12px; color: #333; margin-right: 10px; cursor: pointer; display: inline-block}
@@ -168,20 +168,19 @@ body.graybg{ background:#eeeeee;}
 
 .orderlists .itemlist{ height: calc(100% - 230px); overflow-y: auto}
 .orderlists .itemlist thead{ background: #ebeff2; border: none;}
-.orderlists .itemlist table th{ padding: 8px 5px; font-weight: normal; font-size: 12px;}
-.orderlists .itemlist table td{ padding: 8px 5px; color: #868181; font-size: 12px;}
-.orderlists .itemlist table td p{ font-weight: normal; display: inline-block; width: calc(100% - 70px); vertical-align: top; font-size: 12px; line-height: 15px; color: #666666;}
-.orderlists .itemlist table a.action{ background: #fff; padding: 4px 7px; border-radius: 2px;
-    color: #333; font-size: 12px; line-height: 15px; margin-right: 2px; display: inline-block; border: 1px solid #eeeeee;}
+.orderlists .itemlist table th{ padding: 8px 5px;}
+.orderlists .itemlist table td{ padding: 8px 5px; color: #868181; font-size: 14px;}
+.orderlists .itemlist table td p{ font-weight: 500; display: inline-block; width: calc(100% - 70px); vertical-align: top; font-size: 13px; line-height: 15px; color: #333;}
+.orderlists .itemlist table a.action{ background: #dae6ec; padding: 4px 7px; border-radius: 2px;
+    color: #333; font-size: 14px; line-height: 15px; margin-right: 5px; display: inline-block}
 .orderlists .itemlist table .quantity{ width: 86px;}
-.orderlists .itemlist table .quantity button{background: #fff; cursor: pointer; border: 1px solid #eeeeee; width: 25px; height: 25px; border-radius: 0; float: left; padding: 0; font-size: 12px;}
-.orderlists .itemlist table .quantity button .fa{font-size: 10px; color: #505050;}
-.orderlists .itemlist table .quantity span{ background: #fff; border: 1px solid #eeeeee; width: 25px; height: 25px; border-left: 0; border-right: 0; float: left; text-align: center; font-size: 12px; color: #666666;}
+.orderlists .itemlist table .quantity button{background: #dae6ec; cursor: pointer; border: 1px solid #ccc; width: 25px; height: 25px; border-radius: 0; float: left; padding: 0; font-size: 12px;}
+.orderlists .itemlist table .quantity span{ background: #dae6ec; border: 1px solid #ccc; width: 25px; height: 25px; border-left: 0; border-right: 0; float: left; text-align: center; font-size: 14px; color: #222;}
 
-.orderlists .calculation table{ background: #fff}
-.orderlists .calculation table td{ padding: 8px; color: #797979; text-align: right; font-size: 12px;}
+.orderlists .calculation table{ background: #f4f8fb}
+.orderlists .calculation table td{ padding: 8px; color: #797979; text-align: right}
 .orderlists .calculation table td.count{ text-align: left;}
-.orderlists .calculation table .net{ background: #ebeff2;}
+.orderlists .calculation table .net{ background: #dff0d8;}
 .orderlists .btn-group{ width: 100%;}
 .orderlists .btn-group button{ width: 33.33%; box-shadow: none;}
 .orderlists .btn-group .btn-success{ background: #10c469!important; border-color: #10c469!important;}
@@ -194,17 +193,17 @@ body.graybg{ background:#eeeeee;}
 
 .pickup-page .categories_list{ width: 9%; float: left; position: relative; background: #fff; margin: 0 10px;  box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02); border-radius: 5px; min-height: 20px;}
 .pickup-page .categories_list ul{ list-style: none; margin: 0; padding: 0; height: 100%; max-height: 100%; overflow-y: auto; overflow-x: hidden; border-radius: 5px;}
-.pickup-page .categories_list ul li{ text-align: center; margin: 8px 0; border-bottom: 8px solid #fff; border-top: 8px solid #fff;}
-.pickup-page .categories_list ul li.active{ border-bottom: 9px solid #eeeeee; border-top: 8px solid #eeeeee;}
+.pickup-page .categories_list ul li{ text-align: center; margin: 15px 0; border: 3px solid rgba(0,0,0,0);}
+.pickup-page .categories_list ul li.active{ border: 3px solid #333;}
 .pickup-page .categories_list ul li a{ display: inline-block; position: relative; z-index: 9;}
 .pickup-page .categories_list ul li a img{max-width: 100%;}
 .pickup-page .categories_list .mCSB_inside > .mCSB_container{ margin-right: 0;}
 .pickup-page .categories_list .mCSB_draggerContainer{ opacity: 0;}
-.pickup-page .categories_list .mCSB_container{ padding: 32px 0;}
-.pickup-page .categories_list .mCSB_scrollTools{ width: 100%; opacity:.5; display: block !important;}
-.pickup-page .categories_list .mCSB_buttonUp{ background: #f4f8fb; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius: 5px 5px 0 0; border-bottom: 1px solid #a3aaae;box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
+.pickup-page .categories_list .mCSB_container{ padding: 50px 0;}
+.pickup-page .categories_list .mCSB_scrollTools{ width: 100%; opacity: 1; display: block !important;}
+.pickup-page .categories_list .mCSB_buttonUp{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius: 5px 5px 0 0;}
 .pickup-page .categories_list .mCSB_buttonUp:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/top-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
-.pickup-page .categories_list .mCSB_buttonDown{ background: #f4f8fb; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius:0 0 5px 5px;border-top: 1px solid #a3aaae;box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
+.pickup-page .categories_list .mCSB_buttonDown{ background: #10c469; z-index: 10; color: #fff; opacity: 1; width: 100%; height: 40px; border-radius:0 0 5px 5px;}
 .pickup-page .categories_list .mCSB_buttonDown:after{ position: absolute; left: 50%; top: 50%; width: 16px; height: 13px; background: url(../images/order/bottom-arrow.png) no-repeat top center; content: ''; margin: -7px 0 0 -8px; z-index: 1;}
 
 .pickup-page .categories_list .mCS_no_scrollbar_y + .mCSB_scrollTools .mCSB_buttonUp{ opacity: .5; pointer-events: none;}
@@ -214,17 +213,13 @@ body.graybg{ background:#eeeeee;}
 .brandtab_content{ display: none; height: 100%;}
 .brandtab_content.active{ display: block;}
 
-.catname-lists{ background: #f4f8fb; overflow: auto; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
+.catname-lists{ background: #52575b; overflow: auto; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;}
 .catname-lists ul{ margin: 0; padding: 0; list-style: none; white-space: nowrap; display: inline-block; margin-right: 10px;}
-
-/*.catname-lists{ background: #f4f8fb; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
-.catname-lists ul{ margin: 0; padding: 0; list-style: none;}*/
-
 .catname-lists ul li{ display: inline-block; padding: 0 1px; }
 .catname-lists .nav.nav-tabs > li > a{ line-height: 70px; background: #cce2f0; color: #222; display: block; font-weight: 600}
 .catname-lists .nav.nav-tabs > li.gradient1 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
 .catname-lists .nav.nav-tabs > li.gradient2 > a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
-.catname-lists .nav.nav-tabs > li.gradient3 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
+.catname-lists .nav.nav-tabs > li.gradient3 > a{ background: linear-gradient(blue, purple); color: #fff!important;}
 
 .catname-lists .scrtabs-tabs-fixed-container{ height: 70px; min-width: calc(100% - 80px);}
 .catname-lists .scrtabs-tabs-fixed-container .scrtabs-tabs-movable-container{ min-width: 100%;}
@@ -266,7 +261,3 @@ body.graybg{ background:#eeeeee;}
     height: calc(100% - 330px);
 }
 }
-
-.hide{display:none !important;}
-
-
