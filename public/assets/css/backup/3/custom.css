@@ -166,17 +166,7 @@ body.graybg{ background:#eeeeee;}
 .pickup-page .orderlists h2{ font-size: 18px; line-height: 25px; font-weight: 600; margin: 0 0 15px;}
 .pickup-page .orderlists .editbtn{ background: #dae6ec; border-bottom: 2px solid #c2d6e0 !important; padding: 3px 7px; border-radius: 2px; color: #333; font-size: 14px; line-height: 15px; margin-right: 10px;}
 
-.orderlists .itemlist{ height: calc(100% - 230px); overflow-y: auto; overflow-x: hidden;}
-.orderlists .itemlist::-webkit-scrollbar {height: 4px;width: 4px;border: 1px solid #d5d5d5;}
-.orderlists .itemlist::-webkit-scrollbar-track {
-  border-radius: 0;
-  background: #eeeeee;
-}
-
-.orderlists .itemlist::-webkit-scrollbar-thumb {
-  border-radius: 0;
-  background: #b0b0b0;
-}
+.orderlists .itemlist{ height: calc(100% - 230px); overflow-y: auto}
 .orderlists .itemlist thead{ background: #ebeff2; border: none;}
 .orderlists .itemlist table th{ padding: 8px 5px; font-weight: normal; font-size: 12px;}
 .orderlists .itemlist table td{ padding: 8px 5px; color: #868181; font-size: 12px;}
@@ -224,11 +214,9 @@ body.graybg{ background:#eeeeee;}
 .brandtab_content{ display: none; height: 100%;}
 .brandtab_content.active{ display: block;}
 
-.catname-lists{ background: #f4f8fb; overflow-y: auto; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
+.catname-lists{ background: #f4f8fb; overflow: auto; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
 .catname-lists ul{ margin: 0; padding: 0; list-style: none; white-space: nowrap; display: inline-block; margin-right: 10px;}
 
-
- 
 /*.catname-lists{ background: #f4f8fb; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
 .catname-lists ul{ margin: 0; padding: 0; list-style: none;}*/
 
@@ -255,7 +243,7 @@ body.graybg{ background:#eeeeee;}
 .cat_description .tab-content .boxes .wrapper{ display: inline-block; vertical-align: top; padding: 0; height: 100%; max-width: 765px;}
 
 .cat_description .tab-content .boxes.active{ display: block}
-.cat_description .tab-content .boxes .common{ float: left; max-width: 33%; padding: 2px; display: table-cell; height: 100px;}
+.cat_description .tab-content .boxes .common{ float: left; width: 16.66%; max-width: 128px; padding: 2px; display: table-cell; height: 100px;}
 .cat_description .tab-content .boxes .common a{ background: #d3dde6; height: 100%; padding: 5px; display: flex; text-align: center; justify-content: center; color: #222; display: flex; align-items: center}
 .cat_description .tab-content .boxes.gradient1 .common a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
 .cat_description .tab-content .boxes.gradient2 .common a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
