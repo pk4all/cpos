@@ -14,7 +14,6 @@ body {
   overflow-x: hidden;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
- 
 }
 
 html {
@@ -1412,7 +1411,8 @@ select[multiple] {
 
 .nav.nav-tabs {
   border-bottom: 0;
-  /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);*/
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
 .navtab-bg {
@@ -1585,7 +1585,8 @@ select[multiple] {
 }
 
 .wrapper {
-  padding-top: 75px;
+  padding-top: 55px;
+  min-height: calc(100% - 84px)
 }
 .wrapper.no_navigation{
     padding-top: 64px;
@@ -1594,14 +1595,34 @@ select[multiple] {
 .page-title-box {
   padding: 22px 0;
 }
-
+.sub-tab-list .page-title-box:before {
+    content: '';
+    position: absolute;
+    background: #566676;
+    left: 0px;
+    width: 120%;
+    top: 0px;
+    margin: 0 -10%;
+    height: 100%;
+}
 .page-title-box .page-title {
   font-size: 20px;
   margin-bottom: 0;
   margin-top: 0;
   font-weight: 500;
 }
-
+.sub-tab-list .page-title-box .page-title {display: none;}
+.sub-tab-list .starterpage_tabs:before {
+    content: '';
+    position: absolute;
+    background: #566676;
+    left: 0px;
+    width: 120%;
+    top: 0px;
+    margin: 0 -10%;
+    height: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 8px 10px 0 rgba(0, 0, 0, 0.12);
+}
 #topnav {
   position: fixed;
   right: 0;
@@ -2122,11 +2143,11 @@ select[multiple] {
   bottom: 0;
   text-align: left !important;
   padding: 20px 0;
-  position: absolute;
+  /*position: absolute;*/
   right: 0;
   background-color: #ffffff;
   left: 0;
-  display: none;
+  display: block;
 }
 
 .footer ul li {
@@ -3634,7 +3655,7 @@ table.focus-on tbody tr.focused td {
   text-align: left;
 }
 
-.al-right{
+.alright{
   text-align:right;
 }
 
