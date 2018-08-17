@@ -56,10 +56,10 @@
                         </ul>
                     </li>
                     @else
-                    <li class="has-submenu {{Request::segment(1)==null?'':'active'}}">
+                    <li class="has-submenu {{Request::segment(1)=='setup'?'active':''}}">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
                     </li>
-                    <li class="has-submenu {{Request::segment(2)=='pos'?'':'active'}}">
+                    <li class="has-submenu {{Request::segment(1)=='pos'?'active':''}}">
                         <a href="/pos"><i class="md md-add-shopping-cart"></i>Pos</a>
                     </li>
                     @endif

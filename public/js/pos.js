@@ -7,7 +7,7 @@ function PosModel() {
         self.selCategory=ko.observable(0);
         self.items=ko.observableArray(0);
         self.cartItems=ko.observableArray(0);
-        $.get(siteurl+'/getData/'+store_id,function(data){
+        $.get(siteurl+'/positem/'+store_id,function(data){
             //getDataVar = JSON.parse(data);
              getDataVar = data;
             //console.log(getDataVar);

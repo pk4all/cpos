@@ -45,10 +45,9 @@ class KitchenController extends Controller {
         /* end permission code */
        // $orderData = OrderHistory::getOrdersHistory();
         $orderData=Order::getOrdersfromStoreId($id);
-        
         //echo '<pre>';
        // print_r($orderData);die;
-      $return = view('kitchen.kitchen', ['orderData' => $orderData]);
+      $return = view('pos.kitchen', ['orderData' => $orderData]);
         return $return;
     }
     

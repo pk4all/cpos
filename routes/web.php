@@ -170,7 +170,7 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/customer', 'Pos\CustomerController@getCustomer');
     Route::post('/save-customer', 'Pos\CustomerController@saveCustomer');
     Route::post('/order', 'Pos\CustomerController@order');
-    Route::get('/getData/{id}', 'Pos\PosController@getData');
+    Route::get('/positem/{id}', 'Pos\PosController@getPosData');
     Route::post('/add-order', 'Pos\PosController@addOrder');
 });
  
