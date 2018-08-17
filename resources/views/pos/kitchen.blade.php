@@ -30,11 +30,11 @@
                                     <span class="num">{{$key+1}}</span>
                                     <span class="title">{{$product['item']['name']}}</span>
                                 </h3>
-                                <ul class="menu-list">
+<!--                                <ul class="menu-list">
                                     <li>
                                         <span>Crust: Gluten Free</span>
                                     </li>
-                                </ul>
+                                </ul>-->
                                 <ul class="menu-list">
                                     <li>
                                         <span></span>

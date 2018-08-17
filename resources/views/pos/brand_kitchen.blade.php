@@ -2,27 +2,26 @@
 <li class='{{$brand['_id']}} hide'>
     <div class="head-sec">
         <div class="left-sec">{{$brand['name']}}</div>
-        <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}} {{$key}}/{{$count}}</div>
+        <div class="right-sec">Order#{{isset($order['order_id'])?$order['order_id']:''}} {{$key+1}}/{{$count}}</div>
     </div>
 
     <div class="body-sec">
-
-        <h3><span class="num">1</span><span class="title">superbiotic</span></h3>
-        <ul class="menu-list">
-            <li><span>Crust: Gluten Free</span></li>
-            <li><span>Size: Medium</span></li>
-            <li><span>- Tomato Sauce (Full)</span></li>
-            <li><span>+ BBQ Sauce (Full)</span></li>
-            <li><span>+ Feta (Full)</span></li>
-        </ul>
-        <h3><span class="num">1</span><span class="title">superbiotic</span></h3>
-        <ul class="menu-list">
-            <li><span>Crust: Gluten Free</span></li>
-            <li><span>Size: Medium</span></li>
-            <li><span>- Tomato Sauce (Full)</span></li>
-            <li><span>+ BBQ Sauce (Full)</span></li>
-            <li><span>+ Feta (Full)</span></li>
-        </ul>
+  @if(is_array($order['cart_items']))
+                        @foreach($order['cart_items'] as $key=>$product)
+                        @if($brand['_id'] == $product['brand']['_id'])
+                        <div class="item-list">
+                            <div class="item">
+                                <h3>
+                                    <span class="num">{{$key+1}}</span>
+                                    <span class="title">{{$product['item']['name']}}</span>
+                                </h3>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
+        
+        
     </div>
 
     <div class="footer-sec">
