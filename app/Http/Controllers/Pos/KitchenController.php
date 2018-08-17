@@ -38,7 +38,6 @@ class KitchenController extends Controller {
 
     public function getIndex(Request $request, $id) {
         
-
         /* code for check roles and redirect it on index method of current controller if has not access */
         if (($return = UserRoles::hasAccess('menu_view', $request)) !== true) {
               return redirect()->action($return);
@@ -46,6 +45,7 @@ class KitchenController extends Controller {
         /* end permission code */
        // $orderData = OrderHistory::getOrdersHistory();
         $orderData=Order::getOrdersfromStoreId($id);
+        
         //echo '<pre>';
        // print_r($orderData);die;
       $return = view('kitchen.kitchen', ['orderData' => $orderData]);

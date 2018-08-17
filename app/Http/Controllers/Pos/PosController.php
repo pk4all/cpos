@@ -69,7 +69,8 @@ class PosController extends Controller {
         if($request->input('data')){
             $cart_items=$request->input('data.cart_items');
             foreach($cart_items as $item){
-                   $brand_status[$item['brand']['_id']]='In Kitchen';
+             $brand_status[$item['brand']['_id']]=['status'=>'In Kitchen','id'=>$item['brand']['_id'],'name'=>$item['brand']['name']];
+                $brand_status=array_values($brand_status);
             }
            $order=new Order();
            $order->store_id=$request->input('data.store_id');
