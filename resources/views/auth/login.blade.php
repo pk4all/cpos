@@ -3,12 +3,12 @@
 <div class="account-pages"></div>
 <div class="clearfix"></div>
 <div class="wrapper-page">
+<div style="text-align:center;">
+<img src="{{ asset("assets/images/logo-cpos.png")}}" alt="Logo CPOS360">
+<h5>A Complete cloud solution for your restaurant customer and order management to delivery</h5>
+</div>
+
             <div class="card-box">
-                <div class="panel-heading">
-                    <h4 class="text-center"> Sign In to <strong>Cpos</strong></h4>
-                </div>
-
-
                 <div class="p-20">
                     <form class="form-horizontal m-t-20" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -45,7 +45,7 @@
 
                         <div class="form-group text-center m-t-40">
                             <div class="col-12">
-                                <button class="btn btn-success btn-block text-uppercase waves-effect waves-light"
+                                <button class="btn btn-danger btn-block text-uppercase waves-effect waves-light"
                                         type="submit">Log In
                                 </button>
                             </div>
