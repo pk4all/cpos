@@ -13,7 +13,7 @@
                     @if(is_array($order['brand_status']))
                     @foreach($order['brand_status'] as $key=>$brand)
                     <div class="brand">
-                        <div class="brand{{$key+1}}">
+                        <div class="{{strtolower(str_replace(" ","",$brand['name']))}}">
                             <div class="left-sec">{{$brand['name']}}</div>
 
                             <!-- <div class="right-sec">Ready</div> -->
@@ -34,12 +34,12 @@
                                     <li>
                                         <span>Crust: Gluten Free</span>
                                     </li>
-                                </ul>-->
+                                </ul>
                                 <ul class="menu-list">
                                     <li>
                                         <span></span>
                                     </li>
-                                </ul>
+                                </ul>-->
 
                             </div>
                         </div>
@@ -87,9 +87,7 @@
             <div class="footer-sec">
                 <div class="left-sec timer">00:00</div>
                 <div class="right-sec">
-                    @if(strtolower($order['order_status'])=='ready')   
-                    <button type="button" class="dispach_btn">Dispatch</button>
-                    @endif
+                    <button type="button" class="dispach_btn{{strtolower($order['order_status'])=='ready'?'':'.disabled'}}">Dispatch</button>
                 </div>
             </div>
 

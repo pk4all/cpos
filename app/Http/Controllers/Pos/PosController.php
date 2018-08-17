@@ -68,6 +68,7 @@ class PosController extends Controller {
             $order->shipping = $request->input('data.shipping');
             $order->order_status = 'In Kitchen';
             $order->brand_status = $brand_status;
+            $order->order_id = rand(100,999);
             $order->customer = $customer;
             if ($order->save()) {
                 $request->session()->forget('customer');

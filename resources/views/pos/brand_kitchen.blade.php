@@ -18,11 +18,7 @@
                                     <span class="title">{{$product['item']['name']}}</span>
                                 </h3>
                             </div>
-                            <ul class="menu-list">
-                                    <li>
-                                        <span></span>
-                                    </li>
-                                </ul>
+                            
                         </div>
                         @endif
                         @endforeach
