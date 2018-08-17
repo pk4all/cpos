@@ -44,9 +44,9 @@ class KitchenController extends Controller {
               return redirect()->action($return);
         }
         /* end permission code */
-        $orderData = OrderHistory::getOrdersHistory();
-
-        $return = view('kitchen.kitchen', ['orderData' => $orderData]);
+       // $orderData = OrderHistory::getOrdersHistory();
+    
+      $return = view('kitchen.kitchen', ['orderData' => $orderData]);
 
         return $return;
     }
