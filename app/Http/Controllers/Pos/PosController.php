@@ -56,7 +56,7 @@ class PosController extends Controller {
         if ($request->input('data')) {
             $cart_items = $request->input('data.cart_items');
             foreach ($cart_items as $item) {
-                $brand_status[$item['brand']['_id']] = ['status' => 'In Kitchen', 'id' => $item['brand']['_id'], 'name' => $item['brand']['name']];
+                $brand_status[$item['brand']['_id']] = ['status' => 'In Kitchen', '_id' => $item['brand']['_id'], 'name' => $item['brand']['name']];
             }
             $brand_status = array_values($brand_status);
             $order = new Order();
@@ -71,7 +71,7 @@ class PosController extends Controller {
             $order->customer = $customer;
             if ($order->save()) {
                 $request->session()->forget('customer');
-                $request->session()->forget('store');
+                //$request->session()->forget('store');
                 $request->session()->forget('order_type');
                 return response()->json(["response" => 200, 'status' => 'success', "action" => '/pos']);
             } else {
