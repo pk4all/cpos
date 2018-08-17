@@ -13,7 +13,7 @@
                     @if(is_array($order['brand_status']))
                     @foreach($order['brand_status'] as $key=>$brand)
                     <div class="brand">
-                        <div class="{{strtolower(str_replace(" ","",$brand['name']))}}">
+                        <div class="brand-common brand{{$key+1}}">
                             <div class="left-sec">{{$brand['name']}}</div>
 
                             <!-- <div class="right-sec">Ready</div> -->
@@ -22,12 +22,13 @@
 
                         </div>
                         @if(is_array($order['cart_items']))
+                        {{-- */$count=1;/* --}}
                         @foreach($order['cart_items'] as $key=>$product)
                         @if($brand['_id'] == $product['brand']['_id'])
                         <div class="item-list">
                             <div class="item">
                                 <h3>
-                                    <!--<span class="num">{{$key+1}}</span>-->
+                                    <span class="num">{{$count++}}</span>
                                     <span class="title">{{$product['item']['name']}}</span>
                                 </h3>
 <!--                                <ul class="menu-list">
