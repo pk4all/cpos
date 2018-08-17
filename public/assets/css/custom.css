@@ -2,7 +2,7 @@
 .wrapper.no_navigation{
     padding-top: 64px;
 }
-.starterpage_tabs .back-link{ background: #505050; color: #fff; padding: 0 20px; line-height: 42px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
+.starterpage_tabs .back-link{ background: #62a3ff; color: #fff; position: relative; padding: 0 20px; line-height: 41px; display: inline-block; font-weight: 500; width: 100px; text-align: center; float: left;}
 .starterpage_tabs .back-link i{ margin-right: 10px;}
 .starterpage_tabs .nav.nav-tabs > li > a{ line-height: 42px;}
  .scrtabs-tab-container * {
@@ -82,7 +82,7 @@
 
 
 /*==========Login page css start here===============*/
-html{ height: 100%;}
+html,body{ height: 100%;}
 body.nopadd{ padding-bottom: 0;}
 body.fullheight{ height: 100%;}
 body.loginbg{ position: relative; background: url(../images/login/banner.jpg) no-repeat top left; background-size: contain;}
@@ -214,8 +214,8 @@ body.graybg{ background:#eeeeee;}
 .brandtab_content{ display: none; height: 100%;}
 .brandtab_content.active{ display: block;}
 
-.catname-lists{ background: #f4f8fb; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #d4d4d4;}
-.catname-lists ul{ margin: 0; padding: 0; list-style: none;}
+.catname-lists{ background: #52575b; overflow: auto; padding: 10px; display: inline-block; vertical-align: top; width: 100%; border-radius: 5px 5px 0 0;}
+.catname-lists ul{ margin: 0; padding: 0; list-style: none; white-space: nowrap; display: inline-block; margin-right: 10px;}
 .catname-lists ul li{ display: inline-block; padding: 0 1px; }
 .catname-lists .nav.nav-tabs > li > a{ line-height: 70px; background: #cce2f0; color: #222; display: block; font-weight: 600}
 .catname-lists .nav.nav-tabs > li.gradient1 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
@@ -262,7 +262,3 @@ body.graybg{ background:#eeeeee;}
     height: calc(100% - 330px);
 }
 }
-
-.hide{display:none !important;}
-
-

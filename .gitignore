@@ -13,3 +13,4 @@ yarn-error.log
 *.lock
 #/public/assets/images/
 /nbproject/
+routes/web.php
