@@ -120,7 +120,7 @@
         self.selCategory=ko.observable(0);
         self.items=ko.observableArray(0);
         self.cartItems=ko.observableArray(0);
-        $.get(siteurl+'/getData',function(data){
+        $.get(siteurl+'/positem/5b6711bc71add87dab29cc52',function(data){
             getDataVar = JSON.parse(data);
             //console.log(getDataVar);
             self.brands(getDataVar.data.brands);
