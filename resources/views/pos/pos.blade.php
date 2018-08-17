@@ -11,9 +11,9 @@
                             <thead>
                                 <tr> 
                                     <th>Items</th>
-                                    <th>Unit Price</th>
+                                    <th>Price</th>
                                     <th class="quantity">Quantity</th>
-                                    <th>Total Price</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody data-bind="foreach:cartItems">
