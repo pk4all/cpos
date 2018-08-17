@@ -21,7 +21,7 @@ class OrderHistory extends Eloquent {
     public static function getOrdersHistory() {
         //return self::where('_id', $id)->where('status', 'enable')->first();
         $itemData = array();
-        $item1 = Menu::getMenuById('5b74485c727b8b08b71f0993');
+        $item1 = Menu::getMenuById('5b75988b71add856b95fefe4');
         $item1 = $item2 = $item1[0]->attributes;
         $item1['Brand'] = [
             '_id' => 'abcd',
