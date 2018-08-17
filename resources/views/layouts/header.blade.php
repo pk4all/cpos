@@ -22,7 +22,7 @@
             <div class="menu-extras topbar-custom">
                 <ul class="navigation-menu list-inline float-left mb-0">
 
-                    <li>
+                    <li class="has-submenu {{Request::segment(1)==null?'active':''}}">
                         <a href="/"> <i class="md md-dashboard"></i>Dashboard</a>
                     </li>
                     <!--<li class="has-submenu">
@@ -56,7 +56,7 @@
                         </ul>
                     </li>
                     @else
-                    <li class="has-submenu {{Request::segment(1)=='setup'?'active':''}}">
+                    <li class="has-submenu {{Request::segment(1)==null?'':'active'}}">
                         <a href="/setup"><i class="md  md-settings"></i>Setup</a>
                     </li>
                     <li class="has-submenu {{Request::segment(1)=='pos'?'active':''}}">
