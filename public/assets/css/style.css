@@ -633,6 +633,7 @@ a:focus {
   margin-bottom: 15px;
   padding-top: 10px;
   padding-left: 0;
+  display:none;
 }
 
 .breadcrumb a {
@@ -1609,6 +1610,7 @@ select[multiple] {
   margin-bottom: 0;
   margin-top: 0;
   font-weight: 500;
+  display:none;
 }
 .sub-tab-list .page-title-box .page-title {display: none;}
 .sub-tab-list .starterpage_tabs:before {
