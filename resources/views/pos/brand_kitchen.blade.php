@@ -9,7 +9,7 @@
 
 
         @if(is_array($order['cart_items']))
-        @php ($count = 0)
+        @php ($count = 1)
         @foreach($order['cart_items'] as $key=>$product)
         @if($brand['_id'] == $product['brand']['_id'])
         <div class="item-list">
