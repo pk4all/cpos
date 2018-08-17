@@ -7877,7 +7877,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
 }
 .main-grid .row .col-md-2 .card .card-body h5{
   font-size: 14px;
