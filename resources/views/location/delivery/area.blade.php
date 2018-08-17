@@ -3,7 +3,7 @@
 <div class="wrapper">
     <div class="container-fluid">
         <!-- Page-Title -->
-        <div class="row">
+        <div class="row sub-tab-list">
 @include('layouts.messages',['title'=>'Delivery Store Areas','path'=>['#'=>'Delivery Store Areas']])
 @include('layouts.menu',['tabList'=>$tabList])
         </div>      

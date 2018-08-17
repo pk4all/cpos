@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row sub-tab-list">
     <div class="col-sm-12">
         <div class="card-box">
             <div class="">

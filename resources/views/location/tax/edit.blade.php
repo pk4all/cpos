@@ -4,7 +4,7 @@
 <div class="wrapper">
     <div class="container-fluid">
         <!-- Page-Title -->
-        <div class="row">
+        <div class="row sub-tab-list">
             @include('layouts.messages',['title'=>'Add New Tax','path'=>['/location'=>'Location','#'=>'Tax']])
             @include('layouts.menu',['tabList'=>$tabList])
             <div class="col-12">
