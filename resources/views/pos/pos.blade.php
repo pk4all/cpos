@@ -110,17 +110,17 @@
                 <div class="modal-header">
                     
                     <h4 class="modal-title">Order Payment</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
                 </div>
     <div class="modal-body">
     <div id="pay_sec" class="row" >
-	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;margin-right: 10px;" data-bind="click:order">Cash</button>
-	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;" data-bind="click:order">Card</button>
+	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:150px; height:150px;margin-right: 10px;" data-bind="click:order">Cash</button>
+	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:150px; height:150px;" data-bind="click:order">Card</button>
 		
 					</div>
 				</div>
 				<div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-info waves-effect" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-inverse btn-info waves-effect" data-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-danger btn-info waves-effect hide" onclick="order();">OK</button>
                 </div>
 			</div>
