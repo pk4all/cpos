@@ -17,7 +17,7 @@
                                 </tr>
                             </thead>
                             <tbody data-bind="foreach:cartItems">
-                                <tr >
+                                <tr>
                                     <td>
                                         <a class="action" href="#"><i class="fa fa-trash error"></i></a>
                                         <a class="action" href="#"><i class="fa fa-edit"></i></a>
@@ -126,7 +126,6 @@
 			</div>
 			</div>	
 	</div>
-	
 <?php $store=session('store'); ?>
 <script>
   var getDataVar='';
@@ -134,7 +133,7 @@
   var siteurl='<?php echo url('/');?>';
   var store_id="{{$store['_id']}}";
   var customer='<?php echo json_encode($customer); ?>';
-  var brandImgUrl='http://nkdpizza.cpos360.com/assets/images/uploaded_image/';  
+  var brandImgUrl='http://nkdpizza.cpos360.com/assets/images/uploaded_image/';
 </script>
 <script src="{{ asset('js/pos.js')}}"></script>
 @stop
