@@ -26,6 +26,7 @@ function PosModel() {
             self.items(getDataVar.data.items[self.selCategory()]);
             $('.categories_list ul li').removeClass('active');
             $('.categories_list ul li').eq(indx).addClass('active');
+            //console.log(self.categories());
         }
         
        self.changeItems=function(indx,data){
@@ -94,29 +95,19 @@ ko.bindingHandlers.brandCro = {
  }
  
 ko.bindingHandlers.catTab = {
-    init: function() {
-	setTimeout(function(){
-            /* $('.catname-lists ul')
-            .scrollingTabs({
-                enableSwiping: true
-            })
-            .on('ready.scrtabs', function() {
-                $('.tab-content').show();
-            });*/
-        },2000);
+    init: function(el) {
+	/* $(el).scrollingTabs('destroy');
+         $(el)
+        .scrollingTabs({
+            enableSwiping: true
+        });
+        */
     },
-    update:function(){
-        setTimeout(function(){
-          /* $('.catname-lists ul')
-            .scrollingTabs({
-                enableSwiping: true
-            })
-            .on('ready.scrtabs', function() {
-                $('.tab-content').show();
-            });*/
-        },2000);
+    update:function(el){
+        $(el).scrollingTabs('refresh');
     }
 };
 ko.options.useOnlyNativeEvents = true;
 ko.options.deferUpdates = true;
 ko.applyBindings(pm); 
+

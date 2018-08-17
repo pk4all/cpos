@@ -89,7 +89,7 @@
     <div class="brandtab_content active">
         <!-- ko if: categories().length>0 -->
         <div class="catname-lists">
-            <ul class="nav nav-tabs brand1" data-bind="foreach:categories,catTab">
+            <ul class="nav nav-tabs brand1" data-bind="foreach:$root.categories,catTab">
                 <li data-bind="attr:{class:'gradient'+($index()+1)},click:$parent.changeItems.bind($data, $index())"><a href="javascript:void(0)" data-bind="text:$data.name">Brand 1 Category1</a></li>
             </ul>
         </div>
@@ -114,7 +114,7 @@
                 </div>
     <div class="modal-body">
     <div id="pay_sec" class="row" >
-	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;" data-bind="click:order">Cash</button>
+	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;margin-right: 10px;" data-bind="click:order">Cash</button>
 	<button class="btn btn-default waves-effect waves-light btn-lg m-b-5 btn-size" style="width:200px; height:150px;" data-bind="click:order">Card</button>
 		
 					</div>
