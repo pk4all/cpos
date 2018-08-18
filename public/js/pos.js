@@ -30,6 +30,11 @@ function PosModel() {
         }
         
        self.changeItems=function(indx,data){
+		   var cls=$('.catname-lists ul li').eq(indx).attr('class');
+		   $('.tab-content>div').removeAttr('class');
+		   $('.tab-content>div').addClass('boxes');
+			$('.tab-content>div').addClass('active');
+		   $('.tab-content>div').addClass(cls);
            self.selCategory(data._id);
            self.items(getDataVar.data.items[self.selCategory()]);
         }
@@ -86,16 +91,18 @@ function PosModel() {
  var pm=new PosModel();
 ko.bindingHandlers.brandCro = {
     init: function() {
-        $(".categories_list ul").mCustomScrollbar({
+		$('.tab-content>div').addClass($('.catname-lists ul li').eq(0).attr('class'));
+       /* $(".categories_list ul").mCustomScrollbar({
             scrollButtons:{
               enable:true
             }
-      });
+      });*/
     }
  }
  
 ko.bindingHandlers.catTab = {
     init: function(el) {
+		$('.tab-content>div').addClass($('.catname-lists ul li').eq(0).attr('class'));
 	/* $(el).scrollingTabs('destroy');
          $(el)
         .scrollingTabs({
