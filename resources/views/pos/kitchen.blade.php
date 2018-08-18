@@ -100,18 +100,20 @@
 
     </ul>
     @if(count($orderData)>0)
+    <ul class="grid-list" id="Completed-list-brand">
     @foreach($orderData as $order)
     @if(is_array($order['brand_status']))
-    <ul class="grid-list" id="Completed-list-brand">
+    
         @foreach($order['brand_status'] as $key=>$brand)
         @if(strtolower($brand['status'])!='ready') 
         @include('pos.brand_kitchen',['brand'=>$brand,'order'=>$order,'key'=>$key,'count'=>count($order['brand_status'])])
         @endif
         @endforeach
-    </ul>
+   
 
     @endif           
     @endforeach
+     </ul>
     @endif
 </div>
 
