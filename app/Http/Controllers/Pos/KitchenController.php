@@ -115,7 +115,7 @@ class KitchenController extends Controller {
 			curl_close($curl);
 			//print_r($response);
 			/*--------------- Code for delv--------------*/
-			//$orderData->order_status='Dispatch';
+			$orderData->order_status='Dispatch';
 			if($orderData->save()){
 				return response()->json(["response" => 200, 'status' => 'success','msg'=>$response]);
 			}else{
