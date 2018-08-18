@@ -57,11 +57,20 @@ class KitchenController extends Controller {
 		$orderData=Order::getOrdersById($ord_id);
 		//echo '<pre>';
 		$bd_data=$orderData->brand_status;
+		$sts=false;
 		foreach($bd_data as $bd){
 			if($bd['_id']==$brand_id){
 				$bd['status']='Ready';
 			}
+			if($bd['status']=='Ready'){
+				$sts=true;
+			}else{
+				$sts=false;
+			}
 			$ourBd[]=$bd;
+		}
+		if($sts){
+			$orderData->order_status='Ready';
 		}
 		$orderData->brand_status=$ourBd;
 		if($orderData->save()){
