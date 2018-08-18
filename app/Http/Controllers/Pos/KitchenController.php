@@ -101,7 +101,7 @@ class KitchenController extends Controller {
 			header('Access-Control-Allow-Headers: Content-Type');
 			$fields=(array(
 			  'store_id' => 'MARINA',
-			  'order_no' => $orderData->_id,
+			  'order_no' => $orderData->order_id,
 			  'order_description' => $ord_items,
 			  'customer_first_name' => $orderData->customer['name'],
 			  'customer_last_name' => '',
