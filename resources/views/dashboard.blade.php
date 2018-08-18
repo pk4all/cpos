@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="row">
+       <!-- <div class="row">
 
             <div class="col-lg-12 col-xl-4">
                 <div class="card-box">
@@ -117,11 +117,11 @@
 
 
 
-        </div>
+        </div>-->
         <!-- end row -->
 
 
-        <div class="row">
+       <!-- <div class="row">
 
             <div class="col-lg-12 col-xl-6">
                 <div class="card-box">
@@ -147,7 +147,7 @@
 
             </div>
 
-            <!-- col -->
+
 
             <div class="col-lg-12 col-xl-6">
                 <div class="card-box">
@@ -224,9 +224,9 @@
 
                 </div>
             </div>
-            <!-- end col -->
 
-        </div>
+
+        </div> -->
         <!-- end row -->
 
     </div> <!-- end container -->

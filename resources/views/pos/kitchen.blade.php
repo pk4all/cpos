@@ -100,7 +100,7 @@
 
     </ul>
     @if(count($orderData)>0)
-		<ul class="grid-list" id="Completed-list-brand">
+    <ul class="grid-list" id="Completed-list-brand">
     @foreach($orderData as $order)
     @if(is_array($order['brand_status']))
     
@@ -113,7 +113,7 @@
 
     @endif           
     @endforeach
-	 </ul>
+     </ul>
     @endif
 </div>
 
