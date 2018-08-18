@@ -39,9 +39,10 @@
 		  evnt.preventDefault();
 		 var brand=$(this).val();
 		 if(brand=='master'){
-			 $('#Completed-list-brand li').hide();
-			 $('#Completed-list').show();
-			 
+			// $('#Completed-list-brand li').hide();
+			// $('#Completed-list').show();
+			 location.reload();
+
 		 }else{
 			 $('#Completed-list').hide();
 			  $('#Completed-list-brand li').hide();
