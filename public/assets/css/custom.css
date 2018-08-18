@@ -250,7 +250,7 @@ body.graybg{ background:#eeeeee;}
 .catname-lists ul li{ display: inline-block; padding: 0 1px; }
 .catname-lists .nav.nav-tabs > li > a{ line-height: 70px; background: #cce2f0; color: #222; display: block; font-weight: 600}
 .catname-lists .nav.nav-tabs > li.gradient1 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
-.catname-lists .nav.nav-tabs > li.gradient2 > a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
+.catname-lists .nav.nav-tabs > li.gradient0 > a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
 .catname-lists .nav.nav-tabs > li.gradient3 > a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
 
 .catname-lists .scrtabs-tabs-fixed-container{ height: 70px; min-width: calc(100% - 80px);}
@@ -273,7 +273,7 @@ body.graybg{ background:#eeeeee;}
 .cat_description .tab-content .boxes .common{ float: left; max-width: 33%; padding: 2px; display: table-cell; height: 100px;}
 .cat_description .tab-content .boxes .common a{ background: #d3dde6; height: 100%; padding: 5px; display: flex; text-align: center; justify-content: center; color: #222; display: flex; align-items: center}
 .cat_description .tab-content .boxes.gradient1 .common a{ background: linear-gradient(#2cc0a6, #3db4d2); color: #fff!important;}
-.cat_description .tab-content .boxes.gradient2 .common a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
+.cat_description .tab-content .boxes.gradient0 .common a{ background: linear-gradient(#768bf4, #579ac7); color: #fff!important;}
 .cat_description .tab-content .boxes.gradient3 .common a{ background: linear-gradient(blue, purple); color: #fff!important;}
 
 .cat-pagination{ display: flex;}
