@@ -85,7 +85,6 @@ class KitchenController extends Controller {
 			foreach($orderData->cart_items as $item){
 				$ord_items.=$item['item']['name'].', ';
 			}
-			
 			//print_r($orderData->customer);die;
 			/*--------------- Code for delv--------------*/
 			header('Access-Control-Allow-Origin: *');

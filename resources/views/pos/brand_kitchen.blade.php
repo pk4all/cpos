@@ -7,7 +7,6 @@
 
     <div class="body-sec">
 
-
         @if(is_array($order['cart_items']))
         @php ($count = 1)
         @foreach($order['cart_items'] as $key=>$product)

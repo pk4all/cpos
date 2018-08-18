@@ -105,7 +105,7 @@
     @if(is_array($order['brand_status']))
     
         @foreach($order['brand_status'] as $key=>$brand)
-        @if(strtolower($brand['status'])!='ready') 
+        @if(strtolower($brand['status'])!='ready')
         @include('pos.brand_kitchen',['brand'=>$brand,'order'=>$order,'key'=>$key,'count'=>count($order['brand_status'])])
         @endif
         @endforeach
