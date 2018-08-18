@@ -89,7 +89,7 @@
             <div class="footer-sec">
                 <div class="left-sec timer">00:00</div>
                 <div class="right-sec">
-                    <button type="button" class="dispach_btn{{strtolower($order['order_status'])=='ready'?'':'disabled'}}" onclick="dispatch('{{$order['_id']}}');">Dispatch</button>
+                    <button type="button" class="dispach_btn {{strtolower($order['order_status'])=='ready'?'':'disabled'}}" onclick="dispatch('{{$order['_id']}}');">Dispatch</button>
                 </div>
             </div>
 
