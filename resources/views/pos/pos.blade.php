@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <?php $customer=session('customer');?>
         <div class="orderlists">
-                    <h2><a href="javascript:void(0)" class="editbtn"><i class="fa fa-edit"></i></a>Order for {{$customer['name']}} ({{$customer['phone']}})</h2>
+                    <h2><a href="/pos" class="editbtn"><i class="fa fa-edit"></i></a>Order for {{$customer['name']}} ({{$customer['phone']}})</h2>
                     <div class="table-responsive itemlist">
                         <table class="table">
                             <thead>
