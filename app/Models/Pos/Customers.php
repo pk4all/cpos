@@ -20,7 +20,10 @@ class Customers extends Eloquent {
     }
     
     public static function getCustomerByPhone($phone) {
-        return self::where('phone', $phone)->where('status', 'enable')->first();
+        return self::where('phone', $phone)->first();
+    }
+    public static function getRawCustomerById($id) {
+        return self::where('_id', $id)->first();
     }
 
 }
