@@ -53,8 +53,7 @@
 
                         <div class="form-group m-t-30 m-b-0">
                             <div class="col-12">
-                                <a href="{{ route('password.request') }}" class="text-dark"><i class="fa fa-lock m-r-5"></i> Forgot
-                                    your password?</a>
+                                <a href="{{ route('password.request') }}" class="text-dark"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a> <a href="/pos/login" class="text-dark pull-right"><i class="md md-dialpad"></i> Login with PIN</a>
                             </div>
                         </div>
                     </form>

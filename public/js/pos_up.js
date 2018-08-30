@@ -1,3 +1,4 @@
+  
 function PosModel() {
         var self = this;
         self.brands=ko.observableArray(0);
@@ -17,16 +18,38 @@ function PosModel() {
             self.categories(getDataVar.data.category[self.selBrandId()]);
             self.selCategory(self.categories()[0]._id);
             self.items(getDataVar.data.items[self.selCategory()]);
+            self.tabs=ko.observableArray(0);
+            var tabs=[];
+            $.each(self.categories(),function(indx,val){
+                tabs.push({title:val.name,class:'grd'});
+            });
+            self.tabs(tabs);
+            $('.catname-lists').scrollingTabs({
+                tabs: self.tabs(),
+               // scrollToTabEdge: false,
+                ignoreTabPanes:true
+              });
         });
         self.changeCats=function(indx,data){
             self.selBrandId(data._id);
             self.selBrand(data);
             self.categories(getDataVar.data.category[data._id]);
             self.selCategory(self.categories()[0]._id);
-            self.items(getDataVar.data.items[self.selCategory()]);
+            
+            var locTabs=[];
+           $.each(self.categories(),function(indx,val){
+                locTabs.push({title:val.name,class:'grd'});
+            });
+                self.tabs(locTabs);
+                $('.catname-lists').scrollingTabs('destroy');
+                $('.catname-lists').scrollingTabs({
+                tabs: self.tabs(),
+               // scrollToTabEdge: false,
+                ignoreTabPanes:true
+              });
+             self.items(getDataVar.data.items[self.selCategory()]);
             $('.categories_list ul li').removeClass('active');
-            $('.categories_list ul li').eq(indx).addClass('active');
-            //console.log(self.categories());
+            $('.categories_list ul li').eq(indx).addClass('active'); 
         }
         
        self.changeItems=function(indx,data){
@@ -89,6 +112,8 @@ function PosModel() {
        }
     }
  var pm=new PosModel();
+
+ 
 ko.bindingHandlers.brandCro = {
     init: function() {
 		$('.tab-content>div').addClass($('.catname-lists ul li').eq(0).attr('class'));
@@ -102,16 +127,21 @@ ko.bindingHandlers.brandCro = {
  
 ko.bindingHandlers.catTab = {
     init: function(el) {
-		$('.tab-content>div').addClass($('.catname-lists ul li').eq(0).attr('class'));
+		//$('.tab-content>div').addClass($('.catname-lists ul li').eq(0).attr('class'));
 	/* $(el).scrollingTabs('destroy');
          $(el)
         .scrollingTabs({
             enableSwiping: true
         });
+                    $('.brand1').scrollingTabs('refresh');
+            $('.brand1').scrollingTabs({
+                enableSwiping: true
+            });
         */
+       
     },
     update:function(el){
-       // $(el).scrollingTabs('refresh');
+        //$(el).scrollingTabs('refresh');
     }
 };
 ko.options.useOnlyNativeEvents = true;

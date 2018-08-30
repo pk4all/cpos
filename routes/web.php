@@ -179,4 +179,9 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
     Route::post('/add-order', 'Pos\PosController@addOrder');
 	
 });
- 
+Route::group(['middleware' => ['domain_setup']], function () {
+    Route::get('/pos/login', 'Login\LoginController@index');
+    Route::post('/pos/check-user', 'Login\LoginController@checkUser');
+    Route::post('/pos/set-pin', 'Login\LoginController@setPin');
+    Route::post('/pos/user-login', 'Login\LoginController@login');
+});

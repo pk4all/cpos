@@ -108,20 +108,20 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
 
     public static function getUserById($id, $is_object = false, $options = []) {
         $result = array();
-        $memcache = getMemcacheKey(func_get_args(), __METHOD__, true);
+        /*$memcache = getMemcacheKey(func_get_args(), __METHOD__, true);
         if (!$is_object && isset($memcache['data']) && !empty($memcache['data'])) {
             return $memcache['data'];
-        }
+        }*/
 
         $result = self::where('_id', $id)->first();
 
 
-        if (!$is_object && isset($memcache['key']) && !empty($result)) {
+       /* if (!$is_object && isset($memcache['key']) && !empty($result)) {
             if (is_object($result)) {
                 $result = $result->toArray();
             }
             putDataMemcached($memcache['key'], $result);
-        }
+        }*/
         return $result;
     }
 
@@ -197,5 +197,7 @@ AuthenticatableContract, AuthorizableContract, CanResetPasswordContract {
         }
         return $result;
     }
+    
+    
 
 }

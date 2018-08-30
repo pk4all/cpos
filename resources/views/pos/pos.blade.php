@@ -87,9 +87,10 @@
         <!-- /ko -->
        <div class="cat_description">
     <div class="brandtab_content active">
+        
         <!-- ko if: categories().length>0 -->
         <div class="catname-lists">
-            <ul class="nav nav-tabs brand1" data-bind="foreach:$root.categories,catTab">
+            <ul class="nav nav-tabs brand1" data-bind="foreach:categories,catTab">
                 <li data-bind="attr:{class:'gradient'+($index() + 1)%2},click:$parent.changeItems.bind($data, $index())"><a href="javascript:void(0)" data-bind="text:$data.name">Brand 1 Category1</a></li>
             </ul>
         </div>
@@ -127,6 +128,8 @@
 			</div>	
 	</div>
 <?php $store=session('store'); ?>
+<link href="{{asset('assets/plugins/owl/owl.carousel.css')}}" rel="stylesheet" type="text/css">
+<script src="{{asset('assets/plugins/owl/owl.carousel.js')}}"></script>
 <script>
   var getDataVar='';
   var crsf='{{ csrf_token()}}';
