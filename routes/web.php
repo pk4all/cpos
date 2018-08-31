@@ -121,8 +121,10 @@ Route::group(['middleware' => ['domain_setup', 'auth']], function () {
 
     Route::get('/category', 'Menu\CategoryController@getIndex');
     Route::get('/category/create', 'Menu\CategoryController@create');
+    Route::get('/sub-category/create', 'Menu\CategoryController@create');
     Route::post('/category/store', 'Menu\CategoryController@postStore');
     Route::get('/category/edit/{id}', 'Menu\CategoryController@getEdit');
+    Route::get('/sub-category/edit/{id}', 'Menu\CategoryController@getEdit');
     Route::post('/category/update/{id}', 'Menu\CategoryController@postUpdate');
     Route::get('/category/destroy/{id}', 'Menu\CategoryController@getDestroy');
     Route::get('/category/update-status/{id}', 'Menu\CategoryController@getUpdateStatus');

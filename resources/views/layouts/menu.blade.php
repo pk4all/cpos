@@ -1,6 +1,6 @@
 <div class="col-sm-12">
     <div class="starterpage_tabs">
-        <a href="/setup" class="back-link"><i class="fa fa-arrow-left"></i>Back</a>
+        <a href="javascript:void(0)" class="back-link" onclick="window.history.back();"><i class="fa fa-arrow-left"></i>Back</a>
         <ul class="nav nav-tabs navtab-bg">
             @if(isset($tabList) && count($tabList)>0)
             @foreach($tabList['tab'] as $tab)

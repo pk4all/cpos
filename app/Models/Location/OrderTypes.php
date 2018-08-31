@@ -40,4 +40,17 @@ class OrderTypes extends Eloquent {
         $column = array('_id', 'name','type');
         return self::whereraw(['store_id'=>$id])->where('status', 'enable')->get($column)->toArray();
     }
+    
+    public static function getOrderTypesList() {
+        $column = array('_id', 'name');
+        $lists=self::where('status', 'enable')->get($column)->toArray();
+        if($lists){
+            foreach($lists as $data){
+                $arrList[$data['_id']]=$data['name'];
+            }
+        }else{
+            $arrList=[];
+        }
+        return $arrList;
+    }
 }

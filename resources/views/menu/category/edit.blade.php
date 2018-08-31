@@ -14,15 +14,25 @@
                     {!! Form::open(array('url' => 'category/update/'.$category_data->_id,'class'=>'form-horizontal', 'method'=>'post')) !!}
 
                     <div class="row">
+                        <?php
+                        use Illuminate\Support\Facades\Route;
+                        $currentPath= Route::getFacadeRoot()->current()->uri();
+                        ///echo $currentPath;
+                        ?>
+                        @if($currentPath=='sub-category/edit/{id}')
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Parent Category</label>
                             <div class="col-9">
                             {!! Form::select('parent', $category_list, array_column($category_data->parent,'_id'), ['class' => 'form-control margin']) !!}
                             </div>
                         </div>
-
+                        @endif
                         <div class="form-group row  col-sm-6">
+                           @if($currentPath=='sub-category/edit/{id}')
+                            <label class="col-3 col-form-label">Sub Category Name</label>
+                            @else
                             <label class="col-3 col-form-label">Category Name</label>
+                            @endif
                             <div class="col-9">
                                 {!! Form::text('name', $category_data->name, array('required','class'=>'form-control','placeholder'=>'Enter Category Name')) !!}
                             </div>

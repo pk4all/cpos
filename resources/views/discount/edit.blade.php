@@ -39,34 +39,14 @@
 	<div class="form-group">
 	<h4>Discount Schedule</h4>
 	<div class="col-sm-offset-4">
+            @if($days)
+            @foreach($days as $day)
 			<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="1" id="eday_checkbox1" type="checkbox" @if ($discount->discount_days && in_array(1, $discount->discount_days)) checked @endif >
-			<label for="eday_checkbox1">S</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="2" id="eday_checkbox2" type="checkbox" @if ($discount->discount_days && in_array(2, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox2">M</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="3" id="eday_checkbox3" type="checkbox" @if ($discount->discount_days && in_array(3, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox3">T</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="4" id="eday_checkbox4" type="checkbox" @if ($discount->discount_days && in_array(4, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox4">W</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="5" id="eday_checkbox5" type="checkbox" @if ($discount->discount_days && in_array(5, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox5">TH</label>
-		 </div>
-		<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="6" id="eday_checkbox6" type="checkbox" @if ($discount->discount_days && in_array(6, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox6">F</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="7" id="eday_checkbox7" type="checkbox" @if ($discount->discount_days && in_array(7, $discount->discount_days)) checked @endif>
-			<label for="eday_checkbox7">S</label>
-		 </div>
+			<input name="discount_days[]" value="{{$day}}" id="eday_checkbox{{$day}}" type="checkbox" @if ($discount->discount_days && in_array($day, $discount->discount_days)) checked @endif >
+			<label for="eday_checkbox{{$day}}">{{$day}}</label>
+                        </div>
+            @endforeach 
+            @endif
 			</div>	
 	</div>
 	<div class="form-group">
@@ -106,22 +86,14 @@
 			<input name="ord_typ_id[]" value="0" id="echeckbox0" onclick="checkAll(this);" type="checkbox">
 			<label for="echeckbox0">All Order Type</label>
 		</div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="1" id="echeckbox1" type="checkbox" @if ($discount->ord_typ_id && in_array(1, $discount->ord_typ_id)) checked @endif >
-			<label for="echeckbox1">Delivery</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="2" id="echeckbox2" type="checkbox" @if ($discount->ord_typ_id && in_array(2, $discount->ord_typ_id)) checked @endif>
-			<label for="echeckbox2">Dine-In</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="3" id="echeckbox3" type="checkbox" @if ($discount->ord_typ_id && in_array(3, $discount->ord_typ_id)) checked @endif>
-			<label for="echeckbox3">Take Away</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="4" id="echeckbox4" type="checkbox" @if ($discount->ord_typ_id && in_array(4, $discount->ord_typ_id)) checked @endif>
-			<label for="echeckbox4">Online-Order</label>
-		 </div>
+                 
+                    @if($ordTypes) @foreach($ordTypes as $key=>$ordT)   
+		<div class="ckbox ckbox-primary">
+                    <input name="ord_typ_id[]" value="{{$key}}" id="echeckbox{{$key}}" type="checkbox" @if ($discount->ord_typ_id && in_array($key, $discount->ord_typ_id)) checked @endif>
+                    <label for="echeckbox{{$key}}">{{$ordT}}</label>
+		</div>
+		@endforeach @endif
+				
 	</div>
 		<div id="edit-msg"></div>
 	</div>

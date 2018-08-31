@@ -82,6 +82,7 @@ class CategoryController extends Controller {
         $category = new Category();
         $parentId = $request->input('parent', null);
         $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
+        $category->parent_id=$parentId;
         $category->name = $request->input('name', null);
         $category->display_name = $request->input('display_name', null);
         //$storeId = $request->input('store', null);
@@ -156,6 +157,7 @@ class CategoryController extends Controller {
         $category = Category::find($id);
         $parentId = $request->input('parent', null);
         $category->parent = Category::getCategoryByIds(array($parentId), ['name']);
+        $category->parent_id=$parentId;
         $category->name = $request->input('name', null);
         $category->display_name = $request->input('display_name', null);
         //$storeId = $request->input('store', null);
