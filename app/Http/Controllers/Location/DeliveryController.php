@@ -100,7 +100,8 @@ class DeliveryController extends Controller {
 
     public function deliveryAreaGmap(Request $request, $id = null) {
         $areas = GMapAreas::where('delv_store_id', '=', $id)->get();
-        $view = view('location.delivery.gmap', ['id' => $id, 'storeLat' => 28.625507, 'storeLng' => 77.208287, 'SelectedAreas' => $areas]);
+        
+        $view = view('location.delivery.gmap', ['id' => $id, 'storeLat' => 28.625507, 'storeLng' => 77.208287, 'SelectedAreas' => $areas,'tabList' => $this->tabList]);
         return $view;
     }
 
@@ -128,7 +129,7 @@ class DeliveryController extends Controller {
 
     public function deliveryArea(Request $request, $id) {
         $areas = DeliveryAreas::where('delv_store_id', '=', $id)->get();
-        $view = view('location.delivery.area', ['id' => $id, 'list' => $areas]);
+        $view = view('location.delivery.area', ['id' => $id, 'list' => $areas,'tabList' => $this->tabList]);
         return $view;
     }
 

@@ -14,15 +14,23 @@
                     {!! Form::open(array('url' => 'category/store','class'=>'form-horizontal','enctype'=>'multipart/form-data', 'method'=>'post')) !!}
 
                     <div class="row">
+                        <?php
+                        use Illuminate\Support\Facades\Route;
+                        $currentPath= Route::getFacadeRoot()->current()->uri();?>
+                        @if($currentPath=='sub-category/create')
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Parent Category</label>
                             <div class="col-9">
                             {!! Form::select('parent', $category_list, null, ['class' => 'form-control margin']) !!}
                             </div>
                         </div>
-
+                       @endif
                         <div class="form-group row  col-sm-6">
+                            @if($currentPath=='sub-category/create')
+                            <label class="col-3 col-form-label">Sub Category Name</label>
+                            @else
                             <label class="col-3 col-form-label">Category Name</label>
+                            @endif
                             <div class="col-9">
                             {!! Form::text('name', Input::old('name'), array('required','class'=>'form-control','placeholder'=>'Enter Category Name')) !!}
                             </div>

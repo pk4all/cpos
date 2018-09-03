@@ -3,11 +3,13 @@
         <div class="card-box">
             <div class="">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
 
                     </div>
-                    <div class="col-sm-4">
-                        <a href="/category/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New</a>
+                    <div class="col-sm-8">
+                        <a href="/sub-category/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 pull-right"><i class="md md-add"></i> Add New Sub Category</a>
+                        <a href="/category/create" class="btn btn-default btn-md waves-effect waves-light m-b-30 m-r-10 pull-right"><i class="md md-add"></i> Add New Category</a>
+                        
                     </div>
                 </div>
                 <table id="mainTable" class="table table-striped m-b-0" style="cursor: pointer;">
@@ -41,12 +43,14 @@
                                 <span class="badge">{{$brand['name']}}</span>&nbsp;&nbsp;
                                 @endforeach
                                 @endif
-
                             </td>
-
-
                             <td class="al-right">
+                                @if($data->parent)
+                                <a href="{{ URL::to('sub-category/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                @else
                                 <a href="{{ URL::to('category/edit/' .$data->_id) }}" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                @endif
+                                
                                 @if(isset($data['status']) && $data['status']=='enable')
                                 <a class="md md-visibility" href="{{ URL::to('category/update-status/' .$data['_id']) }}" title="click for disable " data-value="Status"></a>
                                 @else

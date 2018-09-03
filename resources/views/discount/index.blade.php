@@ -58,7 +58,7 @@
                                         <td>
 										@if($data->discount_days)
 										@foreach($data->discount_days as $day)
-											<span class="badge">{{$days[$day]['value']}}</span>&nbsp;&nbsp;
+											<span class="badge">{{$day}}</span>&nbsp;&nbsp;
 											@endforeach
 										@else
 											<span class="badge">All Days</span>&nbsp;&nbsp;
@@ -155,34 +155,14 @@
 	<div class="form-group">
 	<h4>Discount Schedule</h4>
 	<div class="col-sm-offset-4">
+            @if($days)
+            @foreach($days as $day)
 			<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="1" id="day_checkbox1" type="checkbox">
-			<label for="day_checkbox1">S</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="2" id="day_checkbox2" type="checkbox">
-			<label for="day_checkbox2">M</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="3" id="day_checkbox3" type="checkbox">
-			<label for="day_checkbox3">T</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="4" id="day_checkbox4" type="checkbox">
-			<label for="day_checkbox4">W</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="5" id="day_checkbox5" type="checkbox">
-			<label for="day_checkbox5">TH</label>
-		 </div>
-		<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="6" id="day_checkbox6" type="checkbox">
-			<label for="day_checkbox6">F</label>
-		 </div>
-				<div class="ckbox ckbox-primary" style="float: left;margin-right: 15px;">
-			<input name="discount_days[]" value="7" id="day_checkbox7" type="checkbox">
-			<label for="day_checkbox7">S</label>
-		 </div>
+                            <input name="discount_days[]" value="{{$day}}" id="day_checkbox{{$day}}" type="checkbox">
+                            <label for="day_checkbox{{$day}}">{{$day}}</label>
+                       </div>
+            @endforeach 
+            @endif
 			</div>	
 	</div>
 	<div class="form-group">
@@ -222,22 +202,12 @@
 			<input name="ord_typ_id[]" value="0" id="checkbox0" onclick="checkAll(this);" type="checkbox">
 			<label for="checkbox0">All Order Type</label>
 		</div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="1" id="checkbox1" type="checkbox">
-			<label for="checkbox1">Delivery</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="2" id="checkbox2" type="checkbox">
-			<label for="checkbox2">Dine-In</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="3" id="checkbox3" type="checkbox">
-			<label for="checkbox3">Take Away</label>
-		 </div>
-				<div class="ckbox ckbox-primary">
-			<input name="ord_typ_id[]" value="4" id="checkbox4" type="checkbox">
-			<label for="checkbox4">Online-Order</label>
-		 </div>
+                @if($ordTypes) @foreach($ordTypes as $key=>$ordT)   
+		<div class="ckbox ckbox-primary">
+                    <input name="ord_typ_id[]" value="{{$key}}" id="checkbox{{$key}}" type="checkbox">
+                    <label for="checkbox{{$key}}">{{$ordT}}</label>
+		</div>
+		@endforeach @endif		
 	</div>
 		<div id="msg"></div>
 	</div>

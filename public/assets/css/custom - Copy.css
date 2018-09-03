@@ -104,12 +104,6 @@ body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; h
 .loginpage .dialpad_sec{ display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 1; height: 100%; background: #fff;}
 .dialpad_sec .content{display: inline-block; width: 280px; max-width: 90%;}
 .dialpad_sec input[type="password"]{ width: 100%; letter-spacing: 5px; font-size: 60px; line-height: 30px; height: 40px; text-align: center; border: none; border-bottom: 1px solid #dbdfe0; color: #585858;}
-
-.dialpad_sec input[type="text"]{ width: 100%; letter-spacing: 5px; font-size: 16px; line-height: 30px; height: 40px; text-align: center; border: none; border-bottom: 1px solid #dbdfe0; color: #585858;}
-
- .dialpad_sec #user input[type="password"]{
-    font-size: 16px;
-}
 .dialpad_sec .dailer{ width: 100%; display: inline-block; margin: 15px 0 35px;}
 .dialpad_sec .dailer table{ width: 100%;}
 
@@ -118,10 +112,6 @@ body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; h
 .dialpad_sec table td{ padding: 2px; width: 33.33%;}
 .dialpad_sec table td span{ display: block; background: #b0b0b0; color: #fff; font-size: 30px; height:80px; line-height: 80px; text-align: center; cursor: pointer; transition: .3s; border-radius: 2px;}
 .dialpad_sec table td span:hover{ background: #9a9898;}
-
-.dialpad_sec table td button{ display: block; background: #b0b0b0; color: #fff; font-size: 30px; height:80px; line-height: 80px; text-align: center; cursor: pointer; transition: .3s; border-radius: 2px;border: 0;width: 100%;}
-.dialpad_sec table td button:hover{ background: #9a9898;}
-
 .dialpad_sec table input{ width: 100%; border: none; background: #b0b0b0; color: #fff; font-size: 30px; height: 80px; text-align: center; cursor: pointer; transition: .3s; border-radius: 2px;}
 
 .dialpad_sec table input[type="reset"]{ background: #ff1315; font-size: 16px;}
@@ -129,10 +119,6 @@ body.loginbg:after{ position: absolute; left: 0; top: 0; left: 0; width: 100%; h
 .dialpad_sec table input[type="submit"]{ background: #45c50e; font-size: 16px;}
 .dialpad_sec table input[type="submit"]:hover{ background:#3ca70e }
 
-.dialpad_sec table button.reset{ background: #ff1315; font-size: 16px;}
-.dialpad_sec table button.reset:hover{ background:#e81214 }
-.dialpad_sec table button.submit{ background: #45c50e; font-size: 16px;}
-.dialpad_sec table button.submit:hover{ background:#3ca70e }
 
 /*==========Number page css start here===============*/
 body.graybg{ background:#eeeeee;}
@@ -309,15 +295,4 @@ body.graybg{ background:#eeeeee;}
 }
 
 .hide{display:none !important;}
-::-webkit-input-placeholder {
-  font-size: 13px;
-}
-::-moz-placeholder {
-  font-size: 13px;
-}
-:-ms-input-placeholder {
-  font-size: 13px;
-}
-::placeholder {
-  font-size: 13px;
-}
+
