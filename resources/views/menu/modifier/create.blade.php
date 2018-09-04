@@ -33,7 +33,7 @@
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">PLU Code</label>
                             <div class="col-9">
-                            {!! Form::text('plu_code', Input::old('plu_code'), array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
+                            {!! Form::text('plu_code', $pluCode, array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
                             </div>
                         </div>
 

@@ -29,10 +29,12 @@
                                 {{$data->name}}
                             </td>
 
-                            <td>@if(is_array($data->parent))
+                            <td>@if(is_array($data->parent) && count($data->parent)>0)
                                 @foreach($data->parent as $parent)
                                 <span class="">{{$parent['name']}}</span>&nbsp;&nbsp;
                                 @endforeach
+                                @else
+                                <span class="">NA</span>
                                 @endif</td>
                             <td>
                                 {{$data->display_name}}

@@ -20,12 +20,9 @@
                     </thead>
                     <tbody>
                         @if(count($tbl_data)>0)  
-                        @foreach($tbl_data as $data)
+                        @foreach($tbl_data as $key=>$data)
                         <tr>
-                        <td>
-                                <img src="{{env('IMAGE_PATH').$data->image}}" style="width: 50px; height: 50px;">
-                            </td>
-                           
+                        <td>{{$key+1}}</td>
                             <td>{{$data->name}}</td>
                             <td>
                             @if(is_array($data->category))

@@ -12,10 +12,14 @@
                     <p class="text-muted m-b-30 font-14">
                     </p>
                     {!! Form::open(array('url' => 'item/update/'.$menu_data->_id,'class'=>'form-horizontal', 'method'=>'post', 'enctype'=>'multipart/form-data')) !!}
-
+                    
+                    
                     <div class="row">
-
-                        <div class="form-group row  col-sm-6">
+                            <label class="col-12 col-form-label font-weight-bold">Category & Basic Details</label>
+                        </div>
+                    
+                    <div class="row section">
+                           <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Category</label>
                             <div class="col-9">
                             {!! Form::select('category', $categories, array_column($menu_data->category,'_id'), array('required','class'=>'form-control', 'id' => 'menuCategory')) !!}
@@ -43,12 +47,96 @@
                             {!! Form::text('plu_code', $menu_data->plu_code, array('required','class'=>'form-control','placeholder'=>'Enter PLU Code')) !!}
                             </div>
                         </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                            <label class="col-12 col-form-label font-weight-bold">Price & Tax</label>
+                        </div>
+                        <div class="row section">
+                             <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Price</label>
+                            <div class="col-9">
+                            {!! Form::number('price', $menu_data->price, array('required','class'=>'form-control','placeholder'=>'Enter Price Title', 'step' => '0.01')) !!}
+                            </div>
+                        </div>
+                            
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Tax</label>
+                            <div class="col-9">
+                            {!! Form::select('tax', $taxType, array($menu_data->tax), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
+                            </div>
+                        </div>
+                        </div> 
+                      <div class="row">
+                        <label class="col-12 col-form-label font-weight-bold">Included Modifiers</label>
+                    </div>
+                    <div class="row section">                        
+                        
+                        <div class="form-group row  col-sm-8">
+                            <label class="col-3 col-form-label">Modifier Group</label>
+                            <div class="col-9">
+                            {!! Form::select("included_modifier_groups[]",$modifierGroups , array_column($menu_data->included_modifier_groups,'_id'), array('multiple' => true,'id' => 'includedModifierGroup',  'class' => 'form-control margin')) !!}
+                            </div>
+                        </div>
 
+                     <!--   <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Modifier</label>
+                            <div class="col-9">
+                            {!! Form::select("included_modifiers[]",$includedModifiers, array_column($menu_data->included_modifiers,'_id'), array('multiple' => true, 'id' => 'includedModifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
+                            </div>
+                        </div>-->
+                    </div>
 
+                    <div class="row">
+                        <label class="col-12 col-form-label font-weight-bold">Modifiers</label>
+                    </div>
+                    <div class="row section">                        
+                        
+                        <div class="form-group row  col-sm-8">
+                            <label class="col-3 col-form-label">Modifier Group</label>
+                            <div class="col-9">
+                            {!! Form::select("modifier_groups[]",$modifierGroups, array_column($menu_data->modifier_groups,'_id'), array('multiple' => true, 'id' => 'modifierGroup',  'class' => 'form-control margin')) !!}
+                            </div>
+                        </div>
+
+                     <!--   <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Modifier</label>
+                            <div class="col-9">
+                            {!! Form::select("modifiers[]",$groupModifiers, array_column($menu_data->modifiers,'_id'), array('multiple' => true, 'id' => 'modifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
+                            </div>
+                        </div>-->
+                        
+
+                    </div>
+                    
+                    <div class="row">
+                            <label class="col-12 col-form-label font-weight-bold">Online & Other Details</label>
+                        </div>
+                    
+                    <div class="row section">
+                       
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">Price Title</label>
+                            <div class="col-9">
+                            {!! Form::text('price_title', $menu_data->price_title, array('required','class'=>'form-control','placeholder'=>'Enter Price Title')) !!}
+                            </div>
+                        </div>
+
+                       
+                        <div class="form-group row  col-sm-6">
+                            <label class="col-3 col-form-label">SEO Title</label>
+                            <div class="col-9">
+                            {!! Form::text('seo_title', $menu_data->seo_title, array('class'=>'form-control','placeholder'=>'Enter SEO Title')) !!}
+                            </div>
+                        </div>
+                     
                         <div class="form-group row  col-sm-6">
                             <label class="col-3 col-form-label">Image</label>
                             <div class="col-9">
+                                @if($menu_data->image)
                                 <img src="{{env('IMAGE_PATH').$menu_data->image}}" style="width: 50px; height: 50px;">
+                                @endif
                                 {!! Form::file('image', Input::old('image'), array('class'=>'form-control','id'=>'fileHelp')) !!}
                                 <small id="fileHelp" class="form-text text-muted">Please upload image in png,jpg format</small>
                             </div>
@@ -64,26 +152,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Price Title</label>
-                            <div class="col-9">
-                            {!! Form::text('price_title', $menu_data->price_title, array('required','class'=>'form-control','placeholder'=>'Enter Price Title')) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Price</label>
-                            <div class="col-9">
-                            {!! Form::number('price', $menu_data->price, array('required','class'=>'form-control','placeholder'=>'Enter Price Title', 'step' => '0.01')) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">SEO Title</label>
-                            <div class="col-9">
-                            {!! Form::text('seo_title', $menu_data->seo_title, array('class'=>'form-control','placeholder'=>'Enter SEO Title')) !!}
-                            </div>
-                        </div>
 
                         
 <div class="form-group row  col-sm-6">
@@ -93,62 +161,23 @@
                             </div>
                         </div>
                         <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Group</label>
+                            <label class="col-3 col-form-label">Group </label>
                             <div class="col-9">
-                            {!! Form::select("groups[]",$groups, $menu_data->groups, array('multiple' => true, 'id' => 'dependentModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
+                           <!-- {!! Form::select("groups[]",$groups, $menu_data->groups, array('multiple' => true, 'id' => 'dependentModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!} -->
+                            
+                            @if(count($groups)>0) @foreach($groups as $key=>$group)
+                            <div class="ckbox ckbox-primary col-4 pull-left">
+                                    <input name="groups[]" value="{{$key}}" id="checkbox{{$key}}" type="checkbox" @if(in_array($key,$menu_data->groups))checked @endif>
+                                    <label for="checkbox{{$key}}">{{$group}}</label>
+                            </div>
+                            @endforeach @endif
+                            
                             </div>
                         </div>
 
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Tax</label>
-                            <div class="col-9">
-                            {!! Form::select('tax', $taxType, array($menu_data->tax), array('class'=>'form-control','placeholder'=>'Select Tax')) !!}
-                            </div>
-                        </div>
-
+                      
                     </div>
-                    <div class="row">
-                        <label class="col-12 col-form-label font-weight-bold">Included Modifiers</label>
-                    </div>
-                    <div class="row section">                        
-                        
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Modifier Group</label>
-                            <div class="col-9">
-                            {!! Form::select("included_modifier_groups[]",$modifierGroups , array_column($menu_data->included_modifier_groups,'_id'), array('multiple' => true,'id' => 'includedModifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Modifier</label>
-                            <div class="col-9">
-                            {!! Form::select("included_modifiers[]",$includedModifiers, array_column($menu_data->included_modifiers,'_id'), array('multiple' => true, 'id' => 'includedModifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label class="col-12 col-form-label font-weight-bold">Modifiers</label>
-                    </div>
-                    <div class="row section">                        
-                        
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Modifier Group</label>
-                            <div class="col-9">
-                            {!! Form::select("modifier_groups[]",$modifierGroups, array_column($menu_data->modifier_groups,'_id'), array('multiple' => true, 'id' => 'modifierGroup',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group row  col-sm-6">
-                            <label class="col-3 col-form-label">Modifier</label>
-                            <div class="col-9">
-                            {!! Form::select("modifiers[]",$groupModifiers, array_column($menu_data->modifiers,'_id'), array('multiple' => true, 'id' => 'modifiers',  'class' => 'form-control margin selectpicker', 'data-selected-text-format'=>"count", 'data-style'=>"btn-white")) !!}
-                            </div>
-                        </div>
-                        
-
-                    </div>
-
+                  
                     {!! Form::submit('Save!', array('class' => 'btn btn-primary')) !!}
                     {!! Form::close() !!}
                 </div>
@@ -167,8 +196,85 @@
 
 </div> <!-- end container -->
 @section('custome_script')
-<script>
+
+<link href="{{asset('assets/plugins/multiselect/css/multi-select.css')}}"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{{asset('assets/plugins/multiselect/js/jquery.multi-select.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/plugins/jquery-quicksearch/jquery.quicksearch.js')}}"></script>
+<script type="text/javascript">
 $(function(){
+    
+    $('#includedModifierGroup').multiSelect({
+        selectableHeader: "<h5>Modifiers Groups</h5><input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+        selectionHeader: "<h5>Selected Modifiers Groups</h5><input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+        afterInit: function (ms) {
+            var that = this,
+                $selectableSearch = that.$selectableUl.prev(),
+                $selectionSearch = that.$selectionUl.prev(),
+                selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                .on('keydown', function (e) {
+                    if (e.which === 40) {
+                        that.$selectableUl.focus();
+                        return false;
+                    }
+                });
+
+            that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                .on('keydown', function (e) {
+                    if (e.which == 40) {
+                        that.$selectionUl.focus();
+                        return false;
+                    }
+                });
+        },
+        afterSelect: function () {
+            this.qs1.cache();
+            this.qs2.cache();
+        },
+        afterDeselect: function () {
+            this.qs1.cache();
+            this.qs2.cache();
+        }
+    });
+    
+    $('#modifierGroup').multiSelect({
+        selectableHeader: "<h5>Modifiers Groups</h5><input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+        selectionHeader: "<h5>Selected Modifiers Groups</h5><input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+        afterInit: function (ms) {
+            var that = this,
+                $selectableSearch = that.$selectableUl.prev(),
+                $selectionSearch = that.$selectionUl.prev(),
+                selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                .on('keydown', function (e) {
+                    if (e.which === 40) {
+                        that.$selectableUl.focus();
+                        return false;
+                    }
+                });
+
+            that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                .on('keydown', function (e) {
+                    if (e.which == 40) {
+                        that.$selectionUl.focus();
+                        return false;
+                    }
+                });
+        },
+        afterSelect: function () {
+            this.qs1.cache();
+            this.qs2.cache();
+        },
+        afterDeselect: function () {
+            this.qs1.cache();
+            this.qs2.cache();
+        }
+    });
+    
    $(document).on('change', '#menuCategory', function(){
     if($(this).val() != 0){
         var option = "";

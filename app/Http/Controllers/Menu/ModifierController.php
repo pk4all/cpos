@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Menu\Modifier;
 use App\Models\Menu\ModifierChoice;
 use App\Models\Menu\ModifierGroup;
+use App\Models\Menu\PluCode;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -58,13 +59,14 @@ class ModifierController extends Controller {
         $dependentModifierGroups = ModifierGroup::getModifierGroupDropDownList();
         $dependentModifiers = [];
         unset($modifierChoices[0]);
-        
+        $plucode= PluCode::getPluCode('modifier');
         $view = view('menu.modifier.create', [
             'tabList' => $this->tabList,
             'dependentModifierGroups' => $dependentModifierGroups,
             'dependentModifiers' => $dependentModifiers,
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
-           'modifierChoices' => $modifierChoices
+           'modifierChoices' => $modifierChoices,
+            'pluCode'=>$plucode
         ]);
         return $view;
     }
@@ -77,7 +79,7 @@ class ModifierController extends Controller {
         /* end permission code */
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:modifiers',
+            'plu_code' => 'required|unique:plu_codes,plu',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -123,9 +125,15 @@ class ModifierController extends Controller {
         $modifier->created_by = Auth::user()->_id;
         $modifier->updated_by = Auth::user()->_id;
         $modifier->status = 'enable';
-        $modifier->save();
-        $request->session()->flash('status', 'Modifier ' . $modifier->name . ' created successfully!');
+        if($modifier->save()){
+            $plu = new PluCode();
+            $plu->plu=$request->input('plu_code', null);
+            $plu->type='modifier';
+            $plu->item_id=$modifier->_id;
+            $plu->save();
+            $request->session()->flash('status', 'Modifier ' . $modifier->name . ' created successfully!');
         return redirect()->action('Menu\ModifierController@getIndex');
+        }
     }
 
     /**

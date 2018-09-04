@@ -76,8 +76,11 @@ class Category extends Eloquent {
 
         $column = array('_id', 'name');
         $query = Category::where('status', 'enable');
+        //print_r($options);
         if(isset($options['parentId'])){
             $query = $query->whereraw(array('parent._id'=>$options['parentId']));
+        }else{
+            $query = $query->whereNull('parent_id');
         }
         $result = $query->get($column);
         

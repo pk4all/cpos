@@ -144,5 +144,5 @@ var crsf='{{csrf_token()}}';
 var siteurl='<?php echo url('/');?>';
 var users=<?php echo $users; ?>;
 </script>
-<script src="{{ asset("js/pinlogin.js")}}" type="text/javascript" async></script>
+<script src="{{ asset("js/pinlogin.js")}}" type="text/javascript"></script>
 @stop

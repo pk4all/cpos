@@ -10,6 +10,7 @@ use App\Models\Menu\Menu;
 use App\Models\Menu\Category;
 use App\Models\Menu\Modifier;
 use App\Models\Menu\ModifierGroup;
+use App\Models\Menu\PluCode;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -45,7 +46,7 @@ class MenuController extends Controller {
         //print_r($results); die;
         
         $total_page = Menu::getMenuCount();
-        $table_header = array('Image', 'Menu Name', 'Category', 'PLU Code', 'Price', 'Action');
+        $table_header = array('#','Menu Name', 'Category', 'PLU Code', 'Price', 'Action');
         $return = view('menu.menu.index', ['tabList' => $this->tabList, 'count' => $total_page, 'results' => $results, 'tbl_header' => $table_header]);
         return $return;
     }
@@ -58,12 +59,13 @@ class MenuController extends Controller {
         $groups = Menu::$groups;
         $choices = Menu::$choices;
         $taxType = Menu::$taxType;
+        $plucode= PluCode::getPluCode('menu');
         $categories = Category::getCategoryDropDownList();
         unset($categories[0]);
         $modifierGroups = ModifierGroup::getModifierGroupDropDownList();
         unset($modifierGroups[0]);
         $modifiers = $subCategories = [];
-        //print_r($categories); die;
+        //print_r($plucode); die;
         
         $view = view('menu.menu.create', [
             'tabList' => $this->tabList,
@@ -74,7 +76,8 @@ class MenuController extends Controller {
             'yesNoOptions' => array('Yes' =>'Yes', 'No' => 'No'),
             'groups' => $groups,
             'choices' =>$choices,
-            'taxType' => $taxType
+            'taxType' => $taxType,
+            'pluCode'=>$plucode
         ]);
         return $view;
     }
@@ -85,11 +88,15 @@ class MenuController extends Controller {
             return redirect()->action($return);
         }
         /* end permission code */
+        
+       // echo '<pre>';
+        //print_r($request->input());die;
+        
         $rules = array(
             'category' => 'required',
             'name' => 'required',
-            'plu_code' => 'required |unique:menus',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'plu_code' => 'required|unique:plu_codes,plu',
+            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'price' => 'required'
         );
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -161,7 +168,7 @@ class MenuController extends Controller {
         $modifierGroupsId = $request->input('modifier_groups', null);
         $modifierGroupsId = is_array($modifierGroupsId)? $modifierGroupsId : array(0);
         $modifierGroups = ModifierGroup::getModifierGroupByIds(array_values($modifierGroupsId), ['name']);
-        $menu->modifier_groups = $modifierGroups;  
+        $menu->modifier_groups = $modifierGroups;
         
         $modifiersId = $request->input('modifiers', null);
         $modifiersId = is_array($modifiersId)? $modifiersId : array(0);
@@ -174,9 +181,16 @@ class MenuController extends Controller {
         $menu->created_by = Auth::user()->_id;
         $menu->updated_by = Auth::user()->_id;
         $menu->status = 'disable';
-        $menu->save();
-        $request->session()->flash('status', 'Menu ' . $menu->name . ' created successfully!');
-        return redirect()->action('Menu\MenuController@getIndex');
+        if($menu->save()){
+            $plu = new PluCode();
+            $plu->plu=$request->input('plu_code', null);
+            $plu->type='menu';
+            $plu->item_id=$menu->_id;
+            $plu->save();
+            $request->session()->flash('status', 'Menu ' . $menu->name . ' created successfully!');
+            return redirect()->action('Menu\MenuController@getIndex');
+        }
+        
     }
 
     /**
@@ -277,8 +291,9 @@ class MenuController extends Controller {
 
         $rules = array(
             'name' => 'required',
-            'plu_code' => 'required |unique:menu,id,' . $id,
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            //'plu_code' => 'required|unique:plu_codes,plu',
+            //'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+            'price' => 'required'
         );
 
         //notification_email phone print_label tax_id image address  address state country zip_code radius latitude longitude 
@@ -320,7 +335,7 @@ class MenuController extends Controller {
         }
 
         $menu->name = $request->input('name', null);
-        $menu->plu_code = $request->input('plu_code', null);
+        //$menu->plu_code = $request->input('plu_code', null);
         $menu->price_title = $request->input('price_title', null);
         $menu->price = $request->input('price', null);
         $menu->tax = $request->input('tax', null);
